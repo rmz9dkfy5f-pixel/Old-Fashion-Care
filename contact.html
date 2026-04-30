@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Started | Old Fashion Care | Raleigh, NC</title>
+  <meta name="description" content="Contact Old Fashion Care in Raleigh, NC. Call (919) 902-4150 or fill out the form to schedule your free in-home consultation. Regina will respond within one business day.">
+  <link rel="canonical" href="https://oldfashioncare.com/contact.html">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Old Fashion Care home">
+        <span class="nav__logo-name">Old Fashion Care</span>
+        <span class="nav__logo-sub">In-home care coordination · Raleigh, NC</span>
+      </a>
+      <div class="nav__links">
+        <a href="services.html" class="nav__link">Our Services</a>
+        <a href="about.html" class="nav__link">Meet Regina</a>
+        <a href="how-it-works.html" class="nav__link">How It Works</a>
+        <a href="questions.html" class="nav__link">Questions</a>
+      </div>
+      <a href="tel:9199024150" class="nav__phone">(919) 902-4150</a>
+      <a href="contact.html" class="nav__cta">Get started</a>
+      <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav__mobile" role="navigation" aria-label="Mobile navigation">
+    <a href="services.html" class="nav__link">Our Services</a>
+    <a href="about.html" class="nav__link">Meet Regina</a>
+    <a href="how-it-works.html" class="nav__link">How It Works</a>
+    <a href="questions.html" class="nav__link">Questions</a>
+    <a href="tel:9199024150" class="nav__phone">(919) 902-4150</a>
+    <a href="contact.html" class="nav__cta">Get started</a>
+  </div>
+
+  <main>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <p class="t-overline t-overline--light page-hero__eyebrow">Get started</p>
+        <h1 class="h1 page-hero__headline">Let's talk about your family.</h1>
+        <p class="page-hero__sub">Fill out the form and Regina will respond within one business day. If the situation is urgent, please call directly — <a href="tel:9199024150" style="color: var(--coral); font-weight: 600;">(919) 902-4150</a> — rather than waiting for a form response.</p>
+      </div>
+    </section>
+
+    <!-- Contact Layout -->
+    <section class="section section--white" aria-label="Contact form and details">
+      <div class="container">
+        <div class="contact-layout">
+
+          <!-- Form -->
+          <div>
+            <form
+              id="contact-form"
+              class="form"
+              method="POST"
+              action="https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID"
+              aria-label="Contact form"
+            >
+              <!-- Formspree / Netlify hidden field — update before launch -->
+              <input type="hidden" name="_subject" value="New OFC Consultation Request">
+              <input type="hidden" name="_next" value="https://oldfashioncare.com/contact.html?sent=true">
+
+              <div class="form-field">
+                <label for="name">Your name <span aria-label="required">*</span></label>
+                <input type="text" id="name" name="name" autocomplete="name" required placeholder="Your full name">
+              </div>
+
+              <div class="form-field">
+                <label for="email">Your email address <span aria-label="required">*</span></label>
+                <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@example.com">
+              </div>
+
+              <div class="form-field">
+                <label for="phone">Your phone number <span aria-label="required">*</span></label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" required placeholder="(xxx) xxx-xxxx">
+              </div>
+
+              <div class="form-field">
+                <label for="recipient">Who needs care? <span aria-label="required">*</span></label>
+                <input type="text" id="recipient" name="recipient" required placeholder="e.g. My mother, age 78">
+              </div>
+
+              <div class="form-field">
+                <label for="situation">What's the main challenge right now?</label>
+                <textarea id="situation" name="situation" placeholder="Describe what daily life looks like, what's getting difficult, or anything you'd like Regina to know before your call." rows="5"></textarea>
+              </div>
+
+              <div class="form-field">
+                <label for="referral">How did you hear about us?</label>
+                <select id="referral" name="referral">
+                  <option value="" disabled selected>Select one</option>
+                  <option value="referral">Referral from someone I know</option>
+                  <option value="google">Google search</option>
+                  <option value="social">Social media</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <p class="form__note">We do not share your information. This form goes directly to Regina.</p>
+
+              <div class="form__submit">
+                <button type="submit" class="btn btn--coral btn--lg">Send my message</button>
+              </div>
+            </form>
+
+            <!-- Success state -->
+            <div id="form-success" class="form-success" role="alert" aria-live="polite">
+              <div class="form-success__icon" aria-hidden="true">&#10003;</div>
+              <h2 class="h3" style="margin-bottom: 0.5rem;">Message sent.</h2>
+              <p class="t-body" style="margin-bottom: 1rem;">Regina will be in touch within one business day.</p>
+              <p class="t-body">If you need to speak with someone sooner, call <a href="tel:9199024150" style="color: var(--coral); font-weight:600;">(919) 902-4150</a> directly.</p>
+            </div>
+          </div>
+
+          <!-- Contact aside -->
+          <aside class="contact-aside reveal" aria-label="Contact details">
+
+            <div class="contact-detail">
+              <p class="contact-detail__label">Call us</p>
+              <a href="tel:9199024150" class="contact-phone-link">
+                <span>(919) 902-4150</span>
+              </a>
+              <p class="contact-detail__sub">Available during business hours. For urgent situations, please call rather than using the form.</p>
+            </div>
+
+            <div class="contact-detail">
+              <p class="contact-detail__label">Email</p>
+              <p class="contact-detail__value">info@oldfashioncare.com</p>
+              <p class="contact-detail__sub">We respond within one business day.</p>
+            </div>
+
+            <div class="contact-detail">
+              <p class="contact-detail__label">Service area</p>
+              <p class="contact-detail__value">Raleigh and Wake County</p>
+              <p class="contact-detail__sub">North Carolina. Call to confirm availability in your specific area.</p>
+            </div>
+
+            <div class="contact-detail">
+              <p class="contact-detail__label">Free consultation</p>
+              <p class="contact-detail__value">No charge. No obligation.</p>
+              <p class="contact-detail__sub">Regina visits your loved one's home to assess the situation and answer every question you have — before any commitment is made.</p>
+            </div>
+
+            <div class="contact-detail" style="border-bottom: none;">
+              <p class="contact-detail__label">What to expect</p>
+              <p class="contact-detail__sub" style="line-height: 1.8;">
+                When you reach out, you'll connect directly with Regina — not a receptionist. This first conversation is just about understanding your situation. No scripts, no sales pitch.
+              </p>
+            </div>
+
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <p class="footer__brand-name">Old Fashion Care, LLC</p>
+          <p class="footer__brand-address">Raleigh, North Carolina<br>(919) 902-4150<br>info@oldfashioncare.com</p>
+          <p class="footer__brand-legal">NC Licensed Home Care Coordinator &nbsp;·&nbsp; &copy; 2026 Old Fashion Care, LLC</p>
+        </div>
+        <nav class="footer__nav" aria-label="Footer navigation">
+          <a href="services.html">Our Services</a>
+          <a href="about.html">Meet Regina</a>
+          <a href="how-it-works.html">How It Works</a>
+          <a href="questions.html">Questions</a>
+          <a href="contact.html">Call Us</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
