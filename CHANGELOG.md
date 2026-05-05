@@ -4,6 +4,32 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [v1.2.0] - 2026-05-04 - Regina
+
+### Added
+- Open Graph metadata across public pages for richer social link previews
+- Twitter/X summary card metadata across public pages
+- Site favicon references and SVG favicon asset
+- Plausible analytics script for oldfashioncare.com
+- `robots.txt` with sitemap discovery
+- `sitemap.xml` covering the public site pages
+- `netlify.toml` with security headers, cache headers, content security policy, and `/index.html` redirect
+
+### Changed
+- Added robots indexing directives to secondary pages
+- Improved production deploy readiness for static hosting on Netlify
+
+---
+
+## [v1.1.0] - 2026-05-01 - Regina
+
+### Added
+- `RELEASE.md` with v1.0.0 release notes
+- `CHANGELOG.md` to track notable website changes by version
+- `COMMITS.md` with GitHub commit-style release notes and commit metadata
+
+---
+
 ## [v1.0.0] - 2026-04-30 - Regina
 
 ### Added

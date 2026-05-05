@@ -1,3 +1,38 @@
+# v1.2.0 - 2026-05-04 - Regina
+
+## SEO Deploy — Search, Sharing, Analytics, and Netlify Readiness
+
+This release strengthens the public Old Fashion Care website for production discovery and deployment. It adds social preview metadata, crawl discovery files, analytics, favicon wiring, and Netlify hosting configuration.
+
+---
+
+## What's Included
+
+### SEO & Social Sharing
+- Open Graph metadata across public pages
+- Twitter/X summary card metadata across public pages
+- Page-specific titles, descriptions, URLs, and shared preview image references
+- Robots indexing directives on public pages
+
+### Analytics
+- Plausible analytics script added for `oldfashioncare.com`
+- Content security policy updated to allow Plausible script and connection endpoints
+
+### Search Discovery
+- `robots.txt` allowing crawlers and pointing to the sitemap
+- `sitemap.xml` listing the public site pages with priorities and change frequency
+
+### Deployment
+- `netlify.toml` with security headers, cache headers, CSP, and `/index.html` redirect
+- Long-lived caching for CSS, JavaScript, and images
+- Hourly revalidation for HTML pages
+
+### Branding
+- SVG favicon added and referenced from public pages
+- Apple touch icon references added for mobile home screen contexts
+
+---
+
 # v1.0.0 - 2026-04-30 - Regina
 
 ## 🎉 Initial Release — Old Fashion Care Website
