@@ -59,7 +59,7 @@ Introduces two documentation files to accompany the v1.0.0 tag. `RELEASE.md` pro
 |-------------|--------------------------------------------------------------------|
 | **Commit**  | `1203f1f0526c03ae1ad39651c09114c5737d371b`                        |
 | **Short**   | `1203f1f`                                                          |
-| **Tag**     | `v1.0.0` (tag object `a729e8e` → commit `1203f1f`)                |
+| **Tag**     | `v1.0.0__planning-lead__commit-1203f1f` (tag object `71b1ca6` → commit `1203f1f`) |
 | **Date**    | 2026-04-30 14:12:37 -0400                                          |
 | **Author**  | CyberAntAI                                                         |
 
