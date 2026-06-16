@@ -1200,4 +1200,39 @@ main { padding-top: var(--nav-h); }
 
   .hiw-step { grid-template-columns: 1fr; }
   .hiw-step__num { font-size: 2rem; margin-bottom: -0.5rem; }
+
+  .photos-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   PHOTO SOCIAL PROOF
+   ============================================================ */
+
+.photos-section { padding-top: 5rem; padding-bottom: 5rem; }
+
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.photos-grid img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .photos-grid { grid-template-columns: 1fr; }
+}
+
+/* Founder photo — full rectangular portrait */
+img.founder-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
 }

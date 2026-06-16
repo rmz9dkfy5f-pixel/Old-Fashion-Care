@@ -4,6 +4,26 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [v1.3.0] — 2026-06-15
+
+### Added
+- Caregiver photo social proof section on homepage ("Real Care, Real People" — responsive grid of 6 photos)
+- Regina Booker founder photo on about.html, replacing the "RB" initials placeholder (rectangular portrait)
+- images/ folder with 12 photos: 11 stock caregiver photos (care-01.jpg — care-11.jpg) + regina.jpg
+- Project Starter Kit v3.3 control structure: .claude/agents/, ai/, docs/, plans/
+- 7 Claude sub-agents: debugger, docs-promoter, project-steward, repo-cartographer, security-reviewer, slice-planner, test-verifier
+- 23 root-level project control docs (STATUS.md, BACKLOG.md, PLAN.md, ROADMAP.md, DECISION_LOG.md, etc.)
+- Quality gate docs: DONE_CRITERIA.md, CHANGE_CONTROL.md, REPO_HEALTH_CHECK.md, ROLLBACK_PLAN.md, PROJECT_RISK_REGISTER.md
+- .starter-kit/ migration workspace with install log, pre-migration inventory, and conflicts archive
+
+### Changed
+- README.md rewritten with real project description, tech stack, and setup notes
+- PROJECT_BRIEF.md filled in with business goal, user profile, success criteria, and out-of-scope items
+- STATUS.md and BACKLOG.md updated with real current state and work queue
+- css/style.css: added .photos-grid responsive layout (3-col/2-col/1-col) and img.founder-photo rules
+
+---
+
 ## [v1.2.0] - 2026-05-04 - Regina
 
 ### Added
