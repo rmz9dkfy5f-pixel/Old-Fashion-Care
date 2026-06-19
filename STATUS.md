@@ -1,6 +1,6 @@
 # Status
 
-**Last updated:** 2026-06-15
+**Last updated:** 2026-06-18
 
 ---
 
@@ -36,12 +36,9 @@ SEO audit across all 6 HTML pages
 
 ## Completed This Push
 
-- Starter Kit v3.3 migration — project control docs, .claude/agents/ (7 agents), ai/, docs/, plans/ added
-- Caregiver photo social proof grid added to homepage ("Real Care, Real People" section)
-- Regina Booker founder photo added to about.html, replacing initials placeholder
-- images/ folder created with 12 photos (clean URL-safe names)
-- README.md, PROJECT_BRIEF.md, STATUS.md, BACKLOG.md filled in with real project content
-- No existing site files overwritten
+- GitHub repository renamed from `Old-Fashion-Care-` to `Old-Fashion-Care` (trailing dash removed)
+- Local git remote URL updated to `git@github.com:rmz9dkfy5f-pixel/Old-Fashion-Care.git`
+- Connectivity verified via git ls-remote
 
 ---
 
@@ -61,7 +58,9 @@ SEO audit across all 6 HTML pages
 ## Last Verified Working State
 
 ```text
-v1.3.0 — migration/project-starter-v3-3
+v1.3.1 — migration/project-starter-v3-3
+GitHub repo name: Old-Fashion-Care (no trailing dash)
+Remote URL: git@github.com:rmz9dkfy5f-pixel/Old-Fashion-Care.git
 about.html: Regina founder photo displaying (rectangular, full image)
 index.html: Photo grid section between Testimonials and How It Works
 All 6 pages load correctly
@@ -73,9 +72,9 @@ Netlify auto-deploy active on main branch
 ## Validation Performed This Push
 
 ```text
-Static site — no build/lint/test scripts exist.
-Manual browser check: all pages load, photos display, no broken images.
-git diff --stat reviewed before staging.
+Metadata/infrastructure change only — no site files changed.
+git ls-remote confirmed connectivity to new remote URL.
+gh repo rename confirmed via CLI.
 ```
 
 ---

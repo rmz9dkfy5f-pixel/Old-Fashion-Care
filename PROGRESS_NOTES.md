@@ -6,6 +6,26 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-06-18 — GitHub Repo Rename
+
+**Work completed:**
+- Renamed GitHub repository from `Old-Fashion-Care-` to `Old-Fashion-Care` (trailing dash removed)
+- Updated local git remote URL to `git@github.com:rmz9dkfy5f-pixel/Old-Fashion-Care.git`
+- Updated CONTEXT.md, CHANGELOG.md, STATUS.md, COMMIT_NOTES.md to record rename
+
+**Files changed:**
+- Modified: CONTEXT.md, CHANGELOG.md, STATUS.md, COMMIT_NOTES.md, PROGRESS_NOTES.md
+
+**Validation:**
+- `git ls-remote origin HEAD` confirmed connectivity to new URL
+
+**Notes for next agent:**
+- Repo name is now `Old-Fashion-Care` — use this in all future references
+- No site files were changed in this push
+- Next priority remains: SEO audit across all 6 HTML pages
+
+---
+
 ## 2026-06-15 — Photo Social Proof + Starter Kit v3.3 Migration
 
 **Work completed:**

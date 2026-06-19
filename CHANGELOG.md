@@ -4,6 +4,14 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [v1.3.1] — 2026-06-18
+
+### Changed
+- GitHub repository renamed from `Old-Fashion-Care-` to `Old-Fashion-Care` (trailing dash removed)
+- Local git remote URL updated to match new repo name
+
+---
+
 ## [v1.3.0] — 2026-06-15
 
 ### Added

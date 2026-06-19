@@ -85,3 +85,13 @@ project-root/
 ## No CMS, No Package Manager, No Build Step
 
 This is a static site. There is no `package.json`, no `node_modules`, no build command. Files are deployed as-is to Netlify.
+
+---
+
+## Repo Name History
+
+| Date | Name | Change |
+|------|------|--------|
+| 2026-06-18 | `Old-Fashion-Care` | Renamed from `Old-Fashion-Care-` — trailing dash removed |
+
+**Current remote URL:** `git@github.com:rmz9dkfy5f-pixel/Old-Fashion-Care.git`
