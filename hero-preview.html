@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Preview (3 variants) | Old Fashion Care</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/hero-variants.css">
+</head>
+<body>
+
+  <!-- ======================================================
+       NAVIGATION (mirrors index.html)
+       ====================================================== -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Old Fashion Care home">
+        <span class="nav__logo-name">Old Fashion Care</span>
+        <span class="nav__logo-sub">In-home care coordination · Raleigh, NC</span>
+      </a>
+      <div class="nav__links">
+        <a href="services.html" class="nav__link">Our Services</a>
+        <a href="about.html" class="nav__link">Meet Regina</a>
+        <a href="how-it-works.html" class="nav__link">How It Works</a>
+        <a href="questions.html" class="nav__link">Questions</a>
+      </div>
+      <a href="tel:9199024150" class="nav__phone">(919) 902-4150</a>
+      <a href="contact.html" class="nav__cta">Get started</a>
+      <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile nav -->
+  <div class="nav__mobile" role="navigation" aria-label="Mobile navigation">
+    <a href="services.html" class="nav__link">Our Services</a>
+    <a href="about.html" class="nav__link">Meet Regina</a>
+    <a href="how-it-works.html" class="nav__link">How It Works</a>
+    <a href="questions.html" class="nav__link">Questions</a>
+    <a href="tel:9199024150" class="nav__phone">(919) 902-4150</a>
+    <a href="contact.html" class="nav__cta">Get started</a>
+  </div>
+
+  <!-- ======================================================
+       VARIANT SWITCHER (preview only)
+       ====================================================== -->
+  <div class="hero-switch" role="group" aria-label="Hero variant switcher">
+    <span class="hero-switch__label">Hero variant</span>
+    <button type="button" class="hero-switch__btn" data-hero="ai" aria-pressed="false">AI Image</button>
+    <button type="button" class="hero-switch__btn" data-hero="real-single" aria-pressed="false">Real · Single Photo</button>
+    <button type="button" class="hero-switch__btn" data-hero="real-montage" aria-pressed="false">Real · Soft Montage</button>
+  </div>
+
+  <main>
+
+    <!-- ===== Variant 1 — AI Image ===== -->
+    <section id="hero-ai" class="hero hero--mock hero--ai" aria-label="Introduction — AI image variant" hidden>
+      <p class="hero__placeholder">
+        Variant 1 uses your AI image. Save it as <code>images/hero-ai.jpg</code> to replace this placeholder.
+      </p>
+      <div class="container">
+        <p class="t-overline t-overline--light hero__eyebrow">In-home care coordination · Raleigh, NC</p>
+        <h1 class="h1 hero__headline">
+          Home is where<br>
+          they belong.<br>
+          <em>We make that possible.</em>
+        </h1>
+        <p class="hero__sub">
+          When daily life gets harder to manage, your loved one shouldn't have to choose between getting help and staying home. Old Fashion Care connects Raleigh families with certified, personally vetted caregivers — so they get the support they need, right where they want to be.
+        </p>
+        <div class="hero__actions">
+          <a href="contact.html" class="btn btn--coral btn--lg">Schedule a free consultation</a>
+          <a href="services.html" class="btn btn--ghost-light">See our services ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Variant 2 — Real / Single Featured Photo ===== -->
+    <section id="hero-real-single" class="hero hero--mock hero--real-single" aria-label="Introduction — single photo variant" hidden>
+      <div class="container">
+        <p class="t-overline t-overline--light hero__eyebrow">In-home care coordination · Raleigh, NC</p>
+        <h1 class="h1 hero__headline">
+          Home is where<br>
+          they belong.<br>
+          <em>We make that possible.</em>
+        </h1>
+        <p class="hero__sub">
+          When daily life gets harder to manage, your loved one shouldn't have to choose between getting help and staying home. Old Fashion Care connects Raleigh families with certified, personally vetted caregivers — so they get the support they need, right where they want to be.
+        </p>
+        <div class="hero__actions">
+          <a href="contact.html" class="btn btn--coral btn--lg">Schedule a free consultation</a>
+          <a href="services.html" class="btn btn--ghost-light">See our services ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Variant 3 — Real / Soft Montage ===== -->
+    <section id="hero-real-montage" class="hero hero--mock hero--real-montage" aria-label="Introduction — soft montage variant" hidden>
+      <div class="hero__montage" aria-hidden="true">
+        <span class="hero__montage-layer m1"></span>
+        <span class="hero__montage-layer m2"></span>
+        <span class="hero__montage-layer m3"></span>
+      </div>
+      <div class="container">
+        <p class="t-overline t-overline--light hero__eyebrow">In-home care coordination · Raleigh, NC</p>
+        <h1 class="h1 hero__headline">
+          Home is where<br>
+          they belong.<br>
+          <em>We make that possible.</em>
+        </h1>
+        <p class="hero__sub">
+          When daily life gets harder to manage, your loved one shouldn't have to choose between getting help and staying home. Old Fashion Care connects Raleigh families with certified, personally vetted caregivers — so they get the support they need, right where they want to be.
+        </p>
+        <div class="hero__actions">
+          <a href="contact.html" class="btn btn--coral btn--lg">Schedule a free consultation</a>
+          <a href="services.html" class="btn btn--ghost-light">See our services ↓</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script defer src="js/main.js"></script>
+  <script defer src="js/hero-preview.js"></script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+/* ==========================================================================
+   hero-variants.css  —  PREVIEW ONLY
+   Linked only from hero-preview.html. Production index.html / style.css are
+   untouched. Provides three isolated hero background treatments plus the
+   variant switcher UI. Reuses brand tokens from style.css :root.
+   ========================================================================== */
+
+/* The site nav is position:fixed (height var(--nav-h)); on this preview page the
+   switcher sits directly below it, and the heroes follow with no extra gap. */
+main {
+  padding-top: 0;
+}
+
+/* ── Variant switcher (segmented control) ───────────────────────────────── */
+.hero-switch {
+  position: sticky;
+  top: var(--nav-h);
+  margin-top: var(--nav-h);
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background: var(--charcoal-mid);
+  border-bottom: 1px solid var(--border-dark);
+}
+.hero-switch__label {
+  align-self: center;
+  margin-right: 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.hero-switch__btn {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--warm-white);
+  background: transparent;
+  border: 1px solid var(--border-dark);
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.hero-switch__btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.hero-switch__btn[aria-pressed="true"] {
+  background: var(--coral);
+  border-color: var(--coral);
+  color: var(--white);
+}
+.hero-switch__btn:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 2px;
+}
+
+/* ── Shared scaffolding for the mock heroes ─────────────────────────────── */
+.hero--mock {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 620px;
+  background-color: #15171c; /* fallback if an image fails to load */
+  overflow: hidden;
+}
+/* display:flex above would otherwise defeat the [hidden] attribute the switcher
+   toggles, so the inactive variants must be explicitly hidden. */
+.hero--mock[hidden] {
+  display: none;
+}
+/* Drop the production coral-circle decoration on image backgrounds */
+.hero--mock::before {
+  display: none;
+}
+/* Keep the real, accessible copy above every background layer */
+.hero--mock > .container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+/* ── Variant 1 — AI Image ───────────────────────────────────────────────── */
+.hero--ai {
+  background-image: url("../images/hero-ai.jpg");
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+.hero--ai::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    #1b2230 0%,
+    #1b2230 32%,
+    rgba(27, 34, 48, 0.55) 56%,
+    rgba(27, 34, 48, 0.12) 100%
+  );
+}
+/* Placeholder shown only when images/hero-ai.jpg is absent (set by JS) */
+.hero--ai.is-missing {
+  background-image: none;
+  background: linear-gradient(100deg, #1b2230 0%, #232c3d 100%);
+}
+.hero__placeholder {
+  position: absolute;
+  z-index: 2;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  max-width: 320px;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+}
+.hero--ai:not(.is-missing) .hero__placeholder {
+  display: none;
+}
+.hero__placeholder code {
+  color: var(--amber);
+}
+
+/* ── Variant 2 — Real / Single Featured Photo (care-04) ─────────────────── */
+.hero--real-single {
+  background-image: url("../images/care-04.jpg");
+  background-size: cover;
+  background-position: 72% center;
+  background-repeat: no-repeat;
+}
+.hero--real-single::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    var(--charcoal) 0%,
+    var(--charcoal) 38%,
+    rgba(42, 40, 37, 0.55) 60%,
+    rgba(42, 40, 37, 0.22) 100%
+  );
+}
+
+/* ── Variant 3 — Real / Soft Montage (care-04 + care-10 + care-05) ──────── */
+.hero__montage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero__montage-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(3px);
+}
+.hero__montage-layer.m1 {
+  background-image: url("../images/care-04.jpg");
+  background-position: right center;
+  opacity: 0.38;
+  -webkit-mask-image: linear-gradient(100deg, transparent 36%, #000 72%);
+          mask-image: linear-gradient(100deg, transparent 36%, #000 72%);
+}
+.hero__montage-layer.m2 {
+  background-image: url("../images/care-10.jpg");
+  background-position: 80% center;
+  opacity: 0.26;
+  mix-blend-mode: luminosity;
+  -webkit-mask-image: linear-gradient(100deg, transparent 48%, #000 92%);
+          mask-image: linear-gradient(100deg, transparent 48%, #000 92%);
+}
+.hero__montage-layer.m3 {
+  background-image: url("../images/care-05.jpg");
+  background-position: center;
+  opacity: 0.18;
+  -webkit-mask-image: linear-gradient(100deg, transparent 58%, #000 100%);
+          mask-image: linear-gradient(100deg, transparent 58%, #000 100%);
+}
+.hero--real-montage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    var(--charcoal) 0%,
+    var(--charcoal) 42%,
+    rgba(42, 40, 37, 0.62) 66%,
+    rgba(42, 40, 37, 0.35) 100%
+  );
+}
+
+/* ── Responsive: stack the gradient vertically so text never sits on detail ─ */
+@media (max-width: 760px) {
+  .hero--mock {
+    min-height: 540px;
+  }
+  .hero--ai,
+  .hero--real-single {
+    background-position: center 28%;
+  }
+  .hero--ai::after {
+    background: linear-gradient(
+      180deg,
+      #1b2230 0%,
+      #1b2230 46%,
+      rgba(27, 34, 48, 0.62) 78%,
+      rgba(27, 34, 48, 0.35) 100%
+    );
+  }
+  .hero--real-single::after,
+  .hero--real-montage::after {
+    background: linear-gradient(
+      180deg,
+      var(--charcoal) 0%,
+      var(--charcoal) 46%,
+      rgba(42, 40, 37, 0.6) 78%,
+      rgba(42, 40, 37, 0.3) 100%
+    );
+  }
+  .hero__montage-layer.m1,
+  .hero__montage-layer.m2,
+  .hero__montage-layer.m3 {
+    -webkit-mask-image: linear-gradient(180deg, transparent 30%, #000 75%);
+            mask-image: linear-gradient(180deg, transparent 30%, #000 75%);
+  }
+}
+
+/* Respect reduced-motion / reduced-data: drop the blur cost, keep imagery calm */
+@media (prefers-reduced-motion: reduce) {
+  .hero__montage-layer {
+    filter: none;
+  }
+}

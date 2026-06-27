@@ -7,6 +7,7 @@
   --charcoal:      #2A2825;
   --charcoal-mid:  #3D3B38;
   --charcoal-lite: #524F4B;
+  --navy:          #1b2230;
   --coral:         #D85A30;
   --coral-dark:    #B8451F;
   --coral-pale:    #FAEDE7;
@@ -325,18 +326,41 @@ main { padding-top: var(--nav-h); }
    HERO (DARK)
    ============================================================ */
 .hero {
-  background: var(--charcoal);
-  padding-block: 6rem 5rem;
   position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 600px;
+  padding-block: 6rem 5rem;
   overflow: hidden;
+  background-color: var(--navy);
 }
+.hero > .container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+/* Featured photo layer: a right-anchored band. The mask feathers the band's own
+   left edge, so the photo always dissolves seamlessly into the navy base — no
+   hard edge — regardless of viewport width. */
 .hero::before {
   content: '';
   position: absolute;
-  top: -40%; right: -15%;
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(216,90,48,0.08) 0%, transparent 70%);
+  top: 0; right: 0; bottom: 0; left: auto;
+  width: 58%;
+  z-index: 0;
+  background: url('../images/hero-ai.jpg') no-repeat center right;
+  background-size: cover;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.55) 30%, #000 56%);
+          mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.55) 30%, #000 56%);
+  pointer-events: none;
+}
+/* Desktop: no scrim needed — the left is solid navy. Used only on mobile. */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: none;
   pointer-events: none;
 }
 .hero__eyebrow {
@@ -1183,7 +1207,21 @@ main { padding-top: var(--nav-h); }
   :root { --nav-h: 60px; }
   .section { padding-block: 3.5rem; }
   .section--lg { padding-block: 4.5rem; }
-  .hero { padding-block: 4rem 3rem; }
+  .hero { padding-block: 4rem 3rem; min-height: 520px; }
+  /* Mobile: photo goes full-bleed again (reset the desktop right-band) */
+  .hero::before {
+    left: 0; right: 0; width: 100%;
+    background-size: cover;
+    background-position: center 24%;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  /* Mobile scrim goes vertical (top-dark) so the copy never sits on busy detail */
+  .hero::after {
+    background: linear-gradient(180deg,
+      var(--navy) 0%, var(--navy) 48%,
+      rgba(27,34,48,0.6) 80%, rgba(27,34,48,0.35) 100%);
+  }
 
   .service-item {
     grid-template-columns: 44px 1fr;

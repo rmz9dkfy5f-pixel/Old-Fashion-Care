@@ -13,51 +13,60 @@ For historical notes, copy completed entries into `PROGRESS_NOTES.md`.
 Date:
 
 ```text
-YYYY-MM-DD
+2026-06-27
 ```
 
 Phase:
 
 ```text
-Phase 1 — Planning
+Phase 2 — Implementation (approved): hero background 3-variant preview
 ```
 
 Current slice:
 
 ```text
-None selected yet
+Hero featured photo: seamless photo->navy blend (right-anchored band + aligned feather), css only
 ```
 
 Completed:
 
-- [ ] [Item]
+- [x] css/hero-variants.css — 3 scoped treatments + switcher styles
+- [x] js/hero-preview.js — segmented control + ?hero= deep links + AI-asset detection
+- [x] hero-preview.html — prod nav/head reused, 3 isolated hero sections
+- [x] Local verification: page + all assets 200; production files untouched (git status = 3 new files)
+
+- [x] Variant chosen by user (featured photo) promoted to production .hero in css/style.css
+- [x] Verified: homepage + assets 200; no other page reuses base .hero (no regression)
 
 In progress:
 
-- [ ] [Item]
+- [ ] User visual review of the live homepage hero
 
 Blocked:
 
-- [ ] [Item]
+- [ ] Quality: swap the client's ORIGINAL hi-res photo into images/hero-ai.jpg (current is a soft
+      714x558 crop from a screenshot) before launch
 
 Next action:
 
-> [One concrete next action.]
+> User: run `python3 -m http.server 8000`, open http://localhost:8000/ (homepage), confirm the hero,
+> and supply the original full-res photo for images/hero-ai.jpg.
 
 Checks run:
 
 ```bash
-# none yet
+python3 -m http.server 8765   # hero-preview.html 200; css/js/images 200; hero-ai.jpg 404 (expected)
+git status --short            # only 3 new files; index.html / style.css unchanged
 ```
 
 Commit status:
 
 ```text
-No commit prepared yet.
+Not committed — awaiting user review (no commit/push requested yet).
 ```
 
 Approval status:
 
 ```text
-Phase 2 not approved.
+Plan approved (Phase 2). Promotion of a variant to production NOT yet approved.
 ```
