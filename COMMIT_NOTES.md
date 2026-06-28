@@ -26,6 +26,110 @@ Promote featured-photo hero to production homepage + 3-variant preview
 - Validation: server -> / 200, css/style.css 200, images/hero-ai.jpg 200; other pages do not reuse
   base .hero (no regression)
 
+## Iteration: reveal the hand-on-shoulder (soft fade) — to commit (CURRENT)
+
+- Goal: caregiver's hand on the older woman's shoulder + that shoulder read as a SOFT detail that fades
+  into the gradient (user: "clearly visible, just not as visible as the people's faces"), matching the
+  "There." reference mockup (images/ChatGPT Image Jun 27, 2026 at 06_39_46 AM.png).
+- Root cause confirmed: the hand sits at the photo's FAR-LEFT edge (source x~0-45, y~360-450), which is
+  exactly the right-anchored band's left edge — the same strip that must stay dark/feathered to hide the
+  seam. No clean photo data exists left of the hand (the file was cropped from the text-baked mockup), so
+  the hand is welded to the band edge and can only ever be a soft fade from this source.
+- Changes (css/style.css, hero):
+  - .hero::before: thin left-edge feather mask (linear-gradient 90deg, transparent 0, #000 6%) — softens
+    the band edge (no hard line) without reaching the hand body. Band width 53%, position left center.
+  - .hero::after: lightened the hand/shoulder zone while keeping the copy zone dark and the slope smooth:
+    0.97@0, 0.94@30, 0.84@40, 0.42@47, 0.26@53, 0.15@62, 0.07@75, 0.02@88, 0@100 (+ vertical vignette).
+  - Copy unchanged from the approved reference-match (headline 565 one-line orange, sub 480).
+- Verified desktop(1554) + mobile(390) + upscaled zoom of the hand zone: hand reads as a soft fade,
+  shoulder visible, gradient smooth, NO seam/line; framing matches the target.
+- Limit: the hand stays soft because the source is a low-res, dim crop with the hand at the very edge; a
+  clean full-frame original photo would let it read more clearly (no code change for the swap).
+
+## Iteration: match the user's reference mockup exactly (committing together)
+
+- User supplied the exact target screenshot. Rebuilt the hero to match it precisely:
+  - .hero::before: right-anchored band restored, width var(--hero-photo-w, 53%), background-position
+    left center; added a left-edge feather (mask-image linear-gradient(90deg, transparent 0, #000 11%))
+    so the band dissolves into navy with NO vertical seam/line (the "line" the user flagged)
+  - .hero::after: smooth multi-stop gradient — 0.97@0, 0.94@30, 0.84@41, 0.60@50, 0.36@60, 0.18@72,
+    0.05@87, 0.00@100 (+ softened vertical vignette). Band edge (~47%) hides under the feather+gradient
+  - Copy widened to match the reference: .hero__headline max-width 430 -> 565 (orange "We make that
+    possible." now ONE line); .hero__sub max-width 350 -> 480 (4-line paragraph), color 0.58 -> 0.68,
+    line-height 1.75 -> 1.7
+  - Result vs reference: women on the right, older woman's FACE fully clear of the copy, smooth gradient
+    with no line, lamp+caregiver bright on the right, hand-on-shoulder in the blend zone
+  - Mobile (max-width 640): .hero::before mask reset to none (keeps full-bleed mobile photo unfaded)
+  - Verified desktop(1554) + mobile(390) headless screenshots against the reference
+- Image still the soft 746x558 placeholder crop; client's hi-res original would sharpen it (no code change)
+
+## Iteration: restored smooth gradient (superseded by the reference-match above)
+
+- Prior step wrongly steepened .hero::after to expose the hand, flattening the premium gradient
+  (against the user's explicit instruction). Restored a smooth, gradual multi-stop gradient:
+  0.96@0, 0.93@28, 0.84@40, 0.66@50, 0.46@60, 0.30@74, 0.18@100 (+ vertical vignette)
+- Hand/shoulder kept visible via FRAMING not gradient hacks: --hero-photo-w 53% -> 50% (pushes the
+  hand into the gradient's lighter zone); background-position left center
+- Re-cropped image (offset 808) retained; copy unchanged (headline 430 / sub 350)
+- Verified desktop(1440)+mobile(390): smooth premium gradient + shoulder visible, hand softly present
+
+## Iteration: ROOT-CAUSE fix — re-crop image to include hand+shoulder (image fix retained)
+
+- Root cause of repeated failures: images/hero-ai.jpg had been cropped from the composite at x=840,
+  which sliced OFF the caregiver's hand (x~830) and older woman's outer shoulder (x~815). No CSS could
+  reveal detail absent from the file.
+- Re-cropped images/hero-ai.jpg from the composite at offset x=808 (746x558) — hand + full shoulder now
+  present; cropped just right of the baked-in text so none intrudes.
+- CSS retune so hand/shoulder sit right of the copy and read clearly:
+  - --hero-photo-w 60% -> 53%; background-position left center (keeps the far-left hand; trims the
+    far-right lamp — acceptable per priority)
+  - .hero::after gradient lightened across the hand zone: 0.95@0, 0.94@37, 0.54@45, 0.26@53, 0.20@74,
+    0.16@100 (+ vignette) so the hand/shoulder (~46-52%) are visible, not muddy
+  - copy stays narrow: .hero__headline max-width 430, .hero__sub 350 (ends ~37%, ~10% gap to people)
+- Verified desktop(1440)+mobile(390) screenshots: hand/shoulder in frame & right of copy; left zone clean
+- Caveat: the hand is in a naturally dim/shadowed part of this AI crop; a full-res original at
+  images/hero-ai.jpg would render it more clearly
+- Knobs: crop offset, --hero-photo-w, background-position, .hero::after stops, copy max-widths
+
+## Iteration: copy clears the hand-on-shoulder boundary (superseded — image lacked the hand)
+
+- Problem: hand/shoulder contact sits in the LEFT of the photo crop, so the copy still overlapped it
+- Fix = pull copy in + keep photo wide enough to render hand/shoulder uncropped (don't shrink band):
+  - .hero__headline max-width 680 -> 470 (orange line now wraps to two lines, stays in left zone)
+  - .hero__sub max-width 560 -> 430
+  - .hero::before width var 54% -> 60% (width-bound => no left-crop) ; background-position right -> left
+    (keep the far-left hand/shoulder visible; trims ~3-4% of the far-right lamp)
+  - .hero::after re-aligned: 0.97@0, 0.95@40, 0.74@48, 0.42@58, 0.28@76, 0.20@100 (+ vignette)
+- Result: copy fully in left dark zone; older woman shoulder + caregiver on the right, warm; lamp still
+  visible; verified desktop(1440)+mobile(390) headless screenshots
+- Knobs: .hero__headline/.hero__sub max-width, --hero-photo-w, .hero::before position, .hero::after stops
+
+## Iteration: protected copy zone, people on the right (superseded by the above)
+
+- Reversed the over-wide band: people back on the right, left ~48% is a protected text-safe zone
+- .hero::before width var(--hero-photo-w) 84% -> 54%; background-position center -> right center
+- .hero::after: strong left->right protect gradient — 0.97@0, 0.95@44%, 0.72@52%, 0.42@60%,
+  0.30@76%, 0.22@100% (+ vertical vignette). Opaque left (0-44%) also hides the band edge
+- Older adult sits center-right (face clears the orange line), caregiver far right, lamp far right
+- Mobile: .hero::before reset to full-bleed (left/right/width 100%, background-position 60% 28%) so
+  the people stay present under the stronger top-down overlay; readability prioritized
+- Verified desktop (1440) + mobile (390) via headless-chromium screenshots
+- Tuning knobs: --hero-photo-w (framing), .hero::after stops (readability), .hero min-height (660px)
+
+## Iteration: integrated photo + multi-stop gradient (superseded by the above)
+
+- Goal: hero reads as one composition (not a dark text panel beside a photo); older adult nearer
+  centre & partially in the blend, caregiver clear on the right, warm lamp far right
+- .hero::before: widened photo band 58% -> var(--hero-photo-w, 84%) (bleeds into centre); removed the
+  mask (its hard left edge is now hidden under the opaque-left gradient zone -> still seamless)
+- .hero::after: replaced empty desktop scrim with a 6-stop navy gradient
+  (~0.95 left -> 0.62 @38% -> 0.30 @56% -> 0 @100%) + a subtle vertical vignette
+- .hero min-height 600 -> 660 (more vertical presence)
+- Mobile: photo full-band + stronger top-down navy overlay (readability first), faces clear of headline
+- Verified via headless-chromium screenshots at 1440 and 390 widths (desktop + mobile)
+- Tuning knobs: --hero-photo-w (framing), .hero::after opacity stops (readability), .hero min-height
+- NOTE: not yet committed
+
 ## Iteration: seamless photo->navy blend (whole-photo zoom kept)
 
 - Fixed visible seam from background-size:contain (hard right-anchored edge that shifted with viewport

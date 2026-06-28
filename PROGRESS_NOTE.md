@@ -25,7 +25,9 @@ Phase 2 — Implementation (approved): hero background 3-variant preview
 Current slice:
 
 ```text
-Hero featured photo: seamless photo->navy blend (right-anchored band + aligned feather), css only
+Hero featured photo: matches the "There." reference — band 53% + thin feathered edge (no seam/line),
+smooth multi-stop gradient, copy widened (orange one line, face clear), hand-on-shoulder revealed as a
+soft fade. Committing (user authorized). Limit: hand stays soft until a clean full-frame original photo.
 ```
 
 Completed:

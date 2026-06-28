@@ -329,7 +329,7 @@ main { padding-top: var(--nav-h); }
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 600px;
+  min-height: 660px;
   padding-block: 6rem 5rem;
   overflow: hidden;
   background-color: var(--navy);
@@ -339,28 +339,53 @@ main { padding-top: var(--nav-h); }
   z-index: 2;
   width: 100%;
 }
-/* Featured photo layer: a right-anchored band. The mask feathers the band's own
-   left edge, so the photo always dissolves seamlessly into the navy base — no
-   hard edge — regardless of viewport width. */
+/* Featured photo layer: a right-anchored band (~57%) so the people sit on the RIGHT
+   and the copy zone on the left stays navy. The band's hard left edge sits at ~43%,
+   INSIDE the gradient's still-opaque (~0.8) zone, so it's invisible — no seam/line.
+   The smooth gradient then feathers over the photo's left edge (matches the reference).
+   --hero-photo-w is the framing knob: smaller = people farther right. */
 .hero::before {
   content: '';
   position: absolute;
-  top: 0; right: 0; bottom: 0; left: auto;
-  width: 58%;
+  top: 0; bottom: 0; right: 0; left: auto;
+  width: var(--hero-photo-w, 53%);
   z-index: 0;
-  background: url('../images/hero-ai.jpg') no-repeat center right;
+  background-image: url('../images/hero-ai.jpg');
+  background-repeat: no-repeat;
+  /* bias to the left of the photo so the hand-on-shoulder is not clipped */
+  background-position: left center;
   background-size: cover;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.55) 30%, #000 56%);
-          mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.55) 30%, #000 56%);
+  /* thin feather on the band's left edge: softens the seam line without reaching the
+     hand (which sits ~3-6% into the band) — the hand stays at full opacity */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 6%);
   pointer-events: none;
 }
-/* Desktop: no scrim needed — the left is solid navy. Used only on mobile. */
+/* Strong left→right navy overlay that protects the copy zone:
+   0–42% very dark (~0.95+), 42–58% feathered transition, 58–100% light cinematic.
+   The opaque left also conceals the photo band's edge. Opacities = readability knob. */
 .hero::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: none;
+  background:
+    linear-gradient(100deg,
+      rgba(27,34,48,0.97) 0%,
+      rgba(27,34,48,0.94) 30%,
+      rgba(27,34,48,0.84) 40%,
+      rgba(27,34,48,0.42) 47%,
+      rgba(27,34,48,0.26) 53%,
+      rgba(27,34,48,0.15) 62%,
+      rgba(27,34,48,0.07) 75%,
+      rgba(27,34,48,0.03) 88%,
+      rgba(27,34,48,0.00) 100%),
+    /* gentle vertical vignette keeps top/bottom from washing out */
+    linear-gradient(180deg,
+      rgba(27,34,48,0.16) 0%,
+      rgba(27,34,48,0.00) 24%,
+      rgba(27,34,48,0.00) 78%,
+      rgba(27,34,48,0.18) 100%);
   pointer-events: none;
 }
 .hero__eyebrow {
@@ -369,7 +394,7 @@ main { padding-top: var(--nav-h); }
 .hero__headline {
   color: var(--warm-white);
   margin-bottom: 1.5rem;
-  max-width: 680px;
+  max-width: 565px;
 }
 .hero__headline em {
   color: var(--coral);
@@ -377,9 +402,9 @@ main { padding-top: var(--nav-h); }
 }
 .hero__sub {
   font-size: 1.05rem;
-  color: rgba(255,255,255,0.58);
-  max-width: 560px;
-  line-height: 1.75;
+  color: rgba(255,255,255,0.68);
+  max-width: 480px;
+  line-height: 1.7;
   margin-bottom: 2.5rem;
 }
 .hero__actions {
@@ -1208,19 +1233,22 @@ main { padding-top: var(--nav-h); }
   .section { padding-block: 3.5rem; }
   .section--lg { padding-block: 4.5rem; }
   .hero { padding-block: 4rem 3rem; min-height: 520px; }
-  /* Mobile: photo goes full-bleed again (reset the desktop right-band) */
+  /* Mobile: photo goes full-bleed (reset the desktop right-band) and is biased
+     right so the people stay visible under the stronger top-down overlay. */
   .hero::before {
     left: 0; right: 0; width: 100%;
-    background-size: cover;
-    background-position: center 24%;
+    background-position: 60% 28%;
     -webkit-mask-image: none;
             mask-image: none;
   }
-  /* Mobile scrim goes vertical (top-dark) so the copy never sits on busy detail */
+  /* Mobile: readability first — stronger top-down navy so copy never sits on
+     busy facial detail; photo reads warm toward the bottom. */
   .hero::after {
     background: linear-gradient(180deg,
-      var(--navy) 0%, var(--navy) 48%,
-      rgba(27,34,48,0.6) 80%, rgba(27,34,48,0.35) 100%);
+      rgba(27,34,48,0.92) 0%,
+      rgba(27,34,48,0.82) 40%,
+      rgba(27,34,48,0.60) 68%,
+      rgba(27,34,48,0.48) 100%);
   }
 
   .service-item {
