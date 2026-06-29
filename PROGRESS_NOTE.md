@@ -25,10 +25,10 @@ Phase 2 — Implementation (approved): hero background 3-variant preview
 Current slice:
 
 ```text
-Hero: clean photo with visible hand DONE (rollback tag v1.4.0 @ 41bffc4). Latest: aligned copy to the
-people — shifted hero copy right (container padding-left 4.5rem) so "possible." sits a nice gap from the
-head/aligned to ear; widened .hero__sub to 512 so the paragraph slightly overlays the hand. Verified
-desktop + mobile. Committing.
+Hero: clean photo with visible hand (rollback tag v1.4.0 @ 41bffc4). Latest: shifted whole hero copy +
+gradient LEFT (container padding-left 4.5rem->0.75rem; gradient stops -~5%; .hero__sub 512->480) so
+"See our services" clears the older woman's elbow by ~34px and more photo shows; band edge kept ~0.40 (no
+seam). Verified desktop + mobile. Committing.
 ```
 
 Completed:

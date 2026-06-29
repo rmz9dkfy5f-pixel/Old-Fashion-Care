@@ -26,7 +26,20 @@ Promote featured-photo hero to production homepage + 3-variant preview
 - Validation: server -> / 200, css/style.css 200, images/hero-ai.jpg 200; other pages do not reuse
   base .hero (no regression)
 
-## Iteration: align hero copy to the people (CURRENT)
+## Iteration: shift copy + gradient left; clear button from elbow (CURRENT)
+
+- Last step's right-shift put "See our services" ~30px INTO the older woman's arm/elbow. Per user, moved
+  the whole hero composition left:
+  - `.hero > .container` padding-left 4.5rem -> 0.75rem: shifts eyebrow/headline/"possible."/paragraph/
+    buttons left together (~60px). "See our services" right edge now ~712px, her elbow ~746px -> ~34px
+    comfortable gap ("a bit more breathing room"). Mobile still resets padding-left to 1.5rem.
+  - `.hero::after` gradient stops shifted left ~4-5% (0.84@40->36, 0.42@47->0.50@43, etc.) so the dark
+    copy-zone moves left and more of the photo/people shows; kept ~0.40 at the band edge (47%) so NO seam.
+  - `.hero__sub` max-width 512 -> 480 (the hand-overlap widening is no longer needed).
+- Accepted trade-off: "possible." now has a larger gap from her head; paragraph no longer overlaps the hand.
+- Verified desktop(1554) + mobile(390) + zoom of the button/elbow gap. Photo untouched.
+
+## Iteration: align hero copy to the people (committed 778099e)
 
 - Per user, adjusted the words in relation to the people (photo unchanged; rollback tag
   v1.4.0__hero-clean-photo-hand-visible__commit-41bffc4 protects the prior state):
