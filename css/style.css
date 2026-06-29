@@ -379,13 +379,14 @@ main { padding-top: var(--nav-h); }
   background:
     linear-gradient(100deg,
       rgba(27,34,48,0.97) 0%,
-      rgba(27,34,48,0.92) 20%,
+      rgba(27,34,48,0.94) 18%,
+      rgba(27,34,48,0.86) 22%,
       rgba(27,34,48,0.72) 28%,
-      rgba(27,34,48,0.50) 33%,
-      rgba(27,34,48,0.30) 40%,
-      rgba(27,34,48,0.20) 47%,
-      rgba(27,34,48,0.09) 54%,
-      rgba(27,34,48,0.02) 66%,
+      rgba(27,34,48,0.56) 34%,
+      rgba(27,34,48,0.40) 40%,
+      rgba(27,34,48,0.26) 46%,
+      rgba(27,34,48,0.14) 52%,
+      rgba(27,34,48,0.05) 60%,
       rgba(27,34,48,0.00) 100%),
     /* gentle vertical vignette keeps top/bottom from washing out */
     linear-gradient(180deg,
@@ -401,16 +402,16 @@ main { padding-top: var(--nav-h); }
 .hero__headline {
   color: var(--warm-white);
   margin-bottom: 1.5rem;
-  max-width: 565px;
+  max-width: 620px;
 }
 .hero__headline em {
   color: var(--coral);
   font-style: italic;
 }
 .hero__sub {
-  font-size: 0.97rem;
+  font-size: 0.94rem;
   color: rgba(255,255,255,0.68);
-  max-width: 648px;
+  max-width: 580px;
   line-height: 1.7;
   margin-bottom: 2.5rem;
 }

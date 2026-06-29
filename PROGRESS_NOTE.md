@@ -25,11 +25,11 @@ Phase 2 — Implementation (approved): hero background 3-variant preview
 Current slice:
 
 ```text
-Hero: gradient further left to B-period anchor + wider sub for hand overlap. css/style.css only:
-.hero::after gradient at 33% (B period) now 0.50 opacity (was 0.86) — photo visibly shows through
-from "belong." rightward; seam edge at 0.20@47%, readable. .hero__sub max-width 582->648px: lines 1-3
-("choose between", "certified,", "want") overlay the caregiver's arm/shoulder. 4 lines preserved.
-Verified desktop + mobile.
+Hero: smoother gradient + headline wrap fix + sub barely-covers-hand. css/style.css only:
+.hero__headline max-width 565->620px (orange line back to 1 line). .hero::after 10-stop smooth
+gradient starting at 22% (h in "where"); 0.94@18% to 0.00@100%, ~0.02/% uniform rate. .hero__sub
+0.97->0.94rem, 648->580px; lines barely reach caregiver wrist, shoulder uncovered, 4 lines held.
+Verified desktop 1554x900 + mobile 390x820.
 ```
 
 Completed:

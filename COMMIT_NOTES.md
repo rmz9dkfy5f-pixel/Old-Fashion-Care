@@ -6,6 +6,20 @@ Use it to prepare commits before they are made.
 
 ---
 
+## Iteration: smoother gradient, headline fix, sub barely-covers-hand
+
+- `.hero__headline { max-width: 565→620px }`: fixed "We make that possible." wrapping to 2 lines;
+  now consistently 1 line at desktop.
+- `.hero::after` gradient: smoother 10-stop curve (0.94@18%, 0.86@22%, 0.72@28%, 0.56@34%,
+  0.40@40%, 0.26@46%, 0.14@52%, 0.05@60%) — near-uniform ~0.02/% rate, visible fade begins at
+  'h' in "where" (~22%/x≈340). Seam at 46% covered at 0.26.
+- `.hero__sub`: font-size 0.97→0.94rem, max-width 648→580px — lines just barely reach the
+  caregiver's wrist/hand; shoulder stays visible and uncovered. 4 lines preserved.
+- Verified: desktop 1554×900 + mobile 390×820. Headline 1 line, 4-line sub, smooth gradient,
+  hand barely covered, mobile clean.
+
+---
+
 ## Iteration: hero gradient further left + wider sub overlap (B-period anchor, hand coverage)
 
 - `.hero::after` gradient stops shifted further left: at the B-period position (x≈510, 33%) opacity
