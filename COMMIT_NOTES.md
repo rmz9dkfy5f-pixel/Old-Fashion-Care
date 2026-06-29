@@ -26,7 +26,17 @@ Promote featured-photo hero to production homepage + 3-variant preview
 - Validation: server -> / 200, css/style.css 200, images/hero-ai.jpg 200; other pages do not reuse
   base .hero (no regression)
 
-## Iteration: swap in the CLEAN original photo — hand now clearly visible (CURRENT)
+## Iteration: align hero copy to the people (CURRENT)
+
+- Per user, adjusted the words in relation to the people (photo unchanged; rollback tag
+  v1.4.0__hero-clean-photo-hand-visible__commit-41bffc4 protects the prior state):
+  - Shifted the hero copy right: `.hero > .container` padding-left 1.5rem -> 4.5rem (mobile reset to
+    1.5rem). Result: "We make that possible." now sits a nice ~30px gap from the older woman's head,
+    aligned toward her ear; the paragraph moves toward the caregiver's hand.
+  - Widened the paragraph: `.hero__sub` max-width 480 -> 512 so its right edge slightly OVERLAYS the hand.
+- Verified desktop(1554) + mobile(390) + zoom of both relationships (possible↔head/ear, paragraph↔hand).
+
+## Iteration: swap in the CLEAN original photo — hand now clearly visible (committed 41bffc4)
 
 - User supplied the clean original photograph (no baked website text):
   images/ChatGPT Image Jun 28, 2026 at 08_03_49 PM.png (1536x1024). This was the real blocker — the

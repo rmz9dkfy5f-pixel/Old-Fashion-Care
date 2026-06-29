@@ -338,6 +338,10 @@ main { padding-top: var(--nav-h); }
   position: relative;
   z-index: 2;
   width: 100%;
+  /* shift the hero copy right toward the people: paragraph slightly overlays the
+     caregiver's hand, and "possible." sits a nice gap from the older woman's head,
+     aligned toward her ear. Reset on mobile. */
+  padding-left: 4.5rem;
 }
 /* Featured photo layer: a right-anchored band (~57%) so the people sit on the RIGHT
    and the copy zone on the left stays navy. The band's hard left edge sits at ~43%,
@@ -403,7 +407,7 @@ main { padding-top: var(--nav-h); }
 .hero__sub {
   font-size: 1.05rem;
   color: rgba(255,255,255,0.68);
-  max-width: 480px;
+  max-width: 512px;
   line-height: 1.7;
   margin-bottom: 2.5rem;
 }
@@ -1233,6 +1237,8 @@ main { padding-top: var(--nav-h); }
   .section { padding-block: 3.5rem; }
   .section--lg { padding-block: 4.5rem; }
   .hero { padding-block: 4rem 3rem; min-height: 520px; }
+  /* Mobile: drop the desktop copy indent (full-bleed photo, no right-band) */
+  .hero > .container { padding-left: 1.5rem; }
   /* Mobile: photo goes full-bleed (reset the desktop right-band) and is biased
      right so the people stay visible under the stronger top-down overlay. */
   .hero::before {

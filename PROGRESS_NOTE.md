@@ -25,9 +25,10 @@ Phase 2 — Implementation (approved): hero background 3-variant preview
 Current slice:
 
 ```text
-Hero featured photo: DONE. Clean original photo supplied; re-cropped images/hero-ai.jpg so the hand sits
-inside the frame — hand-on-shoulder now clearly visible (soft fade), smooth gradient, no seam, faces
-clear, paragraph lands on the hand. Verified desktop + mobile. Committing.
+Hero: clean photo with visible hand DONE (rollback tag v1.4.0 @ 41bffc4). Latest: aligned copy to the
+people — shifted hero copy right (container padding-left 4.5rem) so "possible." sits a nice gap from the
+head/aligned to ear; widened .hero__sub to 512 so the paragraph slightly overlays the hand. Verified
+desktop + mobile. Committing.
 ```
 
 Completed:
