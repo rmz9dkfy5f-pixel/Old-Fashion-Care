@@ -6,6 +6,30 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-06-29 — Hero copy↔people micro-alignment
+
+**Work completed:**
+- Hero sub-paragraph reduced to 4 lines (font-size 1.05→0.97rem, max-width 480→582px)
+- Hero copy column nudged up (margin-top -5.2rem, mobile reset) so orange "possible." period bottom aligns with older woman's earlobe bottom (~8px tolerance)
+- Hero gradient pulled left (stops shifted ~5–8% earlier) to reveal more of the photo; band edge kept ≥0.50 opacity to prevent seam
+- Wider sub paragraph makes lower text lines subtly overlap the caregiver's fingertips; hand/shoulder/faces preserved
+- Gradient ambiguity resolved with user: chose "pull dark toward left edge / reveal more photo" direction
+
+**Files changed:**
+- Modified: `css/style.css` (hero rules only), `COMMIT_NOTES.md`, `PROGRESS_NOTE.md`
+- Untracked (not committed): `.DS_Store`, `images/ChatGPT Image Jun 2[78]*.png`, `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md`
+
+**Validation:**
+- Headless Chromium screenshots at desktop 1554×900 and mobile 390×820
+- sips zoom crops confirmed period↔earlobe alignment, hand overlap subtlety, no seam line, mobile unaffected
+
+**Notes for next agent:**
+- The two source image PNGs in `images/` (ChatGPT Image Jun 27/28) are the clean original photo and the old mockup — untracked intentionally; do not commit them unless re-cropping is needed
+- Hero is tuned at desktop 1554×900; period↔earlobe alignment will drift slightly at other viewport sizes (photo is `cover`, text is `align-items:center`)
+- Next steps: user visual review, then SEO audit, then migration branch → main merge review
+
+---
+
 ## 2026-06-18 — GitHub Repo Rename
 
 **Work completed:**

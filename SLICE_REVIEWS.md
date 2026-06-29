@@ -4,6 +4,34 @@ Use this file after each completed vertical slice.
 
 ---
 
+## 2026-06-29 — Hero copy↔people micro-alignment
+
+**Status:** Complete — commit a2e7c9a
+
+**Slice summary:**
+Fine-grained visual tuning of the homepage hero. Approved via plan-mode gate. Four adjustments:
+1. Sub-paragraph → 4 lines (was 5): font-size reduced, max-width widened.
+2. Copy column nudged up: orange "possible." period bottom now aligns with older woman's earlobe bottom (~8px).
+3. Gradient pulled left: more photo revealed, no seam, text readable.
+4. Wider sub: lower lines subtly overlap caregiver's fingertips; hand/shoulder/faces preserved.
+
+**Decision captured:** Gradient direction ambiguity resolved — user chose "pull dark toward left edge / reveal more photo."
+
+**Files changed:**
+- `css/style.css` — hero rules only (`.hero > .container`, `.hero__sub`, `.hero::after`)
+- `COMMIT_NOTES.md` — iteration record appended
+- `PROGRESS_NOTE.md` — current state updated
+
+**Validation:**
+- Headless Chromium at 1554×900 (desktop) and 390×820 (mobile)
+- sips zoom crops: period↔earlobe ~8px, hand overlap subtle, no seam, mobile clean
+
+**Open items:**
+- User visual review of live hero pending
+- Next major slice: SEO audit across all 6 HTML pages
+
+---
+
 ## 2026-06-15 — Photo Social Proof + Starter Kit v3.3 Migration
 
 **Status:** Complete

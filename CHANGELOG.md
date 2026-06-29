@@ -4,6 +4,16 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [v1.4.1] — 2026-06-29
+
+### Changed
+- Hero sub-paragraph reduced to 4 lines (font-size 1.05rem→0.97rem, max-width 480→582px)
+- Hero copy column nudged upward (margin-top -5.2rem, reset on mobile) so the orange "possible." period aligns with the older woman's earlobe
+- Hero gradient pulled left (transition starts ~5–8% earlier) to reveal more of the photo; seam-preventing opacity floor maintained
+- No markup, image, or content changes — `css/style.css` hero rules only
+
+---
+
 ## [v1.3.1] — 2026-06-18
 
 ### Changed
