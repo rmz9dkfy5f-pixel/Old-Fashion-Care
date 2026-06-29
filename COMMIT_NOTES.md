@@ -6,6 +6,18 @@ Use it to prepare commits before they are made.
 
 ---
 
+## Iteration: hero gradient further left + wider sub overlap (B-period anchor, hand coverage)
+
+- `.hero::after` gradient stops shifted further left: at the B-period position (x≈510, 33%) opacity
+  is now ≈0.50 (was ≈0.86) — photo/women show through noticeably starting there. Seam edge at 47%
+  kept at 0.20, sufficient with mask feather. Text over lighter gradient confirmed readable.
+- `.hero__sub` max-width 582→648px: right edges of lines 1–3 now clearly overlap the caregiver's
+  arm/shoulder/hand; "choose between" (line 1), "certified," (line 2), "want" (line 3) sit over hand.
+  4-line count preserved. Mobile max-width is irrelevant (resets to full-width on mobile).
+- Verified: desktop 1554×900 and mobile 390×820 screenshots confirmed.
+
+---
+
 ## Iteration: hero copy↔people micro-alignment (4-line sub, period↔earlobe, gradient left, hand overlap)
 
 Approved plan-mode change; `css/style.css` hero rules only (no markup, no photo change).

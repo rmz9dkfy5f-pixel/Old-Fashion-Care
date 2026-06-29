@@ -25,11 +25,11 @@ Phase 2 — Implementation (approved): hero background 3-variant preview
 Current slice:
 
 ```text
-Hero: copy↔people micro-alignment (approved plan). css/style.css hero only: .hero__sub 1.05->0.97rem &
-480->582px (now 4 lines, was 5); .hero>.container margin-top -5.2rem (mobile reset 0) so "possible." period
-bottom aligns with older woman's earlobe bottom (~8px); .hero::after gradient pulled LEFT (more photo
-revealed, band edge ~0.50, no seam); wider sub makes lower lines subtly overlap the caregiver's fingertips
-(hand/shoulder recognizable, faces clear). Verified desktop 1554x900 + mobile 390x820. Committing.
+Hero: gradient further left to B-period anchor + wider sub for hand overlap. css/style.css only:
+.hero::after gradient at 33% (B period) now 0.50 opacity (was 0.86) — photo visibly shows through
+from "belong." rightward; seam edge at 0.20@47%, readable. .hero__sub max-width 582->648px: lines 1-3
+("choose between", "certified,", "want") overlay the caregiver's arm/shoulder. 4 lines preserved.
+Verified desktop + mobile.
 ```
 
 Completed:
