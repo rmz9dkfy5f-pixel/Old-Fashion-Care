@@ -6,6 +6,24 @@ Use it to prepare commits before they are made.
 
 ---
 
+## Iteration: hero copy↔people micro-alignment (4-line sub, period↔earlobe, gradient left, hand overlap)
+
+Approved plan-mode change; `css/style.css` hero rules only (no markup, no photo change).
+
+- (1) `.hero__sub`: font-size 1.05rem→0.97rem, max-width 480px→582px → paragraph now 4 lines (was 5),
+  smaller and legible.
+- (2) `.hero > .container`: added `margin-top: -5.2rem` (reset to 0 on mobile) so the orange "possible."
+  period bottom (~y355 @1554×900) lines up with the older woman's earlobe bottom (~y348). Photo NOT moved.
+- (3) `.hero::after` first linear-gradient pulled left (stops shifted earlier; e.g. 0.60@44, 0.38@50,
+  0.20@55, 0.09@61) so more of the photo/women reveal, band left edge stays ≈0.50 (no seam), text readable.
+- (4) The wider sub max-width pushes the lower lines' right edges (~"choose"/"support") subtly onto the
+  caregiver's fingertips — hand and shoulder remain clearly recognizable, faces clear.
+- Verification: headless Chromium screenshots at 1554×900 (desktop) and 390×820 (mobile); zoom crops via
+  sips confirmed period↔earlobe within ~8px, subtle hand overlap, no seam, mobile unaffected.
+- Decision: gradient ambiguity resolved with user — "pull dark toward the left edge / reveal more photo."
+
+---
+
 ## Summary
 
 Promote featured-photo hero to production homepage + 3-variant preview

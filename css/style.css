@@ -342,6 +342,9 @@ main { padding-top: var(--nav-h); }
      caregiver's hand, and "possible." sits a nice gap from the older woman's head,
      aligned toward her ear. Reset on mobile. */
   padding-left: 0.75rem;
+  /* nudge the copy column UP so the orange "possible." period lines up with the
+     bottom of the older woman's earlobe (photo is NOT moved). Reset on mobile. */
+  margin-top: -5.2rem;
 }
 /* Featured photo layer: a right-anchored band (~57%) so the people sit on the RIGHT
    and the copy zone on the left stays navy. The band's hard left edge sits at ~43%,
@@ -376,13 +379,13 @@ main { padding-top: var(--nav-h); }
   background:
     linear-gradient(100deg,
       rgba(27,34,48,0.97) 0%,
-      rgba(27,34,48,0.94) 26%,
-      rgba(27,34,48,0.84) 36%,
-      rgba(27,34,48,0.50) 43%,
-      rgba(27,34,48,0.34) 49%,
-      rgba(27,34,48,0.20) 58%,
-      rgba(27,34,48,0.10) 70%,
-      rgba(27,34,48,0.04) 85%,
+      rgba(27,34,48,0.94) 24%,
+      rgba(27,34,48,0.82) 36%,
+      rgba(27,34,48,0.60) 44%,
+      rgba(27,34,48,0.38) 50%,
+      rgba(27,34,48,0.20) 55%,
+      rgba(27,34,48,0.09) 61%,
+      rgba(27,34,48,0.03) 72%,
       rgba(27,34,48,0.00) 100%),
     /* gentle vertical vignette keeps top/bottom from washing out */
     linear-gradient(180deg,
@@ -405,9 +408,9 @@ main { padding-top: var(--nav-h); }
   font-style: italic;
 }
 .hero__sub {
-  font-size: 1.05rem;
+  font-size: 0.97rem;
   color: rgba(255,255,255,0.68);
-  max-width: 480px;
+  max-width: 582px;
   line-height: 1.7;
   margin-bottom: 2.5rem;
 }
@@ -1237,8 +1240,8 @@ main { padding-top: var(--nav-h); }
   .section { padding-block: 3.5rem; }
   .section--lg { padding-block: 4.5rem; }
   .hero { padding-block: 4rem 3rem; min-height: 520px; }
-  /* Mobile: drop the desktop copy indent (full-bleed photo, no right-band) */
-  .hero > .container { padding-left: 1.5rem; }
+  /* Mobile: drop the desktop copy indent + upward nudge (full-bleed photo, no right-band) */
+  .hero > .container { padding-left: 1.5rem; margin-top: 0; }
   /* Mobile: photo goes full-bleed (reset the desktop right-band) and is biased
      right so the people stay visible under the stronger top-down overlay. */
   .hero::before {
