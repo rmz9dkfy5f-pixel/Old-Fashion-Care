@@ -26,7 +26,21 @@ Promote featured-photo hero to production homepage + 3-variant preview
 - Validation: server -> / 200, css/style.css 200, images/hero-ai.jpg 200; other pages do not reuse
   base .hero (no regression)
 
-## Iteration: reveal the hand-on-shoulder (soft fade) — to commit (CURRENT)
+## Iteration: swap in the CLEAN original photo — hand now clearly visible (CURRENT)
+
+- User supplied the clean original photograph (no baked website text):
+  images/ChatGPT Image Jun 28, 2026 at 08_03_49 PM.png (1536x1024). This was the real blocker — the
+  previous hero-ai.jpg was cropped from a full-page MOCKUP screenshot, with the hand ~85% cropped off and
+  the paragraph text baked over the rest, so no CSS could recover it.
+- Re-cropped images/hero-ai.jpg from the clean source: sips crop x=330..1536 (full height), resampled to
+  1100px wide, JPEG q86 (~248KB). The crop keeps a dark margin LEFT of the hand, so the band's left edge
+  sits in dark background (no seam) and the caregiver's hand sits INSIDE the frame at ~hero 49-59%.
+- No CSS change needed — the committed gradient/feather already frame it correctly. Result: hand on the
+  shoulder reads clearly as a soft detail fading into the gradient; paragraph's right edge lands on it;
+  faces clear on the right; smooth gradient, no seam. Verified desktop(1554) + mobile(390).
+- The clean source PNG is left in images/ (untracked) as the re-crop source.
+
+## Iteration: reveal the hand-on-shoulder (soft fade) — committed cf7404a
 
 - Goal: caregiver's hand on the older woman's shoulder + that shoulder read as a SOFT detail that fades
   into the gradient (user: "clearly visible, just not as visible as the people's faces"), matching the

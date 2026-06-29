@@ -25,9 +25,9 @@ Phase 2 — Implementation (approved): hero background 3-variant preview
 Current slice:
 
 ```text
-Hero featured photo: matches the "There." reference — band 53% + thin feathered edge (no seam/line),
-smooth multi-stop gradient, copy widened (orange one line, face clear), hand-on-shoulder revealed as a
-soft fade. Committing (user authorized). Limit: hand stays soft until a clean full-frame original photo.
+Hero featured photo: DONE. Clean original photo supplied; re-cropped images/hero-ai.jpg so the hand sits
+inside the frame — hand-on-shoulder now clearly visible (soft fade), smooth gradient, no seam, faces
+clear, paragraph lands on the hand. Verified desktop + mobile. Committing.
 ```
 
 Completed:
