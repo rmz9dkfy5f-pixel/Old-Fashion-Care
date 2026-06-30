@@ -4,6 +4,31 @@ Use this file after each completed vertical slice.
 
 ---
 
+## 2026-06-30 — Hero smoother gradient + headline fix + sub barely-covers-hand
+
+**Status:** Complete — commit b195aba — tag v1.5.0__hero-smoother-gradient-headline-fix__commit-b195aba
+
+**Slice summary:**
+Three fixes to the homepage hero following the b-period-anchor gradient iteration:
+1. Orange headline regression fixed: "We make that possible." back to 1 line (`max-width: 565→620px`).
+2. Gradient smoothed: 10-stop uniform ~0.02/% curve; visible fade anchored at 'h' in "where" (22%); seam at 46% covered at 0.26 opacity.
+3. Sub-paragraph narrowed: `max-width: 648→580px`, `font-size: 0.97→0.94rem` — 4 lines hold, right edges barely reach caregiver's wrist/hand, shoulder stays visible.
+
+**Files changed:**
+- `css/style.css` — `.hero__headline`, `.hero::after`, `.hero__sub`
+- `COMMIT_NOTES.md`, `PROGRESS_NOTE.md` — tracking (unconditional)
+
+**Validation:**
+- Headless Chromium 1554×900 desktop: 1-line orange headline, 4-line sub, smooth gradient, hand barely covered
+- Headless Chromium 390×820 mobile: clean, no regression
+
+**Open items:**
+- User visual review of live hero pending
+- Hi-res original photo still needed for `images/hero-ai.jpg`
+- Next major slice: SEO audit or new hero adjustment per user direction
+
+---
+
 ## 2026-06-29 — Hero copy↔people micro-alignment
 
 **Status:** Complete — commit a2e7c9a

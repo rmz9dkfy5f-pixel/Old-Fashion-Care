@@ -4,6 +4,17 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [v1.5.0] — 2026-06-30
+
+### Changed
+- Hero gradient smoother 10-stop curve (uniform ~0.02/% rate); visible fade begins at 'h' in "where in the home" (~22% width)
+- Hero gradient seam coverage at 46% strengthened to 0.26 opacity (was 0.20)
+- Hero orange headline max-width 565→620px — "We make that possible." restored to 1 line (regression fix from v1.4.1)
+- Hero sub font-size 0.97→0.94rem, max-width 648→580px — text lines barely reach caregiver's hand, shoulder stays uncovered
+- No markup, image, or content changes — `css/style.css` hero rules only
+
+---
+
 ## [v1.4.1] — 2026-06-29
 
 ### Changed
