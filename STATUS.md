@@ -23,7 +23,7 @@ main
 ## Current Slice
 
 ```text
-Branch sync and merge — migration/project-starter-v3-3 merged into main (2026-06-30)
+Prompts maintenance — refined handoff prompt added (2026-06-30)
 ```
 
 ---
@@ -36,14 +36,11 @@ Branch sync and merge — migration/project-starter-v3-3 merged into main (2026-
 
 ## Completed This Push (2026-06-30)
 
-Branch divergence resolved and all work merged into main:
+Added refined handoff prompt to Prompts folder:
 
-- Local `migration/project-starter-v3-3` was 9 commits behind remote (hero work committed in a previous session had been pushed to remote but never pulled locally)
-- Fast-forward pulled remote `migration/project-starter-v3-3` to local (98f2478 → f794a80)
-- Fast-forward merged `migration/project-starter-v3-3` into local `main` (0806eda → f794a80)
-- Pushed `main` to remote — first time all hero and migration work is on `main`
-- Root cause documented in LESSONS_LEARNED.md: post-check workflow did not verify local vs. remote parity
-- No site files changed; operational + tracking update only
+- `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` committed to repo
+- Refines snapshot naming rules: requires full descriptive tag (`vX.Y.Z__description__commit-HASH`), forbids bare version-only folder names, requires user to confirm RepoBackups path per session
+- No site files changed; workflow/tooling update only
 
 ---
 
@@ -78,10 +75,8 @@ All 6 pages load correctly; Netlify auto-deploy active on main branch.
 
 ```text
 Static site — no build/lint scripts.
-git log confirmed fast-forward merge (no diverging commits, no conflicts).
-git status confirmed clean working tree after merge.
-git branch -vv confirmed main in sync with origin/main at f794a80.
-No site files changed in this session.
+git diff --stat confirmed only Prompts/ and tracking docs changed.
+No site files changed.
 ```
 
 ---

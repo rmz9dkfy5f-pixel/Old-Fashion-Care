@@ -8,16 +8,15 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
-Branch sync and merge: migration/project-starter-v3-3 into main; tracking docs updated
+Add refined handoff prompt: snapshot naming rules and RepoBackups path confirmation
 
 ## Description
 
-- Resolved diverged branch: local `migration/project-starter-v3-3` was 9 commits behind remote (hero work from a previous session was never pulled locally)
-- Fast-forward pulled remote migration branch; fast-forward merged into local main (0806eda → f794a80)
-- Pushed main to remote — all hero, photo social proof, repo rename, and migration work now on main
-- Updated STATUS.md, PROGRESS_NOTES.md, COMMIT_NOTES.md, LESSONS_LEARNED.md
-- No site files changed; operational + tracking update only
-- Post-check gap documented: `git log HEAD..origin/<branch>` must be added to every handoff verification
+- Added `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` to repo
+- Refines Section 9 of the original handoff prompt: forbids bare version-only snapshot folder names, requires full `vX.Y.Z__description__commit-HASH` naming, requires user to confirm RepoBackups path per session
+- Updated STATUS.md, PROGRESS_NOTES.md, COMMIT_NOTES.md to reflect this push
+- No site files changed; workflow tooling only
+- No remaining risk
 
 ---
 

@@ -6,6 +6,27 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-06-30 — Prompts: refined handoff snapshot naming prompt added
+
+**Work completed:**
+- Added `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` to repo
+- Refines Section 9 of the base handoff prompt: full descriptive tag required for snapshot folder names, user must confirm RepoBackups path per session, bare version-only names explicitly forbidden
+- Updated STATUS.md, PROGRESS_NOTES.md, COMMIT_NOTES.md
+
+**Files changed:**
+- `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` (new)
+- `STATUS.md`, `PROGRESS_NOTES.md`, `COMMIT_NOTES.md`
+
+**Validation:**
+- git diff --stat confirmed no site files changed
+
+**Notes for next agent:**
+- Use the refined prompt for all future handoffs; it supersedes Section 9 of the base prompt
+- RepoBackups path: `/Users/ant/WorkSync/Projects/RepoBackups/Old-Fashion-Care`
+- Next steps: user visual review of live hero, then SEO audit across all 6 HTML pages
+
+---
+
 ## 2026-06-30 — Branch sync: migration/project-starter-v3-3 merged into main
 
 **Work completed:**
