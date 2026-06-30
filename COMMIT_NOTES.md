@@ -8,14 +8,16 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
-Handoff: STATUS, PROGRESS_NOTES updated; hero iterations ea8b067→b195aba→c04e819 documented; tag + snapshot for b195aba complete
+Branch sync and merge: migration/project-starter-v3-3 into main; tracking docs updated
 
 ## Description
 
-- Updated STATUS.md and PROGRESS_NOTES.md to reflect three hero CSS iterations since last handoff (ea8b067, b195aba, c04e819)
-- Tag `v1.5.0__hero-smoother-gradient-headline-fix__commit-b195aba` pushed to GitHub; snapshot saved to RepoBackups
-- No site files changed in this commit — tracking docs only
-- Remaining: user visual review of hero on live/local site; hi-res original photo still needed for images/hero-ai.jpg
+- Resolved diverged branch: local `migration/project-starter-v3-3` was 9 commits behind remote (hero work from a previous session was never pulled locally)
+- Fast-forward pulled remote migration branch; fast-forward merged into local main (0806eda → f794a80)
+- Pushed main to remote — all hero, photo social proof, repo rename, and migration work now on main
+- Updated STATUS.md, PROGRESS_NOTES.md, COMMIT_NOTES.md, LESSONS_LEARNED.md
+- No site files changed; operational + tracking update only
+- Post-check gap documented: `git log HEAD..origin/<branch>` must be added to every handoff verification
 
 ---
 

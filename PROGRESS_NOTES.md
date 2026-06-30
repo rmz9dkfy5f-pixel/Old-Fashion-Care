@@ -6,6 +6,29 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-06-30 — Branch sync: migration/project-starter-v3-3 merged into main
+
+**Work completed:**
+- Diagnosed GitHub Desktop "Newer Commits on Remote" block: local `migration/project-starter-v3-3` was 9 commits behind remote; post-check workflow did not verify local vs. remote parity
+- Fast-forward pulled remote `migration/project-starter-v3-3` (98f2478 → f794a80)
+- Fast-forward merged `migration/project-starter-v3-3` into local `main` (0806eda → f794a80)
+- Pushed `main` to remote — all hero and migration work now on main for the first time
+- Updated STATUS.md, PROGRESS_NOTES.md, COMMIT_NOTES.md, LESSONS_LEARNED.md
+
+**Files changed:**
+- `STATUS.md`, `PROGRESS_NOTES.md`, `COMMIT_NOTES.md`, `LESSONS_LEARNED.md` — tracking docs only
+
+**Validation:**
+- git fast-forward merge confirmed clean (no conflicts)
+- git status clean; git branch -vv confirmed main in sync with origin/main
+
+**Notes for next agent:**
+- All work is now on `main`; migration branch is no longer the active working branch
+- RepoBackups path: `/Users/ant/WorkSync/Projects/RepoBackups/Old-Fashion-Care`
+- Next steps: user visual review of hero on live site, then SEO audit across all 6 HTML pages
+
+---
+
 ## 2026-06-30 — Hero: smoother gradient, headline fix, sub barely-covers-hand + handoff
 
 **Work completed:**
