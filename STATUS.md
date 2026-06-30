@@ -1,13 +1,13 @@
 # Status
 
-**Last updated:** 2026-06-29
+**Last updated:** 2026-06-30
 
 ---
 
 ## Current Phase
 
 ```text
-Phase 2 — Active (site is live and in use)
+Phase 1 — Awaiting next task (site is live and in use)
 ```
 
 ---
@@ -23,25 +23,39 @@ migration/project-starter-v3-3
 ## Current Slice
 
 ```text
-Hero copy↔people micro-alignment (multiple iterations, commit a2e7c9a)
+Hero visual micro-tuning — complete through commit c04e819 (2026-06-30)
 ```
 
 ---
 
 ## Current Goal
 
-> Homepage hero polish: copy position tuned relative to the two women — 4-line sub-paragraph, orange "possible." period aligns with the older woman's earlobe, gradient reveals more of the photo, lower lines subtly overlap the caregiver's hand.
+> Awaiting user direction — next hero adjustment or new slice (SEO audit, branch merge, etc.)
 
 ---
 
-## Completed This Push (a2e7c9a — 2026-06-29)
+## Completed This Push (c04e819 — 2026-06-30)
 
-- `.hero__sub` font-size 1.05rem→0.97rem, max-width 480→582px → paragraph now 4 lines (was 5)
-- `.hero > .container` margin-top: -5.2rem (mobile reset 0) → orange "possible." period bottom aligns with older woman's earlobe bottom (~8px tolerance); photo not moved
-- `.hero::after` first gradient pulled left (stops shifted earlier) → more photo/women revealed, band edge ~0.50, no seam, text readable
-- Wider sub max-width → lower lines ("choose"/"support") subtly overlap caregiver's fingertips; hand + shoulder remain recognizable
-- `COMMIT_NOTES.md` and `PROGRESS_NOTE.md` updated
-- Verified: headless Chromium at 1554×900 (desktop) and 390×820 (mobile); zoom crops confirmed all anchors
+Three hero CSS iterations completed and pushed since last handoff (a2e7c9a):
+
+**ea8b067** — Hero gradient further left (B-period anchor) + wider sub overlap:
+- `.hero::after` gradient stops shifted so opacity ≈0.50 at the B-period position (x≈510, 33%)
+- `.hero__sub` max-width 582→648px — lower text lines clearly overlap caregiver's arm/shoulder/hand
+- Verified desktop 1554×900 + mobile 390×820
+
+**b195aba** — Hero smoother gradient + headline 1-line fix + sub barely-covers-hand:
+- `.hero__headline` max-width 565→620px — fixed "We make that possible." regression to 2 lines
+- `.hero::after` 10-stop smooth gradient; visible fade anchored at 'h' in "where" (~22%); seam at 46% covered at 0.26 opacity
+- `.hero__sub` font-size 0.97→0.94rem, max-width 648→580px — lines barely reach hand, shoulder uncovered
+- Verified desktop 1554×900 + mobile 390×820
+
+**c04e819** — Handoff tracking docs (this commit):
+- CHANGELOG.md: v1.5.0 entry added
+- SLICE_REVIEWS.md: 2026-06-30 entry added
+- PROGRESS_NOTE.md: updated to current state
+
+Tag `v1.5.0__hero-smoother-gradient-headline-fix__commit-b195aba` applied to b195aba and pushed.
+Snapshot saved to RepoBackups for b195aba.
 
 ---
 
@@ -53,8 +67,8 @@ Hero copy↔people micro-alignment (multiple iterations, commit a2e7c9a)
 
 ## Next Action
 
-> 1. User visual review of the live hero on the deployed site (or localhost).
-> 2. If hero is approved: proceed to SEO audit across all 6 HTML pages.
+> 1. User visual review of live hero on deployed site or localhost.
+> 2. If approved: proceed to SEO audit across all 6 HTML pages.
 > 3. After SEO work, review migration branch for merge into main.
 
 ---
@@ -62,9 +76,9 @@ Hero copy↔people micro-alignment (multiple iterations, commit a2e7c9a)
 ## Last Verified Working State
 
 ```text
-a2e7c9a — migration/project-starter-v3-3 — 2026-06-29
-Hero: 4-line sub-paragraph; "possible." period aligns with earlobe; gradient reveals more photo;
-lower text subtly overlaps hand. No seam. Mobile clean.
+b195aba — migration/project-starter-v3-3 — 2026-06-30
+Hero: smoother 10-stop gradient starting at 'h' in "where" (22%); orange headline 1 line (620px);
+4-line sub barely reaches hand, shoulder visible; no seam; mobile clean.
 GitHub repo: Old-Fashion-Care — git@github.com:rmz9dkfy5f-pixel/Old-Fashion-Care.git
 All 6 pages load correctly; Netlify auto-deploy active on main branch.
 ```
@@ -75,9 +89,11 @@ All 6 pages load correctly; Netlify auto-deploy active on main branch.
 
 ```text
 Static site — no build/lint scripts.
-Headless Chromium screenshot at 1554×900 and 390×820.
-sips zoom crops to verify period↔earlobe alignment (~8px), hand overlap, gradient seam-free.
-git diff confirmed: only css/style.css, COMMIT_NOTES.md, PROGRESS_NOTE.md changed.
+b195aba: Headless Chromium 1554×900 (desktop) and 390×820 (mobile).
+sips zoom crops confirmed: headline 1 line, 4-line sub, smooth gradient from "where", hand barely
+covered, shoulder visible, mobile clean.
+ea8b067: Headless Chromium 1554×900 + 390×820 confirmed.
+git diff --stat confirmed only css/style.css and tracking docs changed in each commit.
 ```
 
 ---
@@ -100,5 +116,5 @@ Yes
 Phase 2 approved?
 
 ```text
-Yes
+Yes (complete — no active approved slice)
 ```

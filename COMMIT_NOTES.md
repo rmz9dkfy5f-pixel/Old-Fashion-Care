@@ -6,6 +6,19 @@ Use it to prepare commits before they are made.
 
 ---
 
+## Summary
+
+Handoff: STATUS, PROGRESS_NOTES updated; hero iterations ea8b067→b195aba→c04e819 documented; tag + snapshot for b195aba complete
+
+## Description
+
+- Updated STATUS.md and PROGRESS_NOTES.md to reflect three hero CSS iterations since last handoff (ea8b067, b195aba, c04e819)
+- Tag `v1.5.0__hero-smoother-gradient-headline-fix__commit-b195aba` pushed to GitHub; snapshot saved to RepoBackups
+- No site files changed in this commit — tracking docs only
+- Remaining: user visual review of hero on live/local site; hi-res original photo still needed for images/hero-ai.jpg
+
+---
+
 ## Iteration: smoother gradient, headline fix, sub barely-covers-hand
 
 - `.hero__headline { max-width: 565→620px }`: fixed "We make that possible." wrapping to 2 lines;

@@ -6,6 +6,31 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-06-30 — Hero: smoother gradient, headline fix, sub barely-covers-hand + handoff
+
+**Work completed:**
+- Three hero CSS iterations since last handoff: ea8b067 (B-period gradient + wider sub), b195aba (smoother gradient + headline fix + barely-covers-hand), c04e819 (tracking docs)
+- `css/style.css` changes (b195aba): `.hero__headline max-width 565→620px` (fixed orange line regression); `.hero::after` 10-stop smooth gradient anchored at 'h' in "where" (22%); `.hero__sub` 0.97→0.94rem, 648→580px (sub barely reaches hand, not shoulder)
+- Tracking docs updated: CHANGELOG.md v1.5.0 entry, SLICE_REVIEWS.md 2026-06-30 entry, PROGRESS_NOTE.md, STATUS.md
+- Tag `v1.5.0__hero-smoother-gradient-headline-fix__commit-b195aba` created + pushed to GitHub
+- Snapshot saved: `/Users/ant/WorkSync/Projects/RepoBackups/Old-Fashion-Care/v1.5.0__hero-smoother-gradient-headline-fix__commit-b195aba`
+
+**Files changed:**
+- `css/style.css` (b195aba, ea8b067) — hero rules only
+- `COMMIT_NOTES.md`, `PROGRESS_NOTE.md`, `PROGRESS_NOTES.md`, `STATUS.md`, `CHANGELOG.md`, `SLICE_REVIEWS.md`
+
+**Validation:**
+- Headless Chromium at 1554×900 (desktop) and 390×820 (mobile) for both ea8b067 and b195aba
+- sips zoom crops confirmed: headline 1 line, 4-line sub, smooth gradient, hand barely covered, shoulder visible, mobile clean
+
+**Notes for next agent:**
+- The two source image PNGs in `images/` (ChatGPT Image Jun 27/28) remain untracked intentionally; do not commit unless re-cropping hero-ai.jpg
+- Hero alignment tuned at 1554×900; period↔earlobe alignment is viewport-sensitive (cover bg + flex centering)
+- RepoBackups path (user-confirmed): `/Users/ant/WorkSync/Projects/RepoBackups/Old-Fashion-Care`
+- Next steps: user visual review of live hero, then SEO audit, then migration branch → main merge review
+
+---
+
 ## 2026-06-29 — Hero copy↔people micro-alignment
 
 **Work completed:**
