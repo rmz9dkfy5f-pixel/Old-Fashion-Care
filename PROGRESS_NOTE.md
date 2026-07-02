@@ -27,7 +27,7 @@ Current slice:
 ```text
 Hero visual micro-tuning complete. Committed b195aba, tagged
 v1.5.0__hero-smoother-gradient-headline-fix__commit-b195aba, pushed to GitHub, snapshot saved to
-/Users/ant/WorkSync/Projects/RepoBackups/Old-Fashion-Care/v1.5.0__hero-smoother-gradient-headline-fix__commit-b195aba
+/Volumes/DataHub_2TB/WorkSync/Projects/RepoBackups/Old-Fashion-Care/v1.5.0__hero-smoother-gradient-headline-fix__commit-b195aba
 ```
 
 Completed:

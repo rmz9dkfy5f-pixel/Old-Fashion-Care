@@ -8,6 +8,18 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Fix RepoBackups path in tracking docs — correct volume is DataHub_2TB
+
+## Description
+
+- PROGRESS_NOTE.md and PROGRESS_NOTES.md: replaced `/Users/ant/WorkSync/Projects/RepoBackups` with `/Volumes/DataHub_2TB/WorkSync/Projects/RepoBackups` — the drive is mounted on an external volume, not under the home directory
+- No site files changed; no validation required
+- Remaining: actual snapshot folders on disk may still be at the wrong path — user to verify or move manually
+
+---
+
+## Summary
+
 Add .gitignore; untrack root .DS_Store; suppress ChatGPT source PNGs
 
 ## Description
