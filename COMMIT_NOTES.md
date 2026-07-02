@@ -8,6 +8,19 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Add .gitignore; untrack root .DS_Store; suppress ChatGPT source PNGs
+
+## Description
+
+- Created `.gitignore` with `**/.DS_Store` and `images/ChatGPT*` patterns
+- `git rm --cached .DS_Store` to untrack the root .DS_Store that was previously committed
+- `ai/.DS_Store`, `ai/sessions/.DS_Store`, and `images/ChatGPT*.png` were untracked and are now ignored
+- No site files changed; GitHub Desktop changes panel should be clean after this commit
+
+---
+
+## Summary
+
 Add handoff workflow prompt to Prompts/ directory (version-controlled)
 
 ## Description
