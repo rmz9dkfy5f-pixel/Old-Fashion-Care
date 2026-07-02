@@ -8,6 +8,19 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Add handoff workflow prompt to Prompts/ directory (version-controlled)
+
+## Description
+
+- Added `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` to version control; previously untracked
+- File defines the repo push / handoff / snapshot / tag workflow used after each work session
+- No site files changed
+- No verification required — static file addition only
+
+---
+
+## Summary
+
 Handoff: STATUS, PROGRESS_NOTES updated; hero iterations ea8b067→b195aba→c04e819 documented; tag + snapshot for b195aba complete
 
 ## Description
