@@ -4,6 +4,41 @@ Use this file after each completed vertical slice.
 
 ---
 
+## 2026-07-05 — SEO audit across all 6 pages
+
+**Status:** Implemented — not yet committed
+
+**Slice summary:**
+SEO audit of `index.html`, `about.html`, `services.html`, `how-it-works.html`, `questions.html`,
+`contact.html` per the standing next-action from prior handoffs:
+1. Metadata inventory (titles, descriptions, canonicals, OG tags, Twitter Card tags, sitemap.xml,
+   robots.txt) — all already correct across all 6 pages; no changes made there.
+2. Found `og:image`/`twitter:image` referenced a nonexistent `images/og-default.png` on all 6
+   pages. Repointed to the existing `images/hero-ai.jpg`; corrected declared dimensions to the
+   file's actual 1100×934 (was falsely declared 1200×630).
+3. Found `apple-touch-icon` link tag referenced a nonexistent `images/apple-touch-icon.png` on all
+   6 pages. Removed the tag; `favicon.svg` is the fallback icon.
+
+**Files changed:**
+- `index.html`, `about.html`, `services.html`, `how-it-works.html`, `questions.html`,
+  `contact.html` — `og:image`, `og:image:width/height`, `twitter:image` values; apple-touch-icon
+  link removed
+- `STATUS.md`, `COMMIT_NOTES.md`, `PROGRESS_NOTE.md`, `PROGRESS_NOTES.md`, `CHANGELOG.md` —
+  tracking (unconditional)
+
+**Validation:**
+- `grep -rn "og-default\|apple-touch-icon" *.html` → no matches after fix
+- Scripted extraction of every local `href`/`src` across the 6 pages, checked against the
+  filesystem → all resolve to existing files
+
+**Open items:**
+- Commit/tag/snapshot/push pending user confirmation
+- Hi-res original hero photo still needed for `images/hero-ai.jpg`
+- Consider a dedicated 180×180 `apple-touch-icon.png` instead of the `favicon.svg` fallback
+- Next major slice: migration branch → main merge review
+
+---
+
 ## 2026-06-30 — Hero smoother gradient + headline fix + sub barely-covers-hand
 
 **Status:** Complete — commit b195aba — tag v1.5.0__hero-smoother-gradient-headline-fix__commit-b195aba

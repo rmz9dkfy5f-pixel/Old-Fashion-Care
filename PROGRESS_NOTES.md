@@ -6,6 +6,67 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-05 — Production Readiness Skills deployment (V3.4 + 18-skill suite)
+
+**Work completed:**
+- Ran the `DEPLOY_PRODUCTION_READINESS_SKILLS` SOP against this repo. Found both source packages
+  (`project-starter-kit-v3.4`, `production-readiness-skills-v1`) were stranded in an unreviewed
+  migration-staging folder in the vault instead of their documented canonical path; fixed that in
+  the vault first (separate from this repo), with a verified pre-change snapshot.
+- Installed the V3.4 baseline in migrate mode: additive only, `v34_validate.py` → PASS. 3 real
+  conflicts with existing files (`AGENTS.md`, `CLAUDE.md`, `ai/agents/AGENT_REVIEW_GATES.md`) were
+  quarantined into `.v34_migration_review/*.v34-candidate` rather than overwritten.
+- Installed the 18-skill production-readiness suite into `.claude/skills/` — 22 total skills now
+  present (4 V3.4 + 18 PR suite), no name conflicts with the existing v3.3 setup.
+- Verification caught a leftover cross-client reference ("Smart Learning Solutions") baked into
+  `production-readiness-audit/SKILL.md`'s description text; user approved generalizing the wording.
+
+**Files changed:**
+- New: `.agents/`, `.claude/skills/` (22 skills), `docs/governance/`, `docs/project/`,
+  `ai/agents/SUBAGENT_ROLES.md`, `ai/prompts/*`, `00_MIGRATION_KICKOFF.md`, `MIGRATION_REPORT.md`,
+  `V34_INSTALL_REPORT.json`, `.v34_migration_review/*`
+- No existing tracked file was modified or deleted by either installer
+
+**Validation:**
+- `python3 project-starter-kit-v3.4/scripts/v34_validate.py --target .` → PASS
+- `find .claude/skills -name SKILL.md | wc -l` → 22 (expected)
+- `grep -rl "Smart Learning" .claude/skills/` → clean after the one-line fix
+- `git status --short` reviewed to confirm only new/untracked paths plus the 3 quarantined files
+
+**Notes for next agent:**
+- `docs/project/*.md` (from V3.4) duplicates the root-level tracking docs already in active use in
+  this repo (STATUS.md, CHANGELOG.md, COMMIT_NOTES.md, etc.) — not yet reconciled, flagged in
+  STATUS.md open questions
+- The 3 files in `.v34_migration_review/` are candidate replacements for `AGENTS.md`, `CLAUDE.md`,
+  and `ai/agents/AGENT_REVIEW_GATES.md` — review before deciding whether to merge any content in
+- 22 skills are now available as slash-command-style skills in Claude Code sessions on this repo
+
+---
+
+## 2026-07-02 → 2026-07-05 — SEO audit: metadata verified, two broken asset references fixed
+
+**Work completed:**
+- Ran the `CLAUDE_CODE_SESSION_START` SOP to re-establish project context before starting the SEO-audit slice named in the prior handoff.
+- Read-only inventory (grep) of `<title>`, meta description, canonical, Open Graph, and Twitter Card tags across all 6 pages (`index.html`, `about.html`, `services.html`, `how-it-works.html`, `questions.html`, `contact.html`), plus `sitemap.xml` and `robots.txt` — all already correct and consistent; no content changes needed.
+- Found `og:image`/`twitter:image` on all 6 pages pointed to `images/og-default.png`, which does not exist — broken social-share preview image site-wide. User chose to repoint to the existing `images/hero-ai.jpg`; also corrected the declared `og:image:width`/`:height` from the placeholder 1200×630 to the file's actual 1100×934 (verified via `sips`).
+- Found `<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">` on all 6 pages also referenced a nonexistent file — broken iOS "Add to Home Screen" icon. User chose to remove the tag; `favicon.svg` remains as the fallback icon.
+- Verified fix: no remaining `og-default`/`apple-touch-icon` references; a scripted sweep of every local `href`/`src` across the 6 pages confirms all referenced local files now exist.
+
+**Files changed:**
+- `index.html`, `about.html`, `services.html`, `how-it-works.html`, `questions.html`, `contact.html` — `og:image`, `og:image:width`, `og:image:height`, `twitter:image` values; `apple-touch-icon` link removed
+- `STATUS.md`, `PROGRESS_NOTE.md` — updated to reflect this slice
+
+**Validation:**
+- `grep -rn "og-default\|apple-touch-icon" *.html` → no matches
+- Scripted check extracting every local `href`/`src` across the 6 pages and confirming the file exists on disk → all resolve
+
+**Notes for next agent:**
+- SEO audit is now effectively complete pending commit — proceed to migration branch → main merge review next, per the standing open question in STATUS.md
+- Hi-res hero photo swap remains a separate, still-open item
+- Consider creating a real 180×180 `apple-touch-icon.png` later rather than relying on the `favicon.svg` fallback indefinitely
+
+---
+
 ## 2026-06-30 — Hero: smoother gradient, headline fix, sub barely-covers-hand + handoff
 
 **Work completed:**

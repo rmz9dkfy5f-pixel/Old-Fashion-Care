@@ -8,6 +8,33 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+SEO audit fixes + Production Readiness Skills deployment (V3.4 baseline + 18-skill suite)
+
+## Description
+
+- SEO metadata audit across all 6 HTML pages: titles, descriptions, canonicals, Open Graph, and
+  Twitter Card tags, plus sitemap.xml and robots.txt — all already correct, no changes needed
+- Fixed: `og:image`/`twitter:image` on all 6 pages pointed to `images/og-default.png` (does not
+  exist) — repointed to the existing `images/hero-ai.jpg`; corrected `og:image:width`/`:height`
+  from placeholder 1200×630 to the file's actual 1100×934
+- Fixed: `<link rel="apple-touch-icon">` on all 6 pages pointed to `images/apple-touch-icon.png`
+  (does not exist) — removed the tag; `favicon.svg` remains as fallback
+- Installed Project Starter Kit V3.4 baseline (migrate mode, additive only) and the 18-skill
+  production-readiness suite into `.claude/skills/` (22 skills total); `v34_validate.py` passed
+- 3 real conflicts with existing files (`AGENTS.md`, `CLAUDE.md`, `ai/agents/AGENT_REVIEW_GATES.md`)
+  were quarantined into `.v34_migration_review/` rather than overwritten
+- Fixed a leftover cross-client ("Smart Learning Solutions") reference found in one installed
+  skill's description text during verification
+- Verified: no remaining references to either missing SEO asset; every local href/src across the
+  6 pages resolves to an existing file; no existing tracked repo file was modified or deleted by
+  either skills installer
+- Follow-up: consider a dedicated 180×180 apple-touch-icon.png; reconcile `docs/project/*.md` with
+  existing root tracking docs; review the 3 quarantined `.v34_migration_review/` candidates
+
+---
+
+## Summary
+
 Fix RepoBackups path in tracking docs — correct volume is DataHub_2TB
 
 ## Description
