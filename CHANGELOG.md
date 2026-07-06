@@ -4,6 +4,26 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [Unreleased] — 2026-07-05
+
+### Fixed
+- `og:image`/`twitter:image` on all 6 pages pointed to a nonexistent `images/og-default.png`,
+  breaking social-share link previews site-wide — repointed to the existing `images/hero-ai.jpg`
+  and corrected the declared image dimensions (1200×630 → actual 1100×934)
+- `apple-touch-icon` link tag on all 6 pages pointed to a nonexistent `images/apple-touch-icon.png`
+  — removed; `favicon.svg` remains as fallback
+
+### Audited
+- Meta titles, descriptions, canonical URLs, Open Graph tags, Twitter Card tags, `sitemap.xml`,
+  and `robots.txt` across all 6 pages — confirmed correct, no changes needed
+
+### Added
+- Project Starter Kit V3.4 baseline (migrate mode) and the 18-skill production-readiness suite
+  installed under `.claude/skills/` (22 skills total: 4 V3.4 + 18 PR suite), `.agents/`,
+  `docs/governance/`, `docs/project/` — dev-tooling/workflow scaffolding only, no site-facing change
+
+---
+
 ## [v1.5.0] — 2026-06-30
 
 ### Changed

@@ -8,6 +8,71 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+SEO audit fixes + Production Readiness Skills deployment (V3.4 baseline + 18-skill suite)
+
+## Description
+
+- SEO metadata audit across all 6 HTML pages: titles, descriptions, canonicals, Open Graph, and
+  Twitter Card tags, plus sitemap.xml and robots.txt — all already correct, no changes needed
+- Fixed: `og:image`/`twitter:image` on all 6 pages pointed to `images/og-default.png` (does not
+  exist) — repointed to the existing `images/hero-ai.jpg`; corrected `og:image:width`/`:height`
+  from placeholder 1200×630 to the file's actual 1100×934
+- Fixed: `<link rel="apple-touch-icon">` on all 6 pages pointed to `images/apple-touch-icon.png`
+  (does not exist) — removed the tag; `favicon.svg` remains as fallback
+- Installed Project Starter Kit V3.4 baseline (migrate mode, additive only) and the 18-skill
+  production-readiness suite into `.claude/skills/` (22 skills total); `v34_validate.py` passed
+- 3 real conflicts with existing files (`AGENTS.md`, `CLAUDE.md`, `ai/agents/AGENT_REVIEW_GATES.md`)
+  were quarantined into `.v34_migration_review/` rather than overwritten
+- Fixed a leftover cross-client ("Smart Learning Solutions") reference found in one installed
+  skill's description text during verification
+- Verified: no remaining references to either missing SEO asset; every local href/src across the
+  6 pages resolves to an existing file; no existing tracked repo file was modified or deleted by
+  either skills installer
+- Follow-up: consider a dedicated 180×180 apple-touch-icon.png; reconcile `docs/project/*.md` with
+  existing root tracking docs; review the 3 quarantined `.v34_migration_review/` candidates
+
+---
+
+## Summary
+
+Fix RepoBackups path in tracking docs — correct volume is DataHub_2TB
+
+## Description
+
+- PROGRESS_NOTE.md and PROGRESS_NOTES.md: replaced `/Users/ant/WorkSync/Projects/RepoBackups` with `/Volumes/DataHub_2TB/WorkSync/Projects/RepoBackups` — the drive is mounted on an external volume, not under the home directory
+- No site files changed; no validation required
+- Remaining: actual snapshot folders on disk may still be at the wrong path — user to verify or move manually
+
+---
+
+## Summary
+
+Add .gitignore; untrack root .DS_Store; suppress ChatGPT source PNGs
+
+## Description
+
+- Created `.gitignore` with `**/.DS_Store` and `images/ChatGPT*` patterns
+- `git rm --cached .DS_Store` to untrack the root .DS_Store that was previously committed
+- `ai/.DS_Store`, `ai/sessions/.DS_Store`, and `images/ChatGPT*.png` were untracked and are now ignored
+- No site files changed; GitHub Desktop changes panel should be clean after this commit
+
+---
+
+## Summary
+
+Add handoff workflow prompt to Prompts/ directory (version-controlled)
+
+## Description
+
+- Added `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` to version control; previously untracked
+- File defines the repo push / handoff / snapshot / tag workflow used after each work session
+- No site files changed
+- No verification required — static file addition only
+
+---
+
+## Summary
+
 Add refined handoff prompt: snapshot naming rules and RepoBackups path confirmation
 
 ## Description
@@ -17,6 +82,19 @@ Add refined handoff prompt: snapshot naming rules and RepoBackups path confirmat
 - Updated STATUS.md, PROGRESS_NOTES.md, COMMIT_NOTES.md to reflect this push
 - No site files changed; workflow tooling only
 - No remaining risk
+
+---
+
+## Summary
+
+Handoff: STATUS, PROGRESS_NOTES updated; hero iterations ea8b067→b195aba→c04e819 documented; tag + snapshot for b195aba complete
+
+## Description
+
+- Updated STATUS.md and PROGRESS_NOTES.md to reflect three hero CSS iterations since last handoff (ea8b067, b195aba, c04e819)
+- Tag `v1.5.0__hero-smoother-gradient-headline-fix__commit-b195aba` pushed to GitHub; snapshot saved to RepoBackups
+- No site files changed in this commit — tracking docs only
+- Remaining: user visual review of hero on live/local site; hi-res original photo still needed for images/hero-ai.jpg
 
 ---
 
