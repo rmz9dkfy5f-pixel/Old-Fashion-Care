@@ -6,6 +6,33 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-06 — Record next action: hero spec waiting in AntBrain inbox
+
+**Work completed:**
+- Discovered `000_INBOX/ofc-hero-spec-and-fix.md` already exists in the AntBrainOS vault — an
+  un-triaged, frontmatter-less spec ("Hero Component — Verified Spec & Fixes") covering a CTA
+  button contrast fix (coral fill/white text fails 4.5:1 AA) and a gradient fade-seam widening fix
+  (~47–61% → ~40–68%, multi-stop gradient), with guardrails (don't change the two confirmed hex
+  colors) and a 6-step execution plan
+- Recorded this as the project's next work item in `docs/project/STATUS.md` and `PROGRESS_NOTE.md`,
+  and mirrored the same pointer into the vault's `CURRENT_CONTEXT.md`/`HANDOFF_TO_CLAUDE.md`
+- No code changed — this was a pure note-recording turn
+
+**Files changed:**
+- `docs/project/STATUS.md`, `PROGRESS_NOTE.md`, `docs/project/COMMIT_NOTES.md` (this entry's
+  companion), `PROGRESS_NOTES.md` (this entry)
+
+**Validation:**
+- None required — documentation-only, no site files touched
+
+**Notes for next agent:**
+- Before implementing the hero fixes, run `05_SOPS/Obsidian/INBOX_PROCESSING.md` on
+  `000_INBOX/ofc-hero-spec-and-fix.md` first (triage/classify/file it properly), then follow its
+  6-step execution plan against `css/style.css`'s `.hero*` rules
+- Get Phase 1 approval before implementing, per standard workflow
+
+---
+
 ## 2026-07-05 — Production Readiness Skills deployment (V3.4 + 18-skill suite)
 
 **Work completed:**

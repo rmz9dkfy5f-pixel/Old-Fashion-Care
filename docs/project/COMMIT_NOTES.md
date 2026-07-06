@@ -8,6 +8,22 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Record next action: hero contrast/gradient-fade fix spec waiting in AntBrain inbox
+
+## Description
+
+- No code changed. Updated `docs/project/STATUS.md` and `PROGRESS_NOTE.md` to point the next work
+  item at `000_INBOX/ofc-hero-spec-and-fix.md` (AntBrainOS vault) — a pre-written spec covering a
+  CTA button contrast fix (coral fill/white text fails 4.5:1 AA) and a gradient fade-seam widening
+  fix (~47–61% → ~40–68%)
+- The same pointer was also recorded in the vault's `CURRENT_CONTEXT.md`/`HANDOFF_TO_CLAUDE.md` for
+  Old Fashion Care so the vault and repo agree on what's next
+- No validation needed — documentation-only tracking update, no site files touched
+
+---
+
+## Summary
+
 Complete V3.4 migration: reconcile root v3.3 docs with docs/governance/ and docs/project/
 
 ## Description

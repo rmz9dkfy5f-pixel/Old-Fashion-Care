@@ -156,7 +156,11 @@ Snapshot saved to RepoBackups for b195aba.
 
 ## Next Action
 
-> 1. Commit and push this V3.4 doc consolidation (Netlify unaffected — docs-only change).
+> 1. **Run `000_INBOX/ofc-hero-spec-and-fix.md` (in the AntBrainOS vault) through the
+>    `INBOX_PROCESSING.md` SOP, then apply its hero contrast + gradient-fade-seam fixes to this
+>    repo.** This is the priority next work item — see the inbox file for the full spec (coral/white
+>    CTA fails 4.5:1 AA contrast; gradient fade-seam needs widening from ~47–61% to ~40–68%; do not
+>    change the two confirmed hex color values).
 > 2. Swap in hi-res hero photo before final launch (separate, pre-existing known issue).
 > 3. Create a dedicated apple-touch-icon.png (separate, pre-existing known issue).
 
