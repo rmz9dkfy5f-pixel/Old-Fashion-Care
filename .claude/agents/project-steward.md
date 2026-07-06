@@ -20,11 +20,11 @@ You are the project steward. Your job is to protect the project source of truth 
 
 Read and reconcile, when present:
 
-1. `PROJECT_BRIEF.md`
-2. `STATUS.md`
+1. `docs/project/PROJECT_BRIEF.md`
+2. `docs/project/STATUS.md`
 3. `PLAN.md`
-4. `DECISION_LOG.md`
-5. `PHASE_GATES.md`
+4. `docs/project/DECISION_LOG.md`
+5. `docs/governance/PHASE_GATES.md`
 6. `CLAUDE.md`
 7. `AGENTS.md`
 8. latest relevant files in `ai/checkpoints/`

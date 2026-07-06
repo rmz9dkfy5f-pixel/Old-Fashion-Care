@@ -13,69 +13,73 @@ For historical notes, copy completed entries into `PROGRESS_NOTES.md`.
 Date:
 
 ```text
-2026-07-05
+2026-07-07
 ```
 
 Phase:
 
 ```text
-Phase 2 — SEO audit slice implemented, pending commit
+Phase 2 — V3.4 doc consolidation complete, pending commit
 ```
 
 Current slice:
 
 ```text
-(1) SEO audit across all 6 HTML pages. Metadata (titles, descriptions, canonicals, OG/Twitter tags,
-sitemap.xml, robots.txt) was already correct. Found and fixed two broken asset references:
-og-image/twitter-image pointed to a nonexistent images/og-default.png, and apple-touch-icon
-pointed to a nonexistent images/apple-touch-icon.png.
-(2) Production Readiness Skills deployment: installed Project Starter Kit V3.4 baseline (migrate
-mode) + the 18-skill production-readiness suite into .claude/skills/ (22 skills total). Both
-slices ready in the same push, not yet committed.
+Completed the V3.4 migration: reconciled root v3.3 docs with docs/governance/ and docs/project/
+(the paths the installed V3.4 skills actually read from), rewrote AGENTS.md/CLAUDE.md, resolved
+all 3 quarantined .v34_migration_review/ candidates, updated 4 live files that still pointed at
+old root paths. Not yet committed.
 ```
 
 Completed:
 
-- [x] Grep-based SEO metadata inventory across all 6 pages (titles, descriptions, canonicals, OG, Twitter)
-- [x] Confirmed sitemap.xml and robots.txt correct
-- [x] Fixed og:image/twitter:image on all 6 pages: images/og-default.png → images/hero-ai.jpg (existing file); og:image:width/height corrected 1200×630 → 1100×934 (actual file dimensions)
-- [x] Removed broken apple-touch-icon link tag from all 6 pages (file did not exist; favicon.svg remains as fallback)
-- [x] Verified: no remaining references to og-default.png or apple-touch-icon.png; every local href/src across all 6 pages resolves to an existing file
-- [x] Installed V3.4 baseline (migrate mode) — additive only, `v34_validate.py` PASS, 3 conflicts quarantined to `.v34_migration_review/`
-- [x] Installed 18-skill production-readiness suite — 22 total skills, no conflicts
-- [x] Fixed leftover "Smart Learning Solutions" reference in `production-readiness-audit/SKILL.md`
+- [x] Moved 8 root docs (STATUS, CHANGELOG, COMMIT_NOTES, CONTEXT, DECISION_LOG, PROJECT_BRIEF,
+      RELEASE_NOTES, ROADMAP) into `docs/project/`, overwriting empty V3.4 stubs
+- [x] Authored real content for the new `docs/project/ARCHITECTURE.md`
+- [x] Merged 6 governance file pairs into `docs/governance/` (CHANGE_CONTROL, ROLLBACK_PLAN,
+      REPO_HEALTH_CHECK, DONE_CRITERIA, PROJECT_RISK_REGISTER, PHASE_GATES); deleted root duplicates
+- [x] Authored real, project-specific risk entries in `docs/governance/PROJECT_RISK_REGISTER.md`
+- [x] Rewrote `AGENTS.md`/`CLAUDE.md` to keep v3.3 specifics + add V3.4's genuinely new pieces
+- [x] Resolved `ai/agents/AGENT_REVIEW_GATES.md` (kept real 7-agent table, added Review Gate D)
+- [x] Added roster-authority note to `ai/agents/SUBAGENT_ROLES.md`
+- [x] Deleted all 3 `.v34_migration_review/` candidates and the now-empty directory
+- [x] Updated `README.md`, `START_HERE.md`, and 4 live files still referencing old root paths
+- [x] Verified: `git status` matches planned scope exactly; `v34_validate.py` PASS; local
+      `href`/`src` resolution sweep clean; no dangling references in actively-used docs
 
 In progress:
 
-- [ ] Awaiting user confirmation to commit/tag/snapshot/push this slice
+- [ ] Awaiting user confirmation to commit/push this slice
 
 Blocked:
 
 - [ ] Quality: swap the client's ORIGINAL hi-res photo into images/hero-ai.jpg before launch
 - [ ] Decide whether to create a dedicated apple-touch-icon.png (180×180) later, or keep favicon.svg fallback
-- [ ] Reconcile `docs/project/*.md` (new from V3.4) with existing root-level tracking docs
-- [ ] Review the 3 quarantined `.v34_migration_review/` candidates
 
 Next action:
 
-> Get user confirmation, then commit, tag, snapshot, and push. After that, revisit migration branch → main merge review.
+> Get user confirmation, then commit and push. No further V3.4-adoption work remains after this.
 
 Checks run:
 
 ```bash
-grep -rn "og-default\|apple-touch-icon" *.html   # confirmed zero remaining references
+python3 project-starter-kit-v3.4/scripts/v34_validate.py --target .   # PASS
+grep -rn "PHASE_GATES.md|DONE_CRITERIA.md|..." --include="*.md" .     # dangling-reference sweep
 # scripted check: every local href/src across the 6 pages resolves to an existing file
 ```
 
 Commit status:
 
 ```text
-Not yet committed — working tree has uncommitted changes to 6 HTML files + tracking docs.
+Not yet committed — working tree has uncommitted changes (17 deletions, 25 modifications, all
+docs/tooling — no HTML/CSS/JS site files touched).
 ```
 
 Approval status:
 
 ```text
-Phase 1 (inspect/propose) and Phase 2 (implement) both approved by user via AskUserQuestion for
-the og-image fix and the apple-touch-icon removal. Commit/push not yet confirmed.
+Full V3.4 migration plan approved by user via Plan Mode / ExitPlanMode (2026-07-07), including
+the two key decisions: consolidate to docs/governance//docs/project/ as single source of truth
+(deleting root duplicates), and keep the existing 7 sub-agents as authoritative over the generic
+V3.4 role taxonomy. Commit/push not yet confirmed.
 ```

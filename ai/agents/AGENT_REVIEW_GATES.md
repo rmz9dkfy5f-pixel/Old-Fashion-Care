@@ -103,3 +103,17 @@ Recommended next action:
 Do not call every agent for every task. That wastes context and creates noise.
 
 Use agent gates based on risk, not habit.
+
+## Review Gate D — Migration Safety
+
+For any starter-kit or skill-package install/migration (existing repos), agent must confirm:
+
+- Existing instructions preserved
+- Existing docs preserved
+- Template/candidate conflicts sent to `.v34_migration_review/` (or `.starter-kit/review/conflicts/`
+  for legacy v3.3-era conflicts) — never force-merged
+- No forced merge without approval
+
+Note: this project's real agent roster is the 7 named agents above, not the generic
+Planner/Implementer/Verifier/etc. roles listed in `ai/agents/SUBAGENT_ROLES.md` — see that file's
+header note.

@@ -4,6 +4,49 @@ Use this file after each completed vertical slice.
 
 ---
 
+## 2026-07-07 — Complete the V3.4 migration (doc consolidation)
+
+**Status:** Implemented — not yet committed
+
+**Slice summary:**
+The V3.4 baseline + 18-skill suite (installed 2026-07-05, merged to `main` 2026-07-06) only added
+scaffolding — it never reconciled with this project's real v3.3 root docs, and the installed V3.4
+skills hardcode `docs/governance/`/`docs/project/` paths, so they'd only ever see empty generic
+templates without this work. This slice:
+1. Moved 8 root docs with real content into `docs/project/` (STATUS, CHANGELOG, COMMIT_NOTES,
+   CONTEXT, DECISION_LOG, PROJECT_BRIEF, RELEASE_NOTES, ROADMAP), overwriting empty stubs; authored
+   real content for the new `docs/project/ARCHITECTURE.md`.
+2. Merged 6 governance file pairs into `docs/governance/` (root had real content, V3.4 side was
+   generic): CHANGE_CONTROL, ROLLBACK_PLAN, REPO_HEALTH_CHECK, DONE_CRITERIA (all straightforward
+   merges), PROJECT_RISK_REGISTER (authored real project-specific risks — neither side had any),
+   PHASE_GATES (two genuinely different gate taxonomies, reconciled into one). Deleted all 6 root
+   duplicates.
+3. Rewrote `AGENTS.md`/`CLAUDE.md`: kept v3.3-specific content (7-sub-agent workflow, phase-gate
+   language, tracking-file list updated for moved paths), added V3.4's genuinely new pieces
+   (Output Standard report format, no-auto-commit line, skill references).
+4. Resolved `ai/agents/AGENT_REVIEW_GATES.md` (kept the real 7-agent table, added the candidate's
+   new Review Gate D) and added a roster-authority note to `ai/agents/SUBAGENT_ROLES.md`.
+5. Deleted all 3 `.v34_migration_review/*.v34-candidate` files and the now-empty directory.
+6. Updated `README.md`, `START_HERE.md`, and 4 live files that still referenced old root paths.
+
+**Files changed:**
+- 17 files deleted (root docs consolidated), 25 files modified — see `docs/project/COMMIT_NOTES.md`
+  for the full list; no HTML/CSS/JS site files touched
+
+**Validation:**
+- `git status --short` matched the planned scope exactly (verified count and file list)
+- `python3 project-starter-kit-v3.4/scripts/v34_validate.py --target .` → PASS
+- Local `href`/`src` resolution sweep across all 6 pages → clean (no regression)
+- `grep` swept for dangling references to the 6 deleted root files; fixed 4 live files still
+  pointing at old paths; remaining hits confirmed to be frozen `.starter-kit/archive/` history or
+  generic `Prompts/*.md` templates, correctly left untouched
+
+**Open items:**
+- Commit/push pending user confirmation
+- Hi-res hero photo swap and dedicated apple-touch-icon.png remain open (pre-existing, unrelated)
+
+---
+
 ## 2026-07-05 — SEO audit across all 6 pages
 
 **Status:** Implemented — not yet committed

@@ -10,7 +10,7 @@ Do not let `BACKLOG.md` become the active plan. The active plan belongs in `PLAN
 
 Required for the current phase.
 
-- [ ] Merge migration/project-starter-v3-3 branch into main (SEO audit now complete)
+- [ ] Nothing blocking — V3.4 migration is complete; pick from Build Next.
 
 ---
 
@@ -21,10 +21,8 @@ Likely needed after the current slice.
 - [ ] Design review — visual polish and layout improvements across pages
 - [ ] Mobile layout review — verify all pages look great on small screens
 - [ ] Image optimization — compress large photos (care-03 through care-11 are 1–2.5MB each)
-- [ ] Reconcile `docs/project/*.md` (from V3.4 install) with existing root-level tracking docs
-- [ ] Review the 3 quarantined `.v34_migration_review/` candidate files and decide whether to
-      merge any content into `AGENTS.md` / `CLAUDE.md` / `ai/agents/AGENT_REVIEW_GATES.md`
 - [ ] Create a dedicated 180×180 `apple-touch-icon.png` (currently falls back to `favicon.svg`)
+- [ ] Swap in the client's hi-res original photo for `images/hero-ai.jpg`
 
 ---
 
@@ -66,10 +64,14 @@ Rejected or out of scope.
 - [x] Add photo / social proof section to site — homepage photo grid added (care-01 through care-06)
 - [x] Regina Booker founder photo on about.html — rectangular portrait, replacing initials placeholder
 - [x] Project Starter Kit v3.3 migration — control docs, agents, ai/, docs/, plans/ installed
-- [x] Fill in README.md, PROJECT_BRIEF.md, STATUS.md, BACKLOG.md with real project content
+- [x] Fill in README.md, docs/project/PROJECT_BRIEF.md, docs/project/STATUS.md, BACKLOG.md with
+      real project content
 - [x] Audit and improve on-page SEO metadata across all 6 HTML pages — metadata already correct;
       fixed broken og-image/twitter-image and apple-touch-icon references (2026-07-05)
 - [x] Deploy Production Readiness Skills (V3.4 baseline + 18-skill suite) into `.claude/skills/` (2026-07-05)
+- [x] Merge migration/project-starter-v3-3 branch into main (2026-07-06, tag v2.0.0)
+- [x] Complete V3.4 migration — reconciled root docs with docs/governance/docs/project, resolved
+      all quarantined candidates (2026-07-07)
 
 ---
 

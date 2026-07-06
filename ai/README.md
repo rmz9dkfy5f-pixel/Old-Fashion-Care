@@ -109,8 +109,8 @@ Use:
 
 The `ai/` folder now works with project-level quality gates:
 
-- use `DONE_CRITERIA.md` before calling work complete
-- use `CHANGE_CONTROL.md` before risky edits
-- use `ROLLBACK_PLAN.md` for migrations and risky changes
-- use `PROJECT_RISK_REGISTER.md` for recurring or unresolved risks
+- use `docs/governance/DONE_CRITERIA.md` before calling work complete
+- use `docs/governance/CHANGE_CONTROL.md` before risky edits
+- use `docs/governance/ROLLBACK_PLAN.md` for migrations and risky changes
+- use `docs/governance/PROJECT_RISK_REGISTER.md` for recurring or unresolved risks
 - use `ai/agents/AGENT_REVIEW_GATES.md` to determine sub-agent review requirements

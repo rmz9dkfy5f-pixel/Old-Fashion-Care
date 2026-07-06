@@ -49,11 +49,11 @@ Run the relevant checks:
 
 ### 5. Document
 Update project docs only when useful:
-- `STATUS.md`
-- `CHANGELOG.md`
-- `RELEASE_NOTES.md`
-- `DECISION_LOG.md`
-- `PROJECT_RISK_REGISTER.md`
+- `docs/project/STATUS.md`
+- `docs/project/CHANGELOG.md`
+- `docs/project/RELEASE_NOTES.md`
+- `docs/project/DECISION_LOG.md`
+- `docs/governance/PROJECT_RISK_REGISTER.md`
 
 ### 6. Commit/push gate
 Only after explicit approval:

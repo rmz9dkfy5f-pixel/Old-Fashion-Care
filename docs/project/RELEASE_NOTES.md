@@ -1,23 +1,47 @@
 # Release Notes
 
-## Release TBD
+Use this for release-specific summaries.
 
-### Added
+`CHANGELOG.md` tracks ongoing changes.
 
-- TBD
+`RELEASE_NOTES.md` explains what a specific release means.
 
-### Changed
+---
 
-- TBD
+## Release Template
 
-### Fixed
+### Version
 
-- TBD
+```text
+v0.0.0
+```
+
+### Release Date
+
+```text
+YYYY-MM-DD
+```
+
+### Summary
+
+> [What is this release?]
+
+### Highlights
+
+- [Highlight]
+- [Highlight]
+
+### Upgrade Notes
+
+- [Upgrade note]
 
 ### Known Issues
 
-- TBD
+- [Known issue]
 
-### Validation
+### Verification
 
-- TBD
+- [ ] Checks passed.
+- [ ] Manual verification completed.
+- [ ] Release notes reviewed.
+- [ ] Changelog updated.

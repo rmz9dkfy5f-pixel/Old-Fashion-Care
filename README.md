@@ -22,23 +22,26 @@ STATUS.md
 
 | File | Purpose |
 |---|---|
-| `PROJECT_BRIEF.md` | Project goal, scope, validation question |
-| `CONTEXT.md` | Stable context and background |
-| `STATUS.md` | Current progress and next action |
+| `docs/project/PROJECT_BRIEF.md` | Project goal, scope, validation question |
+| `docs/project/CONTEXT.md` | Stable context and background |
+| `docs/project/STATUS.md` | Current progress and next action |
 | `PLAN.md` | Active build plan |
-| `PHASE_GATES.md` | Approval checkpoints |
+| `docs/governance/PHASE_GATES.md` | Approval checkpoints |
 | `BACKLOG.md` | Work queue |
-| `ROADMAP.md` | Long-term direction |
-| `DECISION_LOG.md` | Decisions and reasons |
+| `docs/project/ROADMAP.md` | Long-term direction |
+| `docs/project/DECISION_LOG.md` | Decisions and reasons |
 | `SLICE_REVIEWS.md` | Completed slice reviews |
 | `LESSONS_LEARNED.md` | Process lessons |
-| `CHANGELOG.md` | Changes by date/version |
-| `RELEASE_NOTES.md` | Release summaries |
-| `COMMIT_NOTES.md` | GitHub commit tracking |
+| `docs/project/CHANGELOG.md` | Changes by date/version |
+| `docs/project/RELEASE_NOTES.md` | Release summaries |
+| `docs/project/COMMIT_NOTES.md` | GitHub commit tracking |
 | `PROGRESS_NOTE.md` | Current GitHub progress note |
 | `PROGRESS_NOTES.md` | Historical GitHub progress notes |
 | `CLAUDE.md` | Claude Code instructions |
 | `AGENTS.md` | Codex/agent instructions |
+| `docs/governance/` | V3.4 quality-gate docs (change control, done criteria, rollback, risk register, etc.) |
+| `docs/project/ARCHITECTURE.md` | Site architecture overview |
+| `.claude/skills/` | 22 Claude Code skills (V3.4 baseline + 18-skill production-readiness suite) |
 
 ---
 

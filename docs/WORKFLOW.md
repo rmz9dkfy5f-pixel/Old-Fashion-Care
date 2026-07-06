@@ -28,13 +28,13 @@ This file explains how work should move through the project.
 Usually updated in Phase 1:
 
 ```text
-PROJECT_BRIEF.md
-CONTEXT.md
-STATUS.md
+docs/project/PROJECT_BRIEF.md
+docs/project/CONTEXT.md
+docs/project/STATUS.md
 PLAN.md
-PHASE_GATES.md
+docs/governance/PHASE_GATES.md
 BACKLOG.md
-DECISION_LOG.md
+docs/project/DECISION_LOG.md
 PROGRESS_NOTE.md
 ```
 
@@ -45,13 +45,13 @@ PROGRESS_NOTE.md
 Usually updated in Phase 2:
 
 ```text
-STATUS.md
+docs/project/STATUS.md
 SLICE_REVIEWS.md
 PROGRESS_NOTE.md
 PROGRESS_NOTES.md
-COMMIT_NOTES.md
-CHANGELOG.md
-RELEASE_NOTES.md
+docs/project/COMMIT_NOTES.md
+docs/project/CHANGELOG.md
+docs/project/RELEASE_NOTES.md
 LESSONS_LEARNED.md
 ```
 

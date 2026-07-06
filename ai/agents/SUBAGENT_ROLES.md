@@ -1,5 +1,11 @@
 # Subagent Roles
 
+**Note (2026-07-07):** These are generic V3.4 role names. This project's real, authoritative agent
+roster is the 7 sub-agents defined in `.claude/agents/*.md` and `ai/agents/AGENT_REVIEW_GATES.md`
+(`repo-cartographer`, `project-steward`, `slice-planner`, `debugger`, `test-verifier`,
+`security-reviewer`, `docs-promoter`) — use those, not the generic roles below, when deciding which
+agent to invoke for a task in this repo.
+
 Use these roles when assigning specialized review tasks to Claude Code, Codex, or other coding agents.
 
 ## Planner

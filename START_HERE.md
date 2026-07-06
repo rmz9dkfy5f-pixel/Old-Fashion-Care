@@ -1,5 +1,15 @@
 # Start Here — Unified Project Starter Kit v3.1
 
+**Note (2026-07-07):** This document predates the V3.4 doc consolidation. Several files it lists at
+repo root now live under `docs/project/` (`STATUS.md`, `CHANGELOG.md`, `COMMIT_NOTES.md`,
+`CONTEXT.md`, `DECISION_LOG.md`, `PROJECT_BRIEF.md`, `RELEASE_NOTES.md`, `ROADMAP.md`,
+`ARCHITECTURE.md`) or `docs/governance/` (`PHASE_GATES.md`, `DONE_CRITERIA.md`, `CHANGE_CONTROL.md`,
+`ROLLBACK_PLAN.md`, `PROJECT_RISK_REGISTER.md`, `REPO_HEALTH_CHECK.md`). `BACKLOG.md`, `PLAN.md`,
+`SLICE_REVIEWS.md`, `LESSONS_LEARNED.md`, `PROGRESS_NOTE.md`, `PROGRESS_NOTES.md`, `CLAUDE.md`, and
+`AGENTS.md` are unaffected and still live at root. Read `README.md`'s Project Control Files table
+for the current, authoritative location of every file. This project also now has `.claude/skills/`
+(22 V3.4 + production-readiness skills) — see `CLAUDE.md`/`AGENTS.md` for how to use them.
+
 This project system merges three useful layers:
 
 1. **Project control** from Project Starter Kit v2: phase gates, vertical slices, approval before changes, tracking, and GitHub discipline.

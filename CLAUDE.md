@@ -1,6 +1,7 @@
 # Claude Code Instructions
 
-Claude Code must follow these rules when working in this repo.
+Claude Code must follow these rules when working in this repo. See `AGENTS.md` for the
+agent-neutral rules shared with Codex/other tools — this file adds Claude-Code-specific notes.
 
 ---
 
@@ -12,6 +13,8 @@ Default to Phase 1 unless explicitly told Phase 2 is approved.
 Phase 1 = plan, inspect, propose, ask approval
 Phase 2 = implement approved change only
 ```
+
+Detailed gate criteria: `docs/governance/PHASE_GATES.md`, `docs/governance/DONE_CRITERIA.md`.
 
 ---
 
@@ -49,7 +52,7 @@ For implementation:
 check → fix → verify → commit → push
 ```
 
-The check step comes first.
+The check step comes first. Do not commit or push unless the user explicitly asks.
 
 ---
 
@@ -70,20 +73,20 @@ The check step comes first.
 Keep these files updated as relevant:
 
 ```text
-STATUS.md
+docs/project/STATUS.md
 PLAN.md
-PHASE_GATES.md
+docs/governance/PHASE_GATES.md
 BACKLOG.md
 SLICE_REVIEWS.md
 PROGRESS_NOTE.md
 PROGRESS_NOTES.md
-COMMIT_NOTES.md
-CHANGELOG.md
-RELEASE_NOTES.md
+docs/project/COMMIT_NOTES.md
+docs/project/CHANGELOG.md
+docs/project/RELEASE_NOTES.md
 LESSONS_LEARNED.md
 ```
 
-`COMMIT_NOTES.md` and `PROGRESS_NOTE.md` must be kept unconditionally.
+`docs/project/COMMIT_NOTES.md` and `PROGRESS_NOTE.md` must be kept unconditionally.
 
 ---
 
@@ -107,7 +110,6 @@ fake-token
 todo
 ```
 
-
 ---
 
 ## AI Engineering Memory Rules
@@ -123,13 +125,13 @@ Use `ai/` files this way:
 - Reusable lessons should be promoted into `ai/patterns/`.
 - Reusable instructions should be promoted into `ai/prompts/`.
 
-Never mix architecture, debugging, implementation, and optimization in the same AI session file unless explicitly approved.
+Never mix architecture, debugging, implementation, and optimization in the same AI session file
+unless explicitly approved.
 
 ## Sub-Agent Workflow
 
-This repo may include Claude Code sub-agents under `.claude/agents/`.
-
-Use them as controlled specialists, not autonomous project owners:
+This repo's real, authoritative sub-agents live under `.claude/agents/` (7 agents) — not the
+generic role names in `ai/agents/SUBAGENT_ROLES.md`:
 
 - `repo-cartographer` maps structure and stack.
 - `project-steward` checks alignment with source-of-truth files.
@@ -139,13 +141,47 @@ Use them as controlled specialists, not autonomous project owners:
 - `security-reviewer` reviews security-sensitive changes.
 - `docs-promoter` recommends what should move into docs, patterns, prompts, or decision logs.
 
-Default rule: sub-agents analyze first and do not delete, broadly refactor, deploy, migrate, or overwrite files without explicit user approval.
+Default rule: sub-agents analyze first and do not delete, broadly refactor, deploy, migrate, or
+overwrite files without explicit user approval. See `ai/agents/AGENT_REVIEW_GATES.md` for which
+agents are required for which change types.
 
+## V3.4 Skills
+
+`.claude/skills/` has 22 skills installed: the V3.4 baseline (`v34-execution-loop`,
+`v34-migration-loop`, `v34-production-readiness`, `v34-context-eval-loop`) plus an 18-skill
+production-readiness suite (`production-readiness-audit`, `seo-hygiene-check`,
+`security-auth-admin-review`, `accessibility-pass`, `performance-budget-pass`, etc.). Use the
+narrowest skill that fits the task rather than the generic execution loop for everything.
+
+## Output Standard
+
+For substantial work, end with:
+
+```md
+## Status
+PASS / PARTIAL / BLOCKED / FAIL
+
+## What Changed
+[List]
+
+## Validation
+[Commands and results]
+
+## Risks
+[Remaining issues]
+
+## Next Action
+[Commit / continue / rollback / user decision]
+```
 
 ## v3.3 Quality Gate Rules
 
-Before risky edits, inspect `CHANGE_CONTROL.md`, `DONE_CRITERIA.md`, `ROLLBACK_PLAN.md`, and `ai/agents/AGENT_REVIEW_GATES.md`.
+Before risky edits, inspect `docs/governance/CHANGE_CONTROL.md`, `docs/governance/DONE_CRITERIA.md`,
+`docs/governance/ROLLBACK_PLAN.md`, and `ai/agents/AGENT_REVIEW_GATES.md`.
 
-Do not overwrite existing files during starter-kit migration. Quarantine conflicts in `.starter-kit/review/conflicts/`.
+Do not overwrite existing files during any starter-kit or skill-package install. Quarantine
+conflicts in `.v34_migration_review/` (or `.starter-kit/review/conflicts/` for legacy v3.3-era
+conflicts) and reconcile by hand rather than force-merging.
 
-Do not mark work complete unless verification is run or the missing verification is explicitly documented.
+Do not mark work complete unless verification is run or the missing verification is explicitly
+documented.
