@@ -139,6 +139,12 @@ check → fix → verify → document → commit suggestion
 Do not commit unless the user asks you to commit. Never add LLM co-author attribution to commit
 messages.
 
+When the user does ask to commit/push, use
+`Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` (commit, tag, snapshot,
+push, hard-clean check). As of 2026-07-08 that prompt automatically continues into the AntBrainOS
+vault's `CLAUDE_CODE_SESSION_END` close-out in the same turn — running the push prompt is the
+trigger for both steps; do not treat them as two separate prompts to invoke.
+
 ## v3.3 Quality Gate Rules
 
 Before risky edits, inspect `docs/governance/CHANGE_CONTROL.md`, `docs/governance/DONE_CRITERIA.md`,

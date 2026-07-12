@@ -52,6 +52,12 @@ For implementation:
 check → fix → verify → commit → push
 ```
 
+`push` here means running `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md`
+(commit, tag, snapshot, push, hard-clean check). As of 2026-07-08 that prompt automatically
+continues into the AntBrainOS vault's `CLAUDE_CODE_SESSION_END` close-out in the same turn — do not
+treat push and session-end as two separate steps to ask for individually; running the push prompt
+is the trigger for both.
+
 The check step comes first. Do not commit or push unless the user explicitly asks.
 
 ---

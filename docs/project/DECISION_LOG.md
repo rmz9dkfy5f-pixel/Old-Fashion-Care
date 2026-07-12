@@ -6,6 +6,37 @@ Do not use it for tiny task notes.
 
 ---
 
+## 2026-07-08 — Auto-Chain CLAUDE_CODE_SESSION_END After the Repo Push/Handoff Prompt
+
+### Decision
+`Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` now automatically
+continues into the AntBrainOS vault's `CLAUDE_CODE_SESSION_END` SOP in the same turn (new Section
+13), feeding it the just-established commit hash/tag/snapshot path. This is also applied to the
+vault's canonical master copy of the prompt (`09_PROMPTS/Claude_Code_Prompts/04_Prompts/...`), so
+every project using that prompt gets the same auto-chaining going forward.
+
+### Reason
+On 2026-07-07/08, `CLAUDE_CODE_SESSION_END` was run once, then a further repo push landed
+afterward, leaving the vault's `CURRENT_CONTEXT.md`/`HANDOFF_TO_CLAUDE.md` "Last Known Good State"
+one push stale until a separate correction pass caught it (see `06_LESSONS_LEARNED/Claude_Code/
+2026-07-08_session_end_must_be_the_literal_last_action.md`). Chaining the two prompts into one
+automatic sequence prevents this class of drift structurally, rather than relying on remembering
+to run session-end manually as the literal last action every time.
+
+### Alternatives Considered
+- Keep the two prompts separate and just be more disciplined about running session-end last
+  (rejected — this is exactly the discipline that already failed once)
+- Only fix this repo's local prompt copy, leave the vault master untouched (rejected — user wanted
+  a permanent, systemic fix across all projects, not a one-off local patch)
+
+### Consequences
+Every push now triggers a full vault session-end close-out (`CURRENT_CONTEXT.md`, `SESSION_LOG.md`,
+`HANDOFF_TO_CLAUDE.md`, lessons learned, context packet, `last_run:` updates) even for small
+pushes. This is intentional — keeping the vault always current is preferable to an occasional
+larger drift.
+
+---
+
 ## 2026-07-07 — Consolidate to docs/governance/docs/project as Single Source of Truth
 
 ### Decision

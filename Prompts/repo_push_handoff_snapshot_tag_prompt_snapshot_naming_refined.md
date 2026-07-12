@@ -451,7 +451,47 @@ Use the current remote branch unless the repo state clearly requires otherwise.
 
 ---
 
-## 11. Final Output Required
+## 11. Hard Clean Check Before Claiming Success
+
+After pushing and confirming the remote branch and tag, run:
+
+```bash
+git status --short --branch
+git status --porcelain=v1 --untracked-files=all
+git status
+git log -1 --oneline
+git tag --points-at HEAD
+```
+
+The repo is **not clean** if `git status --porcelain=v1 --untracked-files=all` prints anything.
+That includes untracked `??` files or folders. Do not say "clean" while visible untracked files
+remain.
+
+PASS requires all of these:
+
+- `git status --porcelain=v1 --untracked-files=all` outputs nothing.
+- `git status` says `nothing to commit, working tree clean`.
+- The current branch is up to date with its remote branch.
+- `git tag --points-at HEAD` shows the expected full descriptive tag.
+- GitHub Desktop is expected to show `0 changed files`.
+
+If local-only folders remain visible, resolve them before final success by doing exactly one of:
+
+- Commit them intentionally, if they are part of the project state.
+- Add a repo-appropriate tracked ignore rule, if every clone should ignore them.
+- Add a machine-local exclusion in `.git/info/exclude`, if they are local installer/export/source-kit
+  folders that should stay on this machine and should not be shared across clones.
+
+Examples of local-only folders that may belong in `.git/info/exclude`: extracted starter-kit
+source folders, one-off installer folders, local AI export staging folders, and temporary tool
+payloads. Do not use `.git/info/exclude` for files another clone or collaborator needs.
+
+If the porcelain output is not empty and you cannot safely decide whether to commit or ignore the
+files, stop and report the dirty state. Do not push more work on top of a visibly dirty handoff.
+
+---
+
+## 12. Final Output Required
 
 After completing the process, report:
 
@@ -496,3 +536,17 @@ After completing the process, report:
 Do not claim success unless the command actually completed successfully.
 
 Do not invent commit hashes, tags, snapshot paths, validation results, or push results.
+
+---
+
+## 13. Then Run Session Close-Out
+
+Immediately after producing the Final Output report above — in this same turn, without waiting for
+a separate user prompt — locate and execute CLAUDE_CODE_SESSION_END.md
+(05_SOPS/Claude_Code/CLAUDE_CODE_SESSION_END.md in the AntBrainOS vault). Feed it the commit hash,
+tag, and snapshot path just established in Section 12 as the "Last Known Good State" so the vault's
+current-state records can never fall behind the actual pushed state.
+
+Do not run session-end before this point in the same turn. If any further repo change happens
+after session-end has already run in this turn, re-run session-end again afterward rather than
+leaving the vault's recorded state stale.
