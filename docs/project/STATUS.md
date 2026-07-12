@@ -1,13 +1,13 @@
 # Status
 
-**Last updated:** 2026-07-07
+**Last updated:** 2026-07-11
 
 ---
 
 ## Current Phase
 
 ```text
-Phase 2 — V3.4 doc consolidation complete, pending commit/push
+Phase 2 — hero contrast + gradient fix committed (tag v2.1.0) and pushed to main
 ```
 
 ---
@@ -23,21 +23,55 @@ main
 ## Current Slice
 
 ```text
-Full V3.4 migration completion: reconciled root v3.3 docs with docs/governance/ and docs/project/
-(the paths the installed V3.4 skills actually read), rewrote AGENTS.md/CLAUDE.md, resolved all 3
-quarantined .v34_migration_review/ candidates. Not yet committed.
+Hero fix (index.html hero + css/style.css): CTA button contrast (WCAG AA) + gradient/photo band
+repositioned left per a fresh user-provided annotated screenshot. Superseded the older, un-triaged
+000_INBOX/ofc-hero-spec-and-fix.md spec, whose hex values didn't match this repo's actual tokens.
+Committed as tag v2.1.0 and pushed to main this session (immediately after the v2.0.3 policy-docs
+commit that cleared the pre-existing uncommitted batch).
 ```
 
 ---
 
 ## Current Goal
 
-> Verify and commit this consolidation, then push. After that, no outstanding V3.4-adoption work
-> remains — only the pre-existing content items (hi-res hero photo, dedicated apple-touch-icon).
+> Hero fix reviewed, committed (v2.1.0), and pushed. Remaining known items are the hi-res hero
+> photo swap, a dedicated apple-touch-icon, and the same coral-fill/white-text contrast fix on
+> `.nav__cta`/`.section--coral`.
 
 ---
 
-## Completed This Push — V3.4 Doc Consolidation (2026-07-07)
+## Completed This Push — Hero Contrast + Gradient Fix (2026-07-11)
+
+Two changes to `css/style.css`, both verified via Playwright-driven pixel sampling (no
+ImageMagick/PIL available in this environment — used `npx --no-install playwright` with chromium
+already cached locally, driving a canvas-based pixel sampler instead):
+
+- **Button contrast:** added `--coral-fill: #C2512B` (new token, ~4.66:1 vs white — `--coral`
+  alone measures 3.87:1, below the 4.5:1 AA threshold for normal-size text; confirmed `.btn--lg`
+  at 15px/weight 600 does not qualify as WCAG "large text"). `.btn--coral` background/border now
+  use `--coral-fill`; `--coral` itself is untouched (still used for the headline `<em>`). Verified
+  by sampling the rendered button pixel: `(217,97,57)` → `(196,89,52)`, matching the intended
+  token shift. Hover (`--coral-dark`) unchanged, still darkens further on hover.
+- **Gradient/photo band repositioned left:** `.hero::after`'s 10-stop overlay gradient stops
+  compressed/shifted left (e.g. 46%→39%, 52%→46%, 60%→52%, 100%→60% — full table in commit notes),
+  and `--hero-photo-w` widened 53%→57% (band's hard left edge 47%→43%) to reach the zone the user
+  marked in their reference screenshot. Verified by pixel-sampling before/after screenshots at
+  1200/1440/700/390px: real, correctly-directioned change exactly where the math predicts (zero
+  diff left of the old band edge, consistent lightening from x≈564px rightward at 1200px
+  viewport), zero diff on mobile (390px, untouched media query).
+- **Known tradeoff, flagged for awareness, not blocking:** widening the band moved the photo (and
+  the older woman's face) left along with it. Measured headline-text-end-to-hairline gap shrank
+  from ~125px (10.4% of a 1200px viewport) to ~80px (6.7%) — still above the ~60px/5% minimum this
+  project's own history established as safe (see `docs/project/COMMIT_NOTES.md`), but a real
+  reduction worth knowing about if future sessions touch this again.
+- Fixed two stale explanatory comments above `.hero::before`/`.hero::after` that described the
+  pre-change opacity/edge numbers.
+- Found but explicitly out of scope: `.nav__cta` and `.section--coral` have the same coral-fill/
+  white-text contrast pattern as the button fix — not touched this pass.
+
+---
+
+## Completed Previously — V3.4 Doc Consolidation (2026-07-07)
 
 Reconciled the V3.4 scaffolding (installed 2026-07-05, merged to `main` 2026-07-06) with this
 project's real v3.3 root docs, since the installed V3.4 skills (`v34-execution-loop`,
@@ -156,26 +190,29 @@ Snapshot saved to RepoBackups for b195aba.
 
 ## Next Action
 
-> 1. **Run `000_INBOX/ofc-hero-spec-and-fix.md` (in the AntBrainOS vault) through the
->    `INBOX_PROCESSING.md` SOP, then apply its hero contrast + gradient-fade-seam fixes to this
->    repo.** This is the priority next work item — see the inbox file for the full spec (coral/white
->    CTA fails 4.5:1 AA contrast; gradient fade-seam needs widening from ~47–61% to ~40–68%; do not
->    change the two confirmed hex color values).
-> 2. Swap in hi-res hero photo before final launch (separate, pre-existing known issue).
-> 3. Create a dedicated apple-touch-icon.png (separate, pre-existing known issue).
+> 1. **User to review the hero fix (screenshots + pixel-sampling results reported in chat) and
+>    decide whether to commit/push.** The `000_INBOX/ofc-hero-spec-and-fix.md` item this used to
+>    point at is now superseded — its numbers didn't match this repo's real tokens; this pass
+>    worked from a fresh, direct user screenshot instead.
+> 2. Consider fixing the same coral-fill/white-text contrast issue on `.nav__cta` and
+>    `.section--coral` (found this session, not fixed — out of scope for the approved slice).
+> 3. Swap in hi-res hero photo before final launch (separate, pre-existing known issue).
+> 4. Create a dedicated apple-touch-icon.png (separate, pre-existing known issue).
 
 ---
 
 ## Last Verified Working State
 
 ```text
-V3.4 doc consolidation on main — 2026-07-07 (pending commit)
-Prior good state: merge of 5a7abc8 (migration/project-starter-v3-3, tag v1.5.5) and 76ea00e
-(main, tag v1.6.1) — main — 2026-07-06.
-Hero: smoother 10-stop gradient starting at 'h' in "where" (22%); orange headline 1 line (620px);
-4-line sub barely reaches hand, shoulder visible; no seam; mobile clean.
-SEO metadata fixed (og-image, apple-touch-icon); V3.4 baseline + 18-skill suite installed and now
-fully reconciled with this project's real docs (docs/governance/, docs/project/).
+Hero contrast + gradient fix on main — 2026-07-12 (committed tag v2.1.0, pushed).
+Immediate prior commit: v2.0.3 (d2ffe77) push→session-end auto-chain policy docs — main — 2026-07-12.
+Prior good state before this session: V3.4 doc consolidation, commit af6255d, tag v2.0.1 — 2026-07-07.
+Hero: --coral-fill button token (~4.66:1); .hero::after gradient compressed/shifted left;
+--hero-photo-w 53%->57% (band edge 47%->43%); text-to-hairline gap ~80px/6.7% at 1200px viewport
+(was ~125px/10.4%, still above the ~60px/5% historical safe minimum); no hard seam detected;
+mobile (390px) pixel-identical to before, untouched.
+SEO metadata fixed (og-image, apple-touch-icon); V3.4 baseline + 18-skill suite installed and fully
+reconciled with this project's real docs (docs/governance/, docs/project/).
 GitHub repo: Old-Fashion-Care — git@github.com:rmz9dkfy5f-pixel/Old-Fashion-Care.git
 All 6 pages load correctly; Netlify auto-deploy active on main branch.
 ```
@@ -185,6 +222,17 @@ All 6 pages load correctly; Netlify auto-deploy active on main branch.
 ## Validation Performed This Push
 
 ```text
+Hero fix (2026-07-11): static site, no build/lint scripts. Verified via Playwright
+(npx --no-install playwright, chromium cached locally — no PIL/ImageMagick available in this
+environment) screenshotting index.html before/after at 1200/1440/700/390px viewports, then a
+canvas-based pixel sampler (same Playwright chromium instance, images served over a throwaway
+local HTTP server to avoid file:// canvas tainting) to numerically confirm: button fill color
+shift, gradient lightening exactly in the predicted x-range with zero diff outside it, mobile
+pixel-identical before/after, and the text-to-hairline gap measurement (125px -> 80px). No hard
+seam found via direct zoomed-crop visual inspection of the new band edge. Hit and resolved an
+environment ENOSPC (disk-full) error mid-session that blocked Bash entirely for a few minutes;
+confirmed via `df -h` once resolved (7.6Gi free at the low point) and re-ran the blocked steps.
+
 Static site — no build/lint scripts.
 V3.4 consolidation (2026-07-07): git status reviewed — 17 deletions (root files consolidated),
 25 modifications (docs/governance/, docs/project/, AGENTS.md, CLAUDE.md, README.md, START_HERE.md,

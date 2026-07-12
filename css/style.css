@@ -10,6 +10,7 @@
   --navy:          #1b2230;
   --coral:         #D85A30;
   --coral-dark:    #B8451F;
+  --coral-fill:    #C2512B;  /* AA-safe bg for white text on .btn--coral (~4.66:1; --coral alone is 3.87:1) */
   --coral-pale:    #FAEDE7;
   --amber:         #EF9F27;
   --cream:         #F4F1EB;
@@ -271,9 +272,9 @@ main { padding-top: var(--nav-h); }
   white-space: nowrap;
 }
 .btn--coral {
-  background: var(--coral);
+  background: var(--coral-fill);
   color: var(--white);
-  border: 2px solid var(--coral);
+  border: 2px solid var(--coral-fill);
 }
 .btn--coral:hover {
   background: var(--coral-dark);
@@ -346,16 +347,16 @@ main { padding-top: var(--nav-h); }
      bottom of the older woman's earlobe (photo is NOT moved). Reset on mobile. */
   margin-top: -5.2rem;
 }
-/* Featured photo layer: a right-anchored band (~57%) so the people sit on the RIGHT
-   and the copy zone on the left stays navy. The band's hard left edge sits at ~43%,
-   INSIDE the gradient's still-opaque (~0.8) zone, so it's invisible — no seam/line.
-   The smooth gradient then feathers over the photo's left edge (matches the reference).
+/* Featured photo layer: a right-anchored band (57%) so the people sit on the RIGHT
+   and the copy zone on the left stays navy. The band's hard left edge sits at ~43%; the
+   overlay gradient is still ~0.19 opacity there (down from ~0.8 originally), so seam
+   concealment leans on both the overlay and this band's own 6% mask feather below.
    --hero-photo-w is the framing knob: smaller = people farther right. */
 .hero::before {
   content: '';
   position: absolute;
   top: 0; bottom: 0; right: 0; left: auto;
-  width: var(--hero-photo-w, 53%);
+  width: var(--hero-photo-w, 57%);
   z-index: 0;
   background-image: url('../images/hero-ai.jpg');
   background-repeat: no-repeat;
@@ -369,8 +370,9 @@ main { padding-top: var(--nav-h); }
   pointer-events: none;
 }
 /* Strong left→right navy overlay that protects the copy zone:
-   0–42% very dark (~0.95+), 42–58% feathered transition, 58–100% light cinematic.
-   The opaque left also conceals the photo band's edge. Opacities = readability knob. */
+   0–22% very dark (~0.95+), 22–52% feathered transition, 52–100% light cinematic.
+   Seam concealment at the band edge (~43%, ~0.19 opacity here) is shared between this
+   overlay and the band's own 6% mask feather above. Opacities = readability knob. */
 .hero::after {
   content: '';
   position: absolute;
@@ -379,15 +381,15 @@ main { padding-top: var(--nav-h); }
   background:
     linear-gradient(100deg,
       rgba(27,34,48,0.97) 0%,
-      rgba(27,34,48,0.94) 18%,
-      rgba(27,34,48,0.86) 22%,
-      rgba(27,34,48,0.72) 28%,
-      rgba(27,34,48,0.56) 34%,
-      rgba(27,34,48,0.40) 40%,
-      rgba(27,34,48,0.26) 46%,
-      rgba(27,34,48,0.14) 52%,
-      rgba(27,34,48,0.05) 60%,
-      rgba(27,34,48,0.00) 100%),
+      rgba(27,34,48,0.94) 13%,
+      rgba(27,34,48,0.86) 17%,
+      rgba(27,34,48,0.72) 22%,
+      rgba(27,34,48,0.56) 27%,
+      rgba(27,34,48,0.40) 33%,
+      rgba(27,34,48,0.26) 39%,
+      rgba(27,34,48,0.14) 46%,
+      rgba(27,34,48,0.05) 52%,
+      rgba(27,34,48,0.00) 60%),
     /* gentle vertical vignette keeps top/bottom from washing out */
     linear-gradient(180deg,
       rgba(27,34,48,0.16) 0%,

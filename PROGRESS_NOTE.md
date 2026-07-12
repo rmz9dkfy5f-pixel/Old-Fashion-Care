@@ -13,33 +13,40 @@ For historical notes, copy completed entries into `PROGRESS_NOTES.md`.
 Date:
 
 ```text
-2026-07-07
+2026-07-11
 ```
 
 Phase:
 
 ```text
-Phase 1 — awaiting the hero spec fix; no active implementation slice
+Phase 2 — hero contrast + gradient fix committed (tag v2.1.0) and pushed to main
 ```
 
 Current slice:
 
 ```text
-None active. V3.4 migration fully complete and pushed (commit af6255d, tag v2.0.1). Next work item
-is the hero spec/fix already captured in the AntBrain vault inbox — see Next action.
+Hero CTA contrast fix + gradient/photo-band repositioned left, per a fresh user-provided annotated
+screenshot (plan-mode approved). Supersedes the older 000_INBOX/ofc-hero-spec-and-fix.md pointer —
+that spec's hex values didn't match this repo's actual tokens.
 ```
 
 Completed:
 
 - [x] Committed and pushed the full V3.4 migration doc consolidation (commit `af6255d`, tag
       `v2.0.1__complete-v34-migration-doc-consolidation__commit-af6255d`)
-- [x] Snapshot verified (264 files, matches `git ls-tree`)
-- [x] Recorded the hero-spec next action in the AntBrainOS vault's `CURRENT_CONTEXT.md` and
-      `HANDOFF_TO_CLAUDE.md` for Old Fashion Care
+- [x] Added `--coral-fill: #C2512B` token; repointed `.btn--coral` to it (~4.66:1 vs white,
+      up from 3.87:1)
+- [x] Shifted `.hero::after` gradient stops left; widened `--hero-photo-w` 53%→57% (band edge
+      47%→43%) to reach the zone marked in the user's reference screenshot
+- [x] Verified via Playwright screenshots + canvas pixel-sampling at 1200/1440/700/390px (no
+      PIL/ImageMagick in this environment) — real, correctly-directioned, no hard seam, mobile
+      pixel-identical
+- [x] Measured the face-clearance tradeoff precisely: text-to-hairline gap 125px→80px at 1200px
+      viewport (10.4%→6.7%), still above the ~60px/5% historical safe minimum
 
 In progress:
 
-- [ ] None
+- [ ] None — hero fix reviewed, committed (v2.1.0), and pushed this session
 
 Blocked:
 
@@ -48,31 +55,33 @@ Blocked:
 
 Next action:
 
-> **Run `000_INBOX/ofc-hero-spec-and-fix.md` (AntBrainOS vault) through the `INBOX_PROCESSING.md`
-> SOP, then apply its hero fixes to this repo**: fix the CTA button's coral-fill/white-text
-> contrast (currently fails 4.5:1 AA) and widen the gradient fade-seam transition from ~47–61% to
-> ~40–68% (multi-stop gradient). Do not change the two confirmed hex color values. Re-screenshot
-> and verify (desktop + mobile) after the fix per the inbox spec's acceptance criteria.
+> Hero fix is pushed. **Fast-follow: apply the same coral-fill/white-text contrast fix to
+> `.nav__cta` and `.section--coral`** (found this session, not yet fixed). Also still pending:
+> hi-res hero photo swap and a dedicated apple-touch-icon before final launch.
 
 Checks run:
 
 ```bash
-git rev-parse HEAD                 # af6255d, matches origin/main
-python3 project-starter-kit-v3.4/scripts/v34_validate.py --target .   # PASS
-git ls-tree -r HEAD --name-only | wc -l   # 264, matches snapshot file count
+git rev-parse HEAD                 # af6255d (parent — this session's changes not yet committed)
+npx --no-install playwright screenshot --viewport-size=... http://localhost:8000/index.html ...
+# canvas-based pixel sampling script (Playwright chromium + <canvas>.getImageData) — see
+# docs/project/COMMIT_NOTES.md for the full before/after pixel tables
 ```
 
 Commit status:
 
 ```text
-af6255d pushed — main. Tag v2.0.1__complete-v34-migration-doc-consolidation__commit-af6255d pushed.
-Snapshot: /Volumes/AntNVMe1TB/WorkSync/Projects/RepoBackups/Old-Fashion-Care/v2.0.1__complete-v34-migration-doc-consolidation__commit-af6255d
+Pushed to main in two commits this session: v2.0.3 (d2ffe77) cleared the four pre-existing
+unrelated policy-doc files (AGENTS.md, CLAUDE.md, a Prompts/ file, docs/project/DECISION_LOG.md);
+v2.1.0 is this hero fix (css/style.css + the four tracking docs). Both tagged, snapshotted to
+RepoBackups/Old-Fashion-Care, and pushed. See git log / the vault AGENT_HANDOFF.md for the exact
+v2.1.0 commit hash.
 ```
 
 Approval status:
 
 ```text
-V3.4 migration: approved and complete. Hero spec (000_INBOX/ofc-hero-spec-and-fix.md) is planning
-output only — "no code has been changed. Review before implementing." per the inbox file itself —
-awaiting a session to process it through inbox triage and then get Phase 1 approval before implementing.
+Plan-mode approved by user for the button-contrast + gradient-shift-left changes. The band-width
+widening (--hero-photo-w) was a separate, explicit escalation the user opted into after being shown
+the gradient-only result and told it couldn't reach the full marked zone without it.
 ```

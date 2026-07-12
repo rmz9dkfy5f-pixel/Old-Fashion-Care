@@ -4,6 +4,23 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [v2.1.0] — 2026-07-12
+
+### Fixed
+- Homepage hero CTA button (`.btn--coral`) failed WCAG AA contrast (3.87:1 vs the 4.5:1 required
+  for normal-size text). Added `--coral-fill: #C2512B` (~4.66:1 vs white), used only for the
+  button's fill/border; `--coral` itself is unchanged everywhere else.
+
+### Changed
+- Homepage hero gradient (`.hero::after`) and photo band (`--hero-photo-w`, 53%→57%) repositioned
+  left per a fresh user-provided reference screenshot, so the photo reads through noticeably
+  earlier/more clearly. Verified via Playwright screenshot + pixel sampling; no hard seam
+  introduced; mobile hero (separate `@media` rules) unaffected. Known tradeoff: the
+  headline-text-to-hairline clearance shrank from ~125px to ~80px at a 1200px viewport — still
+  above this project's own historical ~60px safe minimum, but worth knowing for future tuning.
+
+---
+
 ## [v2.0.1] — 2026-07-07
 
 ### Changed

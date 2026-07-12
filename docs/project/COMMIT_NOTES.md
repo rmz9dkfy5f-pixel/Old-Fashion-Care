@@ -8,6 +8,86 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Fix hero CTA contrast (WCAG AA) and reposition the hero gradient/photo band left
+
+## Description
+
+- Superseded `000_INBOX/ofc-hero-spec-and-fix.md` (AntBrainOS vault) — that un-triaged spec's
+  hex values (`#1A1F2A`/`#C25A32`) didn't match this repo's actual tokens (`--navy:#1b2230`,
+  `--coral:#D85A30`), and its "widen 47–61%→40–68%" gradient target was superseded by a fresh,
+  more specific ask this session: the user provided an annotated screenshot of the live hero and
+  asked to move the gradient left into a marked zone (~43–50% of hero width).
+- **Button contrast:** added `--coral-fill: #C2512B` (`css/style.css` `:root`), `.btn--coral`
+  background/border repointed to it. `--coral` (3.87:1 vs white, fails 4.5:1 AA) is unchanged
+  everywhere else (headline `<em>`, etc.). `--coral-fill` measures ~4.66:1, sits between `--coral`
+  and `--coral-dark` (5.37:1, still used for `:hover`) so hover still darkens further. Confirmed
+  `.btn--lg` (15px/weight 600) doesn't qualify as WCAG "large text," so the stricter 4.5:1 applies.
+- **Gradient shifted left (low-risk lever, applied first):** `.hero::after`'s 10-stop overlay
+  gradient stop positions compressed/shifted left (opacities unchanged): 18→13%, 22→17%, 28→22%,
+  34→27%, 40→33%, 46→39%, 52→46%, 60→52%, 100→60%. Concentrates the compression in the old
+  gradient's long, nearly-invisible tail rather than uniformly rescaling — peak slope only
+  increases ~20% vs. the ~82% a naive rescale would cause.
+- **Photo band widened (higher-risk lever, applied after explicit user sign-off):** `--hero-photo-w`
+  53%→57% (`.hero::before`), moving the band's hard left edge 47%→43% to reach the rest of the
+  user's marked zone that gradient-only tuning structurally cannot reach (no photo pixels exist
+  left of the band edge, regardless of overlay opacity). This is the lever this project's history
+  flagged as having caused repeat regressions (steepened gradients, narrowed bands, hard seams) —
+  only touched after showing the user the gradient-only result and confirming they wanted to close
+  the remaining gap.
+- Updated two stale explanatory comments above `.hero::before`/`.hero::after` describing the old
+  edge/opacity numbers.
+- **Found but explicitly out of scope:** `.nav__cta` (header "Get started") and `.section--coral`
+  (phone-strip band) have the same coral-fill/white-text contrast pattern as `.btn--coral` — not
+  touched this pass.
+
+### Verification (no PIL/ImageMagick available in this environment)
+
+Used `npx --no-install playwright` (chromium already cached locally, no install needed) to
+screenshot `index.html` at 1200/1440/700/390px viewports before and after each change, served via
+a throwaway local `python3 -m http.server`. Built a small canvas-based pixel sampler (Playwright
+chromium navigated to a same-origin HTML page, `<img>` + `<canvas>.getImageData`, images served
+over a second local HTTP server to avoid `file://` canvas-tainting) rather than eyeballing
+screenshots, since the opacity change is real but visually subtle over a busy photo.
+
+**Button fill**, sampled at the same interior pixel: `(217,97,57)` before → `(196,89,52)` after —
+matches the intended `#D85A30`→`#C2512B` shift.
+
+**Gradient-only fix**, sampled along y=460 at 1200px viewport (before → after, `(r,g,b)`):
+| x (hero %) | before | after |
+|---|---|---|
+| 420–564 (≤ old band edge) | identical | identical (0 diff — no photo pixels exist there yet) |
+| 600 (50%) | (76,51,49) | (82,53,49) |
+| 624 (52%) | (117,78,72) | (125,82,73) |
+| 660 (55%) | (139,123,114) | (148,131,120) |
+| 900 (75%) | (102,75,54) | (105,77,55) |
+| 1050+ | identical | identical (old residual tint already <2%, below rounding) |
+
+Confirms the change is real and lands exactly where the math predicts, and nowhere else.
+
+**Band-widening**, hairline-transition point (dark→lit skin/hair tones) measured across 6 rows
+(y=290–340) at 1200px viewport: consistently shifts ~43–45px left (e.g. y=290: x≈710 → x≈667),
+matching the intended 4-percentage-point (48px) edge shift closely.
+
+**Face-clearance check** (this project's history flags this as the thing to watch): measured the
+gap from the "possible." period's right edge to the hairline's left edge, same rows: **before
+~125px (10.4% of 1200px viewport) → after ~80px (6.7%)**. A real reduction, but still above the
+~60px/5% gap this project's own prior iteration established as safe (`b195aba`/`ea8b067` era).
+Direct zoomed-crop visual inspection (both before/after, same region) showed no hard seam/line at
+the new band edge in either version.
+
+**Mobile (390px):** 4 sampled points pixel-identical before/after — confirms the separate mobile
+`@media` block (untouched) renders unaffected.
+
+**Environment note:** mid-session, Bash briefly failed entirely with `ENOSPC` (disk full) — even
+`df -h` couldn't write its own output log. Resolved itself (or was resolved by the user) partway
+through; confirmed via `df -h` showing 7.6Gi free at the low point, 21Gi after cleanup. No repo
+files were affected (Edit/Write tool changes to `css/style.css` were confirmed intact via direct
+file reads throughout, since those don't depend on the same code path as Bash's output capture).
+
+---
+
+## Summary
+
 Record next action: hero contrast/gradient-fade fix spec waiting in AntBrain inbox
 
 ## Description
