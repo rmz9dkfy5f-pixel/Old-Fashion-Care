@@ -1,13 +1,14 @@
 # Status
 
-**Last updated:** 2026-07-11
+**Last updated:** 2026-07-12
 
 ---
 
 ## Current Phase
 
 ```text
-Phase 2 — hero contrast + gradient fix committed (tag v2.1.0) and pushed to main
+Phase 2 — hero composition rework (25%-navy/75%-image ratio, hi-res photo swap, full-frame
+desktop framing) committed and pushed to main
 ```
 
 ---
@@ -23,24 +24,57 @@ main
 ## Current Slice
 
 ```text
-Hero fix (index.html hero + css/style.css): CTA button contrast (WCAG AA) + gradient/photo band
-repositioned left per a fresh user-provided annotated screenshot. Superseded the older, un-triaged
-000_INBOX/ofc-hero-spec-and-fix.md spec, whose hex values didn't match this repo's actual tokens.
-Committed as tag v2.1.0 and pushed to main this session (immediately after the v2.0.3 policy-docs
-commit that cleared the pre-existing uncommitted batch).
+Hero photo composition (index.html hero + css/style.css + images/hero-ai.jpg): enforced a strict
+leftmost-25%-navy / rightmost-75%-image ratio (previous builds never moved the navy/photo boundary
+far enough left despite repeated attempts); swapped in the client's clean hi-res original photo
+(replacing the old soft 1100x934 crop); and, on desktop (>=1024px), scaled hero height so
+full-width `cover` shows the WHOLE photo frame (full lamp, full heads with headroom, more of the
+left curtain) with no cropping and no seam. An interim `background-size: contain` zoom-out attempt
+was tried and reverted — it made the navy column grow with screen width (26% at 1440px to ~45% at
+1790px+) and left a mid-screen photo edge that hardened into a visible line on wide monitors;
+reverting to full-width `cover` (photo band pinned right, 75%) keeps navy structurally at ~25% at
+every width with no seam to begin with.
 ```
 
 ---
 
 ## Current Goal
 
-> Hero fix reviewed, committed (v2.1.0), and pushed. Remaining known items are the hi-res hero
-> photo swap, a dedicated apple-touch-icon, and the same coral-fill/white-text contrast fix on
-> `.nav__cta`/`.section--coral`.
+> Hero composition fix reviewed, committed, and pushed. Remaining known items: a dedicated
+> apple-touch-icon, and the same coral-fill/white-text contrast fix on `.nav__cta`/
+> `.section--coral` (still queued from the prior session).
 
 ---
 
-## Completed This Push — Hero Contrast + Gradient Fix (2026-07-11)
+## Completed This Push — Hero Photo Composition Rework (2026-07-12)
+
+Three related changes to `css/style.css` + `images/hero-ai.jpg`, all verified via Playwright
+headless rendering + canvas pixel-sampling across 1024/1440/1790/2560px desktop widths plus
+768px tablet and 390px mobile (no PIL/ImageMagick available in this environment):
+
+- **25%-navy / 75%-image ratio enforced:** widened the photo band (`--hero-photo-w` 57%→75%,
+  band's left edge 43%→25%) and compressed the `.hero::after` overlay gradient stops so solid
+  navy ends by ~18-25% instead of the prior ~43-47%. Pixel-sampled confirmation: navy now ends at
+  ~25% at every desktop width (was ~43-50% before), image visible across the full right 75%.
+- **Hi-res photo swap:** replaced the old soft, low-res `images/hero-ai.jpg` (1100x934, a crop of
+  a mockup) with a resample of the client's clean hi-res original (1400x933, q85, comparable file
+  weight). Source PNG kept locally at `images/ChatGPT Image Jul 12, 2026 at 05_07_20 AM.png`
+  (untracked, matches the existing `.gitignore` `images/ChatGPT*` rule).
+- **Full-frame desktop display, no seam:** added `@media(min-width:1024px){ .hero{ min-height:
+  clamp(660px, 50vw, 900px) } }` so the photo band's aspect ratio matches the photo's own (~1.5),
+  letting `cover` show the entire frame (full lamp, full heads, more left curtain) instead of
+  cropping the top on wide screens. Reverted an earlier `background-size: contain` attempt at the
+  same goal after it proved to grow the navy column with viewport width and reintroduce a hard
+  seam on wide monitors — full-width `cover` has neither problem by construction.
+
+**Known tradeoff, flagged for awareness, not blocking:** the desktop hero is now taller on wide
+screens (up to ~900px, e.g. ~895px at 1790px width) — the cost of showing the full photo without
+cropping. Tablet (641-1023px) and mobile (<=640px) layouts are completely unchanged (pixel-verified
+identical before/after).
+
+---
+
+## Completed Previously — Hero Contrast + Gradient Fix (2026-07-11)
 
 Two changes to `css/style.css`, both verified via Playwright-driven pixel sampling (no
 ImageMagick/PIL available in this environment — used `npx --no-install playwright` with chromium

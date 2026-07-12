@@ -347,16 +347,16 @@ main { padding-top: var(--nav-h); }
      bottom of the older woman's earlobe (photo is NOT moved). Reset on mobile. */
   margin-top: -5.2rem;
 }
-/* Featured photo layer: a right-anchored band (57%) so the people sit on the RIGHT
-   and the copy zone on the left stays navy. The band's hard left edge sits at ~43%; the
-   overlay gradient is still ~0.19 opacity there (down from ~0.8 originally), so seam
+/* Featured photo layer: a right-anchored band (75%) so image pixels exist across the
+   right 75% of the hero and only the leftmost 25% stays pure navy. The band's hard left
+   edge sits at ~25%; the overlay gradient is down to ~0.55 opacity there, so seam
    concealment leans on both the overlay and this band's own 6% mask feather below.
-   --hero-photo-w is the framing knob: smaller = people farther right. */
+   --hero-photo-w is the framing knob: smaller = people farther right / more left navy. */
 .hero::before {
   content: '';
   position: absolute;
   top: 0; bottom: 0; right: 0; left: auto;
-  width: var(--hero-photo-w, 57%);
+  width: var(--hero-photo-w, 75%);
   z-index: 0;
   background-image: url('../images/hero-ai.jpg');
   background-repeat: no-repeat;
@@ -370,9 +370,11 @@ main { padding-top: var(--nav-h); }
   pointer-events: none;
 }
 /* Strong left→right navy overlay that protects the copy zone:
-   0–22% very dark (~0.95+), 22–52% feathered transition, 52–100% light cinematic.
-   Seam concealment at the band edge (~43%, ~0.19 opacity here) is shared between this
-   overlay and the band's own 6% mask feather above. Opacities = readability knob. */
+   0–18% solid navy (~0.90+), the "solid navy" region the user caps at the left quarter;
+   18–32% smooth transition so the image begins showing right at ~25%; 32–60% light
+   cinematic; fully clear by 60%. Seam concealment at the band edge (~25%, ~0.55 opacity
+   here) is shared between this overlay and the band's own 6% mask feather above. The slope
+   stays gentle/multi-stop — never a steep dark panel. Opacities = readability knob. */
 .hero::after {
   content: '';
   position: absolute;
@@ -381,13 +383,11 @@ main { padding-top: var(--nav-h); }
   background:
     linear-gradient(100deg,
       rgba(27,34,48,0.97) 0%,
-      rgba(27,34,48,0.94) 13%,
-      rgba(27,34,48,0.86) 17%,
-      rgba(27,34,48,0.72) 22%,
-      rgba(27,34,48,0.56) 27%,
-      rgba(27,34,48,0.40) 33%,
-      rgba(27,34,48,0.26) 39%,
-      rgba(27,34,48,0.14) 46%,
+      rgba(27,34,48,0.93) 12%,
+      rgba(27,34,48,0.80) 18%,
+      rgba(27,34,48,0.55) 25%,
+      rgba(27,34,48,0.34) 32%,
+      rgba(27,34,48,0.16) 42%,
       rgba(27,34,48,0.05) 52%,
       rgba(27,34,48,0.00) 60%),
     /* gentle vertical vignette keeps top/bottom from washing out */
@@ -422,6 +422,19 @@ main { padding-top: var(--nav-h); }
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+}
+/* Desktop (≥1024px): the photo band is 75vw wide but the hero is only 660px tall, so on wide
+   screens `cover` crops the photo's top (the lamp + the two heads). Scale the hero height with
+   viewport width so the band's shape (~75vw × 50vw = 1.5) matches the photo's 1.5 aspect — then
+   full-width `cover` (base rule above) shows the WHOLE frame (full lamp, full heads, more left
+   curtain) while solid navy stays structurally the left 25% and the smooth `.hero::after` overlay
+   does the cinematic fade — no zoom-out, no mid-band photo edge, no hard line. Capped so ultrawide
+   screens don't get an excessively tall hero (there `cover` crops a little again, but navy is
+   still exactly 25% and there is never a seam). Tablet (641–1023px) and mobile are unaffected. */
+@media (min-width: 1024px) {
+  .hero {
+    min-height: clamp(660px, 50vw, 900px);
+  }
 }
 
 /* ============================================================

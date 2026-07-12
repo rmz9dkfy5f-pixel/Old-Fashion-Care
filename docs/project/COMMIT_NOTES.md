@@ -8,6 +8,35 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Rework the homepage hero photo composition: enforce a 25%-navy/75%-image ratio, swap in the
+client's hi-res original photo, and show the full frame (lamp, heads, curtain) on desktop with no
+seam
+
+## Description
+
+- **What changed:** `css/style.css` — widened `--hero-photo-w` 57%→75% (band left edge 43%→25%)
+  and compressed the `.hero::after` overlay so solid navy ends by ~18-25% instead of ~43-47%;
+  added `@media(min-width:1024px){ .hero{ min-height: clamp(660px, 50vw, 900px) } }` so full-width
+  `cover` shows the entire photo frame on wide screens instead of cropping the top. `images/hero-ai.jpg`
+  replaced with a 1400x933 q85 resample of the client's clean hi-res original (source PNG kept
+  locally, untracked per existing `.gitignore` `images/ChatGPT*` rule).
+- **Why it changed:** prior hero passes never actually moved the navy/photo boundary far enough
+  left despite repeated attempts (user-reported); the old hero photo was a soft, low-res crop and
+  the client since supplied a clean hi-res original; the user separately asked to zoom out enough
+  to show the full lamp, both full heads, and more of the left curtain without cropping.
+- **What was verified:** Playwright headless rendering + canvas pixel-sampling at
+  1024/1440/1790/2560px desktop, 768px tablet, 390px mobile (no PIL/ImageMagick available). Navy
+  confirmed to end at ~25% at every desktop width (flat, not growing with viewport). Tablet and
+  mobile renders confirmed byte-identical before/after (`cmp`).
+- **Remaining risk or follow-up:** an interim `background-size: contain` zoom-out approach was
+  tried and reverted mid-session — it made the navy column grow with viewport width (26% at
+  1440px to ~45% at 1790px+) and left a mid-screen photo edge that hardened into a visible line on
+  wide monitors; the final full-width-`cover` + height-scaling approach has neither problem by
+  construction. Desktop hero is now taller on wide screens (up to ~900px) as the necessary cost of
+  showing the full photo without cropping — a visible layout change, reviewed and approved by the
+  user on their own (~1790px) screen. `.nav__cta`/`.section--coral` contrast fast-follow and the
+  apple-touch-icon remain open, unrelated to this push.
+
 Fix hero CTA contrast (WCAG AA) and reposition the hero gradient/photo band left
 
 ## Description

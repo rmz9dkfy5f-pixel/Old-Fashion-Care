@@ -4,6 +4,26 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [Unreleased] — 2026-07-12
+
+### Changed
+- Homepage hero photo composition reworked: photo band widened (`--hero-photo-w` 57%→75%) and the
+  `.hero::after` overlay compressed so solid navy is confined to the leftmost ~25% of the hero
+  (was ~43-47%), with the image visible across the full right 75%.
+- Homepage hero photo (`images/hero-ai.jpg`) replaced with a sharper resample of the client's
+  clean hi-res original photo (was a soft, low-res 1100x934 crop).
+- Desktop (≥1024px) hero height now scales with viewport width
+  (`clamp(660px, 50vw, 900px)`) so the full photo frame — the entire lamp, both people's full
+  heads, and more of the left curtain — displays without cropping. Hero is visibly taller on wide
+  screens as a result. Tablet and mobile layouts unaffected.
+
+### Fixed
+- An interim `background-size: contain` zoom-out attempt (since reverted) had caused the hero's
+  navy/photo boundary to grow with viewport width and reintroduced a hard vertical seam on wide
+  monitors; final fix avoids both by using full-width `cover` with height scaling instead.
+
+---
+
 ## [v2.1.0] — 2026-07-12
 
 ### Fixed

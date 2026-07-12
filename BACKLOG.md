@@ -22,7 +22,6 @@ Likely needed after the current slice.
 - [ ] Mobile layout review — verify all pages look great on small screens
 - [ ] Image optimization — compress large photos (care-03 through care-11 are 1–2.5MB each)
 - [ ] Create a dedicated 180×180 `apple-touch-icon.png` (currently falls back to `favicon.svg`)
-- [ ] Swap in the client's hi-res original photo for `images/hero-ai.jpg`
 
 ---
 
@@ -72,6 +71,7 @@ Rejected or out of scope.
 - [x] Merge migration/project-starter-v3-3 branch into main (2026-07-06, tag v2.0.0)
 - [x] Complete V3.4 migration — reconciled root docs with docs/governance/docs/project, resolved
       all quarantined candidates (2026-07-07)
+- [x] Swap in the client's hi-res original photo for `images/hero-ai.jpg` (2026-07-12)
 
 ---
 

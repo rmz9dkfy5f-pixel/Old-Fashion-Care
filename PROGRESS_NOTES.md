@@ -6,6 +6,33 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-11 — Hero CTA contrast fix + gradient/photo-band repositioned left
+
+**Work completed:**
+- Added `--coral-fill: #C2512B` token; repointed `.btn--coral` to it (~4.66:1 vs white, up from
+  3.87:1, fixing a WCAG AA failure)
+- Shifted `.hero::after` gradient stops left; widened `--hero-photo-w` 53%→57% (band edge
+  47%→43%) to reach the zone marked in the user's reference screenshot
+- Verified via Playwright screenshots + canvas pixel-sampling at 1200/1440/700/390px — real,
+  correctly-directioned, no hard seam, mobile pixel-identical
+- Measured the face-clearance tradeoff: text-to-hairline gap 125px→80px at 1200px viewport
+  (10.4%→6.7%), still above the ~60px/5% historical safe minimum
+
+**Files changed:**
+- `css/style.css`, `docs/project/STATUS.md`, `PROGRESS_NOTE.md`, `docs/project/COMMIT_NOTES.md`,
+  `docs/project/CHANGELOG.md`
+
+**Validation:**
+- Playwright headless render + canvas pixel-sampling, no PIL/ImageMagick available
+
+**Notes for next agent:**
+- Pushed to main in two commits: `d2ffe77` (v2.0.3, pre-existing unrelated policy docs) and
+  `b9a2a42` (v2.1.0, this hero fix). Both tagged, snapshotted, pushed.
+- Found but out of scope: `.nav__cta`/`.section--coral` share the same coral-fill/white-text
+  contrast bug — not fixed this pass.
+
+---
+
 ## 2026-07-06 — Record next action: hero spec waiting in AntBrain inbox
 
 **Work completed:**
