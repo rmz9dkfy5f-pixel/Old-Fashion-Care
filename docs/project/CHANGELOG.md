@@ -4,6 +4,43 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [Unreleased — branch `design/editorial-sage-elder-friendly`] — 2026-07-13
+
+Isolated alternate design branch. Does **not** change `main` or the live site.
+
+### Added
+- New `css/editorial-sage.css` — a complete "Editorial Sage" design system: warm cream / sage / ink
+  / sand light editorial theme, Lora + Source Sans 3 typography, light sticky cream header with a
+  botanical leaf mark, organic curved hero split, sage trust band, 5 line-icon service cards, sand
+  process strip, Meet Regina split, dignified references statement, rounded final contact panel, and
+  all interior-page components (page hero, prose, service detail, pull quote, values grid, FAQ,
+  contact form).
+- `docs/design/EDITORIAL_SAGE_DESIGN_SPEC.md` and `docs/design/reference/` reference image.
+- Accessibility: skip link + `#main-content` on all six pages; `:focus-visible` outlines;
+  `prefers-reduced-motion` handling; Escape-to-close + focus-return on the mobile menu.
+
+### Changed
+- All six pages (`index`, `about`, `services`, `how-it-works`, `questions`, `contact`) rebuilt onto
+  the new editorial shell and now load `css/editorial-sage.css` instead of `css/style.css` (on this
+  branch only). All `<head>` metadata (title/description/canonical/OG/Twitter/JSON-LD/Plausible/
+  favicon) preserved verbatim; all verified copy retained.
+- `js/main.js` mobile-menu handling upgraded (Escape/focus-return/aria) with backward-compatible
+  selectors; FAQ accordion, scroll-reveal, and contact-form success handler unchanged.
+
+### Fixed
+- Content no longer begins hidden: the legacy scroll-triggered `.reveal` (opacity:0 until scrolled
+  into view) is neutralized so all sections are visible on load, per the plan's accessibility/motion
+  rules. Caught on the Meet Regina page, where the "The difference is Regina" values grid and the
+  "Ready to talk?" CTA rendered blank until scrolled to; fix applies site-wide.
+
+### Notes
+- No fabricated testimonials: the reference's AI-generated quote cards were replaced with a dignified
+  "references available during consultation" statement (user decision).
+- `css/style.css` retained untouched as the prior-design reference. Not committed/pushed; `main`
+  remains the live design.
+
+---
+
 ## [Unreleased] — 2026-07-12
 
 ### Changed

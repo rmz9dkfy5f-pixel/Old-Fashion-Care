@@ -17,17 +17,31 @@
     }
   });
 
-  /* ── Mobile nav toggle ── */
-  const hamburger = document.querySelector('.nav__hamburger');
-  const mobileNav = document.querySelector('.nav__mobile');
-  if (hamburger && mobileNav) {
-    hamburger.addEventListener('click', function () {
-      const open = mobileNav.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', open);
+  /* ── Mobile nav toggle ──
+     Supports both the Editorial Sage shell (.js-menu-toggle / .es-mobile-nav) and the
+     legacy shell (.nav__hamburger / .nav__mobile) so pages on either markup keep working. */
+  const toggle = document.querySelector('.js-menu-toggle') || document.querySelector('.nav__hamburger');
+  const mobileNav = document.querySelector('.es-mobile-nav') || document.querySelector('.nav__mobile');
+  if (toggle && mobileNav) {
+    const setOpen = function (open) {
+      mobileNav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      const label = open ? 'Close menu' : 'Open menu';
+      toggle.setAttribute('aria-label', label);
+    };
+    toggle.addEventListener('click', function () {
+      setOpen(!mobileNav.classList.contains('open'));
     });
     // Close on link click
     mobileNav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { mobileNav.classList.remove('open'); });
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+    // Close on Escape, return focus to the toggle
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+        setOpen(false);
+        toggle.focus();
+      }
     });
   }
 

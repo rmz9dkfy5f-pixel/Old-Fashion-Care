@@ -1,6 +1,26 @@
 # Status
 
-**Last updated:** 2026-07-12
+**Last updated:** 2026-07-13
+
+---
+
+## Active Branch Work — Editorial Sage Redesign (2026-07-13)
+
+```text
+Branch: design/editorial-sage-elder-friendly (isolated; main untouched, still live on Netlify)
+```
+
+Executed the vault's `EDITORIAL_SAGE_REDESIGN_EXECUTION_PLAN.md` (user-authorized): a full-site warm
+cream / sage / ink / sand light editorial redesign (Lora + Source Sans 3) in a new
+`css/editorial-sage.css`, applied across all six pages. `<head>` metadata, verified copy, the FAQ
+accordion, and the Formspree contact form are all preserved; no fabricated testimonials (dignified
+"references available during consultation" statement instead). Verified with Playwright across all 6
+pages at 1440/768/390 (0 overflow, 0 console errors), FAQ + form interaction tests, and a 124-ref
+local link sweep. **Not committed/pushed** — awaiting user review and a commit decision; merging to
+`main` (which would change the live site) is a separate explicit decision. See `PROGRESS_NOTE.md`
+and `docs/project/COMMIT_NOTES.md` for detail.
+
+The `main`-branch status below is unchanged by this branch.
 
 ---
 

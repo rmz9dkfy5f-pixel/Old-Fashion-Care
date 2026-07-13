@@ -6,13 +6,58 @@ Use it to prepare commits before they are made.
 
 ---
 
-## Summary
+## Summary (branch `design/editorial-sage-elder-friendly` — NOT main)
+
+Add a complete, isolated "Editorial Sage" alternate design for the whole site: a warm cream / sage /
+ink / sand light editorial theme (Lora + Source Sans 3) replacing the live dark charcoal/coral look,
+across all six pages, on a dedicated branch that does not touch `main`.
+
+## Description
+
+- **What changed:**
+  - New `css/editorial-sage.css` — full design system: cream/sage/ink/sand tokens, Lora + Source
+    Sans 3 typography, light sticky cream header, mobile menu, hero with organic curved split, sage
+    trust band, 5 line-icon service cards, sand process strip, Meet Regina split, dignified
+    references statement, rounded final contact panel, footer, plus interior components (page hero,
+    prose, service detail, pull quote, values grid, detailed steps, FAQ, contact form) and full
+    responsive rules.
+  - All six HTML pages (`index`, `about`, `services`, `how-it-works`, `questions`, `contact`)
+    rebuilt onto the new shell + design language. `<head>` metadata (title, description, canonical,
+    OG, Twitter, JSON-LD, Plausible, favicon) preserved verbatim on every page — only the stylesheet
+    `<link>` swapped from `css/style.css` to `css/editorial-sage.css`. Added a skip link and
+    `id="main-content"` to every page.
+  - `js/main.js` — mobile menu upgraded to the new shell with Escape-to-close + focus return +
+    `aria-expanded`/`aria-label` sync, while still driving the legacy markup (backward-compatible
+    selectors). FAQ accordion, scroll-reveal, and the contact-form success handler unchanged.
+  - New `docs/design/EDITORIAL_SAGE_DESIGN_SPEC.md` + `docs/design/reference/` reference image.
+  - `css/style.css` left untouched (retained as the prior-design reference; not loaded on this
+    branch).
+- **Why it changed:** executes the vault's `EDITORIAL_SAGE_REDESIGN_EXECUTION_PLAN.md` (2026-07-13),
+  authorized by the user, to produce a faithful implementation of the supplied Editorial Sage concept
+  with real content, on an isolated branch for review before any merge decision.
+- **What was verified:** Playwright headless rendering across 7 viewports (homepage) and all 6 pages
+  at 1440/768/390 — zero horizontal overflow, zero console errors everywhere. Mobile menu
+  open/click + Escape-close + aria state confirmed. FAQ accordion works by click and keyboard.
+  Contact form hides + shows the success state on submit with the Formspree `action` and all field
+  `name`s preserved. Local `href`/`src` sweep across all 6 pages (124 refs) → every referenced file
+  exists. Head-integrity check confirmed one `<h1>` per page and all SEO/analytics metadata intact.
+- **Content policy:** no fabricated testimonials — the reference's AI-generated quote cards were
+  replaced with a dignified "references available during consultation" statement (user decision).
+  Regina uses the real `images/regina.jpg`; hero uses the approved `images/hero-ai.jpg`.
+- **Remaining risk or follow-up:** not committed or pushed (awaiting user go-ahead). `main` is
+  untouched and still live. Botanical/service icons are hand-authored inline SVG line-art (no icon
+  font). Formspree endpoint is still the pre-existing `REPLACE_WITH_FORMSPREE_ID` placeholder,
+  unchanged by this work.
+
+---
+
+## Previous — Summary
 
 Rework the homepage hero photo composition: enforce a 25%-navy/75%-image ratio, swap in the
 client's hi-res original photo, and show the full frame (lamp, heads, curtain) on desktop with no
 seam
 
-## Description
+## Previous — Description
 
 - **What changed:** `css/style.css` — widened `--hero-photo-w` 57%→75% (band left edge 43%→25%)
   and compressed the `.hero::after` overlay so solid navy ends by ~18-25% instead of ~43-47%;

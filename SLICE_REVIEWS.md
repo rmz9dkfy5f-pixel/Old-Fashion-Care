@@ -4,6 +4,40 @@ Use this file after each completed vertical slice.
 
 ---
 
+## 2026-07-13 — Editorial Sage redesign (branch `design/editorial-sage-elder-friendly`)
+
+**Status:** Implemented on an isolated branch — not committed, not merged, `main` untouched.
+
+**Slice summary:**
+Executed the vault's `EDITORIAL_SAGE_REDESIGN_EXECUTION_PLAN.md` in its own controlled slices,
+pausing after the homepage for user review (approved) before doing the secondary pages:
+
+1. Design system — new `css/editorial-sage.css` (cream/sage/ink/sand tokens, Lora + Source Sans 3,
+   light cream sticky header + mobile menu + footer, accessibility baseline), plus
+   `docs/design/EDITORIAL_SAGE_DESIGN_SPEC.md` and the reference image.
+2. Homepage — organic curved hero split, sage trust band, 5 line-icon service cards, sand process
+   strip, Meet Regina split, dignified references statement, rounded contact panel.
+3. Secondary pages — `about`, `services`, `how-it-works`, `questions`, `contact` all rebuilt onto
+   the shared shell + design language; interior components added (page hero, prose, service detail,
+   pull quote, values grid, detailed steps, FAQ, contact form).
+
+**What was preserved:** every page's `<head>` metadata (title/description/canonical/OG/Twitter/
+JSON-LD/Plausible/favicon), all verified copy and business facts, the FAQ accordion, and the
+Formspree contact form (action + hidden fields + `#form-success`). `css/style.css` left untouched.
+
+**Verification:** Playwright across all 6 pages at 1440/768/390 (0 horizontal overflow, 0 console
+errors); mobile menu open/Escape/aria; FAQ click + keyboard; contact-form success with Formspree
+action intact; 124-ref local link sweep clean; one `<h1>` per page; SEO metadata intact.
+
+**Deviations from the reference (intentional):** testimonials shown as a dignified no-cards
+statement (reference quotes are AI-generated — user decision); Regina uses the real photo, not the
+concept's generated portrait.
+
+**Follow-up:** awaiting user review + commit decision; a merge to `main` (changing the live site) is
+a separate explicit decision; Formspree endpoint remains the pre-existing placeholder.
+
+---
+
 ## 2026-07-07 — Complete the V3.4 migration (doc consolidation)
 
 **Status:** Implemented — not yet committed
