@@ -6,6 +6,40 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-14 — SEO/performance hygiene pass + SEOKit install (branch `design/editorial-sage-elder-friendly`)
+
+**Work completed:**
+- Answered the user's "can any of the kits add value?" question with concrete work rather than a
+  survey: evaluated the 22 installed `.claude/skills/` and the 6 external kits at
+  `/Volumes/AntNVMe1TB/.../20_TOOLS/KITS/` against the actual static site.
+- Ran `seo-hygiene-check` + installed **SEOKit** and ran `/seo hygiene` → `seo/audits/hygiene-2026-07-14.md`.
+- Ran `performance-budget-pass`; applied 2 low-risk fixes: (1) removed the render-blocking Google
+  Fonts `@import` from `css/editorial-sage.css` and added `<link rel="preconnect">` + direct font
+  `<link>` to all 6 page `<head>`s; (2) added `loading="lazy"` to the `index.html` founder photo.
+- Evaluated **MKTKit**, judged it a poor fit for a static business site, and rolled it back;
+  preserved its one useful output at `docs/marketing/cta-proposal-2026-07-14.md`.
+
+**Files changed:**
+- Modified: `index.html`, `about.html`, `services.html`, `how-it-works.html`, `contact.html`,
+  `questions.html`, `css/editorial-sage.css`
+- Added: `.claude/commands/seo/*` (19), `.claude/skills/seo-*.md` (4), `.claude/agents/seo-auditor.md`,
+  `.claude/agents/serp-researcher.md`, `seo/{SITE,KEYWORD_MAP,REVENUE}.md`,
+  `seo/audits/hygiene-2026-07-14.md`, `docs/marketing/cta-proposal-2026-07-14.md`
+
+**Validation:**
+- Source inspection + grep across all 6 pages (font links present ×3/page, `@import` removed, lazy
+  attr present). No build/test/lint scripts in this static repo; browser smoke-test not re-run.
+
+**Notes for next agent:**
+- Deferred (user's call): Formspree `action` still `REPLACE_WITH_FORMSPREE_ID` in `contact.html`.
+- Not yet applied (low effort, from the audits): og:image dims 1100×934→1400×933, sitemap `lastmod`
+  refresh, `LocalBusiness` JSON-LD on services/contact/how-it-works, dedicated `apple-touch-icon.png`.
+- `care-03..11.jpg` (1–2.5MB, up to 5760px) are unreferenced — resize before wiring into any page.
+- SEOKit's `/seo quick-wins` needs GSC/CSV data (not connected) before it can produce real rankings.
+- Prior v2.x pushes did not create RepoBackups snapshots; only this v2.3.0 snapshot exists there.
+
+---
+
 ## 2026-07-11 — Hero CTA contrast fix + gradient/photo-band repositioned left
 
 **Work completed:**

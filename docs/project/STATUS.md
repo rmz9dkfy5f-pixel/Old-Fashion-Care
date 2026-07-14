@@ -1,6 +1,42 @@
 # Status
 
-**Last updated:** 2026-07-13
+**Last updated:** 2026-07-14
+
+---
+
+## Latest Push — SEO/Perf Pass + SEOKit Install (2026-07-14, branch `design/editorial-sage-elder-friendly`)
+
+```text
+Branch: design/editorial-sage-elder-friendly (isolated; main untouched, still live on Netlify)
+Tag:    v2.3.0__perf-font-loading-lazyload-plus-seokit-audit__commit-<short-hash>
+        (the real short hash is embedded in the annotated git tag applied to this commit)
+```
+
+**Completed this push:**
+- **Performance fixes (live pages, all 6):** replaced the render-blocking Google Fonts `@import`
+  inside `css/editorial-sage.css` with `<link rel="preconnect">` (googleapis + gstatic) + a direct
+  font `<link rel="stylesheet">` in every page `<head>`; added `loading="lazy"` to the `index.html`
+  founder photo (was inconsistent with `about.html`).
+- **SEOKit installed** (`.claude/commands/seo/` 19 commands, `.claude/skills/seo-*.md`,
+  `.claude/agents/seo-auditor.md` + `serp-researcher.md`, `seo/` context files) and `/seo hygiene`
+  run → `seo/audits/hygiene-2026-07-14.md`.
+- **Kit evaluation** (answering "can any kits add value"): SEOKit kept (strong fit); MKTKit
+  installed, evaluated, then rolled back (poor fit for a static business site) — its one useful
+  output preserved at `docs/marketing/cta-proposal-2026-07-14.md`.
+
+**Validation:** static-site changes verified by source inspection + grep across all 6 pages (font
+links present ×3/page, `@import` removed, lazy attr present). No build/test/lint scripts exist in
+this repo (static HTML/CSS/JS); browser smoke-test not re-run this pass.
+
+**Known issues / deferred (from the SEO + perf audits):**
+- Contact form Formspree `action` is still `REPLACE_WITH_FORMSPREE_ID` (`contact.html`) — form does
+  not submit in production. **Deferred by user.**
+- Low-effort hygiene items not yet applied: og:image dims (1100×934 → 1400×933), sitemap `lastmod`
+  refresh, `LocalBusiness` JSON-LD on services/contact/how-it-works, dedicated `apple-touch-icon.png`.
+- 11 unused `care-03..11.jpg` (1–2.5MB, up to 5760px) must be resized before any page references them.
+
+**Next recommended step:** apply the 4 low-effort hygiene fixes; then decide on the Formspree ID and
+any merge-to-`main` (a separate explicit decision — would change the live site).
 
 ---
 

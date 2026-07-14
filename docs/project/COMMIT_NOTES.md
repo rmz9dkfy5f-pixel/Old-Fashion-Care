@@ -6,6 +6,33 @@ Use it to prepare commits before they are made.
 
 ---
 
+## Summary
+
+SEO/performance hygiene pass + SEOKit install on branch `design/editorial-sage-elder-friendly` (NOT main)
+
+## Description
+
+- **What changed:**
+  - Performance: removed the render-blocking Google Fonts `@import` from `css/editorial-sage.css`
+    and added `<link rel="preconnect">` (googleapis + gstatic) + a direct font `<link rel="stylesheet">`
+    to all 6 page `<head>`s; added `loading="lazy"` to the `index.html` founder photo.
+  - Tooling: installed SEOKit — `.claude/commands/seo/` (19 commands), `.claude/skills/seo-*.md` (4),
+    `.claude/agents/seo-auditor.md` + `serp-researcher.md`, and `seo/` context files
+    (`SITE.md` filled with verified facts, `KEYWORD_MAP.md`, `REVENUE.md`).
+  - Audits: `seo/audits/hygiene-2026-07-14.md` (from `/seo hygiene`) and
+    `docs/marketing/cta-proposal-2026-07-14.md` (MKTKit output, preserved after the kit was removed).
+- **Why it changed:** the user asked whether any of the external kits could add value; this delivers
+  the concrete outcome — faster font rendering, an SEO toolkit that maps onto existing BACKLOG items,
+  and a documented audit trail — while rejecting the kit (MKTKit) that did not fit.
+- **What was verified:** source inspection + grep across all 6 pages confirmed the font links are
+  present (3 per page), the `@import` is gone, and the lazy attribute is set. No build/test/lint
+  scripts exist in this static repo; browser smoke-test not re-run this pass.
+- **Remaining risk / follow-up:** contact-form Formspree `action` still a placeholder (deferred by
+  user); 4 low-effort hygiene items outstanding (og:image dims, sitemap lastmod, JSON-LD on 3 pages,
+  apple-touch-icon); `care-03..11.jpg` need resizing before use. All on the branch — `main` untouched.
+
+---
+
 ## Summary (branch `design/editorial-sage-elder-friendly` — NOT main)
 
 Add a complete, isolated "Editorial Sage" alternate design for the whole site: a warm cream / sage /

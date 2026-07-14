@@ -4,6 +4,33 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [v2.3.0 — branch `design/editorial-sage-elder-friendly`] — 2026-07-14
+
+Isolated branch. Does **not** change `main` or the live site.
+
+### Changed
+- Font loading on all 6 pages: replaced the render-blocking Google Fonts `@import` inside
+  `css/editorial-sage.css` with `<link rel="preconnect">` (googleapis + gstatic) + a direct font
+  `<link rel="stylesheet">` in each page `<head>`, so the browser discovers and fetches fonts
+  immediately instead of after the CSS parses.
+
+### Fixed
+- `index.html` founder photo now has `loading="lazy"`, matching `about.html` (was eagerly loaded).
+
+### Added
+- SEOKit installed under `.claude/` (`commands/seo/` ×19, `skills/seo-*.md` ×4, `agents/seo-auditor.md`
+  + `serp-researcher.md`) with `seo/` context files; `/seo hygiene` audit at
+  `seo/audits/hygiene-2026-07-14.md`.
+- `docs/marketing/cta-proposal-2026-07-14.md` — homepage CTA proposal (MKTKit output; kit itself
+  evaluated then removed as a poor fit for a static business site).
+
+### Notes
+- No live-site behavior change beyond the two performance tweaks; all copy/metadata unchanged.
+- Deferred: contact-form Formspree `action` placeholder; og:image dims, sitemap lastmod,
+  `LocalBusiness` JSON-LD on services/contact/how-it-works, and `apple-touch-icon.png`.
+
+---
+
 ## [Unreleased — branch `design/editorial-sage-elder-friendly`] — 2026-07-13
 
 Isolated alternate design branch. Does **not** change `main` or the live site.

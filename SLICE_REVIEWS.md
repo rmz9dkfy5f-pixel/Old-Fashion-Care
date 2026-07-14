@@ -4,6 +4,31 @@ Use this file after each completed vertical slice.
 
 ---
 
+## 2026-07-14 — SEO/perf hygiene pass + SEOKit install (branch `design/editorial-sage-elder-friendly`)
+
+**Status:** Complete; committed + pushed to the branch. `main` untouched.
+
+**Slice summary:**
+Turned the user's "can any of the kits add value?" question into a concrete, verified slice:
+1. Ran `seo-hygiene-check` and installed **SEOKit** (`/seo` commands + skills + read-only agents +
+   `seo/` context); produced `seo/audits/hygiene-2026-07-14.md`.
+2. Ran `performance-budget-pass` and applied its two lowest-risk fixes: font-loading via
+   preconnect + `<link>` (removed the render-blocking `@import`) across all 6 pages, and
+   `loading="lazy"` on the `index.html` founder photo.
+3. Evaluated **MKTKit**, judged it a poor fit for a static business site, rolled it back, and kept
+   its one useful artifact (`docs/marketing/cta-proposal-2026-07-14.md`).
+
+**What was preserved:** all page copy, `<head>` metadata, JSON-LD, and the contact form markup —
+only the font-loading mechanism and one `loading` attribute changed on the live pages.
+
+**Verification:** grep/source inspection across all 6 pages (font links ×3/page, `@import` removed,
+lazy attr present). No build/test/lint scripts in this static repo; browser smoke-test not re-run.
+
+**Out of scope / deferred:** Formspree ID (user deferred); og:image dims, sitemap lastmod,
+`LocalBusiness` JSON-LD on 3 pages, apple-touch-icon; resizing `care-03..11.jpg`.
+
+---
+
 ## 2026-07-13 — Editorial Sage redesign (branch `design/editorial-sage-elder-friendly`)
 
 **Status:** Implemented on an isolated branch — not committed, not merged, `main` untouched.

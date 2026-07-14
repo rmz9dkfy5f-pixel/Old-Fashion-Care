@@ -20,8 +20,19 @@ Likely needed after the current slice.
 
 - [ ] Design review — visual polish and layout improvements across pages
 - [ ] Mobile layout review — verify all pages look great on small screens
-- [ ] Image optimization — compress large photos (care-03 through care-11 are 1–2.5MB each)
+- [ ] Image optimization — compress large photos (care-03 through care-11 are 1–2.5MB each, up to
+      5760px wide). **Unreferenced today** — resize/re-compress *before* wiring any into a page.
 - [ ] Create a dedicated 180×180 `apple-touch-icon.png` (currently falls back to `favicon.svg`)
+- [ ] **Low-effort SEO hygiene fixes** (from `seo/audits/hygiene-2026-07-14.md`): update stale
+      `og:image` dims (1100×934 → 1400×933) on all 6 pages; refresh `sitemap.xml` `<lastmod>`; add
+      `LocalBusiness` JSON-LD to `services.html`, `contact.html`, `how-it-works.html`.
+- [ ] **Fix contact form** — replace `REPLACE_WITH_FORMSPREE_ID` in `contact.html` with the real
+      Formspree ID (form does not submit until then). *Deferred by user this session.*
+
+### Done this session (2026-07-14)
+- [x] Font-loading performance fix (preconnect + `<link>`, removed `@import`) on all 6 pages
+- [x] `loading="lazy"` on the `index.html` founder photo
+- [x] SEOKit installed + `/seo hygiene` audit produced
 
 ---
 

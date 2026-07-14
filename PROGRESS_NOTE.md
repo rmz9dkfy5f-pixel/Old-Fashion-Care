@@ -13,26 +13,39 @@ For historical notes, copy completed entries into `PROGRESS_NOTES.md`.
 Date:
 
 ```text
-2026-07-13
+2026-07-14
 ```
 
 Phase:
 
 ```text
-Phase 2 — Editorial Sage redesign implemented on isolated branch
-`design/editorial-sage-elder-friendly` (does NOT touch main). Awaiting user review + commit decision.
+Phase 2 — SEO/performance hygiene pass + SEOKit install on branch
+`design/editorial-sage-elder-friendly` (does NOT touch main). Committed + pushed to the branch.
 ```
 
 Current slice:
 
 ```text
-Full-site "Editorial Sage" alternate design (executing the vault's
-EDITORIAL_SAGE_REDESIGN_EXECUTION_PLAN.md). Warm cream/sage/ink/sand light editorial theme
-(Lora + Source Sans 3) replacing the live dark charcoal/coral look, across all 6 pages, via a new
-css/editorial-sage.css. Branch-isolated; main is untouched and still live on Netlify.
+Kit-value evaluation (user question: "can any of the kits add value?") → concrete SEO + performance
+work. Installed SEOKit and ran /seo hygiene; ran seo-hygiene-check + performance-budget-pass skills;
+applied 2 low-risk perf fixes (font preconnect/link, lazy-load); evaluated + rolled back MKTKit.
+Branch-isolated; main untouched and still live on Netlify.
 ```
 
-Completed:
+Completed (this push):
+
+- [x] Font-loading fix on all 6 pages: removed render-blocking `@import` from `css/editorial-sage.css`;
+      added `<link rel="preconnect">` (googleapis + gstatic) + direct font `<link>` in each `<head>`
+- [x] `loading="lazy"` added to `index.html` founder photo (matches `about.html`)
+- [x] SEOKit installed (`.claude/commands/seo/`, `.claude/skills/seo-*.md`, `.claude/agents/seo-*.md`,
+      `seo/` context); `/seo hygiene` run → `seo/audits/hygiene-2026-07-14.md`
+- [x] MKTKit evaluated → rolled back (poor fit); CTA proposal saved to `docs/marketing/cta-proposal-2026-07-14.md`
+
+Prior slice (Editorial Sage redesign) — still complete, unchanged this push:
+
+- [x] Full-site Editorial Sage design on this branch (see PROGRESS_NOTES.md history)
+
+Completed (earlier redesign detail retained for reference):
 
 - [x] Slice 0/1 — new `css/editorial-sage.css` design system (tokens, Lora + Source Sans 3, cream
       sticky header, mobile menu, footer, base + accessibility primitives); `docs/design/` spec +
@@ -59,38 +72,38 @@ Completed:
 
 In progress:
 
-- [ ] None — redesign branch complete; awaiting user review of the full site and a commit/push decision
+- [ ] None — SEO/perf slice complete and pushed to the branch.
 
 Blocked:
 
-- [ ] Nothing blocking. Commit/push and any merge-to-main decision are the user's call.
+- [ ] Nothing blocking. Formspree ID and any merge-to-main decision remain the user's call.
 
 Next action:
 
-> Review the full Editorial Sage branch (local preview server on port 8137, all 6 pages). If
-> approved, run the push/handoff workflow to commit the branch (no LLM co-author line). Merging to
-> `main` (which would change the live Netlify site) is a separate, explicit decision.
+> Apply the 4 low-effort hygiene fixes (og:image dims, sitemap lastmod, LocalBusiness JSON-LD on
+> services/contact/how-it-works, apple-touch-icon.png). Then decide on the Formspree form ID and
+> whether/when to merge `design/editorial-sage-elder-friendly` to `main` (a separate explicit
+> decision — would change the live Netlify site).
 
 Checks run:
 
 ```bash
-python3 -m http.server 8137            # local static preview
-node allpages.mjs                      # Playwright: 6 pages x 3 viewports, overflow + console
-                                       # + FAQ accordion + contact-form success tests
-python3 (local href/src sweep)         # 124 refs across 6 pages, all resolve
+grep -c 'fonts.googleapis.com|fonts.gstatic.com' *.html   # font links present ×3/page
+grep -c '@import' css/editorial-sage.css                   # 0 (removed)
+grep -n 'regina.jpg' index.html                            # loading="lazy" present
+# No build/test/lint scripts in this static repo; browser smoke-test not re-run this pass.
 ```
 
 Commit status:
 
 ```text
-Not committed. Branch design/editorial-sage-elder-friendly created from main @ fd7543c; working
-tree has the redesign changes staged for a future commit only after user approval. main untouched.
+Committed + pushed to origin/design/editorial-sage-elder-friendly (see COMMIT_NOTES.md / STATUS.md
+for hash + tag). main untouched and still live on Netlify.
 ```
 
 Approval status:
 
 ```text
-Phase 2 approved for THIS plan's scope only — user gave "execute this plan" for
-EDITORIAL_SAGE_REDESIGN_EXECUTION_PLAN.md, and separately approved continuing past the homepage
-review checkpoint to the secondary pages. No commit/push authorized yet.
+User explicitly ran the push/handoff prompt this session, authorizing commit + tag + snapshot +
+push of this SEO/perf slice to the branch. Merge-to-main NOT authorized (separate explicit decision).
 ```
