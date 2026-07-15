@@ -8,6 +8,33 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Install AntBrainOS kit tooling — SEOKit, EngKit, TradeKit, handoff-repository (`main`, dev-tooling
+only, live site unchanged)
+
+## Description
+
+- **What changed:** dev-tooling only. Added **SEOKit** (`.claude/commands/seo/` ×19,
+  `.claude/skills/seo-*.md` ×4, `.claude/agents/{seo-auditor,serp-researcher}.md`, `seo/` context
+  reused from the Editorial Sage branch), **EngKit** (`.claude/skills/eng/`, `/eng` + 26
+  subcommands), **TradeKit** (`.claude/tradekit/`, 7 `/tk` cards + adapters), and the cross-tool
+  **handoff-repository** skill (`.claude/skills/` + `.agents/skills/` + a filled
+  `docs/governance/REPOSITORY_HANDOFF_CONFIG.md`).
+- **Why:** user asked to install as many fit-appropriate kits as possible across all branches, and
+  explicitly authorized including `main`. EcomKit/VideoKit skipped (no surface); MKTKit skipped
+  (previously rolled back).
+- **Validation:** **live-site guard** — `git diff <pre-install main>..<post-install main> --
+  '*.html' 'css/**' 'js/**' 'images/**' netlify.toml` is **empty**, proving the deployed Netlify
+  site (appearance, behavior, CSP headers, redirects) is byte-for-byte unchanged. `netlify.toml`
+  publishes the repo root with no served route to `.claude/`, so the added tooling is never served.
+  Site-file guard grep clean; EngKit = 35 files, SEOKit = 19 commands, TradeKit = 7 cards, handoff
+  skill+agent+config present.
+- **Risks:** none to the live site. This is not a design change or a merge of any redesign branch —
+  those remain separate, un-made decisions.
+
+---
+
+## Summary
+
 Rework the homepage hero photo composition: enforce a 25%-navy/75%-image ratio, swap in the
 client's hi-res original photo, and show the full frame (lamp, heads, curtain) on desktop with no
 seam

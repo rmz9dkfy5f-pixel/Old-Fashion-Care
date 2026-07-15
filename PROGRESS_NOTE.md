@@ -8,6 +8,19 @@ For historical notes, copy completed entries into `PROGRESS_NOTES.md`.
 
 ---
 
+## Latest — AntBrainOS Kit Tooling Install (2026-07-15)
+
+Installed dev-tooling kits across all branches (user request, `main` explicitly authorized). `main`
+gained **SEOKit** (`.claude/commands/seo/` + skills/agents + `seo/` context), **EngKit**
+(`.claude/skills/eng/`), **TradeKit** (`.claude/tradekit/`), and **handoff-repository**
+(`.claude/skills/` + `.agents/skills/` + filled `docs/governance/REPOSITORY_HANDOFF_CONFIG.md`).
+**Live site unchanged** — live-site guard diff (`*.html`/`css`/`js`/`images`/`netlify.toml` between
+pre- and post-install commits) is empty; `netlify.toml` serves no route to `.claude/`. EcomKit/
+VideoKit skipped (no surface); MKTKit skipped (previously rolled back). Not a design change or a
+merge. See `docs/project/COMMIT_NOTES.md` for the full entry.
+
+---
+
 ## Current Progress
 
 Date:

@@ -4,6 +4,31 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [tooling: AntBrainOS kit install — `main`] — 2026-07-15
+
+Dev-tooling only, on `main`. **No site files changed** — zero `.html`/`css`/`js`/`images`/
+`netlify.toml` edits. `netlify.toml` publishes the repo root with no served route to `.claude/`,
+so the live Netlify site's appearance, behavior, CSP headers, and redirects are all unchanged
+(verified: `git diff` on `*.html`/`css`/`js`/`images`/`netlify.toml` between the pre- and
+post-install commits is empty).
+
+### Added
+- **SEOKit** — `.claude/commands/seo/` (19), `.claude/skills/seo-*.md` (4),
+  `.claude/agents/{seo-auditor,serp-researcher}.md`, and the `seo/` site context (reused from the
+  Editorial Sage branch — same business).
+- **EngKit** — `/eng` dispatcher skill at `.claude/skills/eng/` (26 subcommands).
+- **TradeKit** — `/tk` command cards + adapters at `.claude/tradekit/`.
+- **handoff-repository** — cross-tool skill at `.claude/skills/handoff-repository/` +
+  `.agents/skills/handoff-repository/`, with a filled `docs/governance/REPOSITORY_HANDOFF_CONFIG.md`.
+
+### Notes
+- EcomKit / VideoKit skipped (no ecommerce or video surface); MKTKit skipped (previously rolled back
+  on the design branches as a poor fit for a static business site).
+- Installing tooling onto `main` was explicitly authorized; it does not constitute a design/merge
+  change to the live site.
+
+---
+
 ## [Unreleased] — 2026-07-12
 
 ### Changed
