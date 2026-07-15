@@ -8,6 +8,28 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Split-depth hero: curved photo-mask dissolve (branch `design/editorial-sage-hero-split-depth`)
+
+## Description
+
+- **What changed:** `css/editorial-sage.css` `.es-hero__media` mask. The prior mask (a large-radius
+  radial off to the right) flattened into a nearly-straight edge and dropped the curve — the
+  opposite of the request. Reshaped the `mask-image` to a **tall left-side ellipse**
+  (`radial-gradient(46% 130% at 0% 50%, …)`) with a wide, evenly-stepped feather, so the photo
+  dissolves into the cream **along a gentle convex curve** — keeping BOTH the organic curve AND a
+  smooth gradient, with no cream-fog overlay. Mobile mask still off (clean rounded card).
+- **Why:** user feedback — the previous version wrongly removed the curve and the gradient. This
+  restores the curve and the smooth dissolve while keeping the clean image-mask technique (no haze).
+- **Verified:** Playwright/Brave at 1440 (full + 2× zoomed seam) + 390 — visible organic curve,
+  smooth gradual dissolve, no line, no haze, faces clear, mobile card clean, 0 overflow, 0 console
+  errors. Redeployed + re-verified live.
+- **Scope:** split-depth branch + subdomain only; cream-immersive, baseline, `main`, nginx, TLS
+  untouched.
+
+---
+
+## Summary
+
 Split-depth hero: professional edge via photo mask (branch `design/editorial-sage-hero-split-depth`)
 
 ## Description

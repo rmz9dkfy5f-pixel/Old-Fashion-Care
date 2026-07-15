@@ -514,15 +514,17 @@ em { font-style: italic; }
   position: relative;
   min-height: 340px;
   isolation: isolate; /* self-contained stacking for the photo + vignette layers */
-  /* Dissolve the PHOTO's own left edge into the cream page (a clean image mask,
-     not a semi-opaque cream fog painted over the image). Off-centre radial so only
-     the left edge softly fades on a gentle curve; top/right/bottom stay full-bleed. */
-  -webkit-mask-image: radial-gradient(145% 135% at 86% 44%,
-    #000 44%, rgba(0,0,0,0.88) 56%, rgba(0,0,0,0.55) 68%,
-    rgba(0,0,0,0.22) 80%, rgba(0,0,0,0) 92%);
-          mask-image: radial-gradient(145% 135% at 86% 44%,
-    #000 44%, rgba(0,0,0,0.88) 56%, rgba(0,0,0,0.55) 68%,
-    rgba(0,0,0,0.22) 80%, rgba(0,0,0,0) 92%);
+  /* Organic curved split, done by masking the PHOTO along a tall left-side ellipse
+     so the image dissolves into the cream page on a gentle convex curve — keeps the
+     curve AND a smooth wide gradient, with no cream fog painted over the image.
+     Transparent (cream shows) inside the ellipse on the left → opaque (photo) to the
+     right, feathered over a wide band. Tall vertical radius = gentle vertical curve. */
+  -webkit-mask-image: radial-gradient(46% 130% at 0% 50%,
+    rgba(0,0,0,0) 40%, rgba(0,0,0,0.12) 52%, rgba(0,0,0,0.34) 63%,
+    rgba(0,0,0,0.58) 73%, rgba(0,0,0,0.80) 84%, rgba(0,0,0,0.94) 92%, #000 100%);
+          mask-image: radial-gradient(46% 130% at 0% 50%,
+    rgba(0,0,0,0) 40%, rgba(0,0,0,0.12) 52%, rgba(0,0,0,0.34) 63%,
+    rgba(0,0,0,0.58) 73%, rgba(0,0,0,0.80) 84%, rgba(0,0,0,0.94) 92%, #000 100%);
 }
 .es-hero__media img {
   position: absolute;
