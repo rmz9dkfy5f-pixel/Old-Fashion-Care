@@ -8,6 +8,28 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Install AntBrainOS kit tooling — EngKit, TradeKit, handoff-repository (branch
+`design/editorial-sage-elder-friendly`)
+
+## Description
+
+- **What changed:** dev-tooling only. Added **EngKit** (`.claude/skills/eng/`, `/eng` dispatcher +
+  26 subcommands), **TradeKit** (`.claude/tradekit/`, 7 `/tk` command cards + adapters + templates),
+  and the cross-tool **handoff-repository** skill (`.claude/skills/handoff-repository/`,
+  `.agents/skills/handoff-repository/`, plus a filled
+  `docs/governance/REPOSITORY_HANDOFF_CONFIG.md`). SEOKit was already present on this branch. **No
+  site files touched** — zero changes to any `.html`/`css`/`js`/`images`/`netlify.toml`.
+- **Why:** user asked to install as many fit-appropriate kits as possible across all branches.
+  EcomKit/VideoKit skipped (no surface); MKTKit skipped (previously rolled back here).
+- **Verified:** `git status` shows only `.claude/`, `.agents/`, `docs/governance/`, and tracking
+  docs; site-file guard grep clean. EngKit = 35 files; TradeKit = 7 cards; handoff skill+agent+config
+  present.
+- **Scope:** this branch's tooling only; live site and design unchanged. Part of a 5-branch install.
+
+---
+
+## Summary
+
 SEO/performance hygiene pass + SEOKit install on branch `design/editorial-sage-elder-friendly` (NOT main)
 
 ## Description
