@@ -41,6 +41,10 @@ Completed (this branch):
       faces kept bright); `isolation: isolate` on the media for self-contained layering
 - [x] Mobile keeps the stacked rounded photo card, now with the same subtle vignette
 - [x] Verified 1440/1024/768/390 — 0 overflow, 0 console errors; no text-over-photo, no new contrast risk
+- [x] **2026-07-15 follow-up (user feedback):** the cream/photo seam read as a hard line — the fade
+      was back-loaded. Rewrote the `.es-hero__media::before` radial to a wide, evenly-stepped fade
+      (28%→100% of radius) so the cream dissolves gradually with no perceptible edge; re-verified
+      (zoomed seam crop) and redeployed to the VPS split-depth subdomain.
 
 Prior slice (Editorial Sage redesign) — still complete, unchanged this push:
 

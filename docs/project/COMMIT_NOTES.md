@@ -8,6 +8,27 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Split-depth hero: smooth the cream/photo curve (branch `design/editorial-sage-hero-split-depth`)
+
+## Description
+
+- **What changed:** `css/editorial-sage.css`, `.es-hero__media::before` radial-gradient only. The
+  cream curve's fade was back-loaded (opaque to 56% of radius, then 0.72→0 crammed into the 72–90%
+  tail), which read as a hard arc where the cream met the darker part of the photo. Replaced with a
+  wide, evenly-stepped fade (28%→100% of radius, ~0.12–0.18 opacity steps) so the cream dissolves
+  gradually with no perceptible line. Also pulls the opaque cream back slightly, keeping both faces
+  clear.
+- **Why:** user feedback — the split-depth seam looked like a hard line; they wanted it much smoother.
+- **What was verified:** Playwright/Brave at 1440/1024/390 + a 2× zoomed crop of the seam — smooth
+  dissolve, no line, faces clear, 0 horizontal overflow, 0 console errors. Then redeployed to
+  `/var/www/old-fashion-care-hero-split-depth/` and re-verified the live HTTPS URL.
+- **Scope:** split-depth branch + its subdomain only. cream-immersive, baseline, `main`, nginx, TLS
+  all untouched.
+
+---
+
+## Summary
+
 Hero variant "split + depth": feathered curve + vignette (branch
 `design/editorial-sage-hero-split-depth` — NOT main, NOT the baseline branch)
 

@@ -543,9 +543,9 @@ em { font-style: italic; }
       rgba(23,50,77,0.00) 52%,
       rgba(23,50,77,0.14) 100%);
 }
-/* Organic cream curve bulging from the left (text) side into the photo — now
-   feathered (radial fill) so the photo dissolves into the cream column instead
-   of ending on a crisp arc, integrating the split. */
+/* Organic cream curve bulging from the left (text) side into the photo — a wide,
+   evenly-stepped radial feather so the cream dissolves gradually into the photo
+   with no perceptible edge (the earlier back-loaded fade read as a hard arc). */
 .es-hero__media::before {
   content: '';
   position: absolute;
@@ -556,9 +556,14 @@ em { font-style: italic; }
   height: 150%;
   background: radial-gradient(ellipse at center,
     var(--es-cream) 0%,
-    var(--es-cream) 56%,
-    rgba(251,247,238,0.72) 72%,
-    rgba(251,247,238,0.00) 90%);
+    var(--es-cream) 28%,
+    rgba(251,247,238,0.94) 40%,
+    rgba(251,247,238,0.82) 50%,
+    rgba(251,247,238,0.64) 60%,
+    rgba(251,247,238,0.44) 70%,
+    rgba(251,247,238,0.26) 80%,
+    rgba(251,247,238,0.11) 90%,
+    rgba(251,247,238,0.00) 100%);
   border-radius: 50%;
   z-index: 2;
   pointer-events: none;
