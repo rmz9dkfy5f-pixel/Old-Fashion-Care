@@ -6,6 +6,30 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-15 — AntBrainOS kit tooling installed across all 5 branches
+
+**Work completed:**
+- Installed dev-tooling kits from the AntBrainOS `20_TOOLS/KITS` collection onto all 5 branches
+  (one commit each): SEOKit (added to `main` + `migration`; already present on the 3 design
+  branches), EngKit (`/eng` dispatcher), TradeKit (`/tk` cards + adapters), and the cross-tool
+  handoff-repository skill with a filled `docs/governance/REPOSITORY_HANDOFF_CONFIG.md`.
+- Skipped EcomKit + VideoKit (no ecommerce/video surface) and MKTKit (previously rolled back here).
+
+**Files/areas changed (per branch):** `.claude/skills/eng/`, `.claude/tradekit/`,
+`.claude/skills/handoff-repository/`, `.agents/skills/handoff-repository/`,
+`docs/governance/REPOSITORY_HANDOFF_CONFIG.md`, (`+ .claude/commands/seo/`, `.claude/skills/seo-*`,
+`.claude/agents/seo-*`, `seo/` on `main` + `migration`), and tracking docs. **No site files.**
+
+**Validation:** per-branch site-file diff (parent..commit) empty on all 5; `main` live-site guard
+diff (`fd7543c..7818660`) empty; cross-branch presence matrix uniform; EngKit validator PASSED.
+
+**Notes for next agent:** `main`'s tooling commit is tagged `v2.5.0__install-antbrainos-kit-tooling-
+all-branches__commit-7818660`. The 4 non-trunk branch commits were pushed but intentionally not
+individually tagged (matches this repo's precedent for non-trunk branches). No live-site or design
+change occurred; redesign/hero merges remain separate decisions.
+
+---
+
 ## 2026-07-11 — Hero CTA contrast fix + gradient/photo-band repositioned left
 
 **Work completed:**

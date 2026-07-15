@@ -1,6 +1,39 @@
 # Status
 
-**Last updated:** 2026-07-12
+**Last updated:** 2026-07-15
+
+---
+
+## Latest Push — AntBrainOS Kit Tooling Install Across All 5 Branches (2026-07-15)
+
+```text
+Trunk tag: v2.5.0__install-antbrainos-kit-tooling-all-branches__commit-7818660 (on main's tooling commit)
+```
+
+Installed dev-tooling kits (from the AntBrainOS `20_TOOLS/KITS` collection) onto **all 5 branches**,
+one commit each, at the user's request:
+
+```text
+main                                        7818660  + SEOKit, EngKit, TradeKit, handoff-repository
+migration/project-starter-v3-3              190caf4  + SEOKit, EngKit, TradeKit, handoff-repository
+design/editorial-sage-elder-friendly        4da3df3  + EngKit, TradeKit, handoff-repository (SEOKit already there)
+design/editorial-sage-hero-cream-immersive  25647aa  + EngKit, TradeKit, handoff-repository (SEOKit already there)
+design/editorial-sage-hero-split-depth      6645f6e  + EngKit, TradeKit, handoff-repository (SEOKit already there)
+```
+
+- **Value-driven kit selection:** installed the kits with genuine fit (SEOKit, EngKit, TradeKit,
+  handoff-repository). **Skipped** EcomKit and VideoKit (no ecommerce/video surface on a static
+  elder-care site) and MKTKit (previously evaluated and rolled back here as a poor fit).
+- **Live site provably unchanged:** every commit is dev-tooling only — no `.html`/`css`/`js`/
+  `images`/`netlify.toml` edits. The `main` live-site guard diff (`fd7543c..7818660` over site
+  paths) is **empty**; `netlify.toml` publishes repo root with no served route to `.claude/`, so the
+  Netlify deploy is byte-for-byte unchanged. Same site-file diff was empty on every branch.
+- **Not a design change or a merge** — the redesign/hero-variant branches remain separate, un-made
+  decisions; this only adds tooling.
+
+**Validation:** cross-branch matrix confirmed each branch carries eng=35 files, tradekit=7 cards,
+handoff skill+agent+config, seo=19 commands; EngKit validator PASSED (26 commands); staging guards
+confirmed no site/local-only files were ever committed. Static site — no build/test/lint scripts.
 
 ---
 

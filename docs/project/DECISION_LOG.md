@@ -6,6 +6,39 @@ Do not use it for tiny task notes.
 
 ---
 
+## 2026-07-15 — Install AntBrainOS kit tooling on all 5 branches; skip poor-fit kits; include `main`
+
+### Decision
+Install the fit-appropriate AntBrainOS kits (SEOKit, EngKit, TradeKit, handoff-repository) as
+dev-tooling onto **all 5 branches** including `main`, as a set of tooling-only commits that touch no
+site files. Skip EcomKit, VideoKit, and MKTKit. Tag `main`'s tooling commit as the canonical
+`v2.5.0` checkpoint; push all 5 branches but do not individually tag the 4 non-trunk branches.
+
+### Reason
+User asked to "use as many kits as possible on as many branches as possible," then refined it to
+"install the tooling, value-driven (skip poor fit), across all 5 branches." Installing tooling only
+adds files under `.claude/`/`.agents/`/`seo/`/`docs/` — `netlify.toml` publishes repo root with no
+served route to those, so even installing onto `main` leaves the live Netlify site byte-for-byte
+unchanged (verified by an empty site-file guard diff). This let "include `main`" be honored safely
+without it being a design change or a merge.
+
+### Alternatives Considered
+- **Run the kits for outputs** instead of installing tooling — not chosen (user picked "install").
+- **Install all 7 kits** including EcomKit/VideoKit/MKTKit — rejected: no ecommerce/video surface,
+  and MKTKit was already evaluated and rolled back here (`docs/project/STATUS.md`) as a poor fit.
+- **Design branches only / current branch only** — rejected: user explicitly chose all 5.
+- **Tag every branch commit** — not chosen: redundant for 5 near-identical tooling commits; this
+  repo's own precedent leaves non-trunk branches (e.g. cream-immersive) untagged.
+
+### Consequences
+- `main` history advances by a tooling commit (+ a trailing docs commit) with zero live-site impact.
+- All 5 branches now carry a consistent SEOKit/EngKit/TradeKit/handoff-repository toolset, available
+  for future work on any branch.
+- `migration/project-starter-v3-3` (pending a deletion decision) also received the install; if that
+  branch is later deleted, its tooling commit goes with it — accepted as low-cost.
+
+---
+
 ## 2026-07-08 — Auto-Chain CLAUDE_CODE_SESSION_END After the Repo Push/Handoff Prompt
 
 ### Decision
