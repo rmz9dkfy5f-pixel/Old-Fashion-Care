@@ -6,6 +6,50 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-15 — Two hero-variant branches built, deployed live, split-depth tagged
+
+**Work completed:**
+- Built two new homepage-hero variants on isolated branches off `design/editorial-sage-elder-friendly`
+  (left unchanged as the boxed-split baseline): `design/editorial-sage-hero-cream-immersive`
+  (full-bleed photo + cream gradient scrim) and `design/editorial-sage-hero-split-depth` (keeps the
+  two-column split, photo dissolves into the cream on a curve).
+- Pushed both branches to GitHub.
+- Deployed both live to VPS `74.208.9.49` (nginx + Let's Encrypt, one cert covering both new
+  subdomains as SANs) for client-visible comparison:
+  - `old-fashion-care.sage.hero.cream.immersive.craftandconscious.com`
+  - `old-fashion-care.sage.hero.split.depth.craftandconscious.com`
+- Split-depth went through 3 iterations after user visual review before landing correctly: (1)
+  feathered radial fill + vignette — user flagged the seam as a hard line; (2) widened the same
+  radial fill — user flagged it as a milky, unprofessional haze; (3) **technique change** — a CSS
+  `mask-image` on the photo itself (not a cream shape painted over it) so the image's own edge
+  dissolves along an organic curve. This is the one that landed.
+
+**Files/areas changed:**
+- `index.html`, `css/editorial-sage.css` (hero markup/CSS only, both branches)
+- Root tracking docs on each branch (`docs/project/STATUS.md`, `PROGRESS_NOTE.md`,
+  `SLICE_REVIEWS.md`, `docs/project/COMMIT_NOTES.md`, `docs/project/CHANGELOG.md`, `PLAN.md`)
+- VPS: two new nginx server blocks, one new Let's Encrypt cert, two new `/var/www/` webroots
+
+**Validation:**
+- Local: Playwright/Brave at 1440/1024/768/390, 0 horizontal overflow, 0 console errors on both
+  variants each iteration.
+- Live: same Playwright method pointed at the live HTTPS URLs (DNS forced to the VPS IP to bypass
+  this environment's stale resolver cache) — 200, 0 overflow, 0 console errors, zoomed seam crops
+  confirmed the final split-depth result in production, not just locally.
+- No build/test/lint scripts exist in this static repo.
+
+**Notes for next agent:**
+- Split-depth branch tagged `v2.4.0__split-depth-hero-curved-mask-dissolve__commit-<hash>` and
+  snapshotted this push (see `docs/project/COMMIT_NOTES.md` for the real hash).
+- cream-immersive branch is pushed but **not yet tagged/snapshotted** — a separate step if the user
+  wants it finalized the same way after they review it.
+- Merge of either branch to `main` (which would go live on Netlify) is a separate, not-yet-made
+  decision — both remain isolated preview branches.
+- RepoBackups path for this project confirmed again this push:
+  `/Volumes/AntNVMe1TB/WorkSync/Projects/RepoBackups/Old-Fashion-Care/`.
+
+---
+
 ## 2026-07-14 — SEO/performance hygiene pass + SEOKit install (branch `design/editorial-sage-elder-friendly`)
 
 **Work completed:**

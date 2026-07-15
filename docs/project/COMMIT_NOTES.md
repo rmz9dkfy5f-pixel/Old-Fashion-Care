@@ -8,6 +8,31 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Tag + snapshot split-depth hero's final curved photo-mask dissolve (branch
+`design/editorial-sage-hero-split-depth`)
+
+## Description
+
+- **What changed:** Handoff/tracking docs only (`docs/project/STATUS.md`, `PROGRESS_NOTES.md`, this
+  file) — no site code in this commit. Formalizes the split-depth hero work already committed and
+  deployed: the photo now dissolves into the cream page along an organic curve via a `mask-image`
+  on `.es-hero__media`, after two earlier attempts (feathered radial fill, then a widened version of
+  the same) were both correctly rejected by the user as a hard line, then a milky/unprofessional
+  haze.
+- **Why it changed:** closing out this push per the repo's push/handoff/snapshot/tag workflow —
+  user approved the live result and asked to commit, push, snapshot, and tag.
+- **What was verified:** Playwright/Brave against the **live HTTPS URL**
+  (`old-fashion-care.sage.hero.split.depth.craftandconscious.com`, DNS forced to the VPS IP) — 200,
+  0 horizontal overflow, 0 console errors, zoomed seam crop confirmed smooth curved dissolve in
+  production.
+- **Remaining risk / follow-up:** sibling branch `design/editorial-sage-hero-cream-immersive` is
+  pushed to GitHub but not yet tagged/snapshotted — separate step, pending user review of that
+  variant. Merge of either branch to `main` remains a separate, un-made decision.
+
+---
+
+## Summary
+
 Split-depth hero: curved photo-mask dissolve (branch `design/editorial-sage-hero-split-depth`)
 
 ## Description

@@ -4,33 +4,54 @@
 
 ---
 
-## Active Work — Hero Variant Branches (2026-07-15)
+## Latest Push — Split-Depth Hero: Curved Photo-Mask Dissolve (2026-07-15, branch `design/editorial-sage-hero-split-depth`)
 
-The user asked to bring the Editorial Sage homepage hero "to life" like the live/`main` design
-(photo + gradient), explored as **separate branches** rather than editing the existing design.
-Three comparable hero treatments now exist:
+```text
+Branch: design/editorial-sage-hero-split-depth (isolated; main untouched)
+Tag:    v2.4.0__split-depth-hero-curved-mask-dissolve__commit-<short-hash>
+        (the real short hash is embedded in the annotated git tag applied to this commit)
+```
+
+Three comparable homepage hero treatments now exist, deployed live for client comparison:
 
 ```text
 design/editorial-sage-elder-friendly       — BASELINE: boxed two-column split, cream-ellipse
                                               curve, no gradient (unchanged)
-design/editorial-sage-hero-cream-immersive — full-bleed photo + cream→transparent gradient scrim;
-                                              dark ink copy over the photo
-design/editorial-sage-hero-split-depth     — THIS BRANCH: keeps the two-column split, adds a
-                                              feathered curve edge + a soft vignette for depth
+design/editorial-sage-hero-cream-immersive — full-bleed photo + cream gradient scrim; dark ink
+                                              copy over the photo. Pushed to origin, not tagged.
+                                              Live: old-fashion-care.sage.hero.cream.immersive.
+                                              craftandconscious.com
+design/editorial-sage-hero-split-depth     — THIS PUSH: two-column split retained, photo dissolves
+                                              into the cream on an organic curve via a CSS mask.
+                                              Live: old-fashion-care.sage.hero.split.depth.
+                                              craftandconscious.com
 ```
 
-**This branch (`hero-split-depth`) — completed:** the lowest-disruption variant. Keeps the existing
-two-column hero and all copy; **CSS-only** (`css/editorial-sage.css` `.es-hero*` only, no markup
-change). Replaced the crisp cream-ellipse arc with a **feathered** radial fill so the photo
-dissolves into the cream column, and added a low-opacity ink **vignette** (`.es-hero__media::after`)
-so the photo reads as a lit scene rather than a flat rectangle — faces kept bright. On mobile the
-photo stays the stacked rounded card, now with the same subtle depth.
+**Completed this push (split-depth, 3 iterations to the final result):**
+1. First pass: feathered the cream-ellipse curve (radial fill) + added a low-opacity ink vignette
+   for depth. Verified, deployed — but the user reported the seam "was not smooth," a hard line.
+2. Second pass: widened/evened the same radial-fill opacity stops. Smoother, but the user correctly
+   flagged it as "not smooth or professional-looking" — a semi-opaque cream shape painted *over*
+   the photo always reads as a milky haze, however gradual the stops.
+3. **Final pass — technique change, not just tuning:** replaced the cream-fill pseudo-element with
+   a CSS `mask-image` on `.es-hero__media` itself (a tall left-side ellipse,
+   `radial-gradient(46% 130% at 0% 50%, …)`), so the **photo's own edge** dissolves into the cream
+   page along a gentle organic curve — curve *and* smooth gradient *and* no haze, all at once. This
+   is the standard "image bleeds into the page" technique. Mobile keeps the mask off (clean rounded
+   card, unchanged).
 
-**Validation:** Playwright (Brave engine) at 1440/1024/768/390 — **0 horizontal overflow, 0 console
-errors**; no text-over-photo so no new contrast risk. No build/test/lint scripts in this static repo.
+**Deployed:** VPS `74.208.9.49`, nginx + Let's Encrypt (cert covers both new subdomains as SANs),
+webroot `/var/www/old-fashion-care-hero-split-depth/` synced via `git archive` + a precise
+site-file-only `rsync` (no dev/governance files on the server).
 
-**Not pushed** — local branch only, pending the user's review of all three variants. Merge to `main`
-is a separate explicit decision.
+**Validation:** Playwright (Brave engine, DNS forced to the VPS IP to bypass this environment's
+stale resolver cache) against the **live HTTPS URL** — 200, 0 horizontal overflow, 0 console errors,
+zoomed seam crop confirmed a smooth curved dissolve with no line/haze in production, not just
+locally. No build/test/lint scripts in this static repo.
+
+**Both hero-variant branches pushed to `origin`.** Split-depth now tagged + snapshotted (this push);
+cream-immersive is pushed but not yet tagged/snapshotted — a separate decision if the user wants it
+finalized the same way. Merge of either branch to `main` remains a separate explicit decision.
 
 ---
 
