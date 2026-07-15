@@ -8,6 +8,17 @@ For historical notes, copy completed entries into `PROGRESS_NOTES.md`.
 
 ---
 
+## Latest — AntBrainOS Kit Tooling Install (2026-07-15)
+
+Installed dev-tooling kits across all branches (user request). This branch gained **EngKit**
+(`.claude/skills/eng/`), **TradeKit** (`.claude/tradekit/`), and **handoff-repository**
+(`.claude/skills/` + `.agents/skills/` + filled `docs/governance/REPOSITORY_HANDOFF_CONFIG.md`);
+SEOKit was already present. **No site files changed** — the rendered site and live Netlify deploy
+are byte-identical. EcomKit/VideoKit skipped (no surface); MKTKit skipped (previously rolled back).
+See `docs/project/COMMIT_NOTES.md` for the full entry.
+
+---
+
 ## Current Progress
 
 Date:
