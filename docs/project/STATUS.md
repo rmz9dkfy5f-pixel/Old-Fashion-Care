@@ -1,6 +1,41 @@
 # Status
 
-**Last updated:** 2026-07-14
+**Last updated:** 2026-07-15
+
+---
+
+## Active Work — Hero Variant Branches (2026-07-15)
+
+The user asked to bring the Editorial Sage homepage hero "to life" like the live/`main` design
+(full-bleed photo + gradient scrim), and to explore it as **separate branches** rather than change
+the existing design. Three comparable hero treatments now exist:
+
+```text
+design/editorial-sage-elder-friendly       — BASELINE: boxed two-column split, cream-ellipse
+                                              curve, no gradient (unchanged)
+design/editorial-sage-hero-cream-immersive — THIS BRANCH: full-bleed photo + cream→transparent
+                                              gradient scrim; dark ink copy over the photo
+design/editorial-sage-hero-split-depth     — planned/other branch: keeps the two-column split,
+                                              adds a soft edge-feather + vignette for depth
+```
+
+**This branch (`hero-cream-immersive`) — completed:** rebuilt the homepage `.es-hero` from a boxed
+side-by-side into a full-bleed composition. Ported the live hero's photo+gradient technique but
+recolored to the sage palette (cream `#fbf7ee` scrim instead of navy), so the hero stays light.
+`images/hero-ai.jpg` now bleeds behind the copy; a cream horizontal scrim keeps the left copy zone
+opaque and clears by ~66% so the caregivers read on the right; ink/sage copy sits over it. Wide
+screens (≥1200px) use the left-fading scrim (copy left, faces right); ≤1199px switches to a
+top-weighted scrim (copy over the cream top, embrace revealing below) so the fixed-width copy never
+overlaps the faces. Only `index.html` (hero markup) + `css/editorial-sage.css` (`.es-hero*` block +
+breakpoints) changed. `css/style.css` and `main` untouched.
+
+**Validation:** headless Brave + Playwright screenshots at 1440/1280/1024/768/390 — copy legible
+everywhere (ink-soft over cream ≈ 6.9:1, > AA), no hard seam, both faces visible, **0 horizontal
+overflow, 0 console errors** (measured via Playwright, not eyeballed). No build/test/lint scripts in
+this static repo.
+
+**Not pushed** — local branch only, pending the user's review of both variants. Merge to `main` is
+a separate explicit decision.
 
 ---
 

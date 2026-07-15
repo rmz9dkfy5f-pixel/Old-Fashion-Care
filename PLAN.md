@@ -14,17 +14,17 @@ Plan only as far as needed to reach the next phase gate.
 
 ## Active Objective
 
-> Deliver a complete, isolated "Editorial Sage" alternate design of the whole site on branch
-> `design/editorial-sage-elder-friendly`, executing the vault's
-> `EDITORIAL_SAGE_REDESIGN_EXECUTION_PLAN.md`, without touching `main` or the live site.
+> Explore a more immersive Editorial Sage homepage hero (full-bleed photo + gradient scrim, like the
+> live/`main` design) as **separate branches** off `design/editorial-sage-elder-friendly`, without
+> touching that baseline branch, `main`, or the live site — so the user can compare treatments.
 
 ---
 
 ## Current Validation Question
 
-> Does the branch faithfully implement the Editorial Sage concept with real content, across all six
-> pages, responsive and accessible, with all metadata/forms/analytics intact — ready for the user to
-> review and decide on commit/merge?
+> Across the three hero branches (baseline boxed split / cream-immersive / split-depth), which
+> treatment best brings the homepage hero "to life" while keeping the sage light aesthetic, legible
+> copy, and responsive/accessible behavior?
 
 ---
 
@@ -32,19 +32,18 @@ Plan only as far as needed to reach the next phase gate.
 
 ### Slice Name
 
-> Editorial Sage full-site redesign (branch-isolated). Implemented — awaiting user review + commit
-> decision.
+> Hero variant branches. `design/editorial-sage-hero-cream-immersive` — implemented + committed
+> (local). `design/editorial-sage-hero-split-depth` — next.
 
 ### Purpose
 
-> Provide a warm, elder-friendly editorial alternative to the live dark charcoal/coral design, built
-> as a new `css/editorial-sage.css` applied to all six pages, so the client can compare it against
-> the current site before any merge.
+> Give the homepage hero the live design's photo + gradient "aliveness" without leaving the sage
+> light theme, delivered as isolated branches so the baseline stays intact for side-by-side review.
 
 ### User/Operator Outcome
 
-> The user can preview the complete redesigned site on the branch (all 6 pages, desktop + mobile),
-> then decide whether to commit the branch and/or merge it to `main`.
+> The user can preview all three homepage heroes (baseline / cream-immersive / split-depth) on
+> desktop + mobile and decide which to keep and whether to merge it toward `main`.
 
 ### Systems Touched
 

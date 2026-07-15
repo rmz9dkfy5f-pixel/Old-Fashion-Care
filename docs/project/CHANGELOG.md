@@ -4,6 +4,27 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [branch `design/editorial-sage-hero-cream-immersive`] — 2026-07-15
+
+Isolated hero-variant branch cut from `design/editorial-sage-elder-friendly`. Does **not** change
+`main` or the live site. One of two new hero variants exploring a more immersive homepage hero.
+
+### Changed
+- Homepage hero rebuilt from a boxed two-column split into a **full-bleed photo + gradient scrim**
+  composition — the live/`main` hero technique, recolored to the sage palette (cream `#fbf7ee`
+  scrim instead of navy) so the hero stays light. `images/hero-ai.jpg` now bleeds behind the copy;
+  ink/sage copy sits over a cream scrim that keeps the copy zone opaque and clears to reveal the
+  caregivers. `index.html` (hero markup) + `css/editorial-sage.css` (`.es-hero*` block +
+  breakpoints) only.
+- Responsive: ≥1200px left-fading scrim (copy left / faces right); ≤1199px top-weighted scrim (copy
+  over the cream top / embrace below).
+
+### Removed
+- The cream-ellipse "organic curve" pseudo-element (`.es-hero__media::before`), superseded by the
+  gradient scrim.
+
+---
+
 ## [v2.3.0 — branch `design/editorial-sage-elder-friendly`] — 2026-07-14
 
 Isolated branch. Does **not** change `main` or the live site.

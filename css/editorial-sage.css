@@ -470,23 +470,66 @@ em { font-style: italic; }
    HERO
    ============================================================ */
 .es-hero {
+  position: relative;
   background: var(--es-cream);
   overflow: hidden;
+  min-height: clamp(560px, 52vw, 760px);
+}
+/* Full-bleed photo layer behind the copy. The height clamp above tracks the
+   photo's ~1.5 aspect (52vw) so `cover` shows both faces without cropping. */
+.es-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.es-hero__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 68% 32%;
+}
+/* Cream scrim: near-opaque over the copy on the left, clearing by ~60% so the
+   caregivers read cleanly on the right; plus a soft top/bottom vignette. Same
+   technique as the live hero's navy scrim, recolored to the sage palette so the
+   hero stays light. cream #fbf7ee == rgb(251,247,238). */
+.es-hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(100deg,
+      rgba(251,247,238,0.98) 0%,
+      rgba(251,247,238,0.97) 14%,
+      rgba(251,247,238,0.94) 30%,
+      rgba(251,247,238,0.86) 40%,
+      rgba(251,247,238,0.60) 48%,
+      rgba(251,247,238,0.30) 57%,
+      rgba(251,247,238,0.08) 66%,
+      rgba(251,247,238,0.00) 74%),
+    linear-gradient(180deg,
+      rgba(251,247,238,0.16) 0%,
+      rgba(251,247,238,0.00) 26%,
+      rgba(251,247,238,0.00) 74%,
+      rgba(251,247,238,0.18) 100%);
+  pointer-events: none;
 }
 .es-hero__inner {
+  position: relative;
+  z-index: 2;
   max-width: var(--es-wide-max);
   margin-inline: auto;
-  display: grid;
-  grid-template-columns: minmax(0, 50fr) minmax(0, 50fr);
-  align-items: stretch;
-  min-height: clamp(500px, 46vw, 600px);
+  display: flex;
+  align-items: center;
+  min-height: clamp(560px, 52vw, 760px);
 }
 .es-hero__content {
   position: relative;
   z-index: 2;
   padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1rem, 2vw, 2rem) clamp(2.5rem, 5vw, 4.5rem) var(--es-gutter);
-  align-self: center;
-  max-width: 680px;
+  max-width: 660px;
 }
 .es-hero__title { margin-bottom: 0.25rem; }
 .es-hero__title-accent {
@@ -502,39 +545,13 @@ em { font-style: italic; }
   font-size: clamp(1.08rem, 1.4vw, 1.24rem);
   line-height: 1.6;
   color: var(--es-ink-soft);
-  max-width: 520px;
+  max-width: 480px;
   margin: 1.25rem 0 2rem;
 }
 .es-hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-}
-.es-hero__media {
-  position: relative;
-  min-height: 340px;
-}
-.es-hero__media img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-}
-/* Organic cream curve bulging from the left (text) side into the photo */
-.es-hero__media::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -1px;
-  transform: translate(-42%, -50%);
-  width: 46%;
-  height: 150%;
-  background: var(--es-cream);
-  border-radius: 50%;
-  z-index: 1;
-  pointer-events: none;
 }
 
 /* ============================================================
@@ -1281,23 +1298,30 @@ em { font-style: italic; }
   .es-menu-toggle { display: flex; }
   .es-brand__name { font-size: 1.35rem; }
 }
-@media (max-width: 820px) {
-  .es-hero__inner { grid-template-columns: 1fr; min-height: 0; }
+@media (max-width: 1199px) {
+  /* Below the wide desktop breakpoint the fixed-width copy would otherwise
+     overlap the faces, so switch to a top-weighted scrim: copy sits over the
+     cream-filled top of the frame, the embrace reveals warm toward the bottom. */
+  .es-hero { min-height: clamp(560px, 96vw, 760px); }
+  .es-hero__inner {
+    min-height: clamp(560px, 96vw, 760px);
+    align-items: flex-start;
+  }
   .es-hero__content {
-    order: 1;
-    padding: clamp(2rem, 6vw, 3rem) var(--es-gutter) 1.5rem;
-    max-width: none;
+    padding: clamp(2.25rem, 6vw, 3.5rem) var(--es-gutter) clamp(2.5rem, 6vw, 3.5rem);
+    max-width: 640px;
   }
-  .es-hero__media {
-    order: 2;
-    margin: 0 var(--es-gutter) clamp(2rem, 6vw, 3rem);
-    min-height: 0;
-    aspect-ratio: 5 / 4;
-    border-radius: var(--es-radius-lg);
-    overflow: hidden;
+  .es-hero__media img { object-position: 60% 24%; }
+  .es-hero__media::after {
+    background: linear-gradient(180deg,
+      rgba(251,247,238,0.97) 0%,
+      rgba(251,247,238,0.92) 30%,
+      rgba(251,247,238,0.66) 60%,
+      rgba(251,247,238,0.34) 100%);
   }
-  .es-hero__media img { position: static; aspect-ratio: 5 / 4; }
-  .es-hero__media::before { display: none; }
+  .es-hero__actions .es-btn { flex: 0 1 auto; }
+}
+@media (max-width: 820px) {
   .es-hero__actions .es-btn { flex: 1 1 auto; }
   .es-process__inner { grid-template-columns: 1fr; }
 }

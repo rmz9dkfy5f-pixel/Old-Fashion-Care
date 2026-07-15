@@ -4,6 +4,38 @@ Use this file after each completed vertical slice.
 
 ---
 
+## 2026-07-15 — Hero variant: cream immersive (branch `design/editorial-sage-hero-cream-immersive`)
+
+**Status:** Implemented + committed to a local branch (not pushed). Baseline branch + `main` untouched.
+
+**Slice summary:**
+The user wanted the Editorial Sage homepage hero to feel alive like the live/`main` design
+(full-bleed photo + gradient scrim), explored as separate branches rather than editing the
+baseline. This branch rebuilds the homepage `.es-hero` from a boxed two-column split into a
+full-bleed composition, porting the live hero's photo+gradient technique but recolored to the sage
+palette so the hero stays light:
+1. `index.html` — moved `.es-hero__media` out of `.es-hero__inner` to a full-bleed background layer
+   (kept the semantic `<img>` with its `alt`/`width`/`height`).
+2. `css/editorial-sage.css` — rewrote the `.es-hero*` block: full-bleed photo, a cream
+   (`#fbf7ee`) horizontal scrim (near-opaque over the copy, clearing by ~66% so the caregivers show
+   on the right) + a soft top/bottom vignette, single-column copy at z-index 2; deleted the
+   cream-ellipse "organic curve" pseudo-element.
+3. Responsive fork: ≥1200px uses the left-fading scrim (copy left / faces right); ≤1199px switches
+   to a top-weighted scrim (copy over the cream top / embrace revealing below) so the fixed-width
+   copy never overlaps the faces at mid widths.
+
+**What was preserved:** all hero copy, `<head>` metadata, buttons, and every other section. Only the
+homepage hero markup + `.es-hero*` CSS changed. `css/style.css` (legacy design) untouched.
+
+**Verification:** headless Brave + Playwright at 1440/1280/1024/768/390 — copy legible everywhere
+(ink-soft `#43586a` over cream ≈ 6.9:1, above AA), no hard seam, both faces visible, **0 horizontal
+overflow, 0 console errors** (Playwright-measured, not eyeballed). No build/test/lint scripts exist.
+
+**Out of scope / next:** the second variant (`design/editorial-sage-hero-split-depth`); pushing
+branches to origin; any merge to `main`. All deferred to explicit user decisions.
+
+---
+
 ## 2026-07-14 — SEO/perf hygiene pass + SEOKit install (branch `design/editorial-sage-elder-friendly`)
 
 **Status:** Complete; committed + pushed to the branch. `main` untouched.

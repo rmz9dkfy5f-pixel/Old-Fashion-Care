@@ -8,6 +8,42 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Hero variant "cream immersive": full-bleed photo + cream gradient scrim (branch
+`design/editorial-sage-hero-cream-immersive` — NOT main, NOT the baseline branch)
+
+## Description
+
+- **What changed:**
+  - `index.html` — moved `<div class="es-hero__media">` (the hero `<img>`) out of `.es-hero__inner`
+    to be a direct child of `.es-hero`, so the photo is a full-bleed background layer behind the
+    copy. The semantic `<img src="images/hero-ai.jpg">` with its `alt`/`width`/`height` is kept.
+  - `css/editorial-sage.css` — rewrote the `.es-hero*` block. `.es-hero` is now the positioning
+    context with a `clamp(560px, 52vw, 760px)` min-height (tracks the photo's ~1.5 aspect).
+    `.es-hero__media` is `position:absolute; inset:0`. A new `.es-hero__media::after` paints a
+    cream (`rgb(251,247,238)`) horizontal scrim — near-opaque over the left copy zone, clearing by
+    ~66% so the caregivers read on the right — plus a soft top/bottom vignette. `.es-hero__inner`
+    is a single-column flex holding the copy at z-index 2. Deleted the cream-ellipse
+    `.es-hero__media::before` curve.
+  - Responsive: the base rules are the wide (≥1200px) left-fading scrim; a `@media (max-width:1199px)`
+    block swaps to a top-weighted scrim (copy over the cream top, embrace below) so fixed-width copy
+    never overlaps the faces; the existing `@media (max-width:820px)` keeps full-width CTAs +
+    the unrelated `.es-process__inner` rule.
+- **Why it changed:** the user asked to bring the Editorial Sage homepage hero "to life" like the
+  live/`main` design (full-bleed photo + gradient), and to explore it as separate branches rather
+  than editing the baseline. This is the "cream immersive" variant — the live hero's technique kept
+  inside the sage light theme. Sibling branch: `design/editorial-sage-hero-split-depth`.
+- **What was verified:** headless Brave + Playwright screenshots at 1440/1280/1024/768/390. Copy
+  legible at every width (ink-soft `#43586a` over cream ≈ 6.9:1, above WCAG AA), no hard seam, both
+  faces visible. Playwright measured `scrollWidth == innerWidth` at every width (0 horizontal
+  overflow) and 0 console errors. No build/test/lint scripts exist in this static repo.
+- **Remaining risk / follow-up:** local branch only — not pushed. Baseline branch and `main`
+  untouched. Choosing a variant, pushing branches, and any merge to `main` are separate user
+  decisions.
+
+---
+
+## Summary
+
 SEO/performance hygiene pass + SEOKit install on branch `design/editorial-sage-elder-friendly` (NOT main)
 
 ## Description
