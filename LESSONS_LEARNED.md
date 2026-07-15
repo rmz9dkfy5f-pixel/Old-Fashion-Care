@@ -38,6 +38,48 @@ Reusable rule:
 
 ## Lessons
 
+### 2026-07-15 — A translucent color shape painted over a photo always reads as haze, however gradual
+
+Context:
+
+> Building the split-depth hero's cream/photo dissolve took 3 attempts. Attempt 1: a solid cream
+> ellipse with a short opacity fade at its edge — user reported it as a hard line. Attempt 2: the
+> same cream ellipse, but with the fade widened and given many more, more evenly-spaced opacity
+> stops — user reported it as "not smooth or professional-looking," a milky haze. Attempt 3: removed
+> the cream shape entirely and instead put a `mask-image` on the photo itself (the photo's own pixels
+> fade to transparent, revealing the cream page behind), which the user approved immediately.
+
+Lesson:
+
+> When a photo needs to dissolve into a solid-color page, mask the photo — don't paint a
+> semi-transparent shape of the page color over the photo. The overlay approach cannot be tuned into
+> looking clean: however many opacity stops it has, a translucent color layer sitting on top of photo
+> detail desaturates and flattens whatever's under it, which reads as fog/haze at any width. This is
+> a technique problem, not a tuning problem — no amount of adjusting stop percentages fixes it.
+
+Cause:
+
+> The instinct to "fix" a hard-edged blend by adding more/wider gradient stops treats the symptom
+> (a visible edge) without questioning the underlying method (compositing a colored layer over image
+> content). The masking approach was reached only after the second rejection made clear that gradual
+> vs. abrupt wasn't the actual axis of the problem.
+
+Correction:
+
+> Switched `.es-hero__media::before` (a cream-filled pseudo-element) to a `mask-image` /
+> `-webkit-mask-image` on `.es-hero__media` itself, shaped as an off-center radial gradient so the
+> image's own edge fades to transparent along an organic curve. Zero color compositing over the
+> photo; the cream simply shows through where the mask is transparent.
+
+Reusable rule:
+
+> For any "photo/image dissolves into a solid-background page" effect, default to `mask-image` on
+> the image element. Reach for a colored overlay pseudo-element only when the desired effect is an
+> actual tint/scrim over the image (e.g. darkening a photo for text contrast) — never as a stand-in
+> for making the image's *edge* soft.
+
+---
+
 ### 2026-07-13 — Screenshot QA that force-shows scroll-reveals masks "content begins hidden" bugs
 
 Context:
