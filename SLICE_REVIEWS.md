@@ -4,6 +4,36 @@ Use this file after each completed vertical slice.
 
 ---
 
+## 2026-07-15 — Hero variant: split + depth (branch `design/editorial-sage-hero-split-depth`)
+
+**Status:** Implemented + committed to a local branch (not pushed). Baseline branch + `main` untouched.
+
+**Slice summary:**
+The lowest-disruption of two new hero variants exploring a more alive homepage hero. Keeps the
+existing Editorial Sage two-column hero and all copy — **CSS-only**, no markup change — and adds
+depth so the photo stops reading as a flat pasted rectangle:
+1. `.es-hero__media::before` — the crisp cream-ellipse arc became a **feathered** radial fill
+   (`var(--es-cream)` → transparent), so the photo dissolves organically into the cream text column.
+2. `.es-hero__media::after` (new) — a low-opacity ink **vignette** (top/bottom bands + an outer
+   radial) that gives the photo dimension while keeping the faces bright.
+3. `.es-hero__media` — `isolation: isolate` so the photo / vignette / cream-curve layers stack
+   self-contained. Mobile keeps the stacked rounded photo card, now with the same subtle vignette.
+
+**Sibling variant:** `design/editorial-sage-hero-cream-immersive` (full-bleed photo + cream gradient
+scrim, copy over the photo). Baseline `design/editorial-sage-elder-friendly` left unchanged.
+
+**What was preserved:** all hero copy + markup, the two-column layout, every other section, and
+`css/style.css`. Only the `.es-hero*` CSS block changed.
+
+**Verification:** Playwright (Brave engine) at 1440/1024/768/390 — **0 horizontal overflow, 0
+console errors**. Text stays in its own column (no text-over-photo), so no new contrast risk. No
+build/test/lint scripts exist in this static repo.
+
+**Out of scope / next:** the user picks a variant; pushing branches to origin and any merge to
+`main` are separate explicit decisions.
+
+---
+
 ## 2026-07-14 — SEO/perf hygiene pass + SEOKit install (branch `design/editorial-sage-elder-friendly`)
 
 **Status:** Complete; committed + pushed to the branch. `main` untouched.

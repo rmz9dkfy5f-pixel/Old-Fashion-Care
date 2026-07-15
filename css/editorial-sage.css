@@ -513,6 +513,7 @@ em { font-style: italic; }
 .es-hero__media {
   position: relative;
   min-height: 340px;
+  isolation: isolate; /* self-contained stacking for the photo/vignette/curve layers */
 }
 .es-hero__media img {
   position: absolute;
@@ -520,20 +521,46 @@ em { font-style: italic; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 32%;
 }
-/* Organic cream curve bulging from the left (text) side into the photo */
+/* Depth vignette on the photo: a soft ink darkening at the top/bottom and outer
+   edges so the image reads as a lit scene rather than a flat pasted rectangle.
+   Kept low-opacity so the faces stay bright. Sits above the photo, below the
+   cream curve. ink #17324d == rgb(23,50,77). */
+.es-hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg,
+      rgba(23,50,77,0.14) 0%,
+      rgba(23,50,77,0.00) 20%,
+      rgba(23,50,77,0.00) 74%,
+      rgba(23,50,77,0.16) 100%),
+    radial-gradient(125% 105% at 72% 42%,
+      rgba(23,50,77,0.00) 52%,
+      rgba(23,50,77,0.14) 100%);
+}
+/* Organic cream curve bulging from the left (text) side into the photo — now
+   feathered (radial fill) so the photo dissolves into the cream column instead
+   of ending on a crisp arc, integrating the split. */
 .es-hero__media::before {
   content: '';
   position: absolute;
   top: 50%;
   left: -1px;
   transform: translate(-42%, -50%);
-  width: 46%;
+  width: 48%;
   height: 150%;
-  background: var(--es-cream);
+  background: radial-gradient(ellipse at center,
+    var(--es-cream) 0%,
+    var(--es-cream) 56%,
+    rgba(251,247,238,0.72) 72%,
+    rgba(251,247,238,0.00) 90%);
   border-radius: 50%;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
 }
 

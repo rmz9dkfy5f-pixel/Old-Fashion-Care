@@ -13,33 +13,34 @@ For historical notes, copy completed entries into `PROGRESS_NOTES.md`.
 Date:
 
 ```text
-2026-07-14
+2026-07-15
 ```
 
 Phase:
 
 ```text
-Phase 2 — SEO/performance hygiene pass + SEOKit install on branch
-`design/editorial-sage-elder-friendly` (does NOT touch main). Committed + pushed to the branch.
+Phase 2 — Hero variant branch `design/editorial-sage-hero-split-depth` (cut from
+`design/editorial-sage-elder-friendly`; does NOT touch main). Committed to the branch (local).
 ```
 
 Current slice:
 
 ```text
-Kit-value evaluation (user question: "can any of the kits add value?") → concrete SEO + performance
-work. Installed SEOKit and ran /seo hygiene; ran seo-hygiene-check + performance-budget-pass skills;
-applied 2 low-risk perf fixes (font preconnect/link, lazy-load); evaluated + rolled back MKTKit.
-Branch-isolated; main untouched and still live on Netlify.
+Bring the Editorial Sage homepage hero "to life", explored as separate branches. THIS branch =
+"split + depth": the lowest-disruption variant — keep the two-column split and all copy, feather
+the cream-ellipse curve edge and add a soft ink vignette so the photo reads as a lit scene.
+CSS-only. Sibling branch `design/editorial-sage-hero-cream-immersive` is the more immersive
+(full-bleed photo + gradient) variant. Baseline `design/editorial-sage-elder-friendly` unchanged.
 ```
 
-Completed (this push):
+Completed (this branch):
 
-- [x] Font-loading fix on all 6 pages: removed render-blocking `@import` from `css/editorial-sage.css`;
-      added `<link rel="preconnect">` (googleapis + gstatic) + direct font `<link>` in each `<head>`
-- [x] `loading="lazy"` added to `index.html` founder photo (matches `about.html`)
-- [x] SEOKit installed (`.claude/commands/seo/`, `.claude/skills/seo-*.md`, `.claude/agents/seo-*.md`,
-      `seo/` context); `/seo hygiene` run → `seo/audits/hygiene-2026-07-14.md`
-- [x] MKTKit evaluated → rolled back (poor fit); CTA proposal saved to `docs/marketing/cta-proposal-2026-07-14.md`
+- [x] `css/editorial-sage.css` `.es-hero*` only (no markup change): feathered the cream curve
+      (`.es-hero__media::before` solid → radial fill) so the photo dissolves into the cream column
+- [x] Added `.es-hero__media::after` depth vignette (low-opacity ink, top/bottom + outer edges;
+      faces kept bright); `isolation: isolate` on the media for self-contained layering
+- [x] Mobile keeps the stacked rounded photo card, now with the same subtle vignette
+- [x] Verified 1440/1024/768/390 — 0 overflow, 0 console errors; no text-over-photo, no new contrast risk
 
 Prior slice (Editorial Sage redesign) — still complete, unchanged this push:
 
@@ -72,38 +73,38 @@ Completed (earlier redesign detail retained for reference):
 
 In progress:
 
-- [ ] None — SEO/perf slice complete and pushed to the branch.
+- [ ] None — both hero variants (cream-immersive + split-depth) are implemented on their branches.
 
 Blocked:
 
-- [ ] Nothing blocking. Formspree ID and any merge-to-main decision remain the user's call.
+- [ ] Nothing blocking. Choice of variant and any merge-to-main decision remain the user's call.
 
 Next action:
 
-> Apply the 4 low-effort hygiene fixes (og:image dims, sitemap lastmod, LocalBusiness JSON-LD on
-> services/contact/how-it-works, apple-touch-icon.png). Then decide on the Formspree form ID and
-> whether/when to merge `design/editorial-sage-elder-friendly` to `main` (a separate explicit
-> decision — would change the live Netlify site).
+> Let the user compare all three homepage heroes (baseline / cream-immersive / split-depth) on
+> desktop + mobile and decide which to keep. Pushing the branches to origin and any merge to `main`
+> are separate explicit decisions.
 
 Checks run:
 
 ```bash
-grep -c 'fonts.googleapis.com|fonts.gstatic.com' *.html   # font links present ×3/page
-grep -c '@import' css/editorial-sage.css                   # 0 (removed)
-grep -n 'regina.jpg' index.html                            # loading="lazy" present
-# No build/test/lint scripts in this static repo; browser smoke-test not re-run this pass.
+# Playwright (Brave engine) at 1440/1024/768/390:
+#   scrollWidth == innerWidth at every width  → 0 horizontal overflow
+#   0 console errors
+# CSS-only change, two-column split retained → no text-over-photo, no new contrast risk.
+# Static site — no build/test/lint scripts.
 ```
 
 Commit status:
 
 ```text
-Committed + pushed to origin/design/editorial-sage-elder-friendly (see COMMIT_NOTES.md / STATUS.md
-for hash + tag). main untouched and still live on Netlify.
+Committed to local branch design/editorial-sage-hero-split-depth (NOT pushed). Sibling branch
+design/editorial-sage-hero-cream-immersive also committed (local). Baseline branch and main untouched.
 ```
 
 Approval status:
 
 ```text
-User explicitly ran the push/handoff prompt this session, authorizing commit + tag + snapshot +
-push of this SEO/perf slice to the branch. Merge-to-main NOT authorized (separate explicit decision).
+User approved the plan (ExitPlanMode) to create two hero-variant branches. Commit-on-branch is
+implied by "make two branches". Push to origin and merge-to-main NOT authorized (separate decisions).
 ```

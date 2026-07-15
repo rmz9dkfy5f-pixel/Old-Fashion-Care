@@ -1,6 +1,36 @@
 # Status
 
-**Last updated:** 2026-07-14
+**Last updated:** 2026-07-15
+
+---
+
+## Active Work — Hero Variant Branches (2026-07-15)
+
+The user asked to bring the Editorial Sage homepage hero "to life" like the live/`main` design
+(photo + gradient), explored as **separate branches** rather than editing the existing design.
+Three comparable hero treatments now exist:
+
+```text
+design/editorial-sage-elder-friendly       — BASELINE: boxed two-column split, cream-ellipse
+                                              curve, no gradient (unchanged)
+design/editorial-sage-hero-cream-immersive — full-bleed photo + cream→transparent gradient scrim;
+                                              dark ink copy over the photo
+design/editorial-sage-hero-split-depth     — THIS BRANCH: keeps the two-column split, adds a
+                                              feathered curve edge + a soft vignette for depth
+```
+
+**This branch (`hero-split-depth`) — completed:** the lowest-disruption variant. Keeps the existing
+two-column hero and all copy; **CSS-only** (`css/editorial-sage.css` `.es-hero*` only, no markup
+change). Replaced the crisp cream-ellipse arc with a **feathered** radial fill so the photo
+dissolves into the cream column, and added a low-opacity ink **vignette** (`.es-hero__media::after`)
+so the photo reads as a lit scene rather than a flat rectangle — faces kept bright. On mobile the
+photo stays the stacked rounded card, now with the same subtle depth.
+
+**Validation:** Playwright (Brave engine) at 1440/1024/768/390 — **0 horizontal overflow, 0 console
+errors**; no text-over-photo so no new contrast risk. No build/test/lint scripts in this static repo.
+
+**Not pushed** — local branch only, pending the user's review of all three variants. Merge to `main`
+is a separate explicit decision.
 
 ---
 

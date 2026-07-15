@@ -8,6 +8,35 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Hero variant "split + depth": feathered curve + vignette (branch
+`design/editorial-sage-hero-split-depth` — NOT main, NOT the baseline branch)
+
+## Description
+
+- **What changed:** `css/editorial-sage.css`, `.es-hero*` block only — **no markup change**, the
+  two-column hero and all copy are kept.
+  - `.es-hero__media::before` (the cream "organic curve") changed from a solid `var(--es-cream)`
+    ellipse to a **feathered** radial fill (cream → transparent) so the photo dissolves into the
+    cream text column instead of ending on a crisp arc.
+  - New `.es-hero__media::after` — a low-opacity ink (`rgb(23,50,77)`) **vignette**: a top/bottom
+    linear band plus an outer radial, giving the photo dimension while keeping the faces bright.
+  - `.es-hero__media` gets `isolation: isolate` so the photo (bottom), vignette (z-index 1), and
+    cream curve (z-index 2) layer self-contained. Mobile keeps the stacked rounded photo card, now
+    carrying the same subtle vignette (the curve `::before` stays hidden when stacked).
+- **Why it changed:** the low-disruption option of the "bring the hero to life" request — adds
+  depth/integration without leaving the two-column split. Sibling variant:
+  `design/editorial-sage-hero-cream-immersive` (full-bleed photo + gradient scrim).
+- **What was verified:** Playwright (Brave engine) at 1440/1024/768/390 — `scrollWidth ==
+  innerWidth` at every width (0 horizontal overflow) and 0 console errors. Text stays in its own
+  column (no text-over-photo), so no new contrast risk. No build/test/lint scripts exist.
+- **Remaining risk / follow-up:** local branch only — not pushed. Baseline branch and `main`
+  untouched. Choosing a variant, pushing branches, and any merge to `main` are separate user
+  decisions.
+
+---
+
+## Summary
+
 SEO/performance hygiene pass + SEOKit install on branch `design/editorial-sage-elder-friendly` (NOT main)
 
 ## Description

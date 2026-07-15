@@ -4,6 +4,25 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [branch `design/editorial-sage-hero-split-depth`] — 2026-07-15
+
+Isolated hero-variant branch cut from `design/editorial-sage-elder-friendly`. Does **not** change
+`main` or the live site. One of two new hero variants; the low-disruption one (keeps the split).
+
+### Changed
+- Homepage hero given more **depth** while keeping the two-column split — **CSS-only**
+  (`css/editorial-sage.css` `.es-hero*`), no markup change. The crisp cream-ellipse curve
+  (`.es-hero__media::before`) became a feathered radial fill so the photo dissolves into the cream
+  column, and a new low-opacity ink vignette (`.es-hero__media::after`) makes the photo read as a
+  lit scene rather than a flat rectangle (faces kept bright). Mobile keeps the stacked rounded photo
+  card with the same subtle vignette.
+
+### Notes
+- Sibling variant: `design/editorial-sage-hero-cream-immersive` (full-bleed photo + cream gradient
+  scrim). Baseline `design/editorial-sage-elder-friendly` unchanged. All hero copy preserved.
+
+---
+
 ## [v2.3.0 — branch `design/editorial-sage-elder-friendly`] — 2026-07-14
 
 Isolated branch. Does **not** change `main` or the live site.
