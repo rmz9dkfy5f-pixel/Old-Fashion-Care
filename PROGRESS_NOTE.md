@@ -45,6 +45,11 @@ Completed (this branch):
       was back-loaded. Rewrote the `.es-hero__media::before` radial to a wide, evenly-stepped fade
       (28%→100% of radius) so the cream dissolves gradually with no perceptible edge; re-verified
       (zoomed seam crop) and redeployed to the VPS split-depth subdomain.
+- [x] **2026-07-15 follow-up #2 (user feedback):** the widened cream fade "was not smooth or
+      professional-looking" (milky haze). Changed technique entirely: removed the cream-fog
+      `::before` and added a `mask-image` on `.es-hero__media` so the **photo's own edge** dissolves
+      into the cream (clean "image bleeds into page" look, no overlay colour). Mask disabled on
+      mobile (clean rounded card). Re-verified + redeployed.
 
 Prior slice (Editorial Sage redesign) — still complete, unchanged this push:
 

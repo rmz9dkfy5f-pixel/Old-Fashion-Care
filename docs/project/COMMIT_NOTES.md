@@ -8,6 +8,30 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Split-depth hero: professional edge via photo mask (branch `design/editorial-sage-hero-split-depth`)
+
+## Description
+
+- **What changed:** `css/editorial-sage.css`. Replaced the cream-fog technique entirely. The prior
+  approach painted a semi-opaque cream radial *over* the photo (`.es-hero__media::before`), which —
+  even widened — read as a milky haze / unprofessional smudge. Removed that pseudo-element and
+  instead put a `mask-image` (off-centre radial) on `.es-hero__media` so the **photo's own left
+  edge dissolves cleanly into the cream page** — a controlled, smooth soft edge with no overlay
+  colour. Mobile disables the mask (`mask-image: none`) so the stacked photo stays a clean rounded
+  card.
+- **Why:** user feedback — the widened cream fade "was not smooth or professional-looking."
+  Masking the image (rather than fogging cream over it) is the standard high-end "image bleeds into
+  the page" technique and reads clean.
+- **What was verified:** Playwright/Brave at 1440/390 + a 2× zoomed seam crop — clean gradual
+  dissolve, no haze, no line, faces + the caregiver's arm read naturally, mobile card clean, 0
+  overflow, 0 console errors. Redeployed to the VPS split-depth webroot and re-verified live.
+- **Scope:** split-depth branch + its subdomain only. cream-immersive, baseline, `main`, nginx, TLS
+  untouched.
+
+---
+
+## Summary
+
 Split-depth hero: smooth the cream/photo curve (branch `design/editorial-sage-hero-split-depth`)
 
 ## Description
