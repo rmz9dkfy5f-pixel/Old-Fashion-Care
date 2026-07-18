@@ -1324,6 +1324,7 @@ main { padding-top: var(--nav-h); }
 img.founder-photo {
   width: 100%;
   height: auto;
+  aspect-ratio: auto;
   display: block;
   border-radius: 6px;
 }

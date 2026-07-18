@@ -6,6 +6,37 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-18 — Fixed distorted founder photo on `about.html` (branch `main`)
+
+**Work completed:**
+- Root-caused the compressed/distorted Regina Booker photo on `about.html`: a leftover
+  `.founder-photo` placeholder-box rule in `css/style.css` was forcing `aspect-ratio: 3/4`
+  (desktop) / `16/9` (mobile) onto the real `<img>`, and with no `object-fit` set the browser
+  stretched the real 354×514 portrait to fill those mismatched boxes.
+- Fix: added `aspect-ratio: auto;` to the `img.founder-photo` rule so the photo renders at its
+  natural ratio, matching how the equivalent photo already looked on the Editorial Sage design
+  branches (`.es-founder__photo` never forced an `aspect-ratio`).
+- Files/areas changed: `css/style.css` only — no markup change, no other page affected (grepped
+  all `.html` files; `about.html` is the only `founder-photo` usage).
+- Also re-synced the VPS webroot behind `old-fashion-care.craftandconscious.com` (the URL the
+  user actually checks) since it's a manually-updated mirror of `main`, not Netlify — see
+  `docs/project/STATUS.md`'s 2026-07-18 entry for the full deployment-topology finding
+  (`oldfashioncare.com` currently serves an unrelated third-party "Jottful" site, not this
+  repo).
+
+**Validation performed:** Local Playwright screenshots at 390/768/1440px (before/after via
+`git stash`), 0 console errors, bounding-box ratios matched the image's real intrinsic ratio
+after the fix. Live re-verification after deploy: curled the deployed CSS for the fix line and
+re-screenshotted the live page at mobile width.
+
+**Notes for the next agent:** `oldfashioncare.com` is not currently wired to this repository
+(Netlify or otherwise) despite being the domain baked into every page's canonical URL,
+`sitemap.xml`, `robots.txt`, and the Plausible analytics `data-domain`. That's a pre-existing
+condition surfaced during this fix, not something resolved here — needs a hosting/DNS decision
+from the user.
+
+---
+
 ## 2026-07-15 — AntBrainOS kit tooling installed across all 5 branches
 
 **Work completed:**

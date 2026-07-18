@@ -4,6 +4,23 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [fix: founder photo aspect ratio — `main`] — 2026-07-18
+
+### Fixed
+- `about.html` founder photo (`images/regina.jpg`) was rendering visibly stretched/compressed,
+  worst on mobile. A leftover `.founder-photo` placeholder-box rule in `css/style.css` was
+  forcing a mismatched `aspect-ratio` (3/4 desktop, 16/9 mobile) onto the real photo with no
+  `object-fit` override, so the browser stretched the image to fill those boxes. Added
+  `aspect-ratio: auto;` to `img.founder-photo` so the photo renders at its natural ratio.
+
+### Notes
+- Re-synced the VPS preview at `old-fashion-care.craftandconscious.com` (manually mirrored from
+  `main`, not Netlify). Surfaced that `oldfashioncare.com` — this repo's documented Netlify
+  production domain — is not currently serving this repository at all (see
+  `docs/project/STATUS.md`); unresolved, flagged for the user.
+
+---
+
 ## [tooling: AntBrainOS kit install — `main`] — 2026-07-15
 
 Dev-tooling only, on `main`. **No site files changed** — zero `.html`/`css`/`js`/`images`/

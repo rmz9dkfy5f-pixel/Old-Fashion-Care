@@ -1,10 +1,46 @@
 # Status
 
-**Last updated:** 2026-07-15
+**Last updated:** 2026-07-18
 
 ---
 
-## Latest Push — AntBrainOS Kit Tooling Install Across All 5 Branches (2026-07-15)
+## Latest Push — Fix Distorted Founder Photo on `about.html` (2026-07-18, branch `main`)
+
+```text
+Branch: main
+Tag:    v2.6.0__founder-photo-aspect-ratio-fix__commit-<short-hash>
+        (the real short hash is embedded in the annotated git tag applied to this commit)
+```
+
+**What changed:** `css/style.css` only — added `aspect-ratio: auto;` to `img.founder-photo`.
+The class was still carrying `aspect-ratio: 3/4` (desktop) / `16/9` (mobile) from an older
+`.founder-photo` placeholder-box rule that predates the real photo. Since nothing reset
+`aspect-ratio` on the actual `<img>`, the browser's default `object-fit: fill` stretched the
+real 354×514 portrait of Regina Booker to fit those mismatched boxes — worst on mobile, where
+a portrait photo was forced into a 16:9 landscape box.
+
+**Why:** user reported the photo looked compressed on their phone at
+`old-fashion-care.craftandconscious.com/about.html`.
+
+**Verified:** locally via Playwright at 390/768/1440 — image renders at its natural ~0.69
+ratio at every width, 0 console errors. Bounding-box measurements matched the image's real
+intrinsic ratio exactly (before: 1.78 mobile / 0.75 desktop; after: 0.689 at both). Re-verified
+against the live deployed URL post-push (see Deployment note below).
+
+**Deployment note (important, unrelated to the photo bug):** this repo's own canonical
+URLs/sitemap/`REPOSITORY_HANDOFF_CONFIG.md` name `oldfashioncare.com` as the Netlify
+production domain, but it currently resolves to an unrelated third-party site built on
+"Jottful" — not this repository, on Netlify or otherwise. The URL the user actually checks,
+`old-fashion-care.craftandconscious.com`, is a separate VPS/nginx deployment of this repo kept
+in sync via manual `git archive` + rsync (same mechanism as the hero-variant preview
+subdomains) — it was frozen at commit `fd7543c` (2026-07-12, `main`'s last site-affecting
+commit before this one) until this push's re-sync. The `oldfashioncare.com` domain mismatch is
+flagged here for visibility; it is a pre-existing condition, not introduced or fixed by this
+push.
+
+---
+
+## Previous Push — AntBrainOS Kit Tooling Install Across All 5 Branches (2026-07-15)
 
 ```text
 Trunk tag: v2.5.0__install-antbrainos-kit-tooling-all-branches__commit-7818660 (on main's tooling commit)

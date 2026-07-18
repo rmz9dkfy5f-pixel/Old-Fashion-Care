@@ -8,6 +8,35 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Fix distorted founder photo on `about.html` (branch `main`)
+
+## Description
+
+- **What changed:** `css/style.css` only. Added `aspect-ratio: auto;` to `img.founder-photo`.
+  A leftover `.founder-photo` placeholder-box rule (predating the real photo) was still
+  forcing `aspect-ratio: 3/4` (desktop) / `16/9` (mobile); with no `object-fit` override, the
+  browser's default `fill` behavior stretched the real 354×514 portrait to fit those
+  mismatched boxes — most visibly on mobile, where a portrait photo was squashed into a
+  landscape 16:9 box.
+- **Why:** user reported the photo looked compressed loading `about.html` on their phone at
+  `old-fashion-care.craftandconscious.com`.
+- **Verified:** Playwright screenshots at 390/768/1440px, before (via `git stash`) and after —
+  bounding-box ratio went from 1.78 (mobile)/0.75 (desktop) to 0.689 at every width, matching
+  the image's real intrinsic ratio exactly. 0 console errors throughout. Re-verified against
+  the live URL after deploy (see below).
+- **Deployment finding (pre-existing, not caused by this change):** `oldfashioncare.com` — the
+  domain this repo's canonical URLs/sitemap/`REPOSITORY_HANDOFF_CONFIG.md` name as Netlify
+  production — currently serves an unrelated third-party "Jottful" site, not this repo. The
+  user-facing URL that actually runs this code, `old-fashion-care.craftandconscious.com`, is a
+  separate VPS mirror manually synced via `git archive` + rsync; it was frozen at commit
+  `fd7543c` (2026-07-12) until this push. Flagged in `docs/project/STATUS.md` for a hosting/DNS
+  decision — out of scope for this fix.
+- **Scope:** `css/style.css` + tracking docs only; no markup change, no other branch touched.
+
+---
+
+## Summary
+
 Install AntBrainOS kit tooling — SEOKit, EngKit, TradeKit, handoff-repository (`main`, dev-tooling
 only, live site unchanged)
 
