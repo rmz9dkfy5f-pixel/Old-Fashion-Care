@@ -4,7 +4,47 @@
 
 ---
 
-## Latest Push — Fix Distorted Founder Photo on `about.html` (2026-07-18, branch `main`)
+## Latest Push — Repo Push-Workflow Governance Fix (2026-07-18, branch `main`)
+
+```text
+Branch: main
+Tag:    v2.7.0__push-workflow-tracking-file-gap-fix__commit-<short-hash>
+        (the real short hash is embedded in the annotated git tag applied to this commit)
+```
+
+**What changed:** `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` and
+`PROGRESS_NOTE.md` only — no site code. A follow-up session running
+`REPO_SESSION_START_RECOVERY_AUDIT.md` found `PROGRESS_NOTE.md` was stale (still describing
+2026-07-15/07-12 state, missing the founder-photo fix above entirely). Root cause: this repo's own
+push prompt told the agent `PROGRESS_NOTE.md` and `PROGRESS_NOTES.md` were alternatives ("prefer
+`PROGRESS_NOTES.md`"), so the previous push updated the plural historical log and silently skipped
+the singular current-state file — despite `CLAUDE.md`/`AGENTS.md`/`REPOSITORY_HANDOFF_CONFIG.md`
+all marking it required "unconditionally."
+
+**Fixed:** (1) `PROGRESS_NOTE.md` content corrected to the actual current state. (2) The push
+prompt: `PROGRESS_NOTE.md` moved into the mandatory "every push" list, the ambiguous
+"prefer `PROGRESS_NOTES.md`" guidance removed, a name-by-name `git diff --stat` cross-check added
+before commit (Section 6), and a new Section 2a added requiring the linked AntBrainOS vault project
+folder (`03_PROJECTS/Active/Old_Fashion_Care/`) to be updated on **every** push, not only at session
+end — closing a gap where the vault-side record could otherwise drift for days across many pushes.
+
+**Why:** the user asked whether the repo-local fix was mirrored in AntBrainOS (it wasn't — the
+vault's canonical copy of this same prompt carried the byte-identical bug, confirming no mechanical
+sync exists between a repo's local prompt copy and the vault template), then asked for "no gaps...
+system to system, or session to session." The vault's canonical prompt template and
+`CLAUDE_CODE_SESSION_END.md` (new independent Step 18a cross-check) were hardened in parallel — see
+`docs/project/DECISION_LOG.md` 2026-07-18 for this repo's side of that decision, and the vault's own
+`08_DECISIONS/DECISION_LOG.md` #36 for the full cross-project write-up.
+
+**Verified:** no build/lint/test scripts exist (static site) — verification here is a manual
+line-by-line review confirming (a) `PROGRESS_NOTE.md`'s "Latest"/"Current Progress" sections match
+this push's actual state, (b) the push prompt's Section 2/2a/4/6 read consistently with no
+remaining "prefer the other file" language, (c) `git diff --stat` includes every file this repo's
+own required-tracking list names for this push (see Validation section below).
+
+---
+
+## Previous Push — Fix Distorted Founder Photo on `about.html` (2026-07-18, branch `main`)
 
 ```text
 Branch: main
@@ -40,7 +80,7 @@ push.
 
 ---
 
-## Previous Push — AntBrainOS Kit Tooling Install Across All 5 Branches (2026-07-15)
+## Completed Previously — AntBrainOS Kit Tooling Install Across All 5 Branches (2026-07-15)
 
 ```text
 Trunk tag: v2.5.0__install-antbrainos-kit-tooling-all-branches__commit-7818660 (on main's tooling commit)

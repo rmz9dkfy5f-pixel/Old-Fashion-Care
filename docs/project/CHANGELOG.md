@@ -4,6 +4,33 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [fix: push-workflow tracking-file gap — `main`] — 2026-07-18
+
+### Fixed
+- `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` told the agent
+  `PROGRESS_NOTE.md` and `PROGRESS_NOTES.md` were alternatives ("prefer `PROGRESS_NOTES.md`"), so a
+  real push silently skipped `PROGRESS_NOTE.md` despite this repo's own governance docs marking it
+  required unconditionally. `PROGRESS_NOTE.md` moved into the mandatory every-push list; the
+  ambiguous guidance removed.
+- `PROGRESS_NOTE.md` content corrected to reflect actual current repo state.
+
+### Changed
+- Added a `git diff --stat` cross-check to the push prompt's validation step (Section 6): every
+  required tracking file is now checked by name before commit, not just assumed updated.
+- Added Section 2a to the push prompt: the linked AntBrainOS vault project folder
+  (`03_PROJECTS/Active/Old_Fashion_Care/`) must be updated on every push, not only at session end.
+
+### Notes
+- The same bug was confirmed present, and fixed the same way, in the AntBrainOS vault's own
+  canonical copy of this prompt (no auto-sync exists between a repo's local copy and the vault
+  template). The vault's `CLAUDE_CODE_SESSION_END.md` also gained an independent cross-check step
+  (Step 18a) so a future closeout can't record a repo as clean/current purely by trusting a prior
+  push-prompt step. See `docs/project/DECISION_LOG.md` this date, and the vault's own
+  `08_DECISIONS/DECISION_LOG.md` #36.
+- No site code changed; live site unaffected.
+
+---
+
 ## [fix: founder photo aspect ratio — `main`] — 2026-07-18
 
 ### Fixed

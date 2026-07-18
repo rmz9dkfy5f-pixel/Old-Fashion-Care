@@ -8,6 +8,38 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Fix a real staleness gap in the repo's own push workflow (branch `main`)
+
+## Description
+
+- **What changed:** `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` and
+  `PROGRESS_NOTE.md` only — no site code. The push prompt previously told the agent to treat
+  `PROGRESS_NOTE.md` (singular) and `PROGRESS_NOTES.md` (plural) as alternatives ("prefer
+  `PROGRESS_NOTES.md`"), so the 2026-07-18 founder-photo push updated the plural historical log but
+  silently skipped the singular current-state file. Moved `PROGRESS_NOTE.md` into the mandatory
+  "every push" section, removed the ambiguous guidance, and added a `git diff --stat` cross-check
+  (Section 6) so a required tracking file can't silently fall out of a push again. Added Section 2a:
+  the linked AntBrainOS vault project folder (`03_PROJECTS/Active/Old_Fashion_Care/`) must now be
+  updated on every push, not only at session end.
+- **Why:** discovered via `REPO_SESSION_START_RECOVERY_AUDIT.md` that `PROGRESS_NOTE.md` was stale;
+  root-caused to the push prompt's own ambiguous instruction rather than agent oversight alone. The
+  user then asked for "no gaps... system to system, or session to session," which extended the fix
+  to the vault's canonical copy of this same prompt (confirmed to carry the byte-identical bug — no
+  auto-sync exists between a repo's local prompt copy and the vault template) and to
+  `CLAUDE_CODE_SESSION_END.md` (new independent Step 18a: cross-check a repo's required tracking
+  files against `git diff --stat` before recording a closeout as clean, rather than trusting the
+  push prompt alone).
+- **Verified:** no build/lint/test scripts exist for this static site. Verification is a manual
+  review: push prompt sections read consistently with no remaining "prefer the other file"
+  language; `PROGRESS_NOTE.md` content matches actual current repo state; this commit's own `git
+  diff --stat` includes every file this repo's required-tracking list names.
+- **Scope:** docs/process only — `Prompts/`, `PROGRESS_NOTE.md`, and the tracking docs listed in
+  this push's `docs/project/STATUS.md` entry. No `.html`/`css`/`js` touched; live site unaffected.
+
+---
+
+## Summary
+
 Fix distorted founder photo on `about.html` (branch `main`)
 
 ## Description

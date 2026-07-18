@@ -6,6 +6,44 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-18 — Fixed a real staleness gap in the push workflow itself
+
+**Work completed:**
+- A follow-up session found `PROGRESS_NOTE.md` was stale after the founder-photo push below —
+  still describing 2026-07-15/07-12 state, missing the fix entirely. Corrected its content.
+- Root-caused why: this repo's own push prompt
+  (`Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md`) told the agent
+  `PROGRESS_NOTE.md` and `PROGRESS_NOTES.md` were alternatives ("prefer `PROGRESS_NOTES.md`"), so
+  the previous push updated this file but silently skipped the singular one, despite `CLAUDE.md`/
+  `AGENTS.md`/`REPOSITORY_HANDOFF_CONFIG.md` all marking it required unconditionally.
+- Fixed the push prompt: `PROGRESS_NOTE.md` is now a mandatory every-push update, the ambiguous
+  guidance was removed, and a `git diff --stat` cross-check was added before every commit so a
+  required file can no longer silently fall out of a push (Section 6).
+- Added a new Section 2a requiring the linked AntBrainOS vault project folder
+  (`03_PROJECTS/Active/Old_Fashion_Care/`) to be updated on every push, not only at session end, so
+  the vault-side record can never drift more than one push behind.
+- The same class of bug was confirmed present, and fixed the same way, in the AntBrainOS vault's own
+  canonical copy of this prompt (no mechanical sync exists between a repo's local copy and the
+  vault template — this was a real, separate gap in its own right), plus a new independent
+  cross-check step added to the vault's `CLAUDE_CODE_SESSION_END.md` so a future closeout can't
+  record a repo as "clean/current" purely by trusting a prior push-prompt step.
+
+**Files/areas changed:** `PROGRESS_NOTE.md`, `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md`,
+`docs/project/STATUS.md`, `docs/project/CHANGELOG.md`, `docs/project/DECISION_LOG.md`,
+`LESSONS_LEARNED.md`, `SLICE_REVIEWS.md`, `docs/project/COMMIT_NOTES.md`. No site code.
+
+**Validation performed:** no build/lint/test scripts exist for this static site; verification was a
+manual review confirming the push prompt's sections are internally consistent (no remaining
+"prefer the other file" language) and that this push's own `git diff --stat` includes every file
+this repo's required-tracking list names.
+
+**Notes for the next agent:** the push prompt now has a Section 2a — update the linked vault
+project folder on every push, not just at session end. Don't skip it because a session-end closeout
+feels like it will "catch up" later; that's the exact assumption that let this gap form in the
+first place.
+
+---
+
 ## 2026-07-18 — Fixed distorted founder photo on `about.html` (branch `main`)
 
 **Work completed:**

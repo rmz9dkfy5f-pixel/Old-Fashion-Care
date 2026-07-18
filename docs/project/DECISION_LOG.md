@@ -6,6 +6,46 @@ Do not use it for tiny task notes.
 
 ---
 
+## 2026-07-18 — Fix the Push-Prompt Ambiguity That Let `PROGRESS_NOTE.md` Go Stale, Not Just the File Itself
+
+### Decision
+Found `PROGRESS_NOTE.md` stale (missing the founder-photo push below entirely) and root-caused it to
+`Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` itself, which told the
+agent `PROGRESS_NOTE.md` and `PROGRESS_NOTES.md` were alternatives ("prefer `PROGRESS_NOTES.md`").
+Rather than only fixing the file's content, fixed the prompt: moved `PROGRESS_NOTE.md` into the
+mandatory every-push section, removed the ambiguous guidance, and added a `git diff --stat`
+cross-check before every commit. Also added a new Section 2a requiring the linked AntBrainOS vault
+project folder to be updated on every push, not only at session end.
+
+### Reason
+This repo's own `CLAUDE.md`/`AGENTS.md`/`REPOSITORY_HANDOFF_CONFIG.md` all mark `PROGRESS_NOTE.md`
+"kept unconditionally" — the push prompt directly contradicted that. Fixing only the stale content
+would have left the same mechanism free to produce the identical gap on the next push. The user
+separately asked whether the fix was mirrored in the AntBrainOS vault (it wasn't — the vault's
+canonical copy of this prompt carried the byte-identical bug) and asked for "no gaps... system to
+system, or session to session," which extended this decision to the vault template and to
+`CLAUDE_CODE_SESSION_END.md` (new independent Step 18a: cross-check a repo's required tracking files
+before recording a closeout as clean, rather than trusting the push prompt alone).
+
+### Alternatives Considered
+- Fix only `PROGRESS_NOTE.md`'s content this one time (rejected — leaves the actual bug in place for
+  the next push).
+- Make `PROGRESS_NOTE.md` unconditionally mandatory in the vault's *generic* template (rejected —
+  not every repo that adopts that template has or needs both a singular and plural progress file;
+  the generic fix instead tells the agent to check that specific repo's own governance docs).
+- Rely on prose guidance alone with no mechanical check (rejected — a prose-only rule, phrased
+  slightly wrong, is exactly what caused the original bug).
+
+### Consequences
+`Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` (this repo) and its
+vault canonical counterpart are now hardened against this failure shape; `CLAUDE_CODE_SESSION_END.md`
+gained an independent verification layer. See the vault's own `08_DECISIONS/DECISION_LOG.md` #36 for
+the full cross-project write-up (this entry is this repo's own record of the same decision).
+
+**Status:** Accepted and implemented 2026-07-18.
+
+---
+
 ## 2026-07-15 — Install AntBrainOS kit tooling on all 5 branches; skip poor-fit kits; include `main`
 
 ### Decision

@@ -4,6 +4,44 @@ Use this file after each completed vertical slice.
 
 ---
 
+## 2026-07-18 — Close the Push-Workflow Tracking-File Gap (repo + AntBrainOS vault)
+
+**Status:** Implemented — committed and pushed this slice
+
+**Slice summary:**
+A follow-up audit found `PROGRESS_NOTE.md` stale after the founder-photo push (missing it entirely).
+Root-caused to the push prompt itself telling the agent `PROGRESS_NOTE.md`/`PROGRESS_NOTES.md` were
+alternatives, letting a required file silently fall out of a push. This slice:
+1. Corrected `PROGRESS_NOTE.md` content to actual current state.
+2. Fixed `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md`: moved
+   `PROGRESS_NOTE.md` into the mandatory every-push list, removed the ambiguous guidance, added a
+   `git diff --stat` cross-check before commit (Section 6).
+3. Added Section 2a: the linked AntBrainOS vault project folder must be updated on every push, not
+   only at session end.
+4. Confirmed and fixed the identical bug in the AntBrainOS vault's own canonical copy of this
+   prompt (no auto-sync exists between a repo's local copy and the vault template).
+5. Added an independent Step 18a to the vault's `CLAUDE_CODE_SESSION_END.md`: cross-check a repo's
+   required tracking files against `git diff --stat` before recording a closeout as clean/current.
+6. Recorded the decision in this repo's `docs/project/DECISION_LOG.md` and the vault's own
+   `08_DECISIONS/DECISION_LOG.md` (#36).
+
+**Files changed:**
+- This repo: `PROGRESS_NOTE.md`, `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md`,
+  `docs/project/{STATUS,CHANGELOG,DECISION_LOG,COMMIT_NOTES}.md`, `PROGRESS_NOTES.md`,
+  `LESSONS_LEARNED.md`, `SLICE_REVIEWS.md` (this entry) — no site code
+- AntBrainOS vault: `09_PROMPTS/Claude_Code_Prompts/04_Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md`,
+  `05_SOPS/Claude_Code/CLAUDE_CODE_SESSION_END.md`, `08_DECISIONS/DECISION_LOG.md`,
+  `00_START_HERE/AGENT_HANDOFF.md`, `03_PROJECTS/Active/Old_Fashion_Care/*` (this project's own
+  vault folder, per the new Section 2a)
+
+**Validation:**
+- No build/lint/test scripts exist for this static site (documented, not a gap).
+- Manual review confirmed the push prompt's Sections 2/2a/4/6 read consistently with no remaining
+  "prefer the other file" language.
+- `git diff --stat` cross-checked against this repo's own required-tracking-file list before commit.
+
+---
+
 ## 2026-07-07 — Complete the V3.4 migration (doc consolidation)
 
 **Status:** Implemented — not yet committed

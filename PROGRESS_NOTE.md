@@ -8,16 +8,32 @@ For historical notes, copy completed entries into `PROGRESS_NOTES.md`.
 
 ---
 
-## Latest — AntBrainOS Kit Tooling Install (2026-07-15)
+## Latest — Fixed a Real Staleness Gap in the Push Workflow Itself (2026-07-18)
 
-Installed dev-tooling kits across all branches (user request, `main` explicitly authorized). `main`
-gained **SEOKit** (`.claude/commands/seo/` + skills/agents + `seo/` context), **EngKit**
-(`.claude/skills/eng/`), **TradeKit** (`.claude/tradekit/`), and **handoff-repository**
-(`.claude/skills/` + `.agents/skills/` + filled `docs/governance/REPOSITORY_HANDOFF_CONFIG.md`).
-**Live site unchanged** — live-site guard diff (`*.html`/`css`/`js`/`images`/`netlify.toml` between
-pre- and post-install commits) is empty; `netlify.toml` serves no route to `.claude/`. EcomKit/
-VideoKit skipped (no surface); MKTKit skipped (previously rolled back). Not a design change or a
-merge. See `docs/project/COMMIT_NOTES.md` for the full entry.
+A follow-up session running `REPO_SESSION_START_RECOVERY_AUDIT.md` found this very file was stale
+after the founder-photo push (below) — still describing 2026-07-15/07-12 state, missing that fix
+entirely. Root cause: `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md`
+told the agent `PROGRESS_NOTE.md` and `PROGRESS_NOTES.md` were alternatives ("prefer
+`PROGRESS_NOTES.md`"), so the previous push updated the plural historical log and silently skipped
+this file — despite `CLAUDE.md`/`AGENTS.md`/`REPOSITORY_HANDOFF_CONFIG.md` all marking it required
+"unconditionally."
+
+**Fixed:** this file's content (done in that same follow-up turn), then the push prompt itself:
+`PROGRESS_NOTE.md` moved into the mandatory every-push section, the ambiguous guidance removed, a
+`git diff --stat` cross-check added before commit (Section 6), and a new Section 2a requiring the
+linked AntBrainOS vault project folder (`03_PROJECTS/Active/Old_Fashion_Care/`) to be updated on
+every push, not only at session end.
+
+**Also propagated to the vault:** the user asked for "no gaps... system to system, or session to
+session." Confirmed the AntBrainOS vault's own canonical copy of this prompt carried the
+byte-identical bug (no auto-sync between a repo's local copy and the vault template — flagged as
+its own gap) and fixed it there too, plus added an independent Step 18a to the vault's
+`CLAUDE_CODE_SESSION_END.md` so a future closeout can't record a repo as clean/current purely by
+trusting a prior push-prompt step. See `docs/project/DECISION_LOG.md` (this repo) and the vault's
+`08_DECISIONS/DECISION_LOG.md` #36 for full detail.
+
+Committed/tagged/pushed as `<pending>` (tag `v2.7.0__push-workflow-tracking-file-gap-fix__commit-<pending>`).
+See `docs/project/COMMIT_NOTES.md` for the full entry.
 
 ---
 
@@ -26,82 +42,80 @@ merge. See `docs/project/COMMIT_NOTES.md` for the full entry.
 Date:
 
 ```text
-2026-07-12
+2026-07-18
 ```
 
 Phase:
 
 ```text
-Phase 2 — hero photo composition rework committed and pushed to main
+Phase 2 — push-workflow governance fix committed and pushed to main. No active site-implementation
+slice: the user confirmed "nothing yet" at the prior 2026-07-18 closeout, and this push is a
+process/docs fix, not a new implementation slice.
 ```
 
 Current slice:
 
 ```text
-Homepage hero photo composition (index.html hero + css/style.css + images/hero-ai.jpg): enforced
-a strict leftmost-25%-navy / rightmost-75%-image ratio (prior builds never moved the navy/photo
-boundary far enough left despite repeated attempts); swapped in the client's clean hi-res original
-photo; and, on desktop (>=1024px), scaled hero height so the full photo frame (lamp, both heads,
-more left curtain) shows with no cropping and no seam.
+None (site-implementation). Awaiting the user's choice of next task. Ranked candidates carried
+from the 2026-07-18 closeout: (1) the oldfashioncare.com/Jottful hosting mismatch, (2)
+.nav__cta/.section--coral contrast fix + dedicated apple-touch-icon.png, (3) the pending client
+hero-variant decision, (4) tag+snapshot the cream-immersive branch once reviewed, (5) decide on
+deleting migration/project-starter-v3-3, (6) the 4 SEO hygiene quick-wins from
+seo/audits/hygiene-2026-07-14.md.
 ```
 
 Completed:
 
-- [x] Widened `--hero-photo-w` 57%→75% (band left edge 43%→25%) and compressed the `.hero::after`
-      overlay so solid navy ends by ~18-25% instead of ~43-47% — pixel-sampled confirmation navy
-      now ends at ~25% at every desktop width
-- [x] Swapped `images/hero-ai.jpg` for a 1400x933 q85 resample of the client's clean hi-res
-      original (source PNG kept locally, untracked per existing `.gitignore` rule) — the old
-      "swap in hi-res photo" blocked item is now resolved
-- [x] Added `@media(min-width:1024px){ .hero{ min-height: clamp(660px, 50vw, 900px) } }` so
-      full-width `cover` shows the whole photo frame on wide screens instead of cropping the top
-- [x] Tried and reverted an interim `background-size: contain` zoom-out approach after it proved
-      to grow the navy column with viewport width (26%@1440px → ~45%@1790px+) and reintroduce a
-      hard seam on wide monitors; final approach avoids both by construction
-- [x] Verified via Playwright headless rendering + canvas pixel-sampling at
-      1024/1440/1790/2560px desktop, 768px tablet, 390px mobile — tablet/mobile confirmed
-      byte-identical before/after
-- [x] User confirmed correct on their own ~1790px screen before approving commit/push
+- [x] Root-caused why `PROGRESS_NOTE.md` went stale: an ambiguous instruction in this repo's own
+      push prompt, not a one-off oversight
+- [x] Fixed `PROGRESS_NOTE.md` content and the push prompt (Sections 2/2a/4/6)
+- [x] Confirmed and fixed the same bug in the AntBrainOS vault's canonical copy of this prompt
+- [x] Added an independent cross-check (Step 18a) to the vault's `CLAUDE_CODE_SESSION_END.md`
+- [x] Recorded the decision in this repo's `docs/project/DECISION_LOG.md` and the vault's
+      `08_DECISIONS/DECISION_LOG.md` (#36)
 
 In progress:
 
-- [ ] None — hero composition fix reviewed, committed, and pushed this session
+- [ ] None — this push is self-contained (docs/process only)
 
 Blocked:
 
-- [ ] Decide whether to create a dedicated apple-touch-icon.png (180×180) later, or keep
-      favicon.svg fallback
+- [ ] `oldfashioncare.com`/Jottful hosting mismatch — needs the user's own DNS/hosting knowledge,
+      not agent-actionable alone
+- [ ] `.nav__cta`/`.section--coral` contrast fix + dedicated apple-touch-icon.png — still queued
+      since 2026-07-11/2026-07-15
 
 Next action:
 
-> Hero composition fix is pushed. **Fast-follow: apply the same coral-fill/white-text contrast
-> fix to `.nav__cta` and `.section--coral`** (found during the 2026-07-11 session, still not
-> fixed). Also still pending: a dedicated apple-touch-icon.
+> No site-implementation task is currently authorized. The same ranked list from the prior
+> 2026-07-18 closeout remains open (`oldfashioncare.com` hosting question; nav/section coral
+> contrast fix + apple-touch-icon; client hero-variant decision; cream-immersive tag/snapshot;
+> `migration/project-starter-v3-3` deletion; SEO hygiene quick-wins). Ask before starting anything
+> new next session.
 
 Checks run:
 
 ```bash
-git rev-parse HEAD                 # b9a2a42 (parent — this session's changes not yet committed)
-python3 -m http.server 8137        # local static server for rendering
-npx --no-install playwright ...    # headless chromium via a scratchpad script, canvas-based
-                                    # pixel sampler (Playwright + <canvas>.getImageData) — no
-                                    # PIL/ImageMagick available
-cmp before/after PNGs              # confirmed tablet/mobile renders byte-identical
+git status --porcelain=v1 --untracked-files=all # empty (hard clean), verified before commit
+git diff --stat                                  # confirmed every required tracking file present
+grep -rn "prefer \`PROGRESS_NOTES.md\`"           # confirmed the ambiguous line no longer exists
 ```
 
 Commit status:
 
 ```text
-Not yet committed as of this note — commit/tag/snapshot/push runs immediately after this file is
-saved, per the standard workflow. See git log / the vault AGENT_HANDOFF.md for the resulting
-commit hash once pushed.
+Docs/process-only change: Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md,
+PROGRESS_NOTE.md, and the tracking docs listed in docs/project/STATUS.md's entry for this push. No
+site code touched. Commit/tag/snapshot/push run immediately after this file is saved, per the
+standard workflow — see git log / docs/project/STATUS.md for the resulting commit hash once pushed.
 ```
 
 Approval status:
 
 ```text
-Plan-mode approved across three sequential plans this session: (1) the 25%-navy/75%-image ratio
-fix, (2) the hero photo zoom-out request (full lamp/heads/curtain), (3) reverting the resulting
-hard-line/growing-navy defect back to full-width cover + height scaling. The user visually
-confirmed the final result was correct on their own ~1790px screen before approving commit/push.
+User explicitly asked to execute the push prompt this turn ("execute
+.../repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md") — direct authorization for
+commit/tag/snapshot/push per this repo's "commit only when the user asks" rule. The underlying fix
+itself was authorized incrementally across the conversation: "fix this" (PROGRESS_NOTE.md), then
+"yes" (propagate Section 2a into this repo's own copy).
 ```

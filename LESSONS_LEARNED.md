@@ -38,6 +38,48 @@ Reusable rule:
 
 ## Lessons
 
+### 2026-07-18 — Similarly-Named Tracking Files Are Not Interchangeable; Chained Workflows Must Not Blindly Trust Each Other
+
+Context:
+
+> `PROGRESS_NOTE.md` went stale for a real push — it kept describing 2026-07-15/07-12 state, missing
+> a whole subsequent fix. The push prompt itself was the cause: it told the agent `PROGRESS_NOTE.md`
+> and `PROGRESS_NOTES.md` were alternatives ("prefer `PROGRESS_NOTES.md`"), so a real push updated the
+> plural file and silently skipped the singular one — even though this repo's own governance docs
+> mark it required unconditionally. Separately, the AntBrainOS vault's session-end SOP recorded that
+> same push as clean/current with no independent check that the push prompt's own file list had
+> actually been honored — it simply trusted the earlier step.
+
+Lesson:
+
+> Two failure modes compounded here, and both are worth naming separately. (1) Don't assume two
+> similarly-named files are the same thing or interchangeable just because their names overlap —
+> confirm what each one is actually for before deciding one covers the other. (2) When two
+> procedures chain together (a push step, then a session-end step), don't let the second one simply
+> assume the first one succeeded — an independent, mechanical check (e.g. diffing required files by
+> name) catches drift that a purely prose-based instruction can silently let through.
+
+Cause:
+
+> The push prompt's own wording ("if `PROGRESS_NOTES.md` is the main running log, prefer
+> `PROGRESS_NOTES.md`") was a plausible-sounding simplification that happened to be wrong for this
+> repo, and nothing downstream re-verified it.
+
+Correction:
+
+> Fixed the push prompt (this repo's copy and the AntBrainOS vault's canonical copy) to check the
+> specific repo's own governance docs rather than assume any one convention, and added a name-by-name
+> `git diff --stat` cross-check before every commit (Section 6) plus an independent cross-check step
+> in the vault's `CLAUDE_CODE_SESSION_END.md` (Step 18a).
+
+Reusable rule:
+
+> Before treating two similarly-named files (or two chained procedures) as redundant with each
+> other, verify that's actually true for *this* project — and wherever a procedure's correctness
+> matters, prefer a mechanical check over a one-line prose reminder.
+
+---
+
 ### 2026-06-30 — Post-check workflow does not detect remote divergence
 
 Context:
