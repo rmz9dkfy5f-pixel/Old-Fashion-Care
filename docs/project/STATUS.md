@@ -8,8 +8,7 @@
 
 ```text
 Branch: main
-Tag:    v2.7.0__push-workflow-tracking-file-gap-fix__commit-<short-hash>
-        (the real short hash is embedded in the annotated git tag applied to this commit)
+Tag:    v2.7.0__push-workflow-tracking-file-gap-fix__commit-8ed5902
 ```
 
 **What changed:** `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md` and

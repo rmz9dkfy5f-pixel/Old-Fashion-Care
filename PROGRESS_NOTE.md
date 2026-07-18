@@ -32,8 +32,9 @@ its own gap) and fixed it there too, plus added an independent Step 18a to the v
 trusting a prior push-prompt step. See `docs/project/DECISION_LOG.md` (this repo) and the vault's
 `08_DECISIONS/DECISION_LOG.md` #36 for full detail.
 
-Committed/tagged/pushed as `<pending>` (tag `v2.7.0__push-workflow-tracking-file-gap-fix__commit-<pending>`).
-See `docs/project/COMMIT_NOTES.md` for the full entry.
+Committed/tagged/pushed as `8ed5902` (tag `v2.7.0__push-workflow-tracking-file-gap-fix__commit-8ed5902`),
+RepoBackups snapshot verified (351 files, 0 diff vs `git ls-tree`). See `docs/project/COMMIT_NOTES.md`
+for the full entry.
 
 ---
 
@@ -96,18 +97,19 @@ Next action:
 Checks run:
 
 ```bash
-git status --porcelain=v1 --untracked-files=all # empty (hard clean), verified before commit
+git status --porcelain=v1 --untracked-files=all # empty before commit (hard clean)
 git diff --stat                                  # confirmed every required tracking file present
 grep -rn "prefer \`PROGRESS_NOTES.md\`"           # confirmed the ambiguous line no longer exists
+git rev-parse --short HEAD                       # 8ed5902
+git tag --points-at HEAD                         # v2.7.0__push-workflow-tracking-file-gap-fix__commit-8ed5902
 ```
 
 Commit status:
 
 ```text
-Docs/process-only change: Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md,
-PROGRESS_NOTE.md, and the tracking docs listed in docs/project/STATUS.md's entry for this push. No
-site code touched. Commit/tag/snapshot/push run immediately after this file is saved, per the
-standard workflow — see git log / docs/project/STATUS.md for the resulting commit hash once pushed.
+Committed, tagged, and pushed: 8ed5902 (tag
+v2.7.0__push-workflow-tracking-file-gap-fix__commit-8ed5902). Matches origin/main. RepoBackups
+snapshot verified (351 files, 0 diff vs git ls-tree). Docs/process-only — no site code.
 ```
 
 Approval status:
