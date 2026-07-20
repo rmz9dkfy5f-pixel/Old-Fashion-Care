@@ -8,8 +8,7 @@
 
 ```text
 Branch: main
-Tag:    v2.8.0__contact-form-contrast-touch-target-content-fixes__commit-<pending>
-        (the real short hash is filled in once this commit is made and tagged)
+Tag:    v2.8.0__contact-form-contrast-touch-target-content-fixes__commit-e6d1363
 ```
 
 **Context:** the user asked whether re-running the 18/20-skill production-readiness suite
