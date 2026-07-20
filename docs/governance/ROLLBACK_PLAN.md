@@ -74,6 +74,36 @@ into `docs/project/` and `docs/governance/` to give the installed V3.4 skills a 
 source of truth at the paths they expect. Rollback: `git revert` the consolidation commit — every
 file move is tracked in Git history and reversible.
 
+### Contact Form, Contrast, Touch Target, and Content Fixes (2026-07-19)
+
+| Item | Value |
+|------|-------|
+| Safe branch | `main` |
+| Safe commit (prior known-good) | `dd88bf4` (tag `v2.6.0`) — also what the VPS mirror was still serving at the start of this change |
+| New tagged commit | `e6d1363` (tag `v2.8.0__contact-form-contrast-touch-target-content-fixes__commit-e6d1363`) |
+| Trailing docs commit | `8e61909` (untagged, per convention) |
+| Snapshot | `/Volumes/AntNVMe1TB/WorkSync/Projects/RepoBackups/Old-Fashion-Care/v2.8.0__contact-form-contrast-touch-target-content-fixes__commit-e6d1363/` (351 files, verified 0 diff vs. `git ls-tree`) |
+| Deployed to | VPS mirror `old-fashion-care.craftandconscious.com`, verified live via fresh `curl` (new `Content-Length`/`Last-Modified`, new testimonials copy, new contrast values, new JS logic all confirmed present) |
+
+Changed files: `js/main.js`, `css/style.css`, `contact.html`, `index.html` (site code) plus
+tracking docs. No data/schema/auth changes — pure static-asset content, inherently low rollback
+risk.
+
+Rollback: re-run the same `git archive` + rsync deploy process pointed at tag `v2.6.0` (`dd88bf4`)
+instead of current `main`, or `git revert e6d1363` in the repo. Verification after rollback: same
+`curl`/Playwright checks used to verify the fix originally (see
+`docs/governance/audits/production-readiness-2026-07-19.md`).
+
+### Uptime Check Workflow (2026-07-19)
+
+| Item | Value |
+|------|-------|
+| Safe commit | `8588925` |
+| File added | `.github/workflows/uptime-check.yml` (single file, no dependencies) |
+
+Rollback: delete the single file, or disable the workflow in the GitHub Actions UI. No other
+system depends on it.
+
 ## Rollback Readiness
 
 - Safe branch: `main` — always the last known-good, deployed state

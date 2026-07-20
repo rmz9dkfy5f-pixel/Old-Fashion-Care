@@ -63,3 +63,11 @@ Required before production (i.e. before merging to `main`, since Netlify auto-de
 - `docs/governance/ROLLBACK_PLAN.md` reviewed
 - `docs/governance/RELEASE_GATE.md` reviewed
 - User-facing impact understood and, if needed, explicitly approved (this is a live client site)
+
+**Status (2026-07-19):** all four docs above were blank templates before this date — a
+production-readiness audit found and filled in all four in the same pass (see
+`docs/governance/audits/production-readiness-2026-07-19.md`). This gate is now substantively
+satisfied for the current state of `main`; re-review whichever doc is relevant after any future
+change of the type it covers (security/auth change → `SECURITY_BASELINE.md`, new
+platform/browser target → `COMPATIBILITY_MATRIX.md`, etc.) rather than treating this as a
+one-time checkbox.

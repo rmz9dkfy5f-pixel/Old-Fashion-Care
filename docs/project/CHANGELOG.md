@@ -4,6 +4,36 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [feat: uptime monitoring + audit completion; deployed live — `main`] — 2026-07-19
+
+### Added
+- `.github/workflows/uptime-check.yml` — checks the VPS mirror
+  (`old-fashion-care.craftandconscious.com`) every 30 minutes for HTTP 200 plus a basic
+  content-sanity check, failing the job otherwise. Verified via a real triggered GitHub Actions
+  run. GitHub's default behavior emails repo watchers on failure.
+
+### Changed
+- **Deployed this session's fixes (below) live to the VPS mirror**, the confirmed-real deployment
+  target, per explicit user authorization. Independently re-verified via fresh `curl` evidence
+  (not assumed from a successful deploy command alone).
+- Completed the production-readiness audit begun earlier the same day: ran the 4 remaining skills
+  (`observability-analytics-readiness`, `rollback-risk-register`, `production-readiness-audit`
+  capstone, `client-handoff-pack`), wrote both consolidated report files
+  (`seo/audits/hygiene-2026-07-19.md`, `docs/governance/audits/production-readiness-2026-07-19.md`),
+  and reconciled `docs/governance/{PROJECT_RISK_REGISTER,SECURITY_BASELINE,COMPATIBILITY_MATRIX,
+  ROLLBACK_PLAN,RELEASE_GATE,PHASE_GATES,AGENT_RUN_LOG}.md` and `BACKLOG.md` against every finding.
+- Closed the already-stale `PROJECT_RISK_REGISTER.md` R-005 entry (hero image — had remained
+  marked Open despite being fixed 2026-07-12).
+
+### Notes
+- 7 new risks added to `PROJECT_RISK_REGISTER.md` (R-007 through R-013): image oversizing,
+  unconfigured Formspree ID, missing form-analytics events, missing HSTS header, the unreferenced
+  `care giver pics/` folder, unverified certbot renewal automation, unverified Netlify status.
+- No further site-code changes beyond what's in the entry below — this entry is the audit's own
+  completion plus the uptime check and the deploy of already-fixed code.
+
+---
+
 ## [fix: contact form, contrast, touch target, content — `main`] — 2026-07-19
 
 ### Fixed

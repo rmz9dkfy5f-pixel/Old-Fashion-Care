@@ -6,6 +6,56 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-19 — Production-readiness audit complete: uptime check added, fixes deployed live to VPS
+
+**Work completed:**
+- Ran the 4 skills left over from the entry below: `observability-analytics-readiness` (found
+  zero custom analytics events and zero uptime monitoring anywhere), `rollback-risk-register`
+  (found, via fresh `curl`, that the VPS mirror was still serving pre-fix code — the deploy gap
+  below), `production-readiness-audit` (capstone — overall verdict: Conditionally ready),
+  `client-handoff-pack` (non-technical summary for the business owner).
+- Fixed the observability gap: added `.github/workflows/uptime-check.yml` (checks the VPS mirror
+  every 30 minutes for HTTP 200 + expected content), verified via a real triggered GitHub Actions
+  run — not just a local simulation. Committed/pushed as `8588925`.
+- User explicitly authorized deploying this session's fixes to the VPS mirror
+  (`old-fashion-care.craftandconscious.com`). Built the exact deploy file set matching the
+  existing live footprint (not a raw rsync filter), dry-ran the sync, applied it, then
+  independently re-verified live via fresh `curl`: new `Content-Length`/`Last-Modified`, new
+  testimonials copy present and old placeholder gone, new contact-form JS logic present, new
+  `--coral-fill` contrast values present on `.nav__cta` and `.phone-strip`.
+- Wrote both consolidated audit report files (`seo/audits/hygiene-2026-07-19.md`,
+  `docs/governance/audits/production-readiness-2026-07-19.md`) — previously the findings existed
+  only in the conversation, not on disk.
+- Reconciled `docs/governance/{PROJECT_RISK_REGISTER,SECURITY_BASELINE,COMPATIBILITY_MATRIX,
+  ROLLBACK_PLAN,RELEASE_GATE,PHASE_GATES,AGENT_RUN_LOG}.md` and `BACKLOG.md` against every finding
+  from all 13 skill-runs — including finally closing the already-stale R-005 entry (hero image —
+  had been marked Open despite being fixed back in 2026-07-12) and adding 7 newly-tracked risks
+  (R-007 through R-013: image oversizing, Formspree ID, missing form-analytics events, missing
+  HSTS, the `care giver pics/` folder, unverified certbot renewal, unverified Netlify status).
+
+**Files/areas changed:** `.github/workflows/uptime-check.yml` (new); `docs/project/{STATUS,
+CHANGELOG,COMMIT_NOTES}.md`, `PROGRESS_NOTE.md`, `PROGRESS_NOTES.md`, `BACKLOG.md`,
+`docs/governance/{PROJECT_RISK_REGISTER,SECURITY_BASELINE,COMPATIBILITY_MATRIX,ROLLBACK_PLAN,
+RELEASE_GATE,PHASE_GATES,AGENT_RUN_LOG}.md`, `seo/audits/hygiene-2026-07-19.md`,
+`docs/governance/audits/production-readiness-2026-07-19.md`. No further site-code changes beyond
+what the entry below already covers (this batch is the audit's own paperwork, plus the uptime
+check and the deploy of already-fixed code).
+
+**Validation performed:** uptime-check workflow confirmed via a real GitHub Actions run (log shows
+`OK: https://old-fashion-care.craftandconscious.com/ is up`). VPS deploy confirmed via fresh
+`curl` evidence post-deploy (not assumed from a successful `rsync` exit code alone) — new content
+length, new `Last-Modified`, new testimonials copy, new JS, new CSS all directly verified present
+on the live site.
+
+**Notes for the next agent:** the production-readiness audit is now genuinely complete — don't
+re-run it from scratch; if new work is needed, treat it as a fresh, smaller, targeted task. Real
+follow-ups worth picking up (all optional/user-owned, none urgent): a real Formspree ID, custom
+form-analytics events, image optimization, an HSTS header, a dedicated apple-touch-icon, a
+decision on `care giver pics/`, and a real-device iOS Safari check — see `BACKLOG.md` and
+`docs/governance/PROJECT_RISK_REGISTER.md`.
+
+---
+
 ## 2026-07-19 — Contact form, contrast, touch target, and content fixes (production-readiness audit, in progress)
 
 **Work completed:**

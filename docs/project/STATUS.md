@@ -4,7 +4,57 @@
 
 ---
 
-## Latest Push — Contact Form, Contrast, Touch Target, and Content Fixes (2026-07-19, branch `main`)
+## Latest Push — Production-Readiness Audit Complete: Uptime Check, VPS Deploy, Full Reconciliation (2026-07-19, branch `main`)
+
+```text
+Branch: main
+Latest commit at time of writing: 8588925 (uptime-check workflow); this push adds the audit's
+own paperwork on top — see git log for the actual resulting hash once committed.
+```
+
+**Context:** follow-on to the push immediately below (same day, continuing the same session). The
+production-readiness audit that push left at "9 of 13 skills done" is now **complete**: all 13
+planned skill-runs finished, the two consolidated report files are written, and all 5 planned
+governance/tracking docs are reconciled — plus `BACKLOG.md` and `PHASE_GATES.md`.
+
+**What happened in this batch:**
+1. Ran the 4 remaining skills: `observability-analytics-readiness` (found zero custom
+   analytics events and zero uptime monitoring — see fix below), `rollback-risk-register` (found
+   the VPS mirror was still serving pre-fix code — see deploy below), `production-readiness-audit`
+   (capstone — overall verdict: Conditionally ready), `client-handoff-pack` (non-technical summary
+   produced for the business owner).
+2. **Fixed:** added `.github/workflows/uptime-check.yml` — checks the VPS mirror every 30 minutes,
+   verified via a real triggered GitHub Actions run (not just local simulation). Committed/pushed
+   as `8588925`.
+3. **User explicitly authorized deploying this session's fixes to the VPS mirror.** Built the
+   exact deploy file set (matching the existing live footprint, not a raw rsync filter), dry-ran
+   the sync, applied it, then verified live via fresh `curl`: new `Content-Length`/`Last-Modified`,
+   new testimonials copy present, old placeholder text gone, new contact-form JS logic present,
+   new contrast values (`--coral-fill`) present on `.nav__cta` and `.phone-strip`.
+4. Wrote `seo/audits/hygiene-2026-07-19.md` and
+   `docs/governance/audits/production-readiness-2026-07-19.md` (the full audit findings, previously
+   only in chat).
+5. Reconciled `docs/governance/{PROJECT_RISK_REGISTER,SECURITY_BASELINE,COMPATIBILITY_MATRIX,
+   ROLLBACK_PLAN,RELEASE_GATE,PHASE_GATES,AGENT_RUN_LOG}.md` and `BACKLOG.md` against every finding
+   from all 13 skill-runs — including correcting the already-stale R-005 entry (closed properly
+   this time) and adding 7 new tracked risks (R-007 through R-013).
+
+**Why:** the prior push's own "Remaining Follow-Up" said this was still open; the user then asked
+to continue ("Finish the production-readiness audit" — confirmed at that push's own session-end
+Step 4a gate), then separately authorized the VPS deploy once the rollback-risk-register step
+surfaced that gap.
+
+**Verified:** uptime-check workflow confirmed working via a real GitHub Actions run (not simulated).
+VPS deploy confirmed via fresh `curl` evidence post-deploy, not just a successful rsync exit code.
+
+**Known follow-up, not fixed this batch:** Formspree ID still a placeholder (user-owned); 9
+oversized images not yet optimized; no HSTS header yet; no custom Plausible events for
+form success/failure yet; WebKit/Firefox/iOS Safari still untested. All tracked in `BACKLOG.md`
+and `PROJECT_RISK_REGISTER.md`.
+
+---
+
+## Previous Push — Contact Form, Contrast, Touch Target, and Content Fixes (2026-07-19, branch `main`)
 
 ```text
 Branch: main
@@ -64,7 +114,7 @@ live "Jottful" application) — **user confirmed this is expected/known right no
 
 ---
 
-## Previous Push — Repo Push-Workflow Governance Fix (2026-07-18, branch `main`)
+## Completed Previously — Repo Push-Workflow Governance Fix (2026-07-18, branch `main`)
 
 ```text
 Branch: main
@@ -175,8 +225,10 @@ confirmed no site/local-only files were ever committed. Static site — no build
 ## Current Phase
 
 ```text
-Phase 2 — production-readiness audit in progress (9 of 13 planned skill-runs complete; 5 real
-code fixes landed and verified; audit report files + tracking-doc reconciliation still pending)
+Phase 2 — production-readiness audit COMPLETE (13 of 13 planned skill-runs done; 6 real fixes
+landed, verified, and deployed live to the VPS mirror; both report files written; all 6
+governance/tracking docs reconciled). No active implementation slice — next steps are the
+user-owned/optional follow-ups listed in BACKLOG.md and PROJECT_RISK_REGISTER.md.
 ```
 
 ---
@@ -192,30 +244,28 @@ main
 ## Current Slice
 
 ```text
-Production-readiness audit pass on `main` (2026-07-19): running a scoped subset of the
-18/20-skill production-readiness suite (installed 2026-07-15, never previously executed).
-9 of 13 planned skills run so far: repo-safety-preflight, v33-quality-gate-enforcer,
-component-inventory, seo-hygiene-check, accessibility-pass, performance-budget-pass,
-responsive-browser-matrix, content-conversion-readiness, deployment-nginx-https-readiness.
-Along the way, 5 real issues the audit surfaced were fixed and verified (not deferred to a
-"findings" list only): the contact form's fake-success bug, 3 coral-contrast WCAG AA failures,
-the mobile nav hamburger's undersized touch target (+ an icon-state improvement), missing
-Escape-key handling on the mobile nav, and the homepage's placeholder testimonials section.
-Remaining: 4 more skill-runs (observability-analytics-readiness, rollback-risk-register,
-production-readiness-audit capstone, client-handoff-pack), writing the two consolidated report
-files, and reconciling 5 governance/tracking docs against the findings so far.
+None active — the production-readiness audit pass on `main` (2026-07-19) is complete. All 13
+planned skills ran: repo-safety-preflight, v33-quality-gate-enforcer, component-inventory,
+seo-hygiene-check, accessibility-pass, performance-budget-pass, responsive-browser-matrix,
+content-conversion-readiness, deployment-nginx-https-readiness, observability-analytics-readiness,
+rollback-risk-register, production-readiness-audit (capstone), client-handoff-pack. 6 real issues
+were fixed, verified, and deployed live (not left as a findings list only): the contact form's
+fake-success bug, 3 coral-contrast WCAG AA failures, the mobile nav hamburger's undersized touch
+target (+ icon-state improvement), missing Escape-key handling, the homepage's placeholder
+testimonials section, and missing uptime monitoring. Both consolidated report files are written
+(seo/audits/hygiene-2026-07-19.md, docs/governance/audits/production-readiness-2026-07-19.md) and
+all 6 governance/tracking docs reconciled.
 ```
 
 ---
 
 ## Current Goal
 
-> Finish the remaining 4 skill-runs, write the two consolidated audit report files
-> (`seo/audits/hygiene-2026-07-19.md`, `docs/governance/audits/production-readiness-2026-07-19.md`),
-> and reconcile `PROJECT_RISK_REGISTER.md`/`SECURITY_BASELINE.md`/`COMPATIBILITY_MATRIX.md`/
-> `RELEASE_GATE.md`/`AGENT_RUN_LOG.md` against everything found. Known items still open after that:
-> configuring a real Formspree ID (user-owned), a dedicated apple-touch-icon, and deciding what to
-> do with the 15MB unreferenced `care giver pics/` folder.
+> No active goal — see `BACKLOG.md` and `docs/governance/PROJECT_RISK_REGISTER.md` (R-007 through
+> R-013) for the remaining, mostly user-owned or optional follow-ups: a real Formspree ID,
+> image optimization, HSTS header, custom form-analytics events, a dedicated apple-touch-icon, a
+> decision on the `care giver pics/` folder, and a real-device iOS Safari check. None are urgent;
+> ask the user which (if any) to pick up next.
 
 ---
 
@@ -397,14 +447,15 @@ Snapshot saved to RepoBackups for b195aba.
 
 ## Next Action
 
-> 1. Finish the remaining 4 skill-runs (`observability-analytics-readiness`,
->    `rollback-risk-register`, `production-readiness-audit` capstone, `client-handoff-pack`),
->    write the two consolidated report files, and reconcile the 5 governance/tracking docs — see
->    Current Goal above.
-> 2. User-owned, not agent-actionable: configure a real Formspree ID in `contact.html`.
-> 3. Create a dedicated apple-touch-icon.png (long-queued, pre-existing known issue).
-> 4. Decide what to do with the 15MB unreferenced `care giver pics/` folder (found this session).
-> 5. `oldfashioncare.com` hosting mismatch — user has confirmed this is expected/known right now;
+> The production-readiness audit is complete — nothing is actively in-progress. Remaining items,
+> none urgent, ask the user which to pick up next:
+> 1. User-owned, not agent-actionable: configure a real Formspree ID in `contact.html`.
+> 2. Add `plausible()` custom events for contact-form success/failure (small, no dependency).
+> 3. Resize/recompress the 9 oversized `care-*.jpg` images (~14.2MB avoidable, quantified).
+> 4. Add HSTS header; create a dedicated apple-touch-icon.png (both small, long-queued).
+> 5. Decide what to do with the 15MB unreferenced `care giver pics/` folder (found this session).
+> 6. Get a real-device iOS Safari / cross-browser check (this environment only has Chromium).
+> 7. `oldfashioncare.com` hosting mismatch — user has confirmed this is expected/known right now;
 >    no action needed unless the user raises it again.
 
 ---

@@ -20,8 +20,14 @@ Likely needed after the current slice.
 
 - [ ] Design review — visual polish and layout improvements across pages
 - [ ] Mobile layout review — verify all pages look great on small screens
-- [ ] Image optimization — compress large photos (care-03 through care-11 are 1–2.5MB each)
+- [ ] Image optimization — compress large photos (9 of 14 `care-*.jpg` files ship at 3500-5760px
+      native resolution into a 356×260px grid cell, ~14.2MB avoidable — quantified 2026-07-19,
+      see `docs/governance/PROJECT_RISK_REGISTER.md` R-007)
 - [ ] Create a dedicated 180×180 `apple-touch-icon.png` (currently falls back to `favicon.svg`)
+- [ ] Add `plausible()` custom events for contact-form success/failure (`js/main.js`) — no
+      business-side visibility exists today when the form fails (2026-07-19, R-009)
+- [ ] Add `Strict-Transport-Security` (HSTS) header to `netlify.toml` / VPS nginx config
+      (2026-07-19, R-010)
 
 ---
 
@@ -92,6 +98,13 @@ Rejected or out of scope.
       (2026-07-19)
 - [x] Add Escape-key handling to close the mobile nav (2026-07-19)
 - [x] Fix homepage testimonials section showing literal placeholder text (2026-07-19)
+- [x] Add automated uptime monitoring (`.github/workflows/uptime-check.yml`, 30-min interval,
+      checks the VPS mirror) — none existed before (2026-07-19)
+- [x] Deploy this session's fixes to the confirmed-real VPS deployment target, verified live
+      (2026-07-19)
+- [x] Complete a first full pass of the 18/20-skill production-readiness suite (13 skills run
+      against `main`) — see `docs/governance/audits/production-readiness-2026-07-19.md` and
+      `seo/audits/hygiene-2026-07-19.md` (2026-07-19)
 
 ---
 
