@@ -1,0 +1,31 @@
+name: Uptime Check
+
+# Monitors the confirmed-real deployment target (the VPS mirror), not oldfashioncare.com —
+# that domain is currently a separate, unrelated third-party site (known/expected, not this repo).
+# See docs/project/STATUS.md for the deployment-topology background.
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check site is up and serving the right content
+        run: |
+          URL="https://old-fashion-care.craftandconscious.com/"
+          STATUS=$(curl -s -o /tmp/body.html -w "%{http_code}" --max-time 15 "$URL")
+
+          if [ "$STATUS" != "200" ]; then
+            echo "::error::$URL returned HTTP $STATUS (expected 200)"
+            exit 1
+          fi
+
+          if ! grep -q "Old Fashion Care" /tmp/body.html; then
+            echo "::error::$URL returned HTTP 200 but the response body doesn't contain the expected site title — may be serving a wrong/default page"
+            exit 1
+          fi
+
+          echo "OK: $URL is up (HTTP 200, expected content found)"
