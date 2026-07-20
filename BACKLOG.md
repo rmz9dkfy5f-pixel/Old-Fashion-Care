@@ -29,10 +29,22 @@ Likely needed after the current slice.
 
 Useful but not needed yet.
 
-- [ ] Testimonials section — written or photo quotes from clients or families
+- [ ] Replace the homepage "trust" section's 3 first-party statements with real client
+      testimonials, once collected (2026-07-19: the section previously showed unfilled
+      bracket-placeholder text; reframed to honest, non-fabricated statements in the meantime —
+      see `docs/project/DECISION_LOG.md` 2026-07-19)
 - [ ] Structured data (Schema.org LocalBusiness) — improves Google local search appearance
 - [ ] Internal linking audit — ensure pages link to each other effectively for SEO
 - [ ] Review whether care-07 through care-11 should replace any current grid photos
+- [ ] Configure a real Formspree form ID (`contact.html`, currently
+      `REPLACE_WITH_FORMSPREE_ID`) — the form now fails/succeeds honestly (fixed 2026-07-19) but
+      still can't deliver a message anywhere until a real ID is set; requires the user's own
+      Formspree account
+- [ ] Get real-device iOS Safari / cross-browser check — this environment only has a Chromium
+      binary available for automated verification
+- [ ] Decide whether/how to delete the untracked 15MB `care giver pics/` folder (raw candidate
+      stock photos, unreferenced anywhere on the site — found during the 2026-07-19
+      production-readiness audit)
 
 ---
 
@@ -40,7 +52,6 @@ Useful but not needed yet.
 
 Interesting but not proven to be needed yet.
 
-- [ ] Contact form — currently the contact page uses direct contact info; a form could increase enquiries
 - [ ] Tips or resources page — content for caregivers or families (could help SEO and trust)
 - [ ] FAQ expansion — build on the existing questions.html page
 
@@ -72,6 +83,15 @@ Rejected or out of scope.
 - [x] Complete V3.4 migration — reconciled root docs with docs/governance/docs/project, resolved
       all quarantined candidates (2026-07-07)
 - [x] Swap in the client's hi-res original photo for `images/hero-ai.jpg` (2026-07-12)
+- [x] Fix contact form silently faking a success message on every submit regardless of whether
+      anything actually sent — now does a real submission attempt with honest success/error
+      states (2026-07-19)
+- [x] Fix `.nav__cta`/`.section--coral`/`.phone-strip` WCAG AA contrast failures — migrated to the
+      already-established `--coral-fill` token (2026-07-19)
+- [x] Enlarge mobile nav hamburger touch target to 44×44px; add open/closed icon state
+      (2026-07-19)
+- [x] Add Escape-key handling to close the mobile nav (2026-07-19)
+- [x] Fix homepage testimonials section showing literal placeholder text (2026-07-19)
 
 ---
 

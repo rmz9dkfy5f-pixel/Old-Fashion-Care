@@ -122,7 +122,7 @@ em { font-style: italic; }
 }
 .section--cream { background: var(--cream); }
 .section--coral {
-  background: var(--coral);
+  background: var(--coral-fill);
   color: var(--white);
 }
 .section--white { background: var(--white); }
@@ -200,7 +200,7 @@ em { font-style: italic; }
 .nav__cta {
   font-size: 13px;
   font-weight: 600;
-  background: var(--coral);
+  background: var(--coral-fill);
   color: var(--white);
   padding: 0.5rem 1.1rem;
   border-radius: 5px;
@@ -214,8 +214,12 @@ em { font-style: italic; }
 .nav__hamburger {
   display: none;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
-  padding: 0.5rem;
+  width: 44px;
+  height: 44px;
+  padding: 0;
 }
 .nav__hamburger span {
   display: block;
@@ -224,6 +228,15 @@ em { font-style: italic; }
   background: var(--warm-white);
   border-radius: 2px;
   transition: transform var(--ease), opacity var(--ease);
+}
+.nav__hamburger[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.nav__hamburger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.nav__hamburger[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
 }
 .nav__mobile {
   display: none;
@@ -441,7 +454,7 @@ main { padding-top: var(--nav-h); }
    PHONE STRIP
    ============================================================ */
 .phone-strip {
-  background: var(--coral);
+  background: var(--coral-fill);
   padding: 0.9rem 0;
 }
 .phone-strip__inner {
@@ -1212,6 +1225,14 @@ main { padding-top: var(--nav-h); }
   border-radius: 8px;
 }
 .form-success.visible { display: block; }
+.form-error {
+  display: none;
+  text-align: center;
+  padding: 3rem;
+  border: 1.5px solid var(--coral);
+  border-radius: 8px;
+}
+.form-error.visible { display: block; }
 .form-success__icon {
   width: 48px; height: 48px;
   background: var(--coral-pale);

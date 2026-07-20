@@ -29,6 +29,14 @@
     mobileNav.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () { mobileNav.classList.remove('open'); });
     });
+    // Close on Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+        mobileNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.focus();
+      }
+    });
   }
 
   /* ── FAQ accordion ── */
@@ -70,14 +78,32 @@
   /* ── Contact form ── */
   const form = document.getElementById('contact-form');
   const success = document.getElementById('form-success');
+  const formError = document.getElementById('form-error');
   if (form) {
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const submitLabel = submitBtn ? submitBtn.textContent : '';
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      // In production: submit to Netlify Forms / Formspree by removing e.preventDefault()
-      // and adding the appropriate action attribute + hidden inputs.
-      // For now, show the success state.
-      form.style.display = 'none';
-      if (success) success.classList.add('visible');
+      if (formError) formError.classList.remove('visible');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+      }
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (response) {
+        if (!response.ok) throw new Error('Form submission failed');
+        form.style.display = 'none';
+        if (success) success.classList.add('visible');
+      }).catch(function () {
+        if (formError) formError.classList.add('visible');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = submitLabel;
+        }
+      });
     });
   }
 })();

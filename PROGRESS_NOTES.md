@@ -6,6 +6,62 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-19 — Contact form, contrast, touch target, and content fixes (production-readiness audit, in progress)
+
+**Work completed:**
+- Ran a `REPO_SESSION_START_RECOVERY_AUDIT.md` at session start — confirmed same-agent resumption
+  (Claude Code → Claude Code), `PASS`, matched the vault's `AGENT_HANDOFF.md` exactly.
+- User asked whether re-running the 18/20-skill production-readiness suite (installed 2026-07-15,
+  never actually executed) would add value. Researched via 3 parallel Explore agents plus a Plan
+  agent; produced a scoped plan (`main` branch only, 13 of ~20 skills, several explicitly skipped
+  as structurally inapplicable to a static no-backend site); user approved full scope.
+- Ran 9 of the 13 planned skills against `main`: `repo-safety-preflight`,
+  `v33-quality-gate-enforcer`, `component-inventory`, `seo-hygiene-check`, `accessibility-pass`,
+  `performance-budget-pass`, `responsive-browser-matrix`, `content-conversion-readiness`,
+  `deployment-nginx-https-readiness`. Notable findings: the contact form always fakes success
+  regardless of actual submission (critical); 9 of 14 homepage photos ship at 5-8x the resolution
+  they're displayed at (~14.2MB avoidable); homepage testimonials section shows literal
+  bracket-placeholder text (critical); a 15MB unreferenced `care giver pics/` folder is tracked in
+  git; `oldfashioncare.com`'s hosting mismatch re-confirmed unchanged.
+- Fixed 5 of the surfaced issues, each explicitly approved before implementation: the contact
+  form's fake-success bug (real `fetch()` submission with honest success/error states); WCAG AA
+  contrast on `.nav__cta`/`.section--coral`/`.phone-strip` (migrated to `--coral-fill`; the
+  `.phone-strip` cascade collision was only found because verification caught the
+  `.section--coral` fix silently not rendering); the mobile nav hamburger's undersized touch
+  target (38×31px → 44×44px, plus an open/closed X-icon state); missing Escape-key handling on the
+  mobile nav; the homepage testimonials section's placeholder text (reframed to 3 honest,
+  first-party trust statements via a short Plan Mode cycle — see `docs/project/DECISION_LOG.md`).
+- Along the way, a sub-agent investigating the testimonials fix's scope reported encountering text
+  in tool output mimicking a fake system-reminder. Investigated thoroughly (grepped the entire
+  repo — tracked files, untracked files, and full git history) and found zero evidence of actual
+  injected content anywhere; most likely the sub-agent saw genuine harness-level messages that
+  don't semantically apply to its own restricted tool context and flagged them out of appropriate
+  caution. No tampering found, no unauthorized action taken.
+
+**Files/areas changed:** `js/main.js`, `css/style.css`, `contact.html`, `index.html` (site code);
+`docs/project/{STATUS,CHANGELOG,DECISION_LOG,COMMIT_NOTES}.md`, `PROGRESS_NOTE.md`,
+`PROGRESS_NOTES.md`, `BACKLOG.md` (this repo's tracking docs); the linked AntBrainOS vault project
+folder (`03_PROJECTS/Active/Old_Fashion_Care/`).
+
+**Validation performed:** no build/lint/test scripts exist (static site). All 5 fixes verified via
+local Playwright — computed-style contrast checks, mocked and real `fetch` responses for the
+contact form's success/error paths, keyboard/focus checks for the Escape handler, bounding-box
+measurement for the touch target, and viewport screenshots for the testimonials section (after
+correctly scrolling it into view to trigger its `.reveal` animation before capturing). Zero
+console errors, zero horizontal overflow across every check.
+
+**Notes for the next agent:** the production-readiness audit is **not finished** — 4 of 13 planned
+skill-runs remain (`observability-analytics-readiness`, `rollback-risk-register`,
+`production-readiness-audit` capstone, `client-handoff-pack`), and neither of the two planned
+consolidated report files nor the tracking-doc reconciliation (`PROJECT_RISK_REGISTER.md`,
+`SECURITY_BASELINE.md`, `COMPATIBILITY_MATRIX.md`, `RELEASE_GATE.md`, `AGENT_RUN_LOG.md`) has been
+written yet. Don't mistake this push for a completed audit — it's 5 real fixes found along the way,
+with the audit's own paperwork still open. The Formspree ID is still a placeholder (user-owned).
+The `oldfashioncare.com` mismatch is user-confirmed expected/known — don't re-flag it as a blocker
+unless the user raises it again.
+
+---
+
 ## 2026-07-18 — Fixed a real staleness gap in the push workflow itself
 
 **Work completed:**

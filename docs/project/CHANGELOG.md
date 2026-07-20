@@ -4,6 +4,52 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [fix: contact form, contrast, touch target, content — `main`] — 2026-07-19
+
+### Fixed
+- **Contact form silently failed while claiming success.** `js/main.js`'s submit handler
+  unconditionally called `preventDefault()` and showed the "message sent" success state on every
+  submit, regardless of whether anything was actually sent — the form never called Formspree at
+  all. Rewrote it to perform a real `fetch()` POST and only show success on an actual `2xx`
+  response; added a matching honest error state (`#form-error` in `contact.html`, reusing the
+  existing `.form-success` visual pattern) that appears on failure, re-enables the submit button,
+  and keeps the form open for retry.
+- `.nav__cta` and `.section--coral` used `--coral` (~3.87:1 on white, below WCAG AA's 4.5:1 for
+  normal text) — migrated both to the already-established `--coral-fill` (~4.66:1) token, the same
+  fix already applied to `.btn--coral` in `v2.1.0`. Verification found a second, related bug:
+  `.phone-strip`'s own `background: var(--coral)` (declared later in the stylesheet) was overriding
+  `.section--coral`'s fix on the one element that actually uses that class — fixed `.phone-strip`
+  too.
+- Mobile nav hamburger button was 38×31px, below the 44×44px minimum touch-target guideline —
+  enlarged to a proper 44×44px hit area. Bundled a small UX improvement on the same element: the
+  three-bar icon now morphs into an "X" when the menu is open (CSS-only, driven by the existing
+  `aria-expanded` attribute).
+- Escape key now closes the mobile nav and returns focus to the hamburger button (previously only
+  closed on nav-link click).
+- Homepage "Testimonials" section was showing literal, unfilled bracket-placeholder text (e.g.
+  `"[Testimonial to be added — contact a current client for a quote before launch.]"`) under a
+  heading claiming "Real words from real families." Reframed to three honest, first-party trust
+  statements — each restating a claim already published elsewhere on the site (personal
+  coordination by Regina, certified/vetted caregivers, transparent no-hidden-fee pricing) — no
+  fabricated names, quotes, or attributions. Section heading and `aria-label` updated to match;
+  visual structure (`section--dark`, 3-column card grid) unchanged.
+
+### Notes
+- These fixes surfaced from an in-progress production-readiness audit (9 of 13 planned skill-runs
+  from the installed-but-never-executed 18/20-skill suite completed this session; the remainder,
+  the two consolidated report files, and tracking-doc reconciliation are still pending — see
+  `docs/project/STATUS.md`).
+- `oldfashioncare.com`'s hosting mismatch (serves an unrelated third-party site, not this repo) is
+  confirmed by the user to be expected/known right now — not a blocker, no action taken.
+- The Formspree ID (`contact.html`) is still the placeholder `REPLACE_WITH_FORMSPREE_ID` — the form
+  now fails/succeeds honestly, but won't actually deliver a message anywhere until a real ID is
+  configured (requires the user's own Formspree account).
+- All five fixes verified via local Playwright (mocked and real fetch responses, computed-style
+  contrast checks, keyboard/focus checks, viewport screenshots) — see `docs/project/COMMIT_NOTES.md`
+  for the full verification detail.
+
+---
+
 ## [fix: push-workflow tracking-file gap — `main`] — 2026-07-18
 
 ### Fixed

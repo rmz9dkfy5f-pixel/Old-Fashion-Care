@@ -8,33 +8,37 @@ For historical notes, copy completed entries into `PROGRESS_NOTES.md`.
 
 ---
 
-## Latest — Fixed a Real Staleness Gap in the Push Workflow Itself (2026-07-18)
+## Latest — Contact Form, Contrast, Touch Target, and Content Fixes Surfaced by an In-Progress Production-Readiness Audit (2026-07-19)
 
-A follow-up session running `REPO_SESSION_START_RECOVERY_AUDIT.md` found this very file was stale
-after the founder-photo push (below) — still describing 2026-07-15/07-12 state, missing that fix
-entirely. Root cause: `Prompts/repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md`
-told the agent `PROGRESS_NOTE.md` and `PROGRESS_NOTES.md` were alternatives ("prefer
-`PROGRESS_NOTES.md`"), so the previous push updated the plural historical log and silently skipped
-this file — despite `CLAUDE.md`/`AGENTS.md`/`REPOSITORY_HANDOFF_CONFIG.md` all marking it required
-"unconditionally."
+The user asked whether re-running the installed-but-never-executed 18/20-skill production-readiness
+suite would add value. Researched and got approval for a scoped plan (`main` only, 13 of ~20
+skills). **9 of 13 planned skill-runs completed**: `repo-safety-preflight`,
+`v33-quality-gate-enforcer`, `component-inventory`, `seo-hygiene-check`, `accessibility-pass`,
+`performance-budget-pass`, `responsive-browser-matrix`, `content-conversion-readiness`,
+`deployment-nginx-https-readiness`. **4 remain**: `observability-analytics-readiness`,
+`rollback-risk-register`, `production-readiness-audit` (capstone), `client-handoff-pack` — along
+with writing the two planned consolidated report files and reconciling 5 governance/tracking docs.
+None of that paperwork is done yet; this push covers only the real fixes found along the way.
 
-**Fixed:** this file's content (done in that same follow-up turn), then the push prompt itself:
-`PROGRESS_NOTE.md` moved into the mandatory every-push section, the ambiguous guidance removed, a
-`git diff --stat` cross-check added before commit (Section 6), and a new Section 2a requiring the
-linked AntBrainOS vault project folder (`03_PROJECTS/Active/Old_Fashion_Care/`) to be updated on
-every push, not only at session end.
+**5 fixes landed and verified, each explicitly approved before implementation:**
+1. Contact form's `js/main.js` submit handler unconditionally faked a success message regardless
+   of whether anything was actually sent — rewrote to a real `fetch()` POST with honest
+   success/error handling.
+2. `.nav__cta`/`.section--coral`/`.phone-strip` WCAG AA contrast failures — migrated to the
+   already-established `--coral-fill` token (the `.phone-strip` cascade collision was only found
+   because verification caught the `.section--coral` fix silently not rendering).
+3. Mobile nav hamburger touch target enlarged 38×31px → 44×44px; added an open/closed X-icon state.
+4. Escape key now closes the mobile nav and returns focus to the hamburger.
+5. Homepage testimonials section was showing literal bracket-placeholder text — reframed to 3
+   honest, first-party trust statements (see `docs/project/DECISION_LOG.md` 2026-07-19).
 
-**Also propagated to the vault:** the user asked for "no gaps... system to system, or session to
-session." Confirmed the AntBrainOS vault's own canonical copy of this prompt carried the
-byte-identical bug (no auto-sync between a repo's local copy and the vault template — flagged as
-its own gap) and fixed it there too, plus added an independent Step 18a to the vault's
-`CLAUDE_CODE_SESSION_END.md` so a future closeout can't record a repo as clean/current purely by
-trusting a prior push-prompt step. See `docs/project/DECISION_LOG.md` (this repo) and the vault's
-`08_DECISIONS/DECISION_LOG.md` #36 for full detail.
+**Known follow-up, not fixed this push:** the Formspree ID (`contact.html`) is still the placeholder
+`REPLACE_WITH_FORMSPREE_ID` — user-owned, not agent-actionable. `oldfashioncare.com`'s hosting
+mismatch was re-confirmed unchanged; **user has stated this is expected/known right now, not a
+blocker.** WebKit/Firefox/iOS Safari not tested (no binaries available in this environment).
 
-Committed/tagged/pushed as `8ed5902` (tag `v2.7.0__push-workflow-tracking-file-gap-fix__commit-8ed5902`),
-RepoBackups snapshot verified (351 files, 0 diff vs `git ls-tree`). See `docs/project/COMMIT_NOTES.md`
-for the full entry.
+See `docs/project/STATUS.md`, `docs/project/CHANGELOG.md`, and `docs/project/COMMIT_NOTES.md` for
+full detail.
 
 ---
 
@@ -43,81 +47,80 @@ for the full entry.
 Date:
 
 ```text
-2026-07-18
+2026-07-19
 ```
 
 Phase:
 
 ```text
-Phase 2 — push-workflow governance fix committed and pushed to main. No active site-implementation
-slice: the user confirmed "nothing yet" at the prior 2026-07-18 closeout, and this push is a
-process/docs fix, not a new implementation slice.
+Phase 2 — 5 real code fixes committed (pending push at the time this section was written — see
+Commit status below). Production-readiness audit itself is 9/13 skill-runs complete; the
+remaining 4 runs, report-writing, and tracking-doc reconciliation are the next slice, not this one.
 ```
 
 Current slice:
 
 ```text
-None (site-implementation). Awaiting the user's choice of next task. Ranked candidates carried
-from the 2026-07-18 closeout: (1) the oldfashioncare.com/Jottful hosting mismatch, (2)
-.nav__cta/.section--coral contrast fix + dedicated apple-touch-icon.png, (3) the pending client
-hero-variant decision, (4) tag+snapshot the cream-immersive branch once reviewed, (5) decide on
-deleting migration/project-starter-v3-3, (6) the 4 SEO hygiene quick-wins from
-seo/audits/hygiene-2026-07-14.md.
+None active beyond finishing this push. Next slice (not yet started): the remaining 4 skill-runs
+(observability-analytics-readiness, rollback-risk-register, production-readiness-audit capstone,
+client-handoff-pack), writing seo/audits/hygiene-2026-07-19.md and
+docs/governance/audits/production-readiness-2026-07-19.md, and reconciling
+PROJECT_RISK_REGISTER.md/SECURITY_BASELINE.md/COMPATIBILITY_MATRIX.md/RELEASE_GATE.md/
+AGENT_RUN_LOG.md against everything found so far.
 ```
 
 Completed:
 
-- [x] Root-caused why `PROGRESS_NOTE.md` went stale: an ambiguous instruction in this repo's own
-      push prompt, not a one-off oversight
-- [x] Fixed `PROGRESS_NOTE.md` content and the push prompt (Sections 2/2a/4/6)
-- [x] Confirmed and fixed the same bug in the AntBrainOS vault's canonical copy of this prompt
-- [x] Added an independent cross-check (Step 18a) to the vault's `CLAUDE_CODE_SESSION_END.md`
-- [x] Recorded the decision in this repo's `docs/project/DECISION_LOG.md` and the vault's
-      `08_DECISIONS/DECISION_LOG.md` (#36)
+- [x] Ran 9 of 13 planned production-readiness-suite skills against `main`
+- [x] Fixed the contact form's fake-success bug (real `fetch()` submission, honest error state)
+- [x] Fixed `.nav__cta`/`.section--coral`/`.phone-strip` contrast (migrated to `--coral-fill`)
+- [x] Enlarged the mobile nav hamburger touch target to 44×44px; added open/closed icon state
+- [x] Added Escape-key handling to close the mobile nav
+- [x] Reframed the homepage testimonials section away from placeholder text
+- [x] Verified all 5 fixes via Playwright (contrast, form success/error/real-URL paths, keyboard,
+      touch-target, screenshots) — zero console errors, zero horizontal overflow
 
 In progress:
 
-- [ ] None — this push is self-contained (docs/process only)
+- [ ] None — this push's fixes are self-contained; the remaining audit work is next session's (or
+      a later slice this session's) task, not carried mid-flight into this commit
 
 Blocked:
 
-- [ ] `oldfashioncare.com`/Jottful hosting mismatch — needs the user's own DNS/hosting knowledge,
-      not agent-actionable alone
-- [ ] `.nav__cta`/`.section--coral` contrast fix + dedicated apple-touch-icon.png — still queued
-      since 2026-07-11/2026-07-15
+- [ ] Formspree ID configuration — needs the user's own Formspree account, not agent-actionable
+- [ ] `oldfashioncare.com` hosting mismatch — user-confirmed expected/known, not currently blocking
+      anything; no action needed unless raised again
 
 Next action:
 
-> No site-implementation task is currently authorized. The same ranked list from the prior
-> 2026-07-18 closeout remains open (`oldfashioncare.com` hosting question; nav/section coral
-> contrast fix + apple-touch-icon; client hero-variant decision; cream-immersive tag/snapshot;
-> `migration/project-starter-v3-3` deletion; SEO hygiene quick-wins). Ask before starting anything
-> new next session.
+> Finish the remaining 4 skill-runs, write the two consolidated audit report files, and reconcile
+> the 5 governance/tracking docs against everything found so far (see `docs/project/STATUS.md`
+> Current Goal). Separately open: apple-touch-icon.png, the 15MB unreferenced `care giver pics/`
+> folder, and the Formspree ID.
 
 Checks run:
 
 ```bash
-git status --porcelain=v1 --untracked-files=all # empty before commit (hard clean)
+git status --porcelain=v1 --untracked-files=all # confirmed clean before this batch started
 git diff --stat                                  # confirmed every required tracking file present
-grep -rn "prefer \`PROGRESS_NOTES.md\`"           # confirmed the ambiguous line no longer exists
-git rev-parse --short HEAD                       # 8ed5902
-git tag --points-at HEAD                         # v2.7.0__push-workflow-tracking-file-gap-fix__commit-8ed5902
+grep -in "testimonial to be added|first name, last initial" index.html  # zero matches, confirmed
 ```
 
 Commit status:
 
 ```text
-Committed, tagged, and pushed: 8ed5902 (tag
-v2.7.0__push-workflow-tracking-file-gap-fix__commit-8ed5902). Matches origin/main. RepoBackups
-snapshot verified (351 files, 0 diff vs git ls-tree). Docs/process-only — no site code.
+See docs/project/STATUS.md's "Latest Push" entry for the commit hash/tag once established —
+this file is written just before the commit itself, per this repo's own convention of preparing
+tracking docs before creating the commit.
 ```
 
 Approval status:
 
 ```text
-User explicitly asked to execute the push prompt this turn ("execute
-.../repo_push_handoff_snapshot_tag_prompt_snapshot_naming_refined.md") — direct authorization for
-commit/tag/snapshot/push per this repo's "commit only when the user asks" rule. The underlying fix
-itself was authorized incrementally across the conversation: "fix this" (PROGRESS_NOTE.md), then
-"yes" (propagate Section 2a into this repo's own copy).
+Each of the 5 fixes was explicitly approved before implementation: fixes 1-3 (contact form,
+contrast, Escape key) via an inline "let's fix all three" after the Accessibility Pass report;
+fix 4 (hamburger touch target + icon) via an "approved" after the Responsive report; fix 5
+(testimonials reframe) via a short Plan Mode cycle (written plan, approved via ExitPlanMode). The
+user then separately confirmed the oldfashioncare.com domain mismatch is expected/known and asked
+to execute this push prompt directly.
 ```

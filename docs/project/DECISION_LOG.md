@@ -6,6 +6,41 @@ Do not use it for tiny task notes.
 
 ---
 
+## 2026-07-19 — Reframe the Placeholder Testimonials Section Instead of Hiding or Fabricating It
+
+### Decision
+The homepage's testimonials section (`index.html`) was found showing literal, unfilled
+bracket-placeholder text ("[Testimonial to be added...]") under a heading claiming "Real words
+from real families." Presented the user three options: hide the section entirely, reframe its
+copy to an honest non-quote statement, or supply real client quotes now. User chose **reframe**:
+kept the section and its `section--dark` visual role (the white→dark→white rhythm between
+"Services" and the caregiver photo grid), replaced the three fake quote+attribution cards with
+three first-party trust statements, and updated the heading/`aria-label` to match. No CSS changes
+needed — the existing 3-column grid classes were reused as-is.
+
+### Reason
+Fabricating client quotes/names was never an option (dishonest, and this project's own content
+rules explicitly forbid inventing reviews). Hiding the section was the simplest fix but would have
+collapsed the page's visual rhythm (confirmed via a scoped investigation that `section--dark` is
+what provides the only dark break between two white sections). Reframing preserves that rhythm
+without waiting on real testimonials, and every replacement claim restates something already
+published elsewhere on the site (hero copy, `about.html`, `questions.html`'s cost FAQ) rather than
+inventing anything new.
+
+### Alternatives Considered
+- Hide/remove the section until real testimonials exist — rejected by the user; would flatten the
+  page's visual structure in the meantime.
+- Wait and ask the user to supply real testimonials now — offered as an option; user did not have
+  them ready, chose to reframe instead rather than block on collecting them.
+
+### Consequences
+The section no longer overclaims. A future session can swap the three trust statements for real
+client testimonials once collected, without needing any structural change — see `BACKLOG.md`.
+
+**Status:** Accepted and implemented 2026-07-19.
+
+---
+
 ## 2026-07-18 — Fix the Push-Prompt Ambiguity That Let `PROGRESS_NOTE.md` Go Stale, Not Just the File Itself
 
 ### Decision

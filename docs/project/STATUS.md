@@ -1,10 +1,71 @@
 # Status
 
-**Last updated:** 2026-07-18
+**Last updated:** 2026-07-19
 
 ---
 
-## Latest Push — Repo Push-Workflow Governance Fix (2026-07-18, branch `main`)
+## Latest Push — Contact Form, Contrast, Touch Target, and Content Fixes (2026-07-19, branch `main`)
+
+```text
+Branch: main
+Tag:    v2.8.0__contact-form-contrast-touch-target-content-fixes__commit-<pending>
+        (the real short hash is filled in once this commit is made and tagged)
+```
+
+**Context:** the user asked whether re-running the 18/20-skill production-readiness suite
+(installed 2026-07-15, never actually executed) would add value. Researched via parallel Explore
+agents + a Plan agent, produced a scoped plan (`main` only, 13 of ~20 skills — several were
+structurally inapplicable to a static no-backend site and explicitly skipped), user approved full
+scope. **9 of 13 planned skill-runs completed this session**: `repo-safety-preflight`,
+`v33-quality-gate-enforcer`, `component-inventory`, `seo-hygiene-check`, `accessibility-pass`,
+`performance-budget-pass`, `responsive-browser-matrix`, `content-conversion-readiness`,
+`deployment-nginx-https-readiness`. **Remaining, not yet run:** `observability-analytics-readiness`,
+`rollback-risk-register`, `production-readiness-audit` (capstone), `client-handoff-pack`. The two
+planned consolidated report files (`seo/audits/hygiene-2026-07-19.md`,
+`docs/governance/audits/production-readiness-2026-07-19.md`) and full tracking-doc reconciliation
+(`PROJECT_RISK_REGISTER.md`, `SECURITY_BASELINE.md`, `COMPATIBILITY_MATRIX.md`, `RELEASE_GATE.md`,
+`AGENT_RUN_LOG.md`) are **also not yet done** — this push covers only the real code fixes the audit
+surfaced along the way, not the audit's own paperwork. All of that remains open follow-up.
+
+**What changed (5 real fixes, all on `main`):**
+1. **Contact form silently failed while claiming success** — `js/main.js`'s submit handler
+   unconditionally faked the success state regardless of whether anything was actually sent.
+   Rewrote to a real `fetch()` POST with honest success/error handling; added a matching
+   `#form-error` state in `contact.html`.
+2. **WCAG AA contrast failures** on `.nav__cta`, `.section--coral`, and (found during
+   verification) `.phone-strip` — all migrated to the already-established `--coral-fill` token.
+3. **Mobile nav hamburger touch target** enlarged from 38×31px to 44×44px; bundled an open/closed
+   "X" icon animation (CSS-only, driven by the existing `aria-expanded` attribute).
+4. **Escape key** now closes the mobile nav and returns focus to the hamburger button.
+5. **Homepage testimonials section** was showing literal, unfilled bracket-placeholder text —
+   reframed to three honest, first-party trust statements (see
+   `docs/project/DECISION_LOG.md` 2026-07-19).
+
+**Why:** all 5 surfaced directly from the accessibility, content-conversion, and responsive audit
+passes above — not pre-planned, but each was small, scoped, low-risk, and explicitly approved by
+the user before implementation (either inline or via a short Plan Mode cycle for the testimonials
+content decision).
+
+**Verified:** no build/lint/test scripts exist (static site). Each fix verified locally via
+Playwright: contrast via computed-style checks against the `--coral-fill` RGB value; the form via
+mocked `fetch` responses (200 → success shown, 500 → error shown, button re-enabled) *and* a real
+request against the actual placeholder Formspree URL (confirms it now fails honestly instead of
+faking success); Escape-key/focus-return behavior; hamburger touch-target bounding-box measurement
+and X-icon transform values; testimonials section screenshots at 390px/1440px (after correctly
+scrolling the section into view to trigger its `.reveal` animation before capturing — an initial
+screenshot attempt captured the pre-animation `opacity:0` state, caught and corrected). Zero
+console errors, zero horizontal overflow at any tested viewport across all fixes.
+
+**Known follow-up, not fixed this push:** `contact.html`'s Formspree ID is still the placeholder
+`REPLACE_WITH_FORMSPREE_ID` — the form now fails/succeeds honestly, but won't actually deliver a
+message until a real ID is configured (needs the user's own Formspree account). WebKit/Firefox/iOS
+Safari testing was not performed — only a Chromium binary is available in this environment.
+`oldfashioncare.com`'s hosting mismatch (confirmed again this session, still serves an unrelated
+live "Jottful" application) — **user confirmed this is expected/known right now, not a blocker.**
+
+---
+
+## Previous Push — Repo Push-Workflow Governance Fix (2026-07-18, branch `main`)
 
 ```text
 Branch: main
@@ -43,7 +104,7 @@ own required-tracking list names for this push (see Validation section below).
 
 ---
 
-## Previous Push — Fix Distorted Founder Photo on `about.html` (2026-07-18, branch `main`)
+## Completed Previously — Fix Distorted Founder Photo on `about.html` (2026-07-18, branch `main`)
 
 ```text
 Branch: main
@@ -115,8 +176,8 @@ confirmed no site/local-only files were ever committed. Static site — no build
 ## Current Phase
 
 ```text
-Phase 2 — hero composition rework (25%-navy/75%-image ratio, hi-res photo swap, full-frame
-desktop framing) committed and pushed to main
+Phase 2 — production-readiness audit in progress (9 of 13 planned skill-runs complete; 5 real
+code fixes landed and verified; audit report files + tracking-doc reconciliation still pending)
 ```
 
 ---
@@ -132,25 +193,30 @@ main
 ## Current Slice
 
 ```text
-Hero photo composition (index.html hero + css/style.css + images/hero-ai.jpg): enforced a strict
-leftmost-25%-navy / rightmost-75%-image ratio (previous builds never moved the navy/photo boundary
-far enough left despite repeated attempts); swapped in the client's clean hi-res original photo
-(replacing the old soft 1100x934 crop); and, on desktop (>=1024px), scaled hero height so
-full-width `cover` shows the WHOLE photo frame (full lamp, full heads with headroom, more of the
-left curtain) with no cropping and no seam. An interim `background-size: contain` zoom-out attempt
-was tried and reverted — it made the navy column grow with screen width (26% at 1440px to ~45% at
-1790px+) and left a mid-screen photo edge that hardened into a visible line on wide monitors;
-reverting to full-width `cover` (photo band pinned right, 75%) keeps navy structurally at ~25% at
-every width with no seam to begin with.
+Production-readiness audit pass on `main` (2026-07-19): running a scoped subset of the
+18/20-skill production-readiness suite (installed 2026-07-15, never previously executed).
+9 of 13 planned skills run so far: repo-safety-preflight, v33-quality-gate-enforcer,
+component-inventory, seo-hygiene-check, accessibility-pass, performance-budget-pass,
+responsive-browser-matrix, content-conversion-readiness, deployment-nginx-https-readiness.
+Along the way, 5 real issues the audit surfaced were fixed and verified (not deferred to a
+"findings" list only): the contact form's fake-success bug, 3 coral-contrast WCAG AA failures,
+the mobile nav hamburger's undersized touch target (+ an icon-state improvement), missing
+Escape-key handling on the mobile nav, and the homepage's placeholder testimonials section.
+Remaining: 4 more skill-runs (observability-analytics-readiness, rollback-risk-register,
+production-readiness-audit capstone, client-handoff-pack), writing the two consolidated report
+files, and reconciling 5 governance/tracking docs against the findings so far.
 ```
 
 ---
 
 ## Current Goal
 
-> Hero composition fix reviewed, committed, and pushed. Remaining known items: a dedicated
-> apple-touch-icon, and the same coral-fill/white-text contrast fix on `.nav__cta`/
-> `.section--coral` (still queued from the prior session).
+> Finish the remaining 4 skill-runs, write the two consolidated audit report files
+> (`seo/audits/hygiene-2026-07-19.md`, `docs/governance/audits/production-readiness-2026-07-19.md`),
+> and reconcile `PROJECT_RISK_REGISTER.md`/`SECURITY_BASELINE.md`/`COMPATIBILITY_MATRIX.md`/
+> `RELEASE_GATE.md`/`AGENT_RUN_LOG.md` against everything found. Known items still open after that:
+> configuring a real Formspree ID (user-owned), a dedicated apple-touch-icon, and deciding what to
+> do with the 15MB unreferenced `care giver pics/` folder.
 
 ---
 
@@ -332,31 +398,39 @@ Snapshot saved to RepoBackups for b195aba.
 
 ## Next Action
 
-> 1. **User to review the hero fix (screenshots + pixel-sampling results reported in chat) and
->    decide whether to commit/push.** The `000_INBOX/ofc-hero-spec-and-fix.md` item this used to
->    point at is now superseded — its numbers didn't match this repo's real tokens; this pass
->    worked from a fresh, direct user screenshot instead.
-> 2. Consider fixing the same coral-fill/white-text contrast issue on `.nav__cta` and
->    `.section--coral` (found this session, not fixed — out of scope for the approved slice).
-> 3. Swap in hi-res hero photo before final launch (separate, pre-existing known issue).
-> 4. Create a dedicated apple-touch-icon.png (separate, pre-existing known issue).
+> 1. Finish the remaining 4 skill-runs (`observability-analytics-readiness`,
+>    `rollback-risk-register`, `production-readiness-audit` capstone, `client-handoff-pack`),
+>    write the two consolidated report files, and reconcile the 5 governance/tracking docs — see
+>    Current Goal above.
+> 2. User-owned, not agent-actionable: configure a real Formspree ID in `contact.html`.
+> 3. Create a dedicated apple-touch-icon.png (long-queued, pre-existing known issue).
+> 4. Decide what to do with the 15MB unreferenced `care giver pics/` folder (found this session).
+> 5. `oldfashioncare.com` hosting mismatch — user has confirmed this is expected/known right now;
+>    no action needed unless the user raises it again.
 
 ---
 
 ## Last Verified Working State
 
 ```text
-Hero contrast + gradient fix on main — 2026-07-12 (committed tag v2.1.0, pushed).
-Immediate prior commit: v2.0.3 (d2ffe77) push→session-end auto-chain policy docs — main — 2026-07-12.
-Prior good state before this session: V3.4 doc consolidation, commit af6255d, tag v2.0.1 — 2026-07-07.
-Hero: --coral-fill button token (~4.66:1); .hero::after gradient compressed/shifted left;
---hero-photo-w 53%->57% (band edge 47%->43%); text-to-hairline gap ~80px/6.7% at 1200px viewport
-(was ~125px/10.4%, still above the ~60px/5% historical safe minimum); no hard seam detected;
-mobile (390px) pixel-identical to before, untouched.
-SEO metadata fixed (og-image, apple-touch-icon); V3.4 baseline + 18-skill suite installed and fully
-reconciled with this project's real docs (docs/governance/, docs/project/).
+Contact form, contrast, touch-target, and content fixes on main — 2026-07-19 (5 fixes, verified
+via Playwright, not yet committed/tagged/pushed at the time this section was written — see the
+Latest Push entry above for the pending tag).
+Immediate prior good state: push-workflow governance fix — 2026-07-18, tag v2.7.0 (8ed5902),
+trailing docs commit 358e0b9.
+Prior good state before that: founder-photo aspect-ratio fix — 2026-07-18, tag v2.6.0 (dd88bf4).
+Contact form: real fetch() submission with honest success/error states (was: unconditional fake
+success regardless of actual submission).
+Contrast: .nav__cta, .section--coral, .phone-strip all now use --coral-fill (~4.66:1) instead of
+--coral (~3.87:1, failed WCAG AA for normal text).
+Mobile nav: hamburger touch target 44x44px (was 38x31px); open/closed X-icon state added; Escape
+key closes the menu and returns focus to the hamburger.
+Homepage testimonials section: reframed from literal bracket-placeholder text to 3 honest
+first-party trust statements; section--dark visual structure unchanged.
 GitHub repo: Old-Fashion-Care — git@github.com:rmz9dkfy5f-pixel/Old-Fashion-Care.git
-All 6 pages load correctly; Netlify auto-deploy active on main branch.
+Confirmed-working deploy target: VPS mirror old-fashion-care.craftandconscious.com (manually
+synced, not Netlify). oldfashioncare.com serves an unrelated third-party site — user-confirmed
+expected, not a blocker.
 ```
 
 ---
@@ -364,6 +438,29 @@ All 6 pages load correctly; Netlify auto-deploy active on main branch.
 ## Validation Performed This Push
 
 ```text
+Contact form / contrast / touch-target / content fixes (2026-07-19): static site, no build/lint
+scripts. All verified via local Playwright (Chromium only — no WebKit/Firefox binaries available
+in this environment):
+- Contrast: computed getComputedStyle().backgroundColor on .nav__cta and .section--coral resolved
+  to rgb(194, 81, 43) (--coral-fill) both before and after finding/fixing the .phone-strip cascade
+  collision that was silently overriding the .section--coral fix on the one real element using it.
+- Contact form: mocked fetch responses via page.route() — 200 response shows success state and
+  hides the form; 500 response shows the new error state, re-enables the submit button, keeps the
+  form visible. A fourth run hit the REAL (still-placeholder) Formspree URL with no mock — confirms
+  it now fails honestly (error state shown) instead of the old unconditional fake success.
+- Escape key: closes the mobile nav, sets aria-expanded=false, returns focus to the hamburger
+  button — confirmed via document.activeElement.
+- Hamburger touch target: bounding-box measured at exactly 44x44px post-fix (was 38x31px);
+  computed transform values on the 3 icon bars confirmed a clean X-morph when aria-expanded=true,
+  confirmed visually via screenshot.
+- Testimonials section: grep confirms zero remaining "[Testimonial to be added" or "[First name,
+  last initial]" placeholder strings. Screenshots at 390px/1440px after scrolling the section into
+  view (to trigger its .reveal IntersectionObserver animation before capturing — an initial
+  screenshot attempt captured the pre-animation opacity:0 state, caught and corrected).
+- Zero horizontal overflow (document.documentElement.scrollWidth === clientWidth) and zero console
+  errors confirmed across all of the above, at every viewport tested (360-1920px).
+git diff reviewed file-by-file after each fix to confirm scope matched intent.
+
 Hero fix (2026-07-11): static site, no build/lint scripts. Verified via Playwright
 (npx --no-install playwright, chromium cached locally — no PIL/ImageMagick available in this
 environment) screenshotting index.html before/after at 1200/1440/700/390px viewports, then a
@@ -433,6 +530,11 @@ Yes
 Phase 2 approved?
 
 ```text
-Yes — SEO-audit fixes, Production Readiness Skills install, and the migration-branch → main merge
-were all explicitly approved by the user (2026-07-05 / 2026-07-06).
+Yes — this push's 5 fixes were each explicitly approved before implementation: the contact-form/
+contrast/Escape-key fixes via an inline "let's fix all three" after the Accessibility Pass report;
+the hamburger touch-target+icon fix via an "approved" after the Responsive report; the testimonials
+reframe via a short Plan Mode cycle (plan written, approved via ExitPlanMode) after the
+Content-Conversion-Readiness report. Prior approvals (SEO-audit fixes, Production Readiness Skills
+install, migration-branch merge — 2026-07-05/06) remain historical record, superseded by the above
+for current-state purposes.
 ```

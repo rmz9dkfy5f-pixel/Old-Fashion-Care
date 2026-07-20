@@ -8,6 +8,61 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Fix contact form, contrast, touch target, and content issues surfaced by an in-progress production-readiness audit (branch `main`)
+
+## Description
+
+- **What changed:**
+  1. `js/main.js` — the contact form's submit handler unconditionally called `preventDefault()`
+     and showed the success state on every submit, regardless of whether anything was actually
+     sent (it never called Formspree at all). Rewrote to a real `fetch()` POST that only shows
+     success on an actual `2xx` response, with a matching honest error state.
+  2. `contact.html` — added the `#form-error` element (reuses the existing `.form-success` visual
+     pattern) that the new JS error path shows.
+  3. `css/style.css` — migrated `.nav__cta`, `.section--coral`, and `.phone-strip` from `--coral`
+     (~3.87:1 on white, fails WCAG AA) to the already-established `--coral-fill` (~4.66:1) token;
+     enlarged the mobile nav hamburger's touch target from 38×31px to 44×44px; added an
+     open/closed "X" icon transform driven by the existing `aria-expanded` attribute.
+  4. `js/main.js` — added an Escape-key handler that closes the mobile nav and returns focus to
+     the hamburger button.
+  5. `index.html` — replaced the homepage testimonials section's literal, unfilled
+     bracket-placeholder text (3 entries reading `"[Testimonial to be added — contact a current
+     client for a quote before launch.]"`) with 3 honest, first-party trust statements; updated
+     the section's heading, overline, and `aria-label` to match.
+- **Why:** all 5 surfaced from an in-progress production-readiness audit (9 of 13 planned
+  skill-runs from the installed-but-never-executed 18/20-skill suite; see
+  `docs/project/STATUS.md` for the audit's own status). Each was small, scoped, and explicitly
+  approved by the user before implementation — fixes 1-2 and 4 via an inline "let's fix all three"
+  after the Accessibility Pass, fix 3's touch-target/icon piece via an "approved" after the
+  Responsive pass, fix 5 via a short Plan Mode cycle after the Content-Conversion-Readiness pass.
+- **Verified:** no build/lint/test scripts exist (static site). Verified via local Playwright:
+  contrast via `getComputedStyle().backgroundColor` resolving to the `--coral-fill` RGB value
+  (`rgb(194, 81, 43)`) on all three selectors (catching and fixing a real cascade collision on
+  `.phone-strip` along the way — its own later-declared `background: var(--coral)` was silently
+  overriding the `.section--coral` fix); the contact form via mocked 200/500 `fetch` responses
+  (success/error states both render correctly, button re-enables on error) plus one run against
+  the real placeholder Formspree URL (confirms it now fails honestly instead of faking success);
+  Escape-key and focus-return behavior via `document.activeElement`; the touch target via
+  `getBoundingClientRect()` (44×44px exactly) and the icon's CSS transform values; the
+  testimonials section via `grep` (zero remaining placeholder strings) and screenshots at
+  390px/1440px (after scrolling the section into view to trigger its `.reveal` animation before
+  capturing — an initial screenshot attempt captured the pre-animation `opacity:0` state, caught
+  and corrected). Zero console errors and zero horizontal overflow confirmed across every check,
+  at every viewport tested (360-1920px).
+- **Remaining risk/follow-up:** the Formspree ID in `contact.html` is still the placeholder
+  `REPLACE_WITH_FORMSPREE_ID` — the form now fails/succeeds honestly but won't actually deliver a
+  message until a real ID is configured (needs the user's own Formspree account, not
+  agent-actionable). WebKit/Firefox/iOS Safari were not tested — only a Chromium binary is
+  available in this environment. The production-readiness audit itself is **not complete**: 4 of
+  13 planned skill-runs remain, and neither the two consolidated report files nor the
+  governance/tracking-doc reconciliation has been written yet — this commit covers only the code
+  fixes found along the way. `oldfashioncare.com`'s hosting mismatch was re-confirmed unchanged;
+  the user has stated this is expected/known right now, not a blocker.
+
+---
+
+## Summary
+
 Fix a real staleness gap in the repo's own push workflow (branch `main`)
 
 ## Description
