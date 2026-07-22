@@ -1,10 +1,56 @@
 # Status
 
-**Last updated:** 2026-07-19
+**Last updated:** 2026-07-22
 
 ---
 
-## Latest Push — Production-Readiness Audit Complete: Uptime Check, VPS Deploy, Full Reconciliation (2026-07-19, branch `main`)
+## Latest Push — Hash Placeholder Backfill and Vault Baton Refresh (2026-07-22, branch `main`)
+
+```text
+Branch: main
+Tag:    v2.10.0__hash-placeholder-backfill-vault-baton-refresh__commit-<pending>
+        (filled in below once this commit is made and tagged)
+```
+
+**Context:** a `REPO_SESSION_START_RECOVERY_AUDIT.md` run found two staleness gaps left over from
+the prior push: (1) `docs/project/STATUS.md`'s v2.9.0 entry and `PROGRESS_NOTE.md`'s "Commit
+status" section still carried "hash once committed" placeholders instead of the real resulting
+hash (`10ee3d0`), and a much older, previously-missed placeholder in this same file's v2.6.0
+founder-photo entry was never backfilled either (`dd88bf4`); (2) the AntBrainOS vault's
+`00_START_HERE/AGENT_HANDOFF.md` baton entry for this project was three days stale, still naming
+the (already-completed) 18-skill audit re-run as the open next task.
+
+**What happened in this batch:**
+1. Backfilled all 3 hash placeholders — `docs/project/STATUS.md` (×2: v2.9.0, v2.6.0) and
+   `PROGRESS_NOTE.md` (×1) — via a small trailing docs-only, untagged commit (`f75de99`),
+   following this repo's own established `8e61909`/`358e0b9` precedent for this exact fix pattern.
+2. Prepended a new dated entry to the vault's `00_START_HERE/AGENT_HANDOFF.md`, superseding
+   (without rewriting) the stale 2026-07-18 entry, recording the actual v2.8.0/v2.9.0 audit
+   completion and that no active task remains.
+3. Refreshed a matching stale "in progress" pointer in this project's own vault
+   `HANDOFF_TO_CLAUDE.md` to cite the real pushed hash.
+4. Took a fresh AntBrainOS vault snapshot before any vault edit, per that vault's own snapshot SOP
+   (987/987 files verified, 0 file-list diff; 3 checksum mismatches traced to unrelated live edits
+   made after the snapshot copy — documented in that snapshot's own `SNAPSHOT_MANIFEST.md`).
+5. Updated this repo's own tracking docs (`STATUS.md`, `PROGRESS_NOTES.md`, `COMMIT_NOTES.md`,
+   `PROGRESS_NOTE.md`, `CHANGELOG.md`) to record this batch before this push's commit/tag.
+
+**Why:** the session-start recovery audit's `PASS WITH CONDITIONS` verdict named both stale spots
+as explicit conditions; the user then asked to fix them.
+
+**Verified:** `git diff --stat` before the trailing commit confirmed only the 2 intended files
+changed; `git show --stat` on that commit confirmed it was docs-only; re-read of the new
+`AGENT_HANDOFF.md` entry confirmed the old entry was left untouched and ordering preserved.
+
+**Known follow-up, not part of this batch:** none new — this batch only closes the two staleness
+conditions named by the recovery audit. The optional/user-owned items from the prior push (real
+Formspree ID, form-analytics events, image optimization, HSTS header, apple-touch-icon, the
+`care giver pics/` folder decision, iOS Safari check) remain open, tracked in `BACKLOG.md` and
+`docs/governance/PROJECT_RISK_REGISTER.md` (R-007–R-013).
+
+---
+
+## Previous Push — Production-Readiness Audit Complete: Uptime Check, VPS Deploy, Full Reconciliation (2026-07-19, branch `main`)
 
 ```text
 Branch: main
@@ -53,7 +99,7 @@ and `PROJECT_RISK_REGISTER.md`.
 
 ---
 
-## Previous Push — Contact Form, Contrast, Touch Target, and Content Fixes (2026-07-19, branch `main`)
+## Completed Previously — Contact Form, Contrast, Touch Target, and Content Fixes (2026-07-19, branch `main`)
 
 ```text
 Branch: main

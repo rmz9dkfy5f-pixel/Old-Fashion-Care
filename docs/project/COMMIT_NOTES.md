@@ -8,33 +8,31 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
-Complete the production-readiness audit: add uptime monitoring, deploy this session's fixes live, reconcile all tracking docs (branch `main`)
+Backfill 3 stale commit-hash placeholders and refresh the AntBrainOS vault baton entry for this project (branch `main`)
 
 ## Description
 
-- **What changed:** (1) Added `.github/workflows/uptime-check.yml` — a GitHub Actions workflow
-  checking the VPS mirror every 30 minutes. (2) Deployed this session's 5 code fixes (contact form,
-  contrast, touch target, Escape key, testimonials — see the commit below) live to the VPS mirror,
-  per explicit user authorization. (3) Ran the 4 remaining production-readiness skills
-  (`observability-analytics-readiness`, `rollback-risk-register`, `production-readiness-audit`
-  capstone, `client-handoff-pack`). (4) Wrote both consolidated audit report files. (5) Reconciled
-  `docs/governance/{PROJECT_RISK_REGISTER,SECURITY_BASELINE,COMPATIBILITY_MATRIX,ROLLBACK_PLAN,
-  RELEASE_GATE,PHASE_GATES,AGENT_RUN_LOG}.md` and `BACKLOG.md` against every finding from all 13
-  skill-runs this session.
-- **Why:** the earlier push this session left the audit at "9 of 13 skills done" with its own
-  paperwork explicitly deferred; the user confirmed continuing it as the next task at that push's
-  own session-end gate, then separately authorized the uptime-check addition and the VPS deploy.
-- **What was verified:** the uptime-check workflow via a real triggered GitHub Actions run (log
-  confirms `OK: ... is up`). The VPS deploy via fresh `curl` evidence post-deploy: new
-  `Content-Length`/`Last-Modified`, new testimonials copy present (old placeholder gone), new
-  contact-form JS logic present, new `--coral-fill` contrast values present on `.nav__cta` and
-  `.phone-strip` — all directly confirmed on the live production site, not assumed from a
-  successful `rsync` exit code.
-- **Remaining risk/follow-up:** all tracked in `BACKLOG.md` and `PROJECT_RISK_REGISTER.md`
-  (R-007 through R-013) — a real Formspree ID (user-owned), custom form-analytics events, image
-  optimization (9 files, ~14.2MB avoidable), an HSTS header, a dedicated apple-touch-icon, a
-  decision on the unreferenced `care giver pics/` folder, and a real-device iOS Safari check
-  (only Chromium was available in this environment all session). None are urgent or blocking.
+- **What changed:** (1) Backfilled 3 "hash once committed" placeholders with the real short
+  hashes now that each commit exists: `docs/project/STATUS.md`'s v2.9.0 entry (`10ee3d0`),
+  `docs/project/STATUS.md`'s previously-missed v2.6.0 founder-photo entry (`dd88bf4`), and
+  `PROGRESS_NOTE.md`'s "Commit status" section (`10ee3d0`) — committed as `f75de99`. (2) Prepended
+  a new dated entry to the AntBrainOS vault's `00_START_HERE/AGENT_HANDOFF.md`, superseding
+  (without rewriting) a 3-day-stale entry that still named an already-completed audit re-run as
+  the open next task. (3) Refreshed a matching stale pointer in this project's own vault
+  `HANDOFF_TO_CLAUDE.md`. (4) Updated this repo's own tracking docs (this file, `STATUS.md`,
+  `PROGRESS_NOTES.md`, `PROGRESS_NOTE.md`, `CHANGELOG.md`) to record the batch.
+- **Why:** a `REPO_SESSION_START_RECOVERY_AUDIT.md` run resolved to `PASS WITH CONDITIONS`,
+  naming both the unfilled hash placeholders and the stale vault baton entry as explicit
+  conditions to close; the user then asked to fix them.
+- **What was verified:** `git diff --stat` before the trailing commit confirmed only the 2
+  intended files changed; `git show --stat` on `f75de99` confirmed it was docs-only; a fresh
+  AntBrainOS vault snapshot was taken and verified (987/987 files, 0 file-list diff) before any
+  vault edit, per that vault's own snapshot SOP; re-read of the new `AGENT_HANDOFF.md` entry
+  confirmed the superseded entry was left untouched.
+- **Remaining risk/follow-up:** none new from this batch. The optional/user-owned items from the
+  prior push (real Formspree ID, form-analytics events, image optimization, HSTS header,
+  apple-touch-icon, the `care giver pics/` folder decision, iOS Safari check) remain open,
+  tracked in `BACKLOG.md` and `docs/governance/PROJECT_RISK_REGISTER.md` (R-007–R-013).
 
 ---
 

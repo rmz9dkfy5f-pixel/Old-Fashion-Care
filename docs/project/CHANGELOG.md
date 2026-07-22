@@ -4,6 +4,27 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [docs: hash placeholder backfill + vault baton refresh — `main`] — 2026-07-22
+
+### Fixed
+- Backfilled 3 stale "hash once committed" placeholders now that each real commit/tag exists:
+  `docs/project/STATUS.md`'s v2.9.0 entry (`10ee3d0`), `docs/project/STATUS.md`'s
+  previously-missed v2.6.0 founder-photo entry (`dd88bf4`), and `PROGRESS_NOTE.md`'s "Commit
+  status" section (`10ee3d0`).
+
+### Changed
+- Prepended a new dated entry to the AntBrainOS vault's `00_START_HERE/AGENT_HANDOFF.md`,
+  recording the actual v2.8.0/v2.9.0 audit completion and superseding a 3-day-stale entry that
+  still named an already-completed audit re-run as the open next task, without rewriting it.
+- Refreshed a matching stale "in progress" pointer in this project's own vault
+  `HANDOFF_TO_CLAUDE.md`.
+
+### Notes
+- No site code changed in this batch. Triggered by a `REPO_SESSION_START_RECOVERY_AUDIT.md` run
+  that resolved `PASS WITH CONDITIONS`, naming both staleness gaps as explicit conditions.
+
+---
+
 ## [feat: uptime monitoring + audit completion; deployed live — `main`] — 2026-07-19
 
 ### Added

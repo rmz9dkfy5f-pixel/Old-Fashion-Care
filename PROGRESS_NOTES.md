@@ -6,6 +6,39 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-22 — Hash placeholder backfill and vault baton refresh
+
+**Work completed:**
+- A `REPO_SESSION_START_RECOVERY_AUDIT.md` run found two staleness gaps: 3 unfilled "hash once
+  committed" placeholders (`docs/project/STATUS.md` ×2 for v2.9.0 and the previously-missed
+  v2.6.0 entry, `PROGRESS_NOTE.md` ×1), and a 3-day-stale vault baton entry in AntBrainOS's
+  `00_START_HERE/AGENT_HANDOFF.md` still naming an already-completed audit re-run as the open
+  next task.
+- Backfilled all 3 hash placeholders with the real short hashes (`10ee3d0`, `dd88bf4`) via a
+  trailing docs-only, untagged commit (`f75de99`), matching this repo's established
+  `8e61909`/`358e0b9` precedent.
+- Prepended a new dated `AGENT_HANDOFF.md` entry recording the actual v2.8.0/v2.9.0 audit
+  completion, without rewriting the stale entry it supersedes (vault's no-rewrite-of-history
+  convention). Refreshed a matching stale pointer in this project's own vault
+  `HANDOFF_TO_CLAUDE.md`.
+
+**Files or areas changed:** `docs/project/STATUS.md`, `PROGRESS_NOTE.md` (repo); AntBrainOS
+`00_START_HERE/AGENT_HANDOFF.md` and `03_PROJECTS/Active/Old_Fashion_Care/HANDOFF_TO_CLAUDE.md`
+(vault, outside this repo).
+
+**Validation performed:** `git diff --stat` confirmed only the 2 intended repo files changed
+before the trailing commit; `git show --stat` confirmed it was docs-only; a fresh vault snapshot
+was taken and verified (987/987 files, 0 file-list diff) before any vault edit; re-read of the
+new `AGENT_HANDOFF.md` entry confirmed the old entry was left untouched.
+
+**Notes for the next agent:** no active task remains — this batch only closed the two staleness
+conditions the recovery audit named. The optional/user-owned follow-ups from the prior push
+(Formspree ID, form-analytics events, image optimization, HSTS header, apple-touch-icon, the
+`care giver pics/` folder decision, iOS Safari check) are unchanged and still open — see
+`BACKLOG.md` and `docs/governance/PROJECT_RISK_REGISTER.md` (R-007–R-013).
+
+---
+
 ## 2026-07-19 — Production-readiness audit complete: uptime check added, fixes deployed live to VPS
 
 **Work completed:**
