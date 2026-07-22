@@ -8,7 +8,35 @@ For historical notes, copy completed entries into `PROGRESS_NOTES.md`.
 
 ---
 
-## Latest — Hash Placeholder Backfill and Vault Baton Refresh (2026-07-22)
+## Latest — Contact Form Vendor Decision: Web3Forms (2026-07-22)
+
+User decided the contact form's eventual delivery vendor: **Web3Forms, not Formspree**. `contact.html`'s
+form action is still the unconfigured placeholder `https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID`
+— that will not be filled in. Instead, once the client finalizes the purchase of this site, the form
+will be switched to Web3Forms (`https://api.web3forms.com/submit` + a real `access_key` hidden field).
+
+**This batch (documentation only, no code change):**
+- Recorded the decision in `docs/project/DECISION_LOG.md`, including implementation notes for
+  whoever does the swap later (the existing `js/main.js` submit handler is vendor-agnostic; only
+  `contact.html`'s form `action` and hidden fields need to change).
+- Reworded `docs/governance/PROJECT_RISK_REGISTER.md` R-008 and its `R-009` cross-reference, and
+  `BACKLOG.md`'s matching item, from Formspree to Web3Forms.
+- Updated `docs/governance/RELEASE_GATE.md`'s Functionality checklist and Release Decision notes to
+  match.
+
+**Not done, and not agent-actionable right now:** no Web3Forms account or access key exists yet.
+Implementation is blocked on the client finalizing the purchase — nothing to configure until then.
+
+**With this decision recorded, the project has no other open agent-actionable items** — every
+remaining `BACKLOG.md`/`PROJECT_RISK_REGISTER.md` entry is either user-owned (this vendor swap,
+the `oldfashioncare.com` domain question) or optional polish (image optimization, HSTS header,
+apple-touch-icon, analytics events, the `care giver pics/` folder decision, iOS Safari check) that
+the user has not asked to prioritize. See `docs/governance/RELEASE_GATE.md` for the current
+PASS WITH CONDITIONS status.
+
+---
+
+## Completed Previously — Hash Placeholder Backfill and Vault Baton Refresh (2026-07-22)
 
 A `REPO_SESSION_START_RECOVERY_AUDIT.md` run resolved `PASS WITH CONDITIONS`, naming two
 staleness gaps as conditions to close: 3 unfilled "hash once committed" placeholders in this
@@ -52,25 +80,26 @@ Date:
 Phase:
 
 ```text
-Phase 2 — production-readiness audit remains COMPLETE (unchanged this batch). This batch closed
-a session-start recovery audit's two staleness conditions (hash placeholder backfill, vault baton
-refresh). No active implementation slice.
+Phase 2 — production-readiness audit remains COMPLETE (unchanged this batch). This batch recorded
+a client-decided contact-form vendor change (Web3Forms, not Formspree) in tracking docs only — no
+code changed. No active implementation slice.
 ```
 
 Current slice:
 
 ```text
-None active. Remaining items are user-owned or optional follow-ups (see BACKLOG.md and
+None active. The Web3Forms swap itself is blocked on the client finalizing the purchase (not
+agent-actionable). Remaining items are user-owned or optional follow-ups (see BACKLOG.md and
 docs/governance/PROJECT_RISK_REGISTER.md R-007 through R-013) — not carried as an in-progress
 slice.
 ```
 
 Completed:
 
-- [x] Backfilled 3 hash placeholders in `docs/project/STATUS.md` (×2) and `PROGRESS_NOTE.md` (×1)
-- [x] Prepended a new AGENT_HANDOFF.md entry for this project in the AntBrainOS vault
-- [x] Refreshed a stale pointer in this project's own vault `HANDOFF_TO_CLAUDE.md`
-- [x] Took and verified a fresh AntBrainOS vault snapshot before the vault edits
+- [x] Recorded the Web3Forms vendor decision in `docs/project/DECISION_LOG.md`, with
+      implementation notes for the future swap
+- [x] Reworded `docs/governance/PROJECT_RISK_REGISTER.md` R-008/R-009, `BACKLOG.md`, and
+      `docs/governance/RELEASE_GATE.md` from Formspree to Web3Forms
 
 In progress:
 
@@ -78,40 +107,40 @@ In progress:
 
 Blocked:
 
-- [ ] Formspree ID configuration — needs the user's own Formspree account, not agent-actionable
+- [ ] Web3Forms configuration (`contact.html`) — blocked on the client finalizing the purchase, not
+      agent-actionable until then
 - [ ] `oldfashioncare.com` hosting mismatch — user-confirmed expected/known, not currently blocking
       anything; no action needed unless raised again
 
 Next action:
 
-> **User-confirmed (session-end closeout gate, 2026-07-22): Image optimization** — compress the 9
-> oversized `care-*.jpg` files (some ship at 3500-5760px; ~14.2MB avoidable). See `BACKLOG.md`
-> "Build Next" and `docs/governance/PROJECT_RISK_REGISTER.md` for the tracked entry. Presented as
-> a ranked 7-candidate list (Formspree ID, image optimization, HSTS header, apple-touch-icon +
-> analytics events, `care giver pics/` folder decision, iOS Safari check, other/none) — this was
-> the explicit pick, not inferred.
+> No agent-actionable next action remains open right now. The standing user-confirmed pick from the
+> prior closeout (image optimization — compress the 9 oversized `care-*.jpg` files, ~14.2MB
+> avoidable; see `BACKLOG.md` "Build Next") is still available to pick up whenever the user wants to
+> continue. Everything else open is either user-owned (Web3Forms swap, `oldfashioncare.com`) or
+> optional polish not yet prioritized.
 
 Checks run:
 
 ```bash
-git status --short                # confirmed only intended files changed before the trailing commit
-git show --stat f75de99           # confirmed the hash-backfill commit was docs-only
-git diff --stat                   # confirmed every required tracking file present before this push
+grep -rln "Formspree"              # confirmed every tracking-doc reference to Formspree was
+                                    # either updated to Web3Forms or left as historical record
+                                    # (contact.html/js/main.js/CHANGELOG/audit files untouched —
+                                    # out of scope for a docs-only decision record)
 ```
 
 Commit status:
 
 ```text
-See docs/project/STATUS.md's "Latest Push" entry for the commit hash/tag once established —
-this file is written just before the commit itself, per this repo's own convention of preparing
-tracking docs before creating the commit.
+Not yet committed — this batch is a docs-only decision record, staged for the next push at the
+user's direction (per this repo's own convention of preparing tracking docs before the commit).
 ```
 
 Approval status:
 
 ```text
-The recovery audit's two staleness conditions were surfaced to the user, who then asked to fix
-them ("let's fix this if needed"). Scope of the fix (extending to the older v2.6.0 placeholder,
-and committing without pushing) was clarified via two direct questions before implementation.
-Running this push prompt itself was separately, explicitly requested by name.
+User directly instructed the vendor decision (Web3Forms) and asked for it to be documented
+("document that, and we can pretty much close out") — treated as explicit approval for this
+docs-only tracking update. No code was changed; the actual Web3Forms swap remains unapproved and
+un-actionable pending the client finalizing the purchase.
 ```

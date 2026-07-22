@@ -6,6 +6,44 @@ Do not use it for tiny task notes.
 
 ---
 
+## 2026-07-22 — Contact Form Vendor Decided: Web3Forms (Not Formspree), Gated on Client Purchase Finalization
+
+### Decision
+The contact form's eventual delivery vendor is **Web3Forms**, not Formspree. `contact.html`'s form
+currently points at `https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID` (still a placeholder, never
+configured — see `PROJECT_RISK_REGISTER.md` R-008). That placeholder will not be filled in with a
+real Formspree ID; instead, once the client finalizes the purchase of this site, the form will be
+switched to Web3Forms.
+
+### Reason
+User's direct instruction. No further business reasoning was given and none is needed to record —
+this is a vendor pick, not a technical tradeoff this project needs to justify.
+
+### Implementation Note (not yet done — recorded for whoever picks this up)
+`js/main.js`'s submit handler is vendor-agnostic (`fetch(form.action, {method:'POST', body: new
+FormData(form), headers:{Accept:'application/json'}})`, checks `response.ok`) — no JS change is
+expected. The HTML-side change, once a real Web3Forms access key exists, is:
+- `contact.html`'s `<form action="...">` swaps from `https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID`
+  to `https://api.web3forms.com/submit`.
+- Add a hidden `<input type="hidden" name="access_key" value="...">` field with the real key.
+- The existing Formspree-specific hidden fields (`_subject`, `_next`) are not Web3Forms field names
+  (Web3Forms uses `subject` and `redirect`) — confirm against Web3Forms's current docs when this is
+  actually implemented, don't assume the old field names carry over unchanged.
+
+### Alternatives Considered
+- Formspree (the prior placeholder default) — not chosen; superseded by this decision.
+
+### Consequences
+`PROJECT_RISK_REGISTER.md` R-008 and `BACKLOG.md`'s matching item are reworded to name Web3Forms
+instead of Formspree. The underlying risk (contact form cannot deliver a message to the business)
+is unchanged and still open — only the planned fix changed. This is explicitly **not
+agent-actionable now**: no Web3Forms account or access key exists yet, and none should be created
+speculatively. Implementation is blocked on the client finalizing the purchase.
+
+**Status:** Accepted, not yet implemented — blocked on the client finalizing the purchase.
+
+---
+
 ## 2026-07-19 — Reframe the Placeholder Testimonials Section Instead of Hiding or Fabricating It
 
 ### Decision

@@ -6,8 +6,10 @@ A project is not release-ready until these checks are complete or explicitly wai
 
 ### Functionality
 
-- [x] Core user flows work — contact form now honestly succeeds/fails (Formspree ID still needs
-      configuring before it can actually deliver a message — see `PROJECT_RISK_REGISTER.md` R-008).
+- [x] Core user flows work — contact form now honestly succeeds/fails (vendor decided as Web3Forms,
+      not Formspree, 2026-07-22; still needs configuring before it can actually deliver a message,
+      blocked on the client finalizing the purchase — see `PROJECT_RISK_REGISTER.md` R-008 and
+      `docs/project/DECISION_LOG.md`).
 - [x] Known critical bugs are resolved or accepted — the fake-success form bug and placeholder
       testimonials (both P0/critical this session) are fixed and deployed live.
 - [x] Regression checks completed — Playwright verification across all 5 fixes, zero console
@@ -55,8 +57,9 @@ A project is not release-ready until these checks are complete or explicitly wai
 - Date: 2026-07-19
 - Approver: User (via inline approvals for each fix, plus explicit deploy authorization)
 - Notes: All site-code fixes verified and deployed live to the confirmed-real deployment target
-  (VPS mirror). Conditions: the Formspree ID remains a placeholder (form cannot yet deliver a
-  message — user-owned), and several lower-priority items (image optimization, HSTS header,
-  Safari/Firefox testing, custom analytics events) remain open and tracked, none blocking this
-  release. `oldfashioncare.com`'s hosting mismatch is explicitly out of scope per the user's own
-  direction.
+  (VPS mirror). Conditions: the contact form still has no live delivery endpoint configured (vendor
+  decided as Web3Forms, not Formspree, 2026-07-22 — see `docs/project/DECISION_LOG.md`; blocked on
+  the client finalizing the purchase, not agent-actionable now), and several lower-priority items
+  (image optimization, HSTS header, Safari/Firefox testing, custom analytics events) remain open and
+  tracked, none blocking this release. `oldfashioncare.com`'s hosting mismatch is explicitly out of
+  scope per the user's own direction.

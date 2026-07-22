@@ -8,6 +8,32 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Record the contact-form vendor decision (Web3Forms, not Formspree) in tracking docs only (branch `main`)
+
+## Description
+
+- **What changed:** no code changed. Recorded a client decision — the contact form's eventual
+  delivery vendor is Web3Forms, not Formspree — across tracking docs: new entry in
+  `docs/project/DECISION_LOG.md` (includes implementation notes for the future swap), reworded
+  `docs/governance/PROJECT_RISK_REGISTER.md` R-008/R-009, `BACKLOG.md`'s matching item, and
+  `docs/governance/RELEASE_GATE.md`'s Functionality checklist + Release Decision notes. This file,
+  `PROGRESS_NOTE.md`, and `STATUS.md` also updated to record the batch.
+- **Why:** user directly instructed the vendor decision and asked for it to be documented
+  ("document that, and we can pretty much close out").
+- **What was verified:** `grep -rln "Formspree"` re-run after edits to confirm every tracking-doc
+  reference either now names Web3Forms or is an untouched historical record (commit notes/changelog
+  entries describing already-shipped past work, and the still-placeholder `contact.html`/`js/main.js`
+  themselves, which are correctly out of scope for a docs-only decision).
+- **Remaining risk/follow-up:** the actual Web3Forms swap (`contact.html`'s form `action` + a real
+  `access_key` field) is not implemented and is not agent-actionable — blocked on the client
+  finalizing the purchase. All other open items unchanged from the prior batch (image optimization,
+  HSTS header, apple-touch-icon, analytics events, `care giver pics/` folder decision, iOS Safari
+  check).
+
+---
+
+## Summary
+
 Backfill 3 stale commit-hash placeholders and refresh the AntBrainOS vault baton entry for this project (branch `main`)
 
 ## Description

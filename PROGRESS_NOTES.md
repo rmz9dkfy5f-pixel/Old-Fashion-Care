@@ -6,6 +6,35 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-22 — Contact form vendor decision: Web3Forms
+
+**Work completed:**
+- User directly decided the contact form's eventual delivery vendor: Web3Forms, not Formspree.
+  `contact.html`'s form action remains the never-configured placeholder
+  `https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID` — that placeholder will not be filled with a
+  real Formspree ID. Once the client finalizes the purchase of this site, the form will be switched
+  to Web3Forms (`https://api.web3forms.com/submit` + a real `access_key` hidden field) instead.
+- Docs-only batch, no code changed: recorded the decision in `docs/project/DECISION_LOG.md`
+  (including implementation notes for the future swap — the existing `js/main.js` submit handler is
+  vendor-agnostic), reworded `docs/governance/PROJECT_RISK_REGISTER.md` R-008/R-009, `BACKLOG.md`'s
+  matching item, and `docs/governance/RELEASE_GATE.md`'s Functionality checklist + Release Decision
+  notes from Formspree to Web3Forms.
+
+**Files or areas changed:** `docs/project/DECISION_LOG.md`, `docs/governance/PROJECT_RISK_REGISTER.md`,
+`BACKLOG.md`, `docs/governance/RELEASE_GATE.md`, `docs/project/STATUS.md`, `PROGRESS_NOTE.md`,
+`docs/project/COMMIT_NOTES.md`.
+
+**Validation performed:** `grep -rln "Formspree"` re-run after edits confirmed every tracking-doc
+reference either now names Web3Forms or is an untouched historical record of already-shipped past
+work; `contact.html`/`js/main.js` intentionally untouched (no access key to configure yet).
+
+**Notes for the next agent:** the actual Web3Forms swap is not agent-actionable — no account or
+access key exists yet, and none should be created speculatively. Blocked on the client finalizing
+the purchase. All other open backlog items unchanged (image optimization remains the standing
+user-confirmed next pick; see `BACKLOG.md` "Build Next").
+
+---
+
 ## 2026-07-22 — Hash placeholder backfill and vault baton refresh
 
 **Work completed:**

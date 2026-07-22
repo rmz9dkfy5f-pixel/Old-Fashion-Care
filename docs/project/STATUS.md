@@ -4,7 +4,47 @@
 
 ---
 
-## Latest Push — Hash Placeholder Backfill and Vault Baton Refresh (2026-07-22, branch `main`)
+## Latest — Contact Form Vendor Decided: Web3Forms (2026-07-22, branch `main`, not yet committed)
+
+**Context:** user directly decided the contact form's eventual delivery vendor: **Web3Forms, not
+Formspree**. `contact.html`'s form action is still the never-configured placeholder
+`https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID` — that placeholder will not be filled in with a
+real Formspree ID. Once the client finalizes the purchase of this site, the form will be switched to
+Web3Forms instead.
+
+**What happened in this batch (docs only, no code change):**
+1. Recorded the decision in `docs/project/DECISION_LOG.md`, including implementation notes for
+   whoever performs the future swap (the existing `js/main.js` submit handler is vendor-agnostic;
+   only `contact.html`'s form `action` and hidden fields need to change, once a real Web3Forms
+   access key exists).
+2. Reworded `docs/governance/PROJECT_RISK_REGISTER.md` R-008 (and its R-009 cross-reference),
+   `BACKLOG.md`'s matching item, and `docs/governance/RELEASE_GATE.md`'s Functionality checklist +
+   Release Decision notes — all from Formspree to Web3Forms.
+3. Updated this repo's own required tracking docs (`PROGRESS_NOTE.md`, `docs/project/COMMIT_NOTES.md`,
+   this file) to record the batch.
+
+**Why:** direct user instruction — "when the client is ready to finalize the purchase, we will be
+using this. Web3Forms document that, and we can pretty much close out."
+
+**Not done, and not agent-actionable right now:** the actual vendor swap. No Web3Forms account or
+access key exists yet; implementation is blocked on the client finalizing the purchase.
+
+**With this decision recorded, no agent-actionable item remains open.** Every remaining
+`BACKLOG.md`/`PROJECT_RISK_REGISTER.md` entry is either user-owned (this vendor swap, the
+`oldfashioncare.com` domain question) or optional polish not yet prioritized by the user (image
+optimization — the standing confirmed pick from the prior closeout — HSTS header, apple-touch-icon,
+analytics events, the `care giver pics/` folder decision, iOS Safari check).
+
+**Verified:** `grep -rln "Formspree"` re-run after edits confirmed every tracking-doc reference to
+Formspree either now names Web3Forms or is an untouched historical record of already-shipped past
+work; `contact.html`/`js/main.js` intentionally untouched (no key to configure yet, out of scope for
+a docs-only decision record).
+
+**Commit status:** not yet committed — staged for the next push at the user's direction.
+
+---
+
+## Previous Push — Hash Placeholder Backfill and Vault Baton Refresh (2026-07-22, branch `main`)
 
 ```text
 Branch: main
@@ -310,7 +350,8 @@ all 6 governance/tracking docs reconciled.
 ## Current Goal
 
 > No active goal — see `BACKLOG.md` and `docs/governance/PROJECT_RISK_REGISTER.md` (R-007 through
-> R-013) for the remaining, mostly user-owned or optional follow-ups: a real Formspree ID,
+> R-013) for the remaining, mostly user-owned or optional follow-ups: configuring Web3Forms in
+> `contact.html` (decided 2026-07-22, blocked on the client finalizing the purchase),
 > image optimization, HSTS header, custom form-analytics events, a dedicated apple-touch-icon, a
 > decision on the `care giver pics/` folder, and a real-device iOS Safari check. None are urgent;
 > ask the user which (if any) to pick up next.
@@ -497,7 +538,9 @@ Snapshot saved to RepoBackups for b195aba.
 
 > The production-readiness audit is complete — nothing is actively in-progress. Remaining items,
 > none urgent, ask the user which to pick up next:
-> 1. User-owned, not agent-actionable: configure a real Formspree ID in `contact.html`.
+> 1. User-owned, not agent-actionable: configure Web3Forms in `contact.html` (vendor decided
+>    2026-07-22 — see `docs/project/DECISION_LOG.md`) — blocked on the client finalizing the
+>    purchase.
 > 2. Add `plausible()` custom events for contact-form success/failure (small, no dependency).
 > 3. Resize/recompress the 9 oversized `care-*.jpg` images (~14.2MB avoidable, quantified).
 > 4. Add HSTS header; create a dedicated apple-touch-icon.png (both small, long-queued).

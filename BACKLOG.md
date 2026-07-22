@@ -42,10 +42,12 @@ Useful but not needed yet.
 - [ ] Structured data (Schema.org LocalBusiness) — improves Google local search appearance
 - [ ] Internal linking audit — ensure pages link to each other effectively for SEO
 - [ ] Review whether care-07 through care-11 should replace any current grid photos
-- [ ] Configure a real Formspree form ID (`contact.html`, currently
-      `REPLACE_WITH_FORMSPREE_ID`) — the form now fails/succeeds honestly (fixed 2026-07-19) but
-      still can't deliver a message anywhere until a real ID is set; requires the user's own
-      Formspree account
+- [ ] Configure Web3Forms for the contact form (`contact.html`) — vendor decided 2026-07-22 as
+      Web3Forms, not Formspree (see `docs/project/DECISION_LOG.md`); the form now fails/succeeds
+      honestly (fixed 2026-07-19) but still can't deliver a message anywhere until this is
+      configured. **Blocked on the client finalizing the purchase** — not agent-actionable until
+      then. Implementation: swap the form `action` to `https://api.web3forms.com/submit` and add a
+      real `access_key` hidden field once issued.
 - [ ] Get real-device iOS Safari / cross-browser check — this environment only has a Chromium
       binary available for automated verification
 - [ ] Decide whether/how to delete the untracked 15MB `care giver pics/` folder (raw candidate
