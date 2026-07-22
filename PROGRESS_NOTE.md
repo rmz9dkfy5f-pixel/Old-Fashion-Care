@@ -84,9 +84,12 @@ Blocked:
 
 Next action:
 
-> No active task. Ask the user which (if any) of the remaining optional follow-ups to pick up:
-> Formspree ID, form-analytics events, image optimization, HSTS header, apple-touch-icon, the
-> `care giver pics/` folder decision, or an iOS Safari check.
+> **User-confirmed (session-end closeout gate, 2026-07-22): Image optimization** — compress the 9
+> oversized `care-*.jpg` files (some ship at 3500-5760px; ~14.2MB avoidable). See `BACKLOG.md`
+> "Build Next" and `docs/governance/PROJECT_RISK_REGISTER.md` for the tracked entry. Presented as
+> a ranked 7-candidate list (Formspree ID, image optimization, HSTS header, apple-touch-icon +
+> analytics events, `care giver pics/` folder decision, iOS Safari check, other/none) — this was
+> the explicit pick, not inferred.
 
 Checks run:
 

@@ -48,6 +48,10 @@ Formspree ID, form-analytics events, image optimization, HSTS header, apple-touc
 `care giver pics/` folder decision, iOS Safari check) remain open, tracked in `BACKLOG.md` and
 `docs/governance/PROJECT_RISK_REGISTER.md` (R-007–R-013).
 
+**Next recommended step (user-confirmed at this push's own session-end closeout gate):** image
+optimization — compress the 9 oversized `care-*.jpg` files (~14.2MB avoidable). Presented as a
+ranked 7-candidate list; this was the explicit pick, not inferred.
+
 ---
 
 ## Previous Push — Production-Readiness Audit Complete: Uptime Check, VPS Deploy, Full Reconciliation (2026-07-19, branch `main`)
