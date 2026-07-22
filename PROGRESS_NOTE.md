@@ -107,9 +107,8 @@ curl -sI https://old-fashion-care.craftandconscious.com/  # confirmed live deplo
 Commit status:
 
 ```text
-See docs/project/STATUS.md's "Latest Push" entry for the commit hash/tag once established —
-this file is written just before the commit itself, per this repo's own convention of preparing
-tracking docs before creating the commit.
+main @ 10ee3d0 (tag v2.9.0__production-readiness-audit-complete-uptime-check-vps-deploy__commit-10ee3d0),
+pushed, matches origin/main. See docs/project/STATUS.md's "Latest Push" entry for full detail.
 ```
 
 Approval status:

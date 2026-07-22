@@ -8,8 +8,7 @@
 
 ```text
 Branch: main
-Latest commit at time of writing: 8588925 (uptime-check workflow); this push adds the audit's
-own paperwork on top — see git log for the actual resulting hash once committed.
+Tag:    v2.9.0__production-readiness-audit-complete-uptime-check-vps-deploy__commit-10ee3d0
 ```
 
 **Context:** follow-on to the push immediately below (same day, continuing the same session). The
@@ -157,8 +156,7 @@ own required-tracking list names for this push (see Validation section below).
 
 ```text
 Branch: main
-Tag:    v2.6.0__founder-photo-aspect-ratio-fix__commit-<short-hash>
-        (the real short hash is embedded in the annotated git tag applied to this commit)
+Tag:    v2.6.0__founder-photo-aspect-ratio-fix__commit-dd88bf4
 ```
 
 **What changed:** `css/style.css` only — added `aspect-ratio: auto;` to `img.founder-photo`.
