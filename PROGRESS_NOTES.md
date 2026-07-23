@@ -6,6 +6,39 @@ Current active progress belongs in `PROGRESS_NOTE.md`.
 
 ---
 
+## 2026-07-23 — Image optimization: compress the 4 live `care-*.jpg` photos
+
+**Work completed:**
+- Resized 4 oversized, live-referenced photos (`care-03`/`04`/`05`/`06`) from native 3507–5760px to
+  ~800×533px (landscape) / 533×800px (portrait) via macOS `sips -Z 800 -s formatOptions 82`.
+- Resized to `/tmp/ofc-image-opt/` scratch location first, inspected each file's dimensions/EXIF
+  orientation, promoted into place via `cp` once all 4 passed verification.
+- Confirmed scope: `git diff --stat` showed exactly the 4 image files changed (binary), no other
+  modifications.
+
+**Files or areas changed:** `images/care-03.jpg`, `images/care-04.jpg`, `images/care-05.jpg`,
+`images/care-06.jpg` (binary image files only); `BACKLOG.md` (moved image optimization to
+Completed, kept the separate `care-07`–`11` review decision untouched), `PROJECT_RISK_REGISTER.md`
+(R-007 marked Partial), `PROGRESS_NOTE.md`, `COMMIT_NOTES.md`, `CHANGELOG.md`, this file,
+`SLICE_REVIEWS.md`.
+
+**Validation performed:** Dimension checks via `sips -g pixelWidth -g pixelHeight` on both original
+and resized files (confirmed 533×800 for portrait, 800×533 for landscape, matching the resize plan).
+EXIF orientation check via `sips -g orientation` (all nil, no unexpected rotation). File size
+comparison (before: 6.96 MB total; after: 0.428 MB total; 93.9% reduction). `git diff --stat`
+confirmed scope (exactly 4 image files, binary diffs, no other changes). No automated test suite
+exists for this static site; Playwright visual verification was not available in this environment,
+but inspection covered dimension/orientation integrity.
+
+**Notes for the next agent:** the 5 unreferenced dead files (`care-07`–`11`, ~5.5 MB) were
+deliberately left untouched per user scope decision — separate `BACKLOG.md` item ("Review whether
+care-07–11 should replace any current grid photo") remains open and unstarted. All other open
+backlog items unchanged from prior sessions (Web3Forms configuration, form-analytics events, HSTS
+header, apple-touch-icon, `care giver pics/` folder decision, iOS Safari check). With this task
+complete, no new agent-actionable items remain open.
+
+---
+
 ## 2026-07-22 — Contact form vendor decision: Web3Forms
 
 **Work completed:**

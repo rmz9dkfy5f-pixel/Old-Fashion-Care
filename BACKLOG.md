@@ -20,9 +20,6 @@ Likely needed after the current slice.
 
 - [ ] Design review — visual polish and layout improvements across pages
 - [ ] Mobile layout review — verify all pages look great on small screens
-- [ ] Image optimization — compress large photos (9 of 14 `care-*.jpg` files ship at 3500-5760px
-      native resolution into a 356×260px grid cell, ~14.2MB avoidable — quantified 2026-07-19,
-      see `docs/governance/PROJECT_RISK_REGISTER.md` R-007)
 - [ ] Create a dedicated 180×180 `apple-touch-icon.png` (currently falls back to `favicon.svg`)
 - [ ] Add `plausible()` custom events for contact-form success/failure (`js/main.js`) — no
       business-side visibility exists today when the form fails (2026-07-19, R-009)
@@ -107,6 +104,10 @@ Rejected or out of scope.
 - [x] Complete a first full pass of the 18/20-skill production-readiness suite (13 skills run
       against `main`) — see `docs/governance/audits/production-readiness-2026-07-19.md` and
       `seo/audits/hygiene-2026-07-19.md` (2026-07-19)
+- [x] Image optimization — compress the 4 live, referenced `care-*.jpg` photos (care-03/04/05/06)
+      from 3507–5760px native resolution to ~800×533px (landscape) / 533×800px (portrait), reducing
+      page weight by 93.9% (6.96 MB → 0.428 MB). The 5 unreferenced dead files (care-07–11) remain
+      uncompressed pending a separate decision. (2026-07-23)
 
 ---
 

@@ -4,6 +4,57 @@ Use this file after each completed vertical slice.
 
 ---
 
+## 2026-07-23 — Image Optimization: Compress the 4 Live `care-*.jpg` Photos
+
+**Status:** Implemented — verified, staged for commit/push (user will request commit separately)
+
+**Slice summary:**
+Compressed the 4 oversized, live-referenced photos that ship to every homepage visitor. R-007
+(performance risk, confirmed/quantified in 2026-07-19 production-readiness audit) has been
+**partially closed**: the 4 live files (the real page-weight impact, 6.7 MB → 0.428 MB) are now
+resized and deployed; the 5 unreferenced dead files (care-07–11, a separate hygiene issue) were
+deliberately left untouched pending a user decision already tracked in BACKLOG.md ("Review whether
+care-07–11 should replace any current grid photo"). This slice strictly compressed; no HTML/CSS
+changes, no markup edits, no new dependencies or tooling (used macOS `sips`, the repo's established
+precedent for prior image work).
+
+**Scope decision:** User confirmed this batch should target only the 4 live/referenced files
+(`care-03`/`04`/`05`/`06` in the homepage `.photos-grid`), not the 5 dead files or the hero/founder
+photos (already correctly sized). User confirmed this batch should not add `width`/`height`
+attributes (a separate, real CLS-risk finding, but out of scope for the tracked R-007 backlog item).
+
+**Files changed:** Binary only — exactly 4 image files (`images/care-03.jpg`, `images/care-04.jpg`,
+`images/care-05.jpg`, `images/care-06.jpg`). Resized via `sips -Z 800 -s format jpeg -s
+formatOptions 82` (max-edge scale-to-fit, JPEG quality 82), preserving aspect ratios. No HTML, CSS,
+JavaScript, or other markup modified. `git diff --stat` confirmed scope: exactly 4 image binary
+changes, nothing else.
+
+**Verification:** Dimension/orientation integrity checks via `sips -g pixelWidth -g pixelHeight -g
+orientation` on both original and resized files (confirmed portrait 533×800, landscape 800×533, all
+EXIF orientations nil). File size summary: care-03 1.2 MB → 102 KB, care-04 989 KB → 93 KB, care-05
+2.1 MB → 106 KB, care-06 2.4 MB → 117 KB (combined: 6.96 MB → 0.428 MB, 93.9% reduction). Resized
+to scratch location first (`/tmp/ofc-image-opt/`), inspected all 4 files, promoted into place once
+all passed — never a one-shot in-place operation. No automated test suite exists for this static
+site; Playwright visual verification was not available in this environment, but inspection covered
+dimension/orientation integrity and the resized files remain valid JPEG images with expected aspect
+ratios.
+
+**Risks accepted:** Quality artifacts at JPEG q82 (appropriate for small decorative grid images, not
+a large hero). Scope bounded via explicit user decisions and `git diff --stat` guardrail. Original
+hi-res files remain recoverable from the tracked-in-git `care giver pics/` folder (confirmed
+byte-identical copies at original filenames).
+
+**Tracking files updated:** BACKLOG.md (image optimization moved to Completed, separate decision on
+care-07–11 untouched), PROJECT_RISK_REGISTER.md (R-007 marked Partial, 4 fixed / 5 remain),
+PROGRESS_NOTE.md, PROGRESS_NOTES.md, COMMIT_NOTES.md, CHANGELOG.md, SLICE_REVIEWS.md (this file).
+
+**Next task decision:** No new urgent items. With this task complete, the standing next-action options
+are the optional follow-ups tracked in BACKLOG.md (Web3Forms configuration, form-analytics events,
+HSTS header, apple-touch-icon, `care giver pics/` folder decision, iOS Safari check) or session
+closeout. User will decide which (if any) to pick up next.
+
+---
+
 ## 2026-07-18 — Close the Push-Workflow Tracking-File Gap (repo + AntBrainOS vault)
 
 **Status:** Implemented — committed and pushed this slice

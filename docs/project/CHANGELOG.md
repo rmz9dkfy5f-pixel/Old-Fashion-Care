@@ -4,6 +4,27 @@ All notable changes to the Old Fashion Care website will be documented here.
 
 ---
 
+## [fix: compress the 4 live `care-*.jpg` photos (93.9% size reduction) — `main`] — 2026-07-23
+
+### Fixed
+- `images/care-03.jpg` resized from 3507×5261 (1.2 MB) to 533×800 (102 KB)
+- `images/care-04.jpg` resized from 5310×3540 (989 KB) to 800×533 (93 KB)
+- `images/care-05.jpg` resized from 5184×3456 (2.1 MB) to 800×533 (106 KB)
+- `images/care-06.jpg` resized from 3840×5760 (2.4 MB) to 533×800 (117 KB)
+- Total combined reduction: 6.96 MB → 0.428 MB (93.9% smaller)
+- Aspect ratios preserved, no unexpected EXIF rotation, JPEG quality q82
+
+### Notes
+- Used macOS `sips -Z 800 -s format jpeg -s formatOptions 82` (this repo's established tool precedent)
+- Resized to scratch location first, visually inspected each file, promoted into place once all 4 passed
+- No HTML/CSS changes, same filenames (transparent to all page references)
+- The 5 unreferenced dead files (`care-07`–`11`, ~5.5 MB) were deliberately left out per user scope 
+  decision — separate `BACKLOG.md` item ("Review whether care-07–11 should replace any current grid 
+  photo") remains open; see that decision before compressing or deleting them
+- Addresses `docs/governance/PROJECT_RISK_REGISTER.md` R-007 (performance), marked Partial closure
+
+---
+
 ## [docs: hash placeholder backfill + vault baton refresh — `main`] — 2026-07-22
 
 ### Fixed

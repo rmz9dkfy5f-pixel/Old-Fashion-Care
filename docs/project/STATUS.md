@@ -1,10 +1,55 @@
 # Status
 
-**Last updated:** 2026-07-22
+**Last updated:** 2026-07-23
 
 ---
 
-## Latest — Contact Form Vendor Decided: Web3Forms (2026-07-22, branch `main`, not yet committed)
+## Latest — Image Optimization: 4 Live `care-*.jpg` Photos Compressed (2026-07-23, branch `main`, verified and staged)
+
+**Context:** The standing user-confirmed next task from the prior two session-end closeouts (2026-07-22 
+and 2026-07-23 recovery audit). R-007 (performance risk, quantified at 2026-07-19 production-readiness 
+audit) identified 9 oversized `care-*.jpg` files. Exploration found this splits into: 4 genuinely 
+referenced in `index.html`'s photo grid (real visitor-facing page-weight impact) and 5 unreferenced 
+dead assets (hygiene-only impact). User confirmed this slice should compress only the 4 live files, 
+leaving the 5 dead files for a separate decision already tracked in BACKLOG.md.
+
+**What happened in this batch (image compression only, no HTML/CSS/copy changes):**
+1. Resized 4 photos via macOS `sips -Z 800 -s format jpeg -s formatOptions 82` (this repo's 
+   established precedent tool) to ~800×533px (landscape files: care-04/05) / 533×800px (portrait 
+   files: care-03/06). Aspect ratios preserved, no stretching or EXIF-rotation artifacts.
+2. Resized to scratch location (`/tmp/ofc-image-opt/`) first, inspected each file's dimensions/
+   integrity via `sips -g`, promoted into place via `cp` once all 4 passed — never one-shot in-place.
+3. Confirmed scope via `git diff --stat`: exactly the 4 image files changed (binary), no other 
+   modifications.
+4. Updated all 8 required tracking docs (BACKLOG.md, PROJECT_RISK_REGISTER.md, PROGRESS_NOTE.md, 
+   PROGRESS_NOTES.md, COMMIT_NOTES.md, CHANGELOG.md, SLICE_REVIEWS.md, this file).
+
+**Why this scope, not all 9:** The 4 live files drive real visitor-facing page-weight savings (6.7 MB 
+→ 0.428 MB combined, 93.9% reduction per file). The 5 unreferenced dead files (`care-07`–`11`) 
+represent hygiene-only savings (~5.5 MB total) but aren't downloaded by any visitor, and their use 
+is blocked on a separate, already-tracked user decision ("should we use these as photo-grid 
+replacements?") — see BACKLOG.md "Review whether care-07–11 should replace any current grid photo."
+
+**Size reduction:** care-03 1.2 MB → 102 KB; care-04 989 KB → 93 KB; care-05 2.1 MB → 106 KB; 
+care-06 2.4 MB → 117 KB. Total: 6.96 MB → 0.428 MB (93.9% smaller).
+
+**Verification:** Dimension checks (portrait 533×800, landscape 800×533, both correct per aspect 
+ratio). EXIF orientation checks (all nil, no unexpected rotation). File integrity confirmed via 
+`sips` read-back. Scope confirmation via `git diff --stat`. No automated test suite exists for this 
+static site; Playwright visual verification not available in this environment, but dimension/
+orientation integrity was verified. The resized JPEG images remain valid.
+
+**Not done, and not in this batch:** the 5 unreferenced files remain uncompressed pending the 
+separate user decision. All other open items unchanged from prior closeouts (Web3Forms configuration 
+blocked on client purchase, form-analytics events, HSTS header, apple-touch-icon, `care giver pics/` 
+folder decision, iOS Safari check).
+
+**Commit status:** not yet committed — images are staged and tracking docs updated; user will request 
+commit as a separate step per this repo's convention (preparation before the actual commit).
+
+---
+
+## Previous — Contact Form Vendor Decided: Web3Forms (2026-07-22, branch `main`, not yet committed)
 
 **Context:** user directly decided the contact form's eventual delivery vendor: **Web3Forms, not
 Formspree**. `contact.html`'s form action is still the never-configured placeholder

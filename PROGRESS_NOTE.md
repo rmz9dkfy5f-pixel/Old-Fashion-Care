@@ -8,7 +8,45 @@ For historical notes, copy completed entries into `PROGRESS_NOTES.md`.
 
 ---
 
-## Latest — Contact Form Vendor Decision: Web3Forms (2026-07-22)
+## Latest — Image Optimization: 4 Live `care-*.jpg` Photos Resized & Deployed (2026-07-23)
+
+The standing user-confirmed next task from the prior two closeouts (2026-07-22 session-end and 
+2026-07-23 recovery audit) was image optimization — compress the oversized photos shipped to every
+homepage visitor. This batch completed that task for the 4 live/referenced photos; the 5
+unreferenced dead files (`care-07`–`11`) remain a separate, already-tracked decision.
+
+**This batch (image compression only, no HTML/CSS/copy changes):**
+- Resized the 4 oversized, live `care-*.jpg` files (`care-03`/`04`/`05`/`06`) from native 
+  3507–5760px down to ~800×533px (landscape) / 533×800px (portrait) via macOS `sips -Z 800 
+  -s formatOptions 82`, matching this repo's established tool precedent.
+- Verified all 4 resized files in a scratch directory first — checked dimensions via `sips -g`,
+  confirmed EXIF orientation was nil (no unexpected rotation), confirmed file sizes dropped by
+  93.9% (6.96 MB → 0.428 MB total).
+- Promoted resized files into place via `cp` once all 4 passed inspection.
+- Confirmed via `git diff --stat` that only the 4 target image files changed (binary), no other
+  changes.
+- Updated tracking docs: `BACKLOG.md` (image optimization now Completed), 
+  `PROJECT_RISK_REGISTER.md` (R-007 marked Partial, 4 fixed / 5 remain), this file, and others below.
+
+**Why this scope, not all 9:** The original R-007 stated "9 of 14" files, but exploration found this 
+actually splits into: 4 files genuinely referenced in `index.html`'s photo grid (downloaded by every 
+visitor, so real page-weight impact) and 5 files unreferenced anywhere in the HTML (dead assets, 
+hygiene-only impact). User explicitly chose to scope this slice to the 4 live files only, leaving the 
+5 dead files for a separate decision already tracked in `BACKLOG.md` ("Review whether care-07–11 
+should replace any current grid photo").
+
+**Not done, and not in this batch:** the 5 unreferenced `care-07`–`11` files remain untouched and 
+uncompressed, pending that separate decision. All other open items unchanged from prior closeouts 
+(Web3Forms configuration blocked on client purchase finalization, form-analytics events, HSTS header, 
+apple-touch-icon, `care giver pics/` folder decision, iOS Safari check).
+
+**With this task complete, no new agent-actionable items remain open** — the standing user-confirmed 
+next choice is to either tackle one of the optional follow-ups from `BACKLOG.md` or close out this 
+session. See `BACKLOG.md` "Build Later" for the full list of user-owned or optional items.
+
+---
+
+## Previous — Contact Form Vendor Decision: Web3Forms (2026-07-22)
 
 User decided the contact form's eventual delivery vendor: **Web3Forms, not Formspree**. `contact.html`'s
 form action is still the unconfigured placeholder `https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID`

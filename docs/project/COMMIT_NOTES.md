@@ -8,6 +8,39 @@ Use it to prepare commits before they are made.
 
 ## Summary
 
+Compress the 4 live, referenced `care-*.jpg` photos via `sips` — 93.9% size reduction (6.96 MB → 0.428 MB) with no markup changes (branch `main`)
+
+## Description (pending commit)
+
+- **What changed:** exactly 4 image files, binary only: `images/care-03.jpg`, `images/care-04.jpg`,
+  `images/care-05.jpg`, `images/care-06.jpg`. Resized from native 3507–5760px to ~800×533px 
+  (landscape) / 533×800px (portrait) via `sips -Z 800 -s format jpeg -s formatOptions 82`, 
+  preserving aspect ratios and JPEG quality q82. No HTML/CSS changes, no markup edits, same 
+  filenames (transparent to all references in `index.html`). No other files modified.
+- **Why:** R-007 (performance risk, confirmed/quantified in 2026-07-19 production-readiness audit). 
+  These 4 are the only `care-*.jpg` files actually referenced on the live site and downloaded by 
+  every visitor — the real page-weight impact. The 5 unreferenced dead files (`care-07`–`11`) were 
+  explicitly left out per user scope decision, pending a separate `BACKLOG.md` decision on whether 
+  to use them as photo-grid replacements.
+- **What was verified:** (1) Pre-resize: confirmed `git status --short` clean, recorded original 
+  sizes/dimensions. (2) Resize-to-scratch: ran `sips` on all 4, stored in `/tmp/ofc-image-opt/`. 
+  (3) Scratch inspection: confirmed dimensions (533×800 for portrait files, 800×533 for landscape), 
+  confirmed EXIF orientation was nil (no unexpected rotation), confirmed file sizes dropped 93.9% 
+  overall (6.96 MB → 0.428 MB, and individually: care-03 1.2 MB → 102 KB, care-04 989 KB → 93 KB, 
+  care-05 2.1 MB → 106 KB, care-06 2.4 MB → 117 KB). (4) Promotion: `cp` into place once all 4 
+  passed inspection. (5) Scope confirmation: `git diff --stat` showed exactly the 4 image files, 
+  binary diffs, no other changes. No automated test suite exists for this static site; visual 
+  verification would normally be done via Playwright (not available in this environment) — 
+  inspection was limited to dimension/orientation checks.
+- **Remaining risk/follow-up:** the 5 unreferenced files remain uncompressed pending a separate user 
+  decision (tracked separately in `BACKLOG.md`). All other open items unchanged (Web3Forms 
+  configuration blocked on client purchase, form-analytics events, HSTS header, apple-touch-icon, 
+  `care giver pics/` folder decision, iOS Safari check).
+
+---
+
+## Previous Commit
+
 Record the contact-form vendor decision (Web3Forms, not Formspree) in tracking docs only (branch `main`)
 
 ## Description
